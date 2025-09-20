@@ -60,8 +60,11 @@ class UIEnhancer {
             });
         });
 
-        // Card hover effects
-        document.querySelectorAll('.card, .team-card, .program-card').forEach(card => {
+        // Card hover effects (excluding team-card)
+        document.querySelectorAll('.card, .program-card').forEach(card => {
+            // Skip team-card to prevent unwanted animations
+            if (card.classList.contains('team-card')) return;
+            
             card.addEventListener('mouseenter', () => {
                 if (window.gsap) {
                     gsap.to(card, {
@@ -473,7 +476,10 @@ class UIEnhancer {
      * Enhanced Card Interactions
      */
     enhanceCardInteractions() {
-        document.querySelectorAll('.card, .team-card, .program-card, .story-card').forEach(card => {
+        document.querySelectorAll('.card, .program-card, .story-card').forEach(card => {
+            // Skip team-card to prevent tilt effects
+            if (card.classList.contains('team-card')) return;
+            
             // Add tilt effect on mouse move
             card.addEventListener('mousemove', (e) => {
                 if (window.gsap) {

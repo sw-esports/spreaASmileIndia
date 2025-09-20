@@ -14,7 +14,7 @@
             <!-- Slide 1 - Image -->
             <div class="carousel-slide active" data-slide="0">
             <div class="slide-content">
-                <img src="./src/images/landing-page/lading-page3.webp" 
+                <img src="./src/images/landing-page/lading-page4.webp" 
                      alt="Children learning in classroom" 
                      class="slide-image" 
                      loading="eager">
@@ -133,36 +133,75 @@
         
         <div class="impact-grid">
             <%- include('components/impact-card', {
-                icon: 'fas fa-graduation-cap',
-                number: '300',
+                icon: 'fas fa-heart',
+                number: '90',
                 suffix: '+',
                 label: 'Lives Transformed',
                 description: 'Street children provided with education and care',
                 color: 'blue',
                 progress: 85,
-                delay: 100
+                delay: 100,
+                backgroundImage: './src/images/tranformation/Shabila’s story is one of Divine Grace and one that epitomizes miracles. . We first met Shabila .webp'
             }) %>
             
             <%- include('components/impact-card', {
-                icon: 'fas fa-school',
-                number: '170',
+                icon: 'fas fa-graduation-cap',
+                number: '200',
                 suffix: '+',
                 label: 'Children in School',
                 description: 'Currently enrolled in formal education',
                 color: 'green',
                 progress: 92,
-                delay: 200
+                delay: 200,
+                backgroundImage: './src/images/education/landscape2.webp'
             }) %>
             
             <%- include('components/impact-card', {
                 icon: 'fas fa-female',
-                number: '85',
-                suffix: '+',
-                label: 'Women Trained',
+                number: '95',
+                suffix: '',
+                label: 'Women Empowerment',
                 description: 'Empowered through skill development programs',
                 color: 'orange',
                 progress: 78,
-                delay: 300
+                delay: 300,
+                backgroundImage: './src/images/impact/women-empowerment.webp'
+            }) %>
+            
+            <%- include('components/impact-card', {
+                icon: 'fas fa-briefcase',
+                number: '108',
+                suffix: '',
+                label: 'Placements',
+                description: 'Successful job placements and career opportunities',
+                color: 'purple',
+                progress: 88,
+                delay: 400,
+                backgroundImage: './src/images/impact/placements.webp'
+            }) %>
+            
+            <%- include('components/impact-card', {
+                icon: 'fas fa-gamepad',
+                number: '24',
+                suffix: '',
+                label: 'Ingenuity Students',
+                description: 'Students with ingenuity gaming skills training',
+                color: 'blue',
+                progress: 75,
+                delay: 500,
+                backgroundImage: './src/images/impact/impact-ingenuity-gaming.webp'
+            }) %>
+            
+            <%- include('components/impact-card', {
+                icon: 'fas fa-laptop',
+                number: '156',
+                suffix: '',
+                label: 'Computer Students',
+                description: 'Students trained in computer literacy and digital skills',
+                color: 'green',
+                progress: 82,
+                delay: 600,
+                backgroundImage: './src/images/impact/computer-class.webp'
             }) %>
         </div>
     </div>
@@ -173,27 +212,35 @@
     <div class="container">
         <div class="about-content">
             <div class="about-text" data-aos="fade-right">
-                <h2 class="section-title">About Spread A Smile India</h2>
+                <h2 class="section-title">Know About Spread A Smile India and How We Are Different ?</h2>
                 <div class="about-description">
                     <p>
-                        Since 2005, Spread A Smile India has been dedicated to transforming the lives of destitute street children through  education, healthcare, and empowerment programs. Founded by Sangita Mehra, a former fashion designer who gave up her successful business to devote herself to social work, our organization believes that every child born in poverty can break the cycle of destitution.
+                        Since 2005, Spread A Smile India has transformed lives through education, healthcare, and empowerment. Founded by Sangita Mehra, we believe every child can break the cycle of poverty through education and opportunity.
                     </p>
                     <p>
-                        We work directly with marginalized communities in Munirka Village, Delhi, and surrounding low-income neighborhoods, providing not just education but also nutrition, healthcare, and skill development. Our mission is to help children transition "from streets to classrooms" while empowering women through vocational training.
+                        We work with marginalized communities in Delhi, providing comprehensive support from nutrition to skill development. Our mission: transforming lives "from streets to classrooms" while empowering families for sustainable change.
                     </p>
                 </div>
                 <div class="about-features">
                     <div class="feature-item">
                         <i class="fas fa-check-circle"></i>
-                        <span>Community-centered approach</span>
+                        <span>Changing street people's lives through education and care</span>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-check-circle"></i>
-                        <span>Holistic development programs</span>
+                        <span>Covering 7+ traffic signals across Delhi NCR</span>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-check-circle"></i>
-                        <span>Sustainable impact focus</span>
+                        <span>Helping women by providing them financial stability</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Teaching students new skills for better opportunities</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Providing uniform learning and skill development centers with qualified teachers</span>
                     </div>
                 </div>
                 <a href="/about" class="btn btn-primary">
@@ -203,16 +250,16 @@
             </div>
             <div class="about-image" data-aos="fade-left">
                 <div class="image-container">
-                    <img src="./src/images/hero/candleworkshop.png" 
+                    <img src="./src/images/landing-page/lading-page1.webp" 
                          alt="Our mission in action" 
                          loading="lazy">
                     <div class="image-overlay">
-                        <div class="overlay-content">
+                        <!-- <div class="overlay-content">
                             <div class="stat-highlight">
-                                <span class="stat-number">98%</span>
-                                <span class="stat-label">Success Rate</span>
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Spread smiles</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -230,7 +277,7 @@
         
         <div class="team-grid">
             <%- include('components/team-card', {
-                image: './src/images/team/sangita-mehra.png',
+                image: './src/images/team/sangita-mehra.webp',
                 name: 'Sangita Mehra',
                 role: 'Founder & Director',
                 bio: 'Former fashion designer from Mehrasons Jewellers family who gave up her business to transform street children\'s lives through education since 2005.',
@@ -242,10 +289,10 @@
             }) %>
             
             <%- include('components/team-card', {
-                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                name: 'Raj Patel',
-                role: 'Head of Programs',
-                bio: 'Educational expert ensuring quality implementation across all initiatives.',
+                image: './src/images/team/op-chabra.webp',
+                name: 'OP Chabra Sir',
+                role: 'Manager & Co-founder',
+                bio: 'Manages operations and financial aspects including accounts and administrative affairs. His strategic oversight ensures smooth functioning of all organizational activities and sustainable growth.',
                 social: {
                     linkedin: '#',
                     twitter: '#'
@@ -254,15 +301,27 @@
             }) %>
             
             <%- include('components/team-card', {
-                image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                name: 'Meera Gupta',
-                role: 'Community Outreach Lead',
-                bio: 'Building bridges between communities and sustainable development.',
+                image: './src/images/team/maddy-sir.webp',
+                name: 'Maddy',
+                role: 'Co-founder & Operations Handler',
+                bio: 'Handles execution and manages candle workshop operations. His hands-on approach ensures quality implementation of programs and maintains direct connection with beneficiaries and community members.',
                 social: {
                     linkedin: '#',
                     facebook: '#'
                 },
                 delay: 300
+            }) %>
+            
+            <%- include('components/team-card', {
+                image: './src/images/team/vicky-sir.webp',
+                name: 'Vicky Rawat',
+                role: 'Co-founder & Technical Support',
+                bio: 'Provides teaching technical support and assists in NGO execution. His expertise in technical aspects and educational methodologies enhances the quality of our programs and training initiatives.',
+                social: {
+                    linkedin: '#',
+                    instagram: '#'
+                },
+                delay: 400
             }) %>
         </div>
     </div>

@@ -20,13 +20,12 @@ yarn-error.log*
 *.bmp
 *.tiff
 *.tif
-*.webp
+
 *.svg
 *.heic
 *.raw
 
 # Large video files - NEVER COMMIT THESE
-*.mp4
 *.mov
 *.avi
 *.mkv
