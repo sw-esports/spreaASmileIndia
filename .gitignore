@@ -1,0 +1,106 @@
+# Dependencies
+/node_modules
+**/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Large image files - NEVER COMMIT THESE
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.tif
+*.webp
+*.svg
+*.heic
+*.raw
+
+# Large video files - NEVER COMMIT THESE
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.webm
+*.m4v
+*.3gp
+
+# Large audio files - NEVER COMMIT THESE
+*.mp3
+*.wav
+*.aac
+*.ogg
+*.flac
+*.m4a
+
+# Document files that might be large
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+
+# Archive files
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# Entire image directories - NEVER COMMIT THESE
+public/src/images/
+public/src/icons/
+**/images/
+**/photos/
+**/media/
+
+# Keep only essential files (exceptions to above rules)
+!favicon.ico
+!manifest.json
+!browserconfig.xml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Any files larger than 100MB should never be committed
+# Use git-lfs for large files if absolutely necessary

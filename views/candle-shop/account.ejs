@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= metaDescription %>">
+    <meta name="keywords" content="my account, profile, SASI candles">
+    <meta name="author" content="Spread A Smile India">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/candle-shop.css">
+    <link rel="stylesheet" href="/css/candle-shop-account.css">
+    <link rel="stylesheet" href="/css/candle-shop-footer-new.css">
+    
+    <!-- Enhanced Candle Shop Scripts -->
+    <script src="/js/candle-shop-enhanced-fixed.js" defer></script>
+    
+    <!-- Theme Initialization -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Candle Shop Navigation -->
+    <%- include('../components/shop-header', { page: 'account' }) %>
+
+    <!-- User Menu Dropdown -->
+    <%- include('../components/user-menu') %>
+
+    <!-- Shopping Cart Sidebar -->
+    <%- include('../components/cart-sidebar') %>
+    <!-- Main Content -->
+    <main class="account-main">
+        <div class="account-container">
+            <!-- Account Sidebar -->
+            <aside class="account-sidebar">
+                <div class="account-profile">
+                    <div class="profile-avatar">
+                        <img src="/src/images/default-avatar.jpg" alt="Profile" id="profileImage">
+                        <button class="avatar-edit" onclick="editProfileImage()">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="profile-info">
+                        <h3>John Doe</h3>
+                        <p>Member since January 2024</p>
+                        <div class="member-status">
+                            <i class="fas fa-star"></i>
+                            Gold Member
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="account-menu">
+                    <a href="#profile" class="menu-item active" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile Information</span>
+                    </a>
+                    <a href="#orders" class="menu-item" data-section="orders">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Order History</span>
+                        <span class="menu-badge">3</span>
+                    </a>
+                    <a href="#addresses" class="menu-item" data-section="addresses">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Addresses</span>
+                    </a>
+                    <a href="#payment" class="menu-item" data-section="payment">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payment Methods</span>
+                    </a>
+                    <a href="#wishlist" class="menu-item" data-section="wishlist">
+                        <i class="fas fa-heart"></i>
+                        <span>Wishlist</span>
+                        <span class="menu-badge">7</span>
+                    </a>
+                    <a href="#preferences" class="menu-item" data-section="preferences">
+                        <i class="fas fa-cog"></i>
+                        <span>Preferences</span>
+                    </a>
+                    <a href="#support" class="menu-item" data-section="support">
+                        <i class="fas fa-headset"></i>
+                        <span>Support</span>
+                    </a>
+                    <a href="/candle-shop/login" class="menu-item logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Account Content -->
+            <main class="account-content">
+                <!-- Profile Section -->
+                <section id="profile" class="account-section active">
+                    <div class="section-header">
+                        <h2>Profile Information</h2>
+                        <p>Manage your personal information and preferences</p>
+                    </div>
+
+                    <div class="profile-form">
+                        <form id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" value="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" value="Doe" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" value="john.doe@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" value="+1 (555) 123-4567" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthday">Date of Birth</label>
+                                <input type="date" id="birthday" value="1990-05-15">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Save Changes
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                    <i class="fas fa-undo"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders" class="account-section">
+                    <div class="section-header">
+                        <h2>Order History</h2>
+                        <p>Track your past and current orders</p>
+                    </div>
+
+                    <div class="orders-list">
+                        <div class="order-item">
+                            <div class="order-header">
+                                <div class="order-info">
+                                    <h3>Order #ORD-2024-001</h3>
+                                    <p>Placed on March 15, 2024</p>
+                                </div>
+                                <div class="order-status delivered">
+                                    <i class="fas fa-check-circle"></i>
+                                    Delivered
+                                </div>
+                            </div>
+                            <div class="order-products">
+                                <div class="product-item">
+                                    <img src="/src/images/candles/lavender-bliss.jpg" alt="Lavender Bliss">
+                                    <div class="product-details">
+                                        <h4>Lavender Bliss Candle</h4>
+                                        <p>Quantity: 2</p>
+                                    </div>
+                                    <div class="product-price">₹1,598</div>
+                                </div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-outline">View Details</button>
+                                <button class="btn btn-outline">Reorder</button>
+                            </div>
+                        </div>
+
+                        <div class="order-item">
+                            <div class="order-header">
+                                <div class="order-info">
+                                    <h3>Order #ORD-2024-002</h3>
+                                    <p>Placed on March 20, 2024</p>
+                                </div>
+                                <div class="order-status processing">
+                                    <i class="fas fa-clock"></i>
+                                    Processing
+                                </div>
+                            </div>
+                            <div class="order-products">
+                                <div class="product-item">
+                                    <img src="/src/images/candles/vanilla-dreams.jpg" alt="Vanilla Dreams">
+                                    <div class="product-details">
+                                        <h4>Vanilla Dreams Candle</h4>
+                                        <p>Quantity: 1</p>
+                                    </div>
+                                    <div class="product-price">₹799</div>
+                                </div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-outline">Track Order</button>
+                                <button class="btn btn-outline">Cancel Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other sections (addresses, payment, etc.) would be similar -->
+                <section id="addresses" class="account-section">
+                    <div class="section-header">
+                        <h2>Saved Addresses</h2>
+                        <p>Manage your delivery addresses</p>
+                    </div>
+                    <div class="coming-soon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Address Management</h3>
+                        <p>This feature is coming soon!</p>
+                    </div>
+                </section>
+
+                <section id="payment" class="account-section">
+                    <div class="section-header">
+                        <h2>Payment Methods</h2>
+                        <p>Manage your saved payment options</p>
+                    </div>
+                    <div class="coming-soon">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Payment Management</h3>
+                        <p>This feature is coming soon!</p>
+                    </div>
+                </section>
+
+                <section id="wishlist" class="account-section">
+                    <div class="section-header">
+                        <h2>My Wishlist</h2>
+                        <p>Items you've saved for later</p>
+                    </div>
+                    <div class="coming-soon">
+                        <i class="fas fa-heart"></i>
+                        <h3>Wishlist Management</h3>
+                        <p>This feature is coming soon!</p>
+                    </div>
+                </section>
+
+                <section id="preferences" class="account-section">
+                    <div class="section-header">
+                        <h2>Preferences</h2>
+                        <p>Customize your experience</p>
+                    </div>
+                    <div class="coming-soon">
+                        <i class="fas fa-cog"></i>
+                        <h3>User Preferences</h3>
+                        <p>This feature is coming soon!</p>
+                    </div>
+                </section>
+
+                <section id="support" class="account-section">
+                    <div class="section-header">
+                        <h2>Customer Support</h2>
+                        <p>Get help with your orders and account</p>
+                    </div>
+                    <div class="coming-soon">
+                        <i class="fas fa-headset"></i>
+                        <h3>Support Center</h3>
+                        <p>This feature is coming soon!</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </main>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+
+    <script>
+        // Account navigation
+        document.querySelectorAll('.menu-item[data-section]').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all menu items and sections
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.account-section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked item and corresponding section
+                this.classList.add('active');
+                document.getElementById(this.dataset.section).classList.add('active');
+            });
+        });
+
+        // Profile form submission
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
+        });
+
+        function resetForm() {
+            document.getElementById('profileForm').reset();
+        }
+
+        function editProfileImage() {
+            alert('Profile image upload feature coming soon!');
+        }
+    </script>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+</body>
+</html>

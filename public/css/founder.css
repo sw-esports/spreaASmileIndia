@@ -1,0 +1,643 @@
+/* Founder Page Styles */
+:root {
+    --primary-orange: #F97316;
+    --secondary-orange: #EA580C;
+    --light-orange: #FBBF24;
+    --orange-50: #FFF7ED;
+    --orange-100: #FFEDD5;
+    --orange-200: #FED7AA;
+    --text-dark: #1F2937;
+    --text-light: #6B7280;
+    --white: #FFFFFF;
+}
+
+/* Hero Section */
+.founder-hero-section {
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    color: white;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.founder-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.founder-hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.founder-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.founder-name {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #ffffff, #f1f5f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.founder-tagline {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #f8fafc;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.founder-intro {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    max-width: 500px;
+    color: #e2e8f0;
+    font-style: italic;
+}
+
+.founder-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    transform: rotate(2deg);
+    transition: all 0.3s ease;
+}
+
+.founder-image:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.founder-image img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.founder-quote-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.founder-quote-overlay blockquote {
+    margin: 0;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Journey Section */
+.founder-journey-section {
+    padding: 100px 0;
+    background: var(--orange-50);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.section-description {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.journey-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.journey-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.journey-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.journey-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.journey-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+    flex-shrink: 0;
+}
+
+.journey-item:nth-child(even) .journey-icon {
+    margin-right: 0;
+    margin-left: 40px;
+}
+
+.journey-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.journey-details h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.journey-details p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+}
+
+/* Philosophy Section */
+.philosophy-section {
+    padding: 100px 0;
+    background: white;
+}
+
+.philosophy-content {
+    text-align: center;
+}
+
+.philosophy-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 60px;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.philosophy-item {
+    background: var(--orange-50);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.philosophy-item:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-orange);
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+}
+
+.philosophy-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.philosophy-icon i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.philosophy-item h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.philosophy-item p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Recognition Section */
+.recognition-section {
+    padding: 100px 0;
+    background: var(--orange-50);
+}
+
+.recognition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.recognition-item {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-top: 5px solid var(--primary-orange);
+}
+
+.recognition-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.recognition-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--orange-100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.recognition-icon i {
+    font-size: 1.5rem;
+    color: var(--primary-orange);
+}
+
+.recognition-item h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.recognition-item p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.recognition-link {
+    color: var(--primary-orange);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.recognition-link:hover {
+    color: var(--secondary-orange);
+    text-decoration: underline;
+}
+
+/* Personal Message Section */
+.personal-message-section {
+    padding: 100px 0;
+    background: white;
+}
+
+.message-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.message-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.message-header h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.founder-message {
+    background: var(--orange-50);
+    padding: 60px 50px;
+    border-radius: 30px;
+    border-left: 8px solid var(--primary-orange);
+    position: relative;
+}
+
+.founder-message::before {
+    content: '"';
+    font-size: 6rem;
+    color: var(--primary-orange);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: serif;
+    opacity: 0.3;
+}
+
+.founder-message p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.founder-message cite {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid var(--orange-200);
+}
+
+.signature-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 3px solid var(--primary-orange);
+}
+
+.signature-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: block;
+}
+
+.signature-title {
+    font-size: 1rem;
+    color: var(--text-light);
+    display: block;
+}
+
+/* Connect Section */
+.connect-section {
+    padding: 80px 0;
+    background: var(--orange-50);
+}
+
+.connect-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.connect-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.connect-content p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 40px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    /* Removed orange background to allow platform-specific colors */
+    color: white;
+}
+
+.social-link i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cta-content p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: white;
+    color: var(--primary-orange);
+    border: 2px solid white;
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: var(--primary-orange);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .founder-title {
+        font-size: 2rem;
+    }
+    
+    .founder-name {
+        font-size: 2.5rem;
+    }
+    
+    .founder-tagline {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .journey-item {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    
+    .journey-item:nth-child(even) .journey-icon {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+    
+    .journey-icon {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .founder-message {
+        padding: 40px 30px;
+    }
+    
+    .founder-message cite {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .signature-img {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Dark mode support */
+[data-theme="dark"] .founder-journey-section {
+    background: #1F2937;
+}
+
+[data-theme="dark"] .journey-item {
+    background: #374151;
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .journey-details h3 {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .philosophy-section {
+    background: #1F2937;
+}
+
+[data-theme="dark"] .philosophy-item {
+    background: #374151;
+}
+
+[data-theme="dark"] .philosophy-item h4 {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .recognition-section {
+    background: #1F2937;
+}
+
+[data-theme="dark"] .recognition-item {
+    background: #374151;
+}
+
+[data-theme="dark"] .recognition-item h4 {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .personal-message-section {
+    background: #1F2937;
+}
+
+[data-theme="dark"] .founder-message {
+    background: #374151;
+}
+
+[data-theme="dark"] .founder-message p {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .connect-section {
+    background: #1F2937;
+}
+
+[data-theme="dark"] .social-link {
+    background: #374151;
+    color: #F9FAFB;
+}

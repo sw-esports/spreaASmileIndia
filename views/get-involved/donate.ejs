@@ -1,0 +1,1748 @@
+<%- include('../partials/header') %>
+
+<div class="donate-page">
+    <!-- Hero Section -->
+    <section class="donate-hero">
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&h=1080&fit=crop" alt="Children learning" class="hero-bg-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-heart"></i>
+                    <span>Make a Difference Today</span>
+                </div>
+                <h1 class="hero-title">
+                    Transform Lives with Your <span class="text-gradient">Generosity</span>
+                </h1>
+                <p class="hero-description">
+                    Every donation, no matter the size, creates ripples of hope and opportunity. Join thousands of compassionate donors who are building a better future for children in need.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">2,500+</div>
+                        <div class="stat-label">Children Helped</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">₹85</div>
+                        <div class="stat-label">Goes to Programs</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Years of Impact</div>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#donation-form" class="btn btn-primary btn-large">
+                        <i class="fas fa-heart"></i>
+                        Start Donating
+                    </a>
+                    <a href="#impact-stories" class="btn btn-outline btn-large">
+                        <i class="fas fa-play"></i>
+                        See Our Impact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Donation Options -->
+    <section class="quick-donation">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quick Donation</h2>
+                <p>Choose a pre-set amount or customize your contribution</p>
+            </div>
+            <div class="quick-options">
+                <button class="quick-btn" data-amount="500">
+                    <div class="amount">₹500</div>
+                    <div class="impact">Feed 5 children for a week</div>
+                </button>
+                <button class="quick-btn featured" data-amount="1500">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="amount">₹1,500</div>
+                    <div class="impact">Full education support for 1 month</div>
+                </button>
+                <button class="quick-btn" data-amount="3000">
+                    <div class="amount">₹3,000</div>
+                    <div class="impact">Healthcare for 10 children</div>
+                </button>
+                <button class="quick-btn" data-amount="5000">
+                    <div class="amount">₹5,000</div>
+                    <div class="impact">Complete care package</div>
+                </button>
+            </div>
+            <div class="custom-amount">
+                <input type="number" id="customAmount" placeholder="Enter custom amount" min="100">
+                <button class="btn btn-secondary" onclick="setCustomAmount()">
+                    <i class="fas fa-plus"></i>
+                    Custom Amount
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Types -->
+    <section class="donation-types">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Donation Type</h2>
+                <p>Select the option that works best for you and maximizes your impact</p>
+            </div>
+            <div class="donation-cards">
+                <div class="donation-card">
+                    <div class="card-header">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Monthly Giving</h3>
+                        <div class="recommended-badge">Recommended</div>
+                    </div>
+                    <div class="card-content">
+                        <p>Make a sustained impact with regular monthly contributions. Your consistent support allows us to plan and implement long-term programs.</p>
+                        <div class="benefits">
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Maximum impact with consistent support</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Regular updates on your impact</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Cancel anytime, no commitment</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Special donor recognition</span>
+                            </div>
+                        </div>
+                        <div class="popular-amounts">
+                            <span>Popular: ₹500, ₹1,000, ₹2,500/month</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectDonationType('monthly')">
+                            <i class="fas fa-heart"></i>
+                            Give Monthly
+                        </button>
+                    </div>
+                </div>
+
+                <div class="donation-card">
+                    <div class="card-header">
+                        <i class="fas fa-gift"></i>
+                        <h3>One-Time Donation</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Make an immediate difference with a single contribution. Perfect for special occasions or when you want to help right away.</p>
+                        <div class="benefits">
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Immediate impact on current needs</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Perfect for memorial or honor gifts</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>No ongoing commitment</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Tax deduction for current year</span>
+                            </div>
+                        </div>
+                        <div class="popular-amounts">
+                            <span>Popular: ₹1,000, ₹5,000, ₹10,000</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="selectDonationType('onetime')">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            Give Once
+                        </button>
+                    </div>
+                </div>
+
+                <div class="donation-card">
+                    <div class="card-header">
+                        <i class="fas fa-user-friends"></i>
+                        <h3>Child Sponsorship</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Create a personal connection by sponsoring a specific child's education, health, and development. Receive updates and photos from your sponsored child.</p>
+                        <div class="benefits">
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Direct relationship with a child</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Regular photos and progress reports</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Optional correspondence exchange</span>
+                            </div>
+                            <div class="benefit">
+                                <i class="fas fa-check"></i>
+                                <span>Visit opportunities</span>
+                            </div>
+                        </div>
+                        <div class="sponsorship-amount">
+                            <span>₹2,500/month covers full sponsorship</span>
+                        </div>
+                        <button class="btn btn-accent" onclick="selectDonationType('sponsorship')">
+                            <i class="fas fa-child"></i>
+                            Sponsor a Child
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stories -->
+    <section id="impact-stories" class="impact-stories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your Donations at Work</h2>
+                <p>See the real impact of your generosity through these inspiring transformations</p>
+            </div>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=400&h=300&fit=crop" alt="Priya's transformation">
+                        <div class="story-category">Education</div>
+                    </div>
+                    <div class="story-content">
+                        <h3>Priya's Dream Realized</h3>
+                        <p>"Thanks to donors like you, I graduated with honors and now work as a teacher, helping other children from my community."</p>
+                        <div class="story-impact">
+                            <div class="impact-stat">
+                                <strong>₹18,000</strong>
+                                <span>Total donations received</span>
+                            </div>
+                            <div class="impact-stat">
+                                <strong>6 years</strong>
+                                <span>Education support</span>
+                            </div>
+                        </div>
+                        <div class="story-outcome">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Now teaching 50+ children</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Arjun's health journey">
+                        <div class="story-category">Healthcare</div>
+                    </div>
+                    <div class="story-content">
+                        <h3>Arjun's Health Recovery</h3>
+                        <p>"Severe malnutrition nearly took my life, but your donations provided the medical care and nutrition that saved me."</p>
+                        <div class="story-impact">
+                            <div class="impact-stat">
+                                <strong>₹12,000</strong>
+                                <span>Medical treatment cost</span>
+                            </div>
+                            <div class="impact-stat">
+                                <strong>8 months</strong>
+                                <span>Recovery period</span>
+                            </div>
+                        </div>
+                        <div class="story-outcome">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Healthy and thriving</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=400&h=300&fit=crop" alt="Meera's skills training">
+                        <div class="story-category">Skills Training</div>
+                    </div>
+                    <div class="story-content">
+                        <h3>Meera's New Beginning</h3>
+                        <p>"The vocational training funded by donations gave me skills to start my tailoring business and support my family."</p>
+                        <div class="story-impact">
+                            <div class="impact-stat">
+                                <strong>₹8,000</strong>
+                                <span>Training program cost</span>
+                            </div>
+                            <div class="impact-stat">
+                                <strong>₹15,000</strong>
+                                <span>Monthly income now</span>
+                            </div>
+                        </div>
+                        <div class="story-outcome">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Self-employed entrepreneur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparency Section -->
+    <section class="transparency">
+        <div class="container">
+            <div class="section-header">
+                <h2>Complete Transparency</h2>
+                <p>See exactly how your donations are used to create maximum impact</p>
+            </div>
+            <div class="transparency-content">
+                <div class="fund-allocation">
+                    <h3>Fund Allocation</h3>
+                    <div class="allocation-chart">
+                        <div class="allocation-item">
+                            <div class="allocation-bar">
+                                <div class="allocation-fill" style="width: 85%" data-category="programs"></div>
+                            </div>
+                            <div class="allocation-info">
+                                <span class="category">Direct Programs</span>
+                                <span class="percentage">85%</span>
+                            </div>
+                        </div>
+                        <div class="allocation-item">
+                            <div class="allocation-bar">
+                                <div class="allocation-fill" style="width: 10%" data-category="admin"></div>
+                            </div>
+                            <div class="allocation-info">
+                                <span class="category">Administration</span>
+                                <span class="percentage">10%</span>
+                            </div>
+                        </div>
+                        <div class="allocation-item">
+                            <div class="allocation-bar">
+                                <div class="allocation-fill" style="width: 5%" data-category="fundraising"></div>
+                            </div>
+                            <div class="allocation-info">
+                                <span class="category">Fundraising</span>
+                                <span class="percentage">5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transparency-features">
+                    <div class="feature">
+                        <i class="fas fa-file-invoice"></i>
+                        <h4>Regular Reports</h4>
+                        <p>Receive detailed quarterly reports showing how your donation created impact</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-certificate"></i>
+                        <h4>Tax Benefits</h4>
+                        <p>All donations qualify for 80G tax deduction under Income Tax Act</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Secure Payments</h4>
+                        <p>Bank-grade security ensures your payment information stays safe</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-eye"></i>
+                        <h4>Visit Anytime</h4>
+                        <p>Schedule visits to see our programs in action and meet the children you're helping</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Form -->
+    <section id="donation-form" class="donation-form-section">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Complete Your Donation</h2>
+                    <p>Thank you for choosing to make a difference. Every rupee counts!</p>
+                </div>
+                
+                <form id="donationForm" class="donation-form">
+                    <div class="form-step active" data-step="1">
+                        <h3>Donation Details</h3>
+                        
+                        <div class="form-group">
+                            <label>Donation Type</label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="donationType" value="onetime" checked>
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">One-time Donation</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="donationType" value="monthly">
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">Monthly Donation</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="donationType" value="sponsorship">
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">Child Sponsorship</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donationAmount">Donation Amount (₹)</label>
+                            <input type="number" id="donationAmount" name="amount" value="1500" min="100" required>
+                            <div class="amount-suggestions">
+                                <button type="button" class="amount-tag" data-amount="500">₹500</button>
+                                <button type="button" class="amount-tag" data-amount="1000">₹1,000</button>
+                                <button type="button" class="amount-tag" data-amount="2500">₹2,500</button>
+                                <button type="button" class="amount-tag" data-amount="5000">₹5,000</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Donation Purpose</label>
+                            <select name="purpose" required>
+                                <option value="">Select purpose</option>
+                                <option value="education">Education Support</option>
+                                <option value="healthcare">Healthcare & Nutrition</option>
+                                <option value="skill-development">Skill Development</option>
+                                <option value="emergency">Emergency Relief</option>
+                                <option value="general">Where Most Needed</option>
+                            </select>
+                        </div>
+
+                        <div class="impact-preview">
+                            <h4>Your Impact</h4>
+                            <div id="impactCalculation">
+                                <div class="impact-item">
+                                    <i class="fas fa-utensils"></i>
+                                    <span id="mealsCount">90 meals</span>
+                                </div>
+                                <div class="impact-item">
+                                    <i class="fas fa-book"></i>
+                                    <span id="educationCount">1 child's education</span>
+                                </div>
+                                <div class="impact-item">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <span id="healthcareCount">Medical care</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-step" data-step="2">
+                        <h3>Personal Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name*</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name*</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address*</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number*</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address*</label>
+                            <textarea id="address" name="address" required rows="3"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City*</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pincode">Pincode*</label>
+                                <input type="text" id="pincode" name="pincode" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="taxReceipt" checked>
+                                <span class="checkmark"></span>
+                                <span>I want to receive 80G tax receipt</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="updates">
+                                <span class="checkmark"></span>
+                                <span>Send me regular updates about my impact</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" id="prevBtn" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-arrow-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" id="nextBtn" class="btn btn-primary">
+                            Next
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="submit" id="donateBtn" class="btn btn-success btn-large" style="display: none;">
+                            <i class="fas fa-heart"></i>
+                            Complete Donation
+                        </button>
+                    </div>
+                    
+                    <div class="form-progress">
+                        <div class="progress-step active">1</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step">2</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="donate-faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about donating to SASI</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I know my donation is being used effectively?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We provide quarterly impact reports showing exactly how donations are used. You'll receive photos, videos, and detailed breakdowns of program costs. Additionally, 85% of every donation goes directly to programs, with only 15% for administration and fundraising.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I visit the children and programs I'm supporting?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We encourage donors to visit our programs. Contact us to schedule a visit where you can meet the children, see our facilities, and witness the impact of your donation firsthand.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What tax benefits do I get for donating?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>All donations to SASI qualify for 80G tax deduction under the Income Tax Act. You can claim 50% of your donation amount as a deduction from your taxable income. We'll provide official receipts for tax filing.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I cancel my monthly donation anytime?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can cancel or modify your monthly donation at any time without any penalty. Simply contact us via email or phone, and we'll process your request immediately.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What's the difference between child sponsorship and regular donation?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Child sponsorship creates a personal connection with a specific child. You'll receive their photo, updates on their progress, and can exchange letters. Regular donations support our general programs and help wherever the need is greatest.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is my payment information secure?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we use bank-grade SSL encryption for all transactions. Your payment information is processed through secure payment gateways and is never stored on our servers. All donations are PCI compliant.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+/* Theme Support Variables */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #f59e0b;
+    --accent-color: #10b981;
+    --success-color: #059669;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+[data-theme="dark"] {
+    --primary-color: #3b82f6;
+    --secondary-color: #fbbf24;
+    --accent-color: #34d399;
+    --success-color: #10b981;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --border-color: #374151;
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.donate-page {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Hero Section */
+.donate-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(16, 185, 129, 0.7));
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    color: white;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 10px 25px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.text-gradient {
+    background: linear-gradient(45deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-description {
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fbbf24;
+    display: block;
+}
+
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.section-header p {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Quick Donation */
+.quick-donation {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.quick-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.quick-btn {
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    padding: 2rem 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.quick-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--primary-color);
+}
+
+.quick-btn.featured {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-medium);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.quick-btn .amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.quick-btn .impact {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.custom-amount {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.custom-amount input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Donation Types */
+.donation-types {
+    padding: 6rem 0;
+}
+
+.donation-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.donation-card {
+    background: var(--bg-primary);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-medium);
+    transition: transform 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.donation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.card-header i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.recommended-badge {
+    background: var(--accent-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+.card-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.benefits {
+    margin-bottom: 2rem;
+}
+
+.benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.benefit i {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+}
+
+.popular-amounts,
+.sponsorship-amount {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Impact Stories */
+.impact-stories {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.story-card {
+    background: var(--bg-primary);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+    transition: transform 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+}
+
+.story-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.story-content {
+    padding: 2rem;
+}
+
+.story-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.story-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.story-impact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.impact-stat {
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
+.impact-stat strong {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.impact-stat span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.story-outcome {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* Transparency */
+.transparency {
+    padding: 6rem 0;
+}
+
+.transparency-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.fund-allocation h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.allocation-item {
+    margin-bottom: 1.5rem;
+}
+
+.allocation-bar {
+    height: 20px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.allocation-fill {
+    height: 100%;
+    transition: width 1s ease;
+}
+
+.allocation-fill[data-category="programs"] {
+    background: var(--accent-color);
+}
+
+.allocation-fill[data-category="admin"] {
+    background: var(--secondary-color);
+}
+
+.allocation-fill[data-category="fundraising"] {
+    background: var(--primary-color);
+}
+
+.allocation-info {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.transparency-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.feature {
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.feature i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.feature p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Donation Form */
+.donation-form-section {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-heavy);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.form-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
+
+.form-step h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.radio-group {
+    display: grid;
+    gap: 1rem;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.radio-item:hover {
+    border-color: var(--primary-color);
+}
+
+.radio-item input[type="radio"] {
+    width: auto;
+    margin: 0;
+}
+
+.amount-suggestions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.amount-tag {
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.amount-tag:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.impact-preview {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 1.5rem;
+}
+
+.impact-preview h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+#impactCalculation {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.impact-item {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.impact-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.impact-item span {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.form-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.progress-step.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.progress-line {
+    width: 50px;
+    height: 2px;
+    background: var(--border-color);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #d97706;
+    transform: translateY(-2px);
+}
+
+.btn-accent {
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-accent:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #047857;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-large {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+/* FAQ Section */
+.donate-faq {
+    padding: 6rem 0;
+}
+
+.faq-grid {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--bg-primary);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-light);
+    overflow: hidden;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background: var(--bg-secondary);
+}
+
+.faq-question h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.faq-question i {
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    max-height: 200px;
+}
+
+.faq-answer p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .hero-stats {
+        gap: 1.5rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .transparency-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .transparency-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .custom-amount {
+        flex-direction: column;
+    }
+    
+    #impactCalculation {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .form-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .quick-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .donation-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .stories-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// Theme toggle functionality
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+// Load saved theme
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // Form step navigation
+    let currentStep = 1;
+    const totalSteps = 2;
+    
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const donateBtn = document.getElementById('donateBtn');
+    
+    function showStep(step) {
+        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('active'));
+        
+        document.querySelector(`[data-step="${step}"]`).classList.add('active');
+        document.querySelectorAll('.progress-step')[step - 1].classList.add('active');
+        
+        prevBtn.style.display = step === 1 ? 'none' : 'flex';
+        nextBtn.style.display = step === totalSteps ? 'none' : 'flex';
+        donateBtn.style.display = step === totalSteps ? 'flex' : 'none';
+    }
+    
+    nextBtn.addEventListener('click', function() {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+    
+    prevBtn.addEventListener('click', function() {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+    
+    // Quick donation buttons
+    document.querySelectorAll('.quick-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const amount = this.dataset.amount;
+            document.getElementById('donationAmount').value = amount;
+            updateImpact();
+            document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    
+    // Custom amount button
+    function setCustomAmount() {
+        const customAmount = document.getElementById('customAmount').value;
+        if (customAmount && customAmount >= 100) {
+            document.getElementById('donationAmount').value = customAmount;
+            updateImpact();
+            document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert('Please enter an amount of at least ₹100');
+        }
+    }
+    
+    // Make function global
+    window.setCustomAmount = setCustomAmount;
+    
+    // Donation type selection
+    function selectDonationType(type) {
+        document.querySelector(`input[value="${type}"]`).checked = true;
+        document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Make function global
+    window.selectDonationType = selectDonationType;
+    
+    // Amount tag buttons
+    document.querySelectorAll('.amount-tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            const amount = this.dataset.amount;
+            document.getElementById('donationAmount').value = amount;
+            updateImpact();
+        });
+    });
+    
+    // Impact calculator
+    function updateImpact() {
+        const amount = parseInt(document.getElementById('donationAmount').value) || 0;
+        const mealsCount = Math.floor(amount / 17); // ₹17 per meal
+        
+        document.getElementById('mealsCount').textContent = `${mealsCount} meals`;
+        
+        if (amount >= 2500) {
+            document.getElementById('educationCount').textContent = 'Complete child sponsorship';
+            document.getElementById('healthcareCount').textContent = 'Full healthcare coverage';
+        } else if (amount >= 1500) {
+            document.getElementById('educationCount').textContent = '1 child\'s education';
+            document.getElementById('healthcareCount').textContent = 'Regular medical care';
+        } else if (amount >= 750) {
+            document.getElementById('educationCount').textContent = 'Education support';
+            document.getElementById('healthcareCount').textContent = 'Basic healthcare';
+        } else if (amount >= 500) {
+            document.getElementById('educationCount').textContent = 'School supplies';
+            document.getElementById('healthcareCount').textContent = 'Health checkups';
+        } else {
+            document.getElementById('educationCount').textContent = 'Learning materials';
+            document.getElementById('healthcareCount').textContent = 'Basic care';
+        }
+    }
+    
+    // Update impact when amount changes
+    document.getElementById('donationAmount').addEventListener('input', updateImpact);
+    updateImpact();
+    
+    // Form submission
+    document.getElementById('donationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simple validation
+        const requiredFields = this.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.style.borderColor = '#ef4444';
+            } else {
+                field.style.borderColor = '';
+            }
+        });
+        
+        if (isValid) {
+            const formData = new FormData(this);
+            const donationType = formData.get('donationType');
+            const amount = formData.get('amount');
+            const name = `${formData.get('firstName')} ${formData.get('lastName')}`;
+            
+            let message = `Thank you, ${name}! `;
+            message += `Your ${donationType} donation of ₹${amount}`;
+            if (donationType === 'monthly') message += ' per month';
+            message += ' will make a tremendous difference in children\'s lives.\n\n';
+            message += 'In a real implementation, you would now be redirected to a secure payment gateway to complete your donation.';
+            
+            alert(message);
+        } else {
+            alert('Please fill in all required fields.');
+        }
+    });
+    
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items
+            document.querySelectorAll('.faq-item').forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // Animate elements on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                
+                // Animate allocation bars
+                if (entry.target.classList.contains('fund-allocation')) {
+                    setTimeout(() => {
+                        entry.target.querySelectorAll('.allocation-fill').forEach(fill => {
+                            fill.style.width = fill.style.width;
+                        });
+                    }, 300);
+                }
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animations
+    document.querySelectorAll('.section-header, .quick-btn, .donation-card, .story-card, .feature, .fund-allocation').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+</script>
+
+<%- include('../partials/footer') %>

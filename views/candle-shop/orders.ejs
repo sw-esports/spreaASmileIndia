@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= metaDescription %>">
+    <meta name="keywords" content="my orders, order history, SASI candles">
+    <meta name="author" content="Spread A Smile India">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/candle-shop.css">
+    <link rel="stylesheet" href="/css/candle-shop-account.css">
+    <link rel="stylesheet" href="/css/candle-shop-footer-new.css">
+    
+    <!-- Enhanced Candle Shop Scripts -->
+    <script src="/js/candle-shop-enhanced-fixed.js" defer></script>
+    
+    <!-- Theme Initialization -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Candle Shop Navigation -->
+    <%- include('../components/shop-header', { page: 'orders' }) %>
+
+    <!-- User Menu Dropdown -->
+    <%- include('../components/user-menu') %>
+
+    <!-- Shopping Cart Sidebar -->
+    <%- include('../components/cart-sidebar') %>
+
+    <!-- Main Content -->
+    <main class="orders-main">
+        <div class="orders-container">
+            <div class="orders-header">
+                <h1>My Orders</h1>
+                <p>Track and manage all your candle orders</p>
+            </div>
+
+            <!-- Order Filters -->
+            <div class="orders-filters">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-status="all">All Orders</button>
+                    <button class="filter-btn" data-status="pending">Pending</button>
+                    <button class="filter-btn" data-status="processing">Processing</button>
+                    <button class="filter-btn" data-status="shipped">Shipped</button>
+                    <button class="filter-btn" data-status="delivered">Delivered</button>
+                    <button class="filter-btn" data-status="cancelled">Cancelled</button>
+                </div>
+                <div class="search-orders">
+                    <input type="text" placeholder="Search orders..." id="orderSearch">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <!-- Orders List -->
+            <div class="orders-list">
+                <!-- Order 1 -->
+                <div class="order-card" data-status="delivered">
+                    <div class="order-header">
+                        <div class="order-number">
+                            <h3>Order #ORD-2024-001</h3>
+                            <span class="order-date">March 15, 2024</span>
+                        </div>
+                        <div class="order-status-badge delivered">
+                            <i class="fas fa-check-circle"></i>
+                            Delivered
+                        </div>
+                    </div>
+
+                    <div class="order-products">
+                        <div class="product-item">
+                            <img src="/src/images/candles/lavender-bliss.jpg" alt="Lavender Bliss Candle">
+                            <div class="product-info">
+                                <h4>Lavender Bliss Candle</h4>
+                                <p>Size: Medium | Scent: Lavender</p>
+                                <span class="product-qty">Quantity: 2</span>
+                            </div>
+                            <div class="product-price">₹1,598</div>
+                        </div>
+                        <div class="product-item">
+                            <img src="/src/images/candles/rose-garden.jpg" alt="Rose Garden Candle">
+                            <div class="product-info">
+                                <h4>Rose Garden Candle</h4>
+                                <p>Size: Small | Scent: Rose</p>
+                                <span class="product-qty">Quantity: 1</span>
+                            </div>
+                            <div class="product-price">₹599</div>
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="order-total">
+                            <span>Total: ₹2,197</span>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="viewOrderDetails('ORD-2024-001')">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                            </button>
+                            <button class="btn btn-primary" onclick="reorderItems('ORD-2024-001')">
+                                <i class="fas fa-redo"></i>
+                                Reorder
+                            </button>
+                            <button class="btn btn-outline" onclick="downloadInvoice('ORD-2024-001')">
+                                <i class="fas fa-download"></i>
+                                Invoice
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tracking-info">
+                        <div class="tracking-steps">
+                            <div class="step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Order Placed</span>
+                            </div>
+                            <div class="step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Processing</span>
+                            </div>
+                            <div class="step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Shipped</span>
+                            </div>
+                            <div class="step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 2 -->
+                <div class="order-card" data-status="processing">
+                    <div class="order-header">
+                        <div class="order-number">
+                            <h3>Order #ORD-2024-002</h3>
+                            <span class="order-date">March 20, 2024</span>
+                        </div>
+                        <div class="order-status-badge processing">
+                            <i class="fas fa-clock"></i>
+                            Processing
+                        </div>
+                    </div>
+
+                    <div class="order-products">
+                        <div class="product-item">
+                            <img src="/src/images/candles/vanilla-dreams.jpg" alt="Vanilla Dreams Candle">
+                            <div class="product-info">
+                                <h4>Vanilla Dreams Candle</h4>
+                                <p>Size: Large | Scent: Vanilla</p>
+                                <span class="product-qty">Quantity: 1</span>
+                            </div>
+                            <div class="product-price">₹899</div>
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="order-total">
+                            <span>Total: ₹899</span>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="viewOrderDetails('ORD-2024-002')">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                            </button>
+                            <button class="btn btn-outline" onclick="trackOrder('ORD-2024-002')">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Track Order
+                            </button>
+                            <button class="btn btn-danger" onclick="cancelOrder('ORD-2024-002')">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tracking-info">
+                        <div class="tracking-steps">
+                            <div class="step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Order Placed</span>
+                            </div>
+                            <div class="step active">
+                                <i class="fas fa-clock"></i>
+                                <span>Processing</span>
+                            </div>
+                            <div class="step">
+                                <i class="fas fa-circle"></i>
+                                <span>Shipped</span>
+                            </div>
+                            <div class="step">
+                                <i class="fas fa-circle"></i>
+                                <span>Delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 3 -->
+                <div class="order-card" data-status="shipped">
+                    <div class="order-header">
+                        <div class="order-number">
+                            <h3>Order #ORD-2024-003</h3>
+                            <span class="order-date">March 22, 2024</span>
+                        </div>
+                        <div class="order-status-badge shipped">
+                            <i class="fas fa-truck"></i>
+                            Shipped
+                        </div>
+                    </div>
+
+                    <div class="order-products">
+                        <div class="product-item">
+                            <img src="/src/images/candles/citrus-burst.jpg" alt="Citrus Burst Candle">
+                            <div class="product-info">
+                                <h4>Citrus Burst Candle Set</h4>
+                                <p>Size: Mixed | Scent: Citrus Blend</p>
+                                <span class="product-qty">Quantity: 3</span>
+                            </div>
+                            <div class="product-price">₹1,497</div>
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="order-total">
+                            <span>Total: ₹1,497</span>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="viewOrderDetails('ORD-2024-003')">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                            </button>
+                            <button class="btn btn-primary" onclick="trackOrder('ORD-2024-003')">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Track Package
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tracking-info">
+                        <div class="tracking-steps">
+                            <div class="step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Order Placed</span>
+                            </div>
+                            <div class="step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Processing</span>
+                            </div>
+                            <div class="step active">
+                                <i class="fas fa-truck"></i>
+                                <span>Shipped</span>
+                            </div>
+                            <div class="step">
+                                <i class="fas fa-circle"></i>
+                                <span>Delivered</span>
+                            </div>
+                        </div>
+                        <div class="tracking-details">
+                            <p><strong>Tracking Number:</strong> TRK123456789</p>
+                            <p><strong>Expected Delivery:</strong> March 25, 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-orders" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3>No Orders Found</h3>
+                <p>You haven't placed any orders yet.</p>
+                <a href="/candle-shop" class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i>
+                    Start Shopping
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active filter
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const status = this.dataset.status;
+                filterOrders(status);
+            });
+        });
+
+        function filterOrders(status) {
+            const orders = document.querySelectorAll('.order-card');
+            let visibleCount = 0;
+            
+            orders.forEach(order => {
+                if (status === 'all' || order.dataset.status === status) {
+                    order.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    order.style.display = 'none';
+                }
+            });
+            
+            // Show empty state if no orders match filter
+            const emptyState = document.querySelector('.empty-orders');
+            if (visibleCount === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+
+        // Search functionality
+        document.getElementById('orderSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const orders = document.querySelectorAll('.order-card');
+            let visibleCount = 0;
+            
+            orders.forEach(order => {
+                const orderNumber = order.querySelector('.order-number h3').textContent.toLowerCase();
+                const products = Array.from(order.querySelectorAll('.product-info h4')).map(p => p.textContent.toLowerCase());
+                
+                const matches = orderNumber.includes(searchTerm) || products.some(p => p.includes(searchTerm));
+                
+                if (matches) {
+                    order.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    order.style.display = 'none';
+                }
+            });
+            
+            // Show empty state if no orders match search
+            const emptyState = document.querySelector('.empty-orders');
+            if (visibleCount === 0 && searchTerm) {
+                emptyState.style.display = 'block';
+                emptyState.querySelector('h3').textContent = 'No Orders Found';
+                emptyState.querySelector('p').textContent = `No orders match "${searchTerm}". Try a different search term.`;
+            } else if (visibleCount > 0) {
+                emptyState.style.display = 'none';
+            }
+        });
+
+        // Order actions
+        function viewOrderDetails(orderNumber) {
+            alert(`Viewing details for ${orderNumber}. This feature will be implemented soon!`);
+        }
+
+        function trackOrder(orderNumber) {
+            alert(`Tracking ${orderNumber}. This feature will be implemented soon!`);
+        }
+
+        function reorderItems(orderNumber) {
+            alert(`Reordering items from ${orderNumber}. This feature will be implemented soon!`);
+        }
+
+        function cancelOrder(orderNumber) {
+            if (confirm(`Are you sure you want to cancel ${orderNumber}?`)) {
+                alert(`${orderNumber} cancellation request submitted. You will receive a confirmation email shortly.`);
+            }
+        }
+
+        function downloadInvoice(orderNumber) {
+            alert(`Downloading invoice for ${orderNumber}. This feature will be implemented soon!`);
+        }
+    </script>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+</body>
+</html>

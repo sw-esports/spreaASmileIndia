@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= metaDescription %>">
+    <meta name="keywords" content="handcrafted candles, artisan candles, NGO products, charity shop, scented candles, natural candles">
+    <meta name="author" content="Spread A Smile India">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://spreadasmileindia.org<%= currentPath %>">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:description" content="<%= metaDescription %>">
+    <meta property="og:image" content="https://spreadasmileindia.org/src/images/candle-shop-og.jpg">
+    <meta property="og:url" content="https://spreadasmileindia.org<%= currentPath %>">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/candle-shop.css">
+    <link rel="stylesheet" href="/css/candle-shop-enhanced-styles.css">
+    <link rel="stylesheet" href="/css/candle-shop-footer-new.css">
+    
+    <!-- Enhanced Candle Shop Scripts -->
+    <script src="/js/candle-shop-enhanced-fixed.js" defer></script>
+    <script src="/js/candle-shop-ui-enhancements.js" defer></script>
+    
+    <!-- Product Data for JavaScript -->
+    <script>
+        window.candleProducts = <%-JSON.stringify(products)%>;
+    </script>
+    
+    <!-- Theme Initialization -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Candle Shop Navigation -->
+    <header class="shop-header">
+        <nav class="shop-navbar">
+            <div class="shop-nav-container">
+                <!-- Logo Section -->
+                <div class="shop-logo">
+                    <a href="/candle-shop" class="logo-link">
+                        <div class="logo-icon">
+                            <i class="fas fa-fire-flame-curved"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>SASI Candles</h1>
+                            <span>Handcrafted for a Cause</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="shop-nav-links">
+                    <a href="/candle-shop" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        Shop
+                    </a>
+                    <a href="/candle-shop/collections" class="nav-link">
+                        <i class="fas fa-layer-group"></i>
+                        Collections
+                    </a>
+                    <a href="/about" class="nav-link">
+                        <i class="fas fa-heart"></i>
+                        Our Story
+                    </a>
+                    <a href="/" class="nav-link back-to-main">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to SASI
+                    </a>
+                </div>
+                
+                <!-- Shop Actions -->
+                <div class="shop-actions">
+                    <!-- Search -->
+                    <button class="shop-search-btn" onclick="toggleShopSearch()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <!-- Cart -->
+                    <button class="cart-toggle" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle-btn" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <!-- User Profile -->
+                    <button class="user-profile-btn" onclick="candleShop.toggleUserMenu()">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu -->
+                    <button class="mobile-menu-btn" onclick="toggleShopMobileMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Search Bar (Hidden by default) -->
+        <div class="shop-search-bar" id="shopSearchBar">
+            <div class="search-container">
+                <input type="text" placeholder="Search candles..." id="shopSearchInput" onkeyup="candleShop.liveSearch(this.value)">
+                <button class="search-submit" onclick="candleShop.performSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="advanced-search-btn" onclick="showAdvancedSearch()" title="Advanced Search">
+                    <i class="fas fa-sliders-h"></i>
+                </button>
+                <button class="search-close" onclick="toggleShopSearch()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-suggestions" id="searchSuggestions">
+                <!-- Live search suggestions will appear here -->
+            </div>
+        </div>
+    </header>
+
+    <!-- User Menu Dropdown -->
+    <div class="user-menu-dropdown" id="userMenuDropdown">
+        <div class="user-menu-content">
+            <div class="user-menu-header">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Welcome!</h4>
+                    <p>Guest User</p>
+                </div>
+            </div>
+            <div class="user-menu-items">
+                <a href="/candle-shop/account" class="user-menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>My Account</span>
+                </a>
+                <a href="/candle-shop/orders" class="user-menu-item">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>My Orders</span>
+                </a>
+                <a href="/candle-shop/wishlist" class="user-menu-item">
+                    <i class="fas fa-heart"></i>
+                    <span>Wishlist</span>
+                </a>
+                <a href="/candle-shop/settings" class="user-menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <div class="user-menu-divider"></div>
+                <a href="/auth/login" class="user-menu-item">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+                <a href="/auth/register" class="user-menu-item">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Sign Up</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-overlay" onclick="toggleCart()"></div>
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button class="cart-close" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be populated by JavaScript -->
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                    <small>Add some beautiful candles to get started!</small>
+                </div>
+            </div>
+            
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal">₹0</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Shipping:</span>
+                        <span id="cartShipping">Free</span>
+                    </div>
+                    <div class="total-row total-final">
+                        <span>Total:</span>
+                        <span id="cartTotal">₹0</span>
+                    </div>
+                </div>
+                
+                <div class="cart-actions">
+                    <a href="/candle-shop/cart" class="btn btn-outline">View Cart</a>
+                    <a href="/candle-shop/checkout" class="btn btn-primary">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="shop-main">
+        <!-- Hero Carousel Section -->
+        <section class="hero-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <div class="slide-content">
+                        <div class="slide-text">
+                            <h1>Handcrafted Candles</h1>
+                            <h2>Made with Love, Sold for a Cause</h2>
+                            <p>Every candle purchase supports our mission to transform lives. Our beneficiaries handcraft each candle with care, bringing light to homes while building brighter futures.</p>
+                            <div class="slide-actions">
+                                <a href="#products" class="btn btn-primary">Shop Now</a>
+                                <a href="/candle-shop/about" class="btn btn-outline">Our Story</a>
+                            </div>
+                        </div>
+                        <div class="slide-image">
+                            <img src="/src/images/shop/candles/big-glass-cup-candle.png" alt="Premium Glass Candles" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide">
+                    <div class="slide-content">
+                        <div class="slide-text">
+                            <h1>Artisan Collections</h1>
+                            <h2>Unique Designs, Premium Quality</h2>
+                            <p>Discover our exclusive artisan collection featuring designer glass candles and premium wax blends. Each piece is a work of art crafted by skilled artisans.</p>
+                            <div class="slide-actions">
+                                <a href="#products" class="btn btn-primary">Explore Collection</a>
+                                <a href="/candle-shop/collections" class="btn btn-outline">View All</a>
+                            </div>
+                        </div>
+                        <div class="slide-image">
+                            <img src="/src/images/shop/candles/setof4-candle-desgined.png" alt="Designer Candle Set" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide">
+                    <div class="slide-content">
+                        <div class="slide-text">
+                            <h1>Special Occasions</h1>
+                            <h2>Perfect for Every Moment</h2>
+                            <p>From romantic dinners to festive celebrations, our candles create the perfect ambiance for every special moment in your life.</p>
+                            <div class="slide-actions">
+                                <a href="#products" class="btn btn-primary">Shop Occasions</a>
+                                <a href="/contact" class="btn btn-outline">Custom Orders</a>
+                            </div>
+                        </div>
+                        <div class="slide-image">
+                            <img src="/src/images/shop/candles/red-glass-big-candle-1.png" alt="Romantic Red Candles" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carousel Navigation -->
+            <div class="carousel-dots">
+                <button class="carousel-dot active" data-slide="0"></button>
+                <button class="carousel-dot" data-slide="1"></button>
+                <button class="carousel-dot" data-slide="2"></button>
+            </div>
+            
+            <!-- Carousel Arrow Buttons -->
+            <button class="carousel-btn carousel-prev" onclick="candleShop.prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn carousel-next" onclick="candleShop.nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </section>
+
+        <!-- Trending Products -->
+        <section class="trending-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🔥 Trending Now</h2>
+                    <p>Most popular candles this month featuring our new arrivals</p>
+                </div>
+                
+                <div class="trending-grid">
+                    <% 
+                    // Filter products to show trending ones (prioritize new products)
+                    const trendingProducts = products.filter(product => 
+                        product.id >= 15 // New candles (IDs 15-21)
+                    ).concat(
+                        products.filter(product => 
+                            product.id < 15 && product.featured && product.price > 400 // High-value featured products
+                        )
+                    ).slice(0, 8);
+                    %>
+                    <% trendingProducts.forEach(product => { %>
+                        <%- include('../components/candle-card', { product: product }) %>
+                    <% }) %>
+                </div>
+                
+                <div class="trending-badges">
+                    <div class="trending-badge">
+                        <i class="fas fa-fire"></i>
+                        <span>Hot This Week</span>
+                    </div>
+                    <div class="trending-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Customer Favorites</span>
+                    </div>
+                    <div class="trending-badge">
+                        <i class="fas fa-bolt"></i>
+                        <span>Fast Selling</span>
+                    </div>
+                    <div class="trending-badge">
+                        <i class="fas fa-gift"></i>
+                        <span>New Arrivals</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Showcase Section -->
+        <section class="video-showcase">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🎬 Behind the Scenes</h2>
+                    <p>Watch our artisans craft beautiful candles with love and care</p>
+                </div>
+                
+                <div class="video-grid">
+                    <!-- Video Card 1 -->
+                    <div class="video-card" data-video-id="1">
+                        <div class="video-container">
+                            <video preload="metadata" poster="/src/images/shop/candles/big-glass-cup-candle.png">
+                                <source src="/src/images/shop/workshop/video/story (1).mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <button class="play-btn" onclick="playVideo(1)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <div class="video-controls">
+                                <button class="like-btn" onclick="toggleVideoLike(1)">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">24</span>
+                                </button>
+                                <button class="share-btn" onclick="shareVideo(1)">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Candle Making Process</h4>
+                            <p>Watch our skilled artisans create beautiful handcrafted candles</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="video-card" data-video-id="2">
+                        <div class="video-container">
+                            <video preload="metadata" poster="/src/images/shop/candles/setof4-candle-desgined.png">
+                                <source src="/src/images/shop/workshop/video/story (2).mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <button class="play-btn" onclick="playVideo(2)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <div class="video-controls">
+                                <button class="like-btn" onclick="toggleVideoLike(2)">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">18</span>
+                                </button>
+                                <button class="share-btn" onclick="shareVideo(2)">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Wax Preparation</h4>
+                            <p>See how we prepare premium wax for our candles</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 3 -->
+                    <div class="video-card" data-video-id="3">
+                        <div class="video-container">
+                            <video preload="metadata" poster="/src/images/shop/candles/red-glass-big-candle-1.png">
+                                <source src="/src/images/shop/workshop/video/story (3).mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <button class="play-btn" onclick="playVideo(3)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <div class="video-controls">
+                                <button class="like-btn" onclick="toggleVideoLike(3)">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">31</span>
+                                </button>
+                                <button class="share-btn" onclick="shareVideo(3)">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Design & Decoration</h4>
+                            <p>Learn about our unique design and decoration techniques</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 4 -->
+                    <div class="video-card" data-video-id="4">
+                        <div class="video-container">
+                            <video preload="metadata" poster="/src/images/shop/candles/big-yellow-glass-canlde-1.png">
+                                <source src="/src/images/shop/workshop/video/story (4).mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <button class="play-btn" onclick="playVideo(4)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <div class="video-controls">
+                                <button class="like-btn" onclick="toggleVideoLike(4)">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">27</span>
+                                </button>
+                                <button class="share-btn" onclick="shareVideo(4)">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Quality Check</h4>
+                            <p>Our quality assurance process ensures perfect candles</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 5 -->
+                    <div class="video-card" data-video-id="5">
+                        <div class="video-container">
+                            <video preload="metadata" poster="/src/images/shop/candles/dia1.png">
+                                <source src="/src/images/shop/workshop/video/story (5).mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <button class="play-btn" onclick="playVideo(5)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <div class="video-controls">
+                                <button class="like-btn" onclick="toggleVideoLike(5)">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">22</span>
+                                </button>
+                                <button class="share-btn" onclick="shareVideo(5)">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Packaging & Finishing</h4>
+                            <p>Final touches and beautiful packaging for our candles</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- View All Videos Button -->
+                <div class="video-showcase-footer">
+                    <button class="btn btn-outline" onclick="showAllVideos()">
+                        <i class="fas fa-video"></i>
+                        View All Workshop Videos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Slider -->
+        <section class="featured-products" id="products">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Candles</h2>
+                    <p>Our most popular handcrafted candles</p>
+                </div>
+                
+                <div class="featured-slider-container">
+                    <div class="featured-slider" id="featuredSlider">
+                        <% featuredProducts.slice(0, 6).forEach(product => { %>
+                            <div class="featured-slide">
+                                <div class="featured-card">
+                                    <div class="card-image">
+                                        <img src="/src/images/shop/candles/<%= product.images[0] %>" alt="<%= product.name %>" loading="lazy">
+                                        <div class="card-overlay">
+                                            <button class="quick-view-btn" onclick="openQuickView('<%= product.id %>')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="wishlist-btn" onclick="toggleWishlist('<%= product.id %>')">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h3><%= product.name %></h3>
+                                        <p class="price">₹<%= product.price %></p>
+                                        <button class="add-to-cart-btn" onclick="addToCart('<%= product.id %>')">
+                                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                    
+                    <!-- Slider Navigation -->
+                    <button class="slider-btn slider-prev" onclick="candleShop.prevFeatured()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn slider-next" onclick="candleShop.nextFeatured()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Slider Dots -->
+                    <div class="slider-dots" id="featuredDots">
+                        <!-- Dots will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Products -->
+        <section class="all-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2>All Candles</h2>
+                    <div class="filters">
+                        <select class="filter-select" id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="aromatherapy">Aromatherapy</option>
+                            <option value="home-fragrance">Home Fragrance</option>
+                            <option value="seasonal">Seasonal</option>
+                            <option value="spiritual">Spiritual</option>
+                        </select>
+                        <select class="filter-select" id="sortFilter">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name A-Z</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="products-grid" id="allProductsGrid">
+                    <% products.forEach(product => { %>
+                        <%- include('../components/candle-card', { product: product }) %>
+                    <% }) %>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="impact-section">
+            <div class="container">
+                <div class="impact-content">
+                    <div class="impact-text">
+                        <h2>Your Purchase Makes a Difference</h2>
+                        <p>When you buy our candles, you're not just getting a beautiful product – you're supporting our mission to transform lives. Each candle is handcrafted by our beneficiaries who are learning valuable skills and earning a sustainable income.</p>
+                        <div class="impact-points">
+                            <div class="impact-point">
+                                <i class="fas fa-hands-helping"></i>
+                                <span>Supports skill development</span>
+                            </div>
+                            <div class="impact-point">
+                                <i class="fas fa-rupee-sign"></i>
+                                <span>Provides fair wages</span>
+                            </div>
+                            <div class="impact-point">
+                                <i class="fas fa-leaf"></i>
+                                <span>Eco-friendly materials</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-image">
+                        <img src="/src/images/hero/candleworkshop.png" alt="Beneficiaries making candles" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>💝 What Our Customers Say</h2>
+                    <p>Real reviews from people who love our handcrafted candles</p>
+                </div>
+                
+                <div class="testimonials-carousel">
+                    <div class="testimonial-card active">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <blockquote>"These candles are absolutely gorgeous! The scent lasts for hours and they burn so evenly. Plus, knowing that my purchase supports such a wonderful cause makes them even more special."</blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <div class="avatar-placeholder female">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="author-info">
+                                    <h5>Priya Sharma</h5>
+                                    <span>Mumbai, Maharashtra</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <blockquote>"I ordered a set of 4 candles for Diwali and they were perfect! Beautiful packaging, amazing quality, and the best part is supporting the artisans. Will definitely order again!"</blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <div class="avatar-placeholder male">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="author-info">
+                                    <h5>Rajesh Kumar</h5>
+                                    <span>Delhi, India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <blockquote>"The lavender aromatherapy candle has become my evening ritual. Such high quality and the story behind each candle makes it so meaningful. Thank you SASI!"</blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <div class="avatar-placeholder female">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="author-info">
+                                    <h5>Anita Singh</h5>
+                                    <span>Bangalore, Karnataka</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonials-stats">
+                    <div class="stat">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Average Rating</div>
+                        <div class="stat-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2,500+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">15,000+</div>
+                        <div class="stat-label">Candles Sold</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Repeat Customers</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Security Section -->
+        <section class="trust-section">
+            <div class="container">
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="badge-content">
+                            <h4>Secure Payment</h4>
+                            <p>256-bit SSL encryption</p>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="badge-content">
+                            <h4>Free Shipping</h4>
+                            <p>On orders over ₹999</p>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <div class="badge-content">
+                            <h4>Easy Returns</h4>
+                            <p>30-day return policy</p>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="badge-content">
+                            <h4>24/7 Support</h4>
+                            <p>Dedicated customer care</p>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="badge-content">
+                            <h4>Eco-Friendly</h4>
+                            <p>Natural, sustainable materials</p>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="badge-content">
+                            <h4>Social Impact</h4>
+                            <p>Supporting artisans & communities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   
+    <!-- Social Proof Notifications -->
+    <div class="social-proof-notifications" id="socialProofNotifications">
+        <!-- Notifications will be added dynamically -->
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-actions">
+        <button class="fab scroll-to-top" onclick="scrollToTop()" title="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- Video Modal for Full Screen Viewing -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideoModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <video controls id="modalVideo">
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- Advanced Search Modal -->
+    <div class="advanced-search-modal" id="advancedSearchModal">
+        <div class="modal-overlay" onclick="closeAdvancedSearch()"></div>
+        <div class="modal-content search-content">
+            <div class="search-header">
+                <h3><i class="fas fa-search"></i> Advanced Search</h3>
+                <button class="modal-close" onclick="closeAdvancedSearch()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-filters">
+                <div class="filter-group">
+                    <label>Search Term</label>
+                    <input type="text" placeholder="Search candles..." class="search-term-input">
+                </div>
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Category</label>
+                        <select class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="aromatherapy">Aromatherapy</option>
+                            <option value="home-fragrance">Home Fragrance</option>
+                            <option value="seasonal">Seasonal</option>
+                            <option value="spiritual">Spiritual</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Price Range</label>
+                        <div class="price-range">
+                            <input type="number" placeholder="Min" class="price-min">
+                            <span>to</span>
+                            <input type="number" placeholder="Max" class="price-max">
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Sort By</label>
+                        <select class="sort-select">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name A-Z</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Availability</label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="in-stock-only">
+                            <span class="checkmark"></span>
+                            In Stock Only
+                        </label>
+                    </div>
+                </div>
+                <div class="search-actions">
+                    <button class="btn btn-outline" onclick="clearFilters()">Clear All</button>
+                    <button class="btn btn-primary" onclick="applyAdvancedSearch()">Search Products</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-notifications" id="toastNotifications">
+        <!-- Toast messages will be added here -->
+    </div>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+</body>
+</html>

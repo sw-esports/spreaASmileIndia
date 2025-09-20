@@ -1,0 +1,577 @@
+<%- include('partials/header', { title: 'Home - Spread A Smile India', page: 'home' }) %>
+
+<!-- Hero Carousel Section -->
+<section class="hero-carousel" id="heroCarousel">
+    <div class="carousel-container">
+        <!-- Slide 1 - Image -->
+        <div class="carousel-slide active" data-slide="0">
+            <div class="slide-content">
+                <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                     alt="Children learning in classroom" 
+                     class="slide-image" 
+                     loading="eager">
+                <div class="slide-overlay">
+                    <div class="hero-content">
+                        <h1 class="hero-title" data-aos="fade-up">Transforming Lives Through Education</h1>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+                            Empowering street children and women through quality education and skill development programs since 2005.
+                        </p>
+                        <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
+                            <a href="/get-involved/donate" class="btn btn-primary btn-hero">
+                                <i class="fas fa-heart"></i>
+                                Donate Now
+                            </a>
+                            <a href="/get-involved/volunteer" class="btn btn-outline btn-hero">
+                                <i class="fas fa-hands-helping"></i>
+                                Join Our Mission
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 - Image -->
+        <div class="carousel-slide" data-slide="1">
+            <div class="slide-content">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                     alt="Women empowerment training" 
+                     class="slide-image" 
+                     loading="lazy">
+                <div class="slide-overlay">
+                    <div class="hero-content">
+                        <h1 class="hero-title" data-aos="fade-up">Empowering Women & Families</h1>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+                            Creating sustainable livelihoods through vocational training and micro-enterprise programs.
+                        </p>
+                        <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
+                            <a href="/programs/empowerment" class="btn btn-primary btn-hero">
+                                <i class="fas fa-graduation-cap"></i>
+                                Our Programs
+                            </a>
+                            <a href="/impact/stories" class="btn btn-outline btn-hero">
+                                <i class="fas fa-chart-line"></i>
+                                See Impact
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 - Video -->
+        <div class="carousel-slide" data-slide="2">
+            <div class="slide-content">
+                <video class="slide-video" 
+                       muted 
+                       loop 
+                       playsinline 
+                       preload="metadata"
+                       poster="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+                    <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-controls">
+                    <button class="video-play-btn" aria-label="Play/Pause video">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+                <div class="slide-overlay">
+                    <div class="hero-content">
+                        <h1 class="hero-title" data-aos="fade-up">20 Years of Impact</h1>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+                            Watch how we've transformed 300+ lives and built stronger communities across Delhi.
+                        </p>
+                        <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
+                            <a href="/about/mission" class="btn btn-primary btn-hero">
+                                <i class="fas fa-info-circle"></i>
+                                Our Story
+                            </a>
+                            <a href="/get-involved/partnership" class="btn btn-outline btn-hero">
+                                <i class="fas fa-handshake"></i>
+                                Partner With Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Navigation -->
+        <div class="carousel-nav">
+            <button class="carousel-btn carousel-prev" aria-label="Previous slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn carousel-next" aria-label="Next slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+            <button class="indicator active" data-slide="0" aria-label="Go to slide 1"></button>
+            <button class="indicator" data-slide="1" aria-label="Go to slide 2"></button>
+            <button class="indicator" data-slide="2" aria-label="Go to slide 3"></button>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="carousel-progress">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Impact Section -->
+<section class="impact-section" id="impactSection">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Our Impact</h2>
+            <p class="section-subtitle">Every number tells a story of transformation and hope</p>
+        </div>
+        
+        <div class="impact-grid">
+            <%- include('components/impact-card', {
+                icon: 'fas fa-graduation-cap',
+                number: '300',
+                suffix: '+',
+                label: 'Lives Transformed',
+                description: 'Street children provided with education and care',
+                color: 'blue',
+                progress: 85,
+                delay: 100
+            }) %>
+            
+            <%- include('components/impact-card', {
+                icon: 'fas fa-school',
+                number: '170',
+                suffix: '+',
+                label: 'Children in School',
+                description: 'Currently enrolled in formal education',
+                color: 'green',
+                progress: 92,
+                delay: 200
+            }) %>
+            
+            <%- include('components/impact-card', {
+                icon: 'fas fa-female',
+                number: '85',
+                suffix: '+',
+                label: 'Women Trained',
+                description: 'Empowered through skill development programs',
+                color: 'purple',
+                progress: 78,
+                delay: 300
+            }) %>
+            
+            <%- include('components/impact-card', {
+                icon: 'fas fa-calendar-alt',
+                number: '20',
+                suffix: '',
+                label: 'Years of Service',
+                description: 'Dedicated to community transformation',
+                color: 'orange',
+                progress: 100,
+                delay: 400
+            }) %>
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section class="about-section" id="aboutSection">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text" data-aos="fade-right">
+                <h2 class="section-title">About Spread A Smile India</h2>
+                <div class="about-description">
+                    <p>
+                        Since 2005, Spread A Smile India has been dedicated to transforming the lives of destitute street children through comprehensive education, healthcare, and empowerment programs. Founded by Sangita Mehra, our organization believes that every child deserves quality education and every woman deserves the opportunity to build a sustainable livelihood.
+                    </p>
+                    <p>
+                        We work directly with marginalized communities in Delhi, providing not just education but also nutrition, healthcare, and skill development. Our holistic approach ensures that families don't just survive—they thrive.
+                    </p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Community-centered approach</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Holistic development programs</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Sustainable impact focus</span>
+                    </div>
+                </div>
+                <a href="/about" class="btn btn-primary">
+                    <i class="fas fa-arrow-right"></i>
+                    Learn More About Us
+                </a>
+            </div>
+            <div class="about-image" data-aos="fade-left">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Our mission in action" 
+                         loading="lazy">
+                    <div class="image-overlay">
+                        <div class="overlay-content">
+                            <div class="stat-highlight">
+                                <span class="stat-number">98%</span>
+                                <span class="stat-label">Success Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Family (Team) Section -->
+<section class="team-section" id="teamSection">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Our Family</h2>
+            <p class="section-subtitle">Meet the passionate hearts driving change in our community</p>
+        </div>
+        
+        <div class="team-grid">
+            <%- include('components/team-card', {
+                image: './src/images/team/sangita-mehra.png',
+                name: 'Sangita Mehra',
+                role: 'Founder & Director',
+                bio: 'Visionary leader transforming street children\'s lives through education since 2005.',
+                social: {
+                    instagram: 'https://instagram.com/sangitamehra1',
+                    linkedin: '#'
+                },
+                delay: 100
+            }) %>
+            
+            <%- include('components/team-card', {
+                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                name: 'Raj Patel',
+                role: 'Head of Programs',
+                bio: 'Educational expert ensuring quality implementation across all initiatives.',
+                social: {
+                    linkedin: '#',
+                    twitter: '#'
+                },
+                delay: 200
+            }) %>
+            
+            <%- include('components/team-card', {
+                image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                name: 'Meera Gupta',
+                role: 'Community Outreach Lead',
+                bio: 'Building bridges between communities and sustainable development.',
+                social: {
+                    linkedin: '#',
+                    facebook: '#'
+                },
+                delay: 300
+            }) %>
+            
+            <%- include('components/team-card', {
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                name: 'Ankit Kumar',
+                role: 'Finance & Operations',
+                bio: 'Ensuring transparent operations and efficient resource utilization.',
+                social: {
+                    linkedin: '#'
+                },
+                delay: 400
+            }) %>
+        </div>
+    </div>
+</section>
+
+<!-- Transformation Section -->
+<section class="transformation-section" id="transformationSection">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">How We Transform Student Lives</h2>
+            <p class="section-subtitle">From street corners to school benches - witness the journey of transformation</p>
+        </div>
+        
+        <div class="transformation-grid">
+            <%- include('components/transformation-card', {
+                type: 'image',
+                media: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                title: 'From Streets to Classrooms',
+                caption: 'Providing safe learning environments for vulnerable children',
+                delay: 100
+            }) %>
+            
+            <%- include('components/transformation-card', {
+                type: 'video',
+                media: 'https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4',
+                poster: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                title: 'Skill Development Programs',
+                caption: 'Vocational training that creates sustainable futures',
+                delay: 200
+            }) %>
+            
+            <%- include('components/transformation-card', {
+                type: 'image',
+                media: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                title: 'Community Support',
+                caption: 'Building strong foundations through family engagement',
+                delay: 300
+            }) %>
+            
+            <%- include('components/transformation-card', {
+                type: 'video',
+                media: 'https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_2mb.mp4',
+                poster: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                title: 'Health & Nutrition',
+                caption: 'Comprehensive care for holistic development',
+                delay: 400
+            }) %>
+        </div>
+    </div>
+</section>
+
+<!-- Feeds Section (Instagram Reels Style) -->
+<section class="feeds-section" id="feedsSection">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Stories of Change</h2>
+            <p class="section-subtitle">Real stories, real impact - follow our journey</p>
+        </div>
+        
+        <div class="feeds-container">
+            <div class="feeds-scroll">
+                <%- include('components/reel-card', {
+                    type: 'video',
+                    media: 'https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4',
+                    poster: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                    caption: 'From street child to college graduate - Priya\'s inspiring journey',
+                    likes: 234,
+                    timeAgo: '2d'
+                }) %>
+                
+                <%- include('components/reel-card', {
+                    type: 'image',
+                    media: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                    caption: 'Women empowerment workshop - 12 new entrepreneurs born today!',
+                    likes: 187,
+                    timeAgo: '1w'
+                }) %>
+                
+                <%- include('components/reel-card', {
+                    type: 'video',
+                    media: 'https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_2mb.mp4',
+                    poster: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                    caption: 'Free health camp reaching 150+ families in Delhi',
+                    likes: 156,
+                    timeAgo: '2w'
+                }) %>
+                
+                <%- include('components/reel-card', {
+                    type: 'image',
+                    media: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                    caption: 'New library opening at our Munirka center! 📚',
+                    likes: 298,
+                    timeAgo: '3w'
+                }) %>
+                
+                <%- include('components/reel-card', {
+                    type: 'video',
+                    media: 'https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4',
+                    poster: 'https://images.unsplash.com/photo-1503914108261-d8ac82d9b4a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                    caption: 'Children celebrating their first graduation ceremony',
+                    likes: 445,
+                    timeAgo: '1m'
+                }) %>
+            </div>
+            
+            <div class="feeds-nav">
+                <button class="feeds-btn feeds-prev" aria-label="Previous stories">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="feeds-btn feeds-next" aria-label="Next stories">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="feeds-footer" data-aos="fade-up">
+            <a href="https://instagram.com/sangitamehra1" target="_blank" rel="noopener" class="btn btn-outline">
+                <i class="fab fa-instagram"></i>
+                Follow Our Journey
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section" id="testimonialsSection">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Voices of Change</h2>
+            <p class="section-subtitle">Hear from those whose lives have been transformed</p>
+        </div>
+        
+        <div class="testimonials-slider">
+            <div class="testimonial-track">
+                <%- include('components/testimonial-card', {
+                    quote: 'Spread A Smile India gave me hope when I had none. Today, I\'m pursuing my engineering degree and dreaming of giving back to my community.',
+                    author: 'Priya Sharma',
+                    role: 'Former Street Child, Now Engineering Student',
+                    image: 'https://images.unsplash.com/photo-1494790108755-2616c739c3c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+                }) %>
+                
+                <%- include('components/testimonial-card', {
+                    quote: 'The vocational training program didn\'t just teach me skills—it gave me independence and dignity. I now run my own tailoring business.',
+                    author: 'Sunita Devi',
+                    role: 'Empowerment Program Graduate',
+                    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+                }) %>
+                
+                <%- include('components/testimonial-card', {
+                    quote: 'This organization doesn\'t just educate children—they transform entire families. My three children are now in school because of their support.',
+                    author: 'Ramesh Kumar',
+                    role: 'Parent & Community Member',
+                    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+                }) %>
+            </div>
+            
+            <div class="testimonials-nav">
+                <button class="testimonial-btn testimonial-prev" aria-label="Previous testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="testimonial-btn testimonial-next" aria-label="Next testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section" id="newsletterSection">
+    <div class="container">
+        <div class="newsletter-content" data-aos="fade-up">
+            <div class="newsletter-header">
+                <h2 class="section-title">Stay Connected</h2>
+                <p class="section-subtitle">Get monthly updates on our impact and upcoming programs</p>
+            </div>
+            
+            <form class="newsletter-form" id="newsletterForm">
+                <div class="form-group">
+                    <input type="email" 
+                           class="form-control" 
+                           placeholder="Enter your email address" 
+                           required 
+                           aria-label="Email address">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Subscribe
+                    </button>
+                </div>
+                <p class="form-note">We respect your privacy. Unsubscribe anytime.</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contactSection">
+    <div class="container">
+        <div class="contact-content">
+            <div class="contact-info" data-aos="fade-right">
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-subtitle">Ready to make a difference? We'd love to hear from you.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Visit Us</h4>
+                            <p>Munirka Community Center<br>New Delhi, India 110067</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email Us</h4>
+                            <p>info@spreadasmileindia.org<br>volunteer@spreadasmileindia.org</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Call Us</h4>
+                            <p>+91 98765 43210<br>+91 87654 32109</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://instagram.com/sangitamehra1" target="_blank" rel="noopener" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://facebook.com/SpreadASmileIndia" target="_blank" rel="noopener" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="contact-map" data-aos="fade-left">
+                <div class="map-placeholder">
+                    <i class="fas fa-map"></i>
+                    <p>Interactive Map</p>
+                    <span>Click to view location</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>
+
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+    <i class="fas fa-moon"></i>
+</button>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+        <div class="loading-logo">
+            <img src="./src/images/logo.png" alt="Spread A Smile India">
+        </div>
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="./js/landing.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 100
+    });
+</script>

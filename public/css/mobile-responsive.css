@@ -1,0 +1,279 @@
+/* 
+   Mobile Responsive CSS - Comprehensive Mobile Optimization
+   Prevents horizontal overflow and improves mobile experience
+*/
+
+/* Global Mobile Fixes */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* Mobile Navigation Menu Fixes */
+@media (max-width: 650px) {
+    /* Force show mobile menu when active */
+    .nav-center.active {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(0) !important;
+        z-index: 999 !important;
+        position: fixed !important;
+        top: 70px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: calc(100vh - 70px) !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+    }
+    
+    /* Dark theme support */
+    [data-theme="dark"] .nav-center.active {
+        background: rgba(20, 20, 20, 0.98) !important;
+    }
+    
+    /* Mobile menu toggle button visibility */
+    .mobile-menu-toggle {
+        display: flex !important;
+        z-index: 1001 !important;
+        position: relative !important;
+    }
+    
+    /* Navigation menu styling for mobile */
+    .nav-center.active .nav-menu {
+        display: flex !important;
+        flex-direction: column !important;
+        opacity: 1 !important;
+        padding: 1rem !important;
+        width: 100% !important;
+    }
+    
+    .nav-center.active .nav-item {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .nav-center.active .nav-link {
+        display: flex !important;
+        width: 100% !important;
+        padding: 0.8rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    .nav-center.active .nav-link-content {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+}
+
+/* Base Mobile Styles */
+@media (max-width: 768px) {
+    /* Global Container Fixes */
+    .container, .nav-container, .shop-nav-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Navigation Fixes - Hide Search Elements */
+    .search-btn, .shop-search-btn, .advanced-search-btn, .mobile-hide {
+        display: none !important;
+    }
+    
+    /* Card Grid Improvements */
+    .card-grid, .products-grid, .team-grid, .testimonial-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    /* Typography Improvements */
+    h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.2;
+        word-wrap: break-word;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+    
+    h3 {
+        font-size: 1.3rem !important;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+    
+    /* Button Improvements */
+    .btn, .cta-button {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 0.95rem;
+    }
+    
+    /* Image and Media Responsiveness */
+    img, video, iframe {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Card Improvements */
+    .card, .product-card, .team-card, .testimonial-card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    /* Flex Layout Fixes */
+    .flex-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    /* Spacing Improvements */
+    section {
+        padding: 2rem 0;
+    }
+    
+    .section-padding {
+        padding: 1.5rem 0;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    /* Extra Small Screen Fixes */
+    .container, .nav-container, .shop-nav-container {
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+    }
+    
+    /* Single Column Layout */
+    .card-grid, .products-grid, .team-grid, .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0;
+    }
+    
+    /* Typography for Small Screens */
+    h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    h2 {
+        font-size: 1.4rem !important;
+    }
+    
+    h3 {
+        font-size: 1.2rem !important;
+    }
+    
+    p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    /* Card Improvements for Small Screens */
+    .card, .product-card, .team-card, .testimonial-card {
+        padding: 0.8rem;
+        max-width: 320px;
+        margin: 0 auto 1rem auto;
+    }
+    
+    /* Button Improvements */
+    .btn, .cta-button {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+    
+    /* Navigation Improvements */
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 0.7rem 0.8rem;
+    }
+    
+    /* Logo Improvements */
+    .logo-title {
+        font-size: 1.1rem;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.65rem;
+    }
+    
+    /* Spacing for Small Screens */
+    section {
+        padding: 1.5rem 0;
+    }
+    
+    .section-padding {
+        padding: 1rem 0;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 375px) {
+    .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    h1 {
+        font-size: 1.4rem !important;
+    }
+    
+    h2 {
+        font-size: 1.3rem !important;
+    }
+    
+    .card, .product-card {
+        max-width: 300px;
+        padding: 0.7rem;
+    }
+    
+    .btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+/* Landscape Orientation Fixes */
+@media (max-width: 812px) and (orientation: landscape) {
+    .nav-center {
+        max-height: calc(100vh - 60px);
+    }
+    
+    .mobile-menu {
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .nav-header, .mobile-menu-toggle, .search-btn {
+        display: none;
+    }
+    
+    * {
+        overflow: visible;
+    }
+}

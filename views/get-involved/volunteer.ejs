@@ -1,0 +1,1281 @@
+<%- include('../partials/header') %>
+
+<main class="volunteer-page">
+    <!-- Hero Section -->
+    <section class="volunteer-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+            <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&h=1080&fit=crop" alt="Volunteers helping children" class="hero-bg-image">
+        </div>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">🤝 Join Our Mission</span>
+                <h1 class="hero-title">Become a Volunteer</h1>
+                <p class="hero-description">
+                    Your time, skills, and passion can create lasting change. Join our community of dedicated volunteers who are making a real difference in children's lives.
+                </p>
+                <div class="hero-cta">
+                    <a href="#volunteer-form" class="btn btn-primary btn-large">
+                        <i class="fas fa-hands-helping"></i>
+                        Start Volunteering Today
+                    </a>
+                    <a href="#volunteer-opportunities" class="btn btn-outline btn-large">
+                        <i class="fas fa-search"></i>
+                        Explore Opportunities
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Volunteer Section -->
+    <section class="why-volunteer">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Volunteer with SASI?</h2>
+                <p>Discover the meaningful impact you can make and the fulfillment you'll gain</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💫</div>
+                    <h3>Make Real Impact</h3>
+                    <p>See firsthand how your efforts directly improve children's lives and futures</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌱</div>
+                    <h3>Grow Personally</h3>
+                    <p>Develop new skills, gain perspectives, and build meaningful relationships</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏆</div>
+                    <h3>Join a Community</h3>
+                    <p>Connect with like-minded people who share your passion for making a difference</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Flexible Commitment</h3>
+                    <p>Choose opportunities that fit your schedule and availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Opportunities -->
+    <section class="volunteer-opportunities" id="volunteer-opportunities">
+        <div class="container">
+            <div class="section-header">
+                <h2>Volunteer Opportunities</h2>
+                <p>Find the perfect way to contribute based on your interests and skills</p>
+            </div>
+            
+            <div class="opportunities-grid">
+                <div class="opportunity-card featured">
+                    <div class="opportunity-header">
+                        <div class="opportunity-icon">👩‍🏫</div>
+                        <div class="opportunity-meta">
+                            <h3>Education Volunteer</h3>
+                            <span class="time-commitment">4-6 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content">
+                        <p>Help children with homework, teach basic subjects, or support literacy programs. Your knowledge can unlock their potential.</p>
+                        <div class="opportunity-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Various centers across Delhi</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Weekdays 4-6 PM or Weekends</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span>10-15 children per session</span>
+                            </div>
+                        </div>
+                        <div class="skills-needed">
+                            <span class="skill-tag">Teaching</span>
+                            <span class="skill-tag">Patience</span>
+                            <span class="skill-tag">Communication</span>
+                        </div>
+                        <button class="apply-btn" data-opportunity="education">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="opportunity-icon">🎨</div>
+                        <div class="opportunity-meta">
+                            <h3>Creative Arts Mentor</h3>
+                            <span class="time-commitment">3-4 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content">
+                        <p>Lead art, music, dance, or craft activities. Help children express themselves and build confidence through creativity.</p>
+                        <div class="opportunity-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Community centers</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Flexible scheduling</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span>8-12 children per group</span>
+                            </div>
+                        </div>
+                        <div class="skills-needed">
+                            <span class="skill-tag">Creativity</span>
+                            <span class="skill-tag">Art Skills</span>
+                            <span class="skill-tag">Enthusiasm</span>
+                        </div>
+                        <button class="apply-btn" data-opportunity="arts">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="opportunity-icon">💼</div>
+                        <div class="opportunity-meta">
+                            <h3>Administrative Support</h3>
+                            <span class="time-commitment">2-3 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content">
+                        <p>Help with office tasks, data entry, documentation, social media, or event coordination from office or remotely.</p>
+                        <div class="opportunity-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Office or Remote</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Very flexible</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-laptop"></i>
+                                <span>Computer-based work</span>
+                            </div>
+                        </div>
+                        <div class="skills-needed">
+                            <span class="skill-tag">Computer Skills</span>
+                            <span class="skill-tag">Organization</span>
+                            <span class="skill-tag">Reliability</span>
+                        </div>
+                        <button class="apply-btn" data-opportunity="admin">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="opportunity-icon">🍽️</div>
+                        <div class="opportunity-meta">
+                            <h3>Meal Distribution</h3>
+                            <span class="time-commitment">3-4 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content">
+                        <p>Join our Thursday Langar program and help distribute meals to children and families on the streets.</p>
+                        <div class="opportunity-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Various street locations</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Thursdays 6-9 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span>Team of 8-10 volunteers</span>
+                            </div>
+                        </div>
+                        <div class="skills-needed">
+                            <span class="skill-tag">Physical Stamina</span>
+                            <span class="skill-tag">Compassion</span>
+                            <span class="skill-tag">Teamwork</span>
+                        </div>
+                        <button class="apply-btn" data-opportunity="meals">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="opportunity-icon">📋</div>
+                        <div class="opportunity-meta">
+                            <h3>Program Coordinator</h3>
+                            <span class="time-commitment">6-8 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content">
+                        <p>Lead specific programs, coordinate with other volunteers, and help plan events and activities.</p>
+                        <div class="opportunity-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Multiple locations</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Flexible with commitment</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span>Leadership role</span>
+                            </div>
+                        </div>
+                        <div class="skills-needed">
+                            <span class="skill-tag">Leadership</span>
+                            <span class="skill-tag">Planning</span>
+                            <span class="skill-tag">Communication</span>
+                        </div>
+                        <button class="apply-btn" data-opportunity="coordinator">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="opportunity-icon">🏥</div>
+                        <div class="opportunity-meta">
+                            <h3>Health & Wellness</h3>
+                            <span class="time-commitment">4-6 hours/month</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-content">
+                        <p>Support health camps, assist with medical check-ups, or help with health education programs.</p>
+                        <div class="opportunity-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Health camps & centers</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Monthly camps</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span>50-100 beneficiaries per camp</span>
+                            </div>
+                        </div>
+                        <div class="skills-needed">
+                            <span class="skill-tag">Medical Knowledge</span>
+                            <span class="skill-tag">Empathy</span>
+                            <span class="skill-tag">Organization</span>
+                        </div>
+                        <button class="apply-btn" data-opportunity="health">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Stories -->
+    <section class="volunteer-stories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Stories from Our Volunteers</h2>
+                <p>Hear from people who are already making a difference</p>
+            </div>
+            
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Rahul volunteer">
+                    </div>
+                    <div class="story-content">
+                        <blockquote>
+                            "Volunteering with SASI has been life-changing. Seeing children's faces light up when they learn something new makes every minute worth it."
+                        </blockquote>
+                        <div class="story-author">
+                            <strong>Rahul Sharma</strong>
+                            <span>Education Volunteer, 2 years</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b524?w=100&h=100&fit=crop&crop=face" alt="Priya volunteer">
+                    </div>
+                    <div class="story-content">
+                        <blockquote>
+                            "I started with just 2 hours a week, but the impact was so fulfilling that I now coordinate an entire program. It's incredibly rewarding."
+                        </blockquote>
+                        <div class="story-author">
+                            <strong>Priya Patel</strong>
+                            <span>Program Coordinator, 3 years</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Amit volunteer">
+                    </div>
+                    <div class="story-content">
+                        <blockquote>
+                            "The Thursday Langar has become the highlight of my week. There's something magical about sharing a meal and seeing hope in people's eyes."
+                        </blockquote>
+                        <div class="story-author">
+                            <strong>Amit Kumar</strong>
+                            <span>Meal Distribution Volunteer, 1 year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Application Form -->
+    <section class="volunteer-form-section" id="volunteer-form">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Ready to Start Volunteering?</h2>
+                    <p>Fill out this form and we'll get in touch with you within 24 hours</p>
+                </div>
+                
+                <form class="volunteer-form" id="volunteerApplicationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="16" max="100">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Preferred Location</label>
+                        <select id="location" name="location">
+                            <option value="">Select a location</option>
+                            <option value="central-delhi">Central Delhi</option>
+                            <option value="north-delhi">North Delhi</option>
+                            <option value="south-delhi">South Delhi</option>
+                            <option value="east-delhi">East Delhi</option>
+                            <option value="west-delhi">West Delhi</option>
+                            <option value="remote">Remote/Online</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interests">Areas of Interest (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="education">
+                                <span class="checkmark"></span>
+                                Education & Teaching
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="arts">
+                                <span class="checkmark"></span>
+                                Creative Arts & Crafts
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="meals">
+                                <span class="checkmark"></span>
+                                Meal Distribution
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="admin">
+                                <span class="checkmark"></span>
+                                Administrative Support
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="health">
+                                <span class="checkmark"></span>
+                                Health & Wellness
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interests" value="events">
+                                <span class="checkmark"></span>
+                                Event Management
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="availability">Availability</label>
+                        <select id="availability" name="availability">
+                            <option value="">Select your availability</option>
+                            <option value="weekdays-morning">Weekdays Morning</option>
+                            <option value="weekdays-afternoon">Weekdays Afternoon</option>
+                            <option value="weekdays-evening">Weekdays Evening</option>
+                            <option value="weekends">Weekends</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeCommitment">Time Commitment</label>
+                        <select id="timeCommitment" name="timeCommitment">
+                            <option value="">How much time can you dedicate?</option>
+                            <option value="1-2-hours">1-2 hours per week</option>
+                            <option value="3-4-hours">3-4 hours per week</option>
+                            <option value="5-8-hours">5-8 hours per week</option>
+                            <option value="more-than-8">More than 8 hours per week</option>
+                            <option value="monthly">Monthly basis</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skills">Skills & Experience</label>
+                        <textarea id="skills" name="skills" rows="4" placeholder="Tell us about your relevant skills, experience, or qualifications..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motivation">Why do you want to volunteer?</label>
+                        <textarea id="motivation" name="motivation" rows="4" placeholder="Share what motivates you to volunteer with us..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="agreement" required>
+                            <span class="checkmark"></span>
+                            I agree to undergo a background check and attend orientation session
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="newsletter" checked>
+                            <span class="checkmark"></span>
+                            Send me updates about volunteer opportunities and impact stories
+                        </label>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Application
+                        </button>
+                        <p class="form-note">We'll contact you within 24 hours to discuss next steps</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="volunteer-faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Get answers to common questions about volunteering</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do I need any special qualifications to volunteer?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Not necessarily! While some roles may benefit from specific skills, the most important qualifications are enthusiasm, reliability, and a genuine desire to help. We provide training for all volunteers.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How much time do I need to commit?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We have opportunities for all schedules! Whether you can spare 1-2 hours per week or several hours per month, we can find something that works for you. Consistency is more valuable than quantity.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is there any training provided?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All new volunteers attend an orientation session where you'll learn about our mission, meet the team, and receive specific training for your chosen role. Ongoing support is always available.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I volunteer with friends or family?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Many of our volunteers come as groups or bring family members. It's a great way to bond while making a difference together.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What safety measures are in place?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Volunteer safety is our priority. We provide safety guidelines, never send volunteers to unfamiliar locations alone, and all activities are supervised by experienced staff members.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Will I receive any certificate or recognition?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We provide volunteer certificates for your records, letters of recommendation when needed, and recognize outstanding volunteers in our annual events and social media.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+/* Theme Support Variables */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #f59e0b;
+    --accent-color: #10b981;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] {
+    --primary-color: #3b82f6;
+    --secondary-color: #fbbf24;
+    --accent-color: #34d399;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --border-color: #374151;
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.volunteer-page {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Hero Section */
+.volunteer-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(16, 185, 129, 0.7));
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    color: white;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 10px 25px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero-description {
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.section-header p {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Why Volunteer Section */
+.why-volunteer {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.benefit-card {
+    background: var(--bg-primary);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+}
+
+.benefit-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.benefit-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.benefit-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Volunteer Opportunities */
+.volunteer-opportunities {
+    padding: 6rem 0;
+}
+
+.opportunities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.opportunity-card {
+    background: var(--bg-primary);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-medium);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.opportunity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.opportunity-card.featured {
+    border-color: var(--primary-color);
+    position: relative;
+}
+
+.opportunity-card.featured::before {
+    content: "Most Popular";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.opportunity-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.opportunity-icon {
+    font-size: 2.5rem;
+}
+
+.opportunity-meta h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.time-commitment {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.opportunity-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.opportunity-details {
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.detail-item i {
+    color: var(--primary-color);
+    width: 16px;
+}
+
+.skills-needed {
+    margin-bottom: 2rem;
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0.2rem;
+}
+
+.apply-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.apply-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Volunteer Stories */
+.volunteer-stories {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.story-card {
+    background: var(--bg-primary);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    text-align: center;
+}
+
+.story-avatar {
+    margin-bottom: 1.5rem;
+}
+
+.story-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+}
+
+.story-content blockquote {
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    quotes: """ """;
+}
+
+.story-content blockquote::before {
+    content: open-quote;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.story-content blockquote::after {
+    content: close-quote;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.story-author strong {
+    display: block;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.story-author span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Volunteer Form */
+.volunteer-form-section {
+    padding: 6rem 0;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-heavy);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.form-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark::after {
+    content: "✓";
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-submit {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.form-note {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-large {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+/* FAQ Section */
+.volunteer-faq {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.faq-grid {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--bg-primary);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-light);
+    overflow: hidden;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background: var(--bg-secondary);
+}
+
+.faq-question h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.faq-question i {
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    max-height: 200px;
+}
+
+.faq-answer p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .opportunities-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .form-container {
+        padding: 2rem 1.5rem;
+    }
+}
+</style>
+
+<script>
+// Theme toggle functionality
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+// Load saved theme
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // FAQ Accordion functionality
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // Apply button functionality
+    const applyButtons = document.querySelectorAll('.apply-btn');
+    applyButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const opportunity = this.dataset.opportunity;
+            document.getElementById('volunteer-form').scrollIntoView({ behavior: 'smooth' });
+            
+            // Pre-select the opportunity in the form
+            const checkboxes = document.querySelectorAll('input[name="interests"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.value === opportunity) {
+                    checkbox.checked = true;
+                }
+            });
+        });
+    });
+    
+    // Form submission
+    const volunteerForm = document.getElementById('volunteerApplicationForm');
+    volunteerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simple validation
+        const requiredFields = this.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.style.borderColor = '#ef4444';
+            } else {
+                field.style.borderColor = '';
+            }
+        });
+        
+        if (isValid) {
+            // Show success message
+            alert('Thank you for your application! We will contact you within 24 hours to discuss the next steps.');
+            this.reset();
+        } else {
+            alert('Please fill in all required fields.');
+        }
+    });
+    
+    // Smooth animations on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe sections for animations
+    document.querySelectorAll('.section-header, .benefit-card, .opportunity-card, .story-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+</script>
+
+<%- include('../partials/footer') %>

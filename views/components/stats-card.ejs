@@ -1,0 +1,21 @@
+<!-- Impact Stats Card Component -->
+<div class="card stats-card" data-aos="zoom-in" data-aos-delay="<%= delay || 0 %>">
+    <div class="stats-icon">
+        <i class="<%= icon %>"></i>
+    </div>
+    
+    <div class="stats-content">
+        <div class="stats-number" data-target="<%= number %>">0</div>
+        <div class="stats-label"><%= label %></div>
+        <% if (typeof description !== 'undefined') { %>
+            <div class="stats-description"><%= description %></div>
+        <% } %>
+    </div>
+    
+    <% if (typeof trend !== 'undefined') { %>
+        <div class="stats-trend <%= trend.type %>">
+            <i class="fas fa-arrow-<%= trend.type === 'up' ? 'up' : 'down' %>"></i>
+            <span><%= trend.value %>%</span>
+        </div>
+    <% } %>
+</div>

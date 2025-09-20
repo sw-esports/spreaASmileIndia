@@ -1,0 +1,1487 @@
+/* Modern Nutrition Program Page Styles */
+
+/* CSS Custom Properties */
+:root {
+    --nutrition-primary: #ff6b35;
+    --nutrition-secondary: #f7931e;
+    --nutrition-accent: #e74c3c;
+    --nutrition-light: #ff8c42;
+    --nutrition-gradient: linear-gradient(135deg, var(--nutrition-primary), var(--nutrition-secondary));
+    --nutrition-gradient-light: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
+    --card-bg: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.12);
+    --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.15);
+    --border-radius: 15px;
+    --border-radius-large: 25px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme Support */
+[data-theme="dark"] {
+    --nutrition-primary: #ff7a47;
+    --nutrition-secondary: #ffa53f;
+    --nutrition-accent: #ff5757;
+    --nutrition-light: #ff9d57;
+    --nutrition-gradient: linear-gradient(135deg, var(--nutrition-primary), var(--nutrition-secondary));
+    --nutrition-gradient-light: linear-gradient(135deg, rgba(255, 122, 71, 0.15), rgba(255, 165, 63, 0.15));
+    --card-bg: #1a1a1a;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #e6e6e6;
+    --text-secondary: #b3b3b3;
+    --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Main Container */
+.nutrition-main {
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.nutrition-hero-modern {
+    min-height: 90vh;
+    position: relative;
+    background: var(--nutrition-gradient);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-element {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float-nutrition 6s ease-in-out infinite;
+}
+
+.floating-element::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.apple-1 { top: 20%; left: 10%; animation-delay: 0s; }
+.carrot-1 { top: 60%; left: 85%; animation-delay: 2s; }
+.fruit-1 { top: 80%; left: 15%; animation-delay: 4s; }
+.apple-2 { top: 15%; right: 20%; animation-delay: 1s; }
+.carrot-2 { bottom: 20%; right: 10%; animation-delay: 3s; }
+
+.hero-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text {
+    color: white;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-title-modern {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.title-highlight {
+    color: #fff3cd;
+    text-shadow: 0 0 20px rgba(255, 243, 205, 0.5);
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.95;
+    margin-bottom: 2.5rem;
+}
+
+.hero-metrics {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.metric-card {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1.5rem 1rem;
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.metric-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff3cd;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.btn-hero.primary {
+    background: white;
+    color: var(--nutrition-primary);
+}
+
+.btn-hero.primary:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+    transform: translateY(-3px);
+}
+
+.btn-hero.secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.btn-hero.secondary:hover {
+    background: white;
+    color: var(--nutrition-primary);
+    transform: translateY(-3px);
+}
+
+/* Hero Visual Cards */
+.hero-visual {
+    position: relative;
+}
+
+.visual-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.visual-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem 1.5rem;
+    border-radius: var(--border-radius-large);
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+/* Dark theme for visual cards */
+[data-theme="dark"] .visual-card {
+    background: rgba(26, 26, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.visual-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: var(--shadow-heavy);
+}
+
+.visual-card .card-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--nutrition-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+/* Better contrast for card icons in dark theme */
+[data-theme="dark"] .visual-card .card-icon {
+    background: var(--nutrition-gradient);
+    box-shadow: 0 4px 15px rgba(255, 122, 71, 0.4);
+}
+
+.visual-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.visual-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Better text contrast in visual cards for dark theme */
+[data-theme="dark"] .visual-card h4 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .visual-card p {
+    color: #cccccc;
+}
+
+/* Daily Meals Section */
+.daily-meals-modern {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+/* Dark theme for daily meals section */
+[data-theme="dark"] .daily-meals-modern {
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+}
+
+.section-header-modern {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--nutrition-gradient);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.section-title-modern {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.meals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.meal-card-modern {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.meal-card-modern:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-heavy);
+}
+
+/* Ensure meal cards are visible by default */
+.meal-card-modern[data-aos] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.meal-card-modern.aos-animate {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.meal-header {
+    background: var(--nutrition-gradient);
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.meal-time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.meal-icon-large {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.meal-body {
+    padding: 2.5rem;
+}
+
+.meal-body h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+}
+
+.meal-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.meal-items {
+    margin-bottom: 2rem;
+}
+
+.meal-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.meal-item:last-child {
+    border-bottom: none;
+}
+
+.item-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--nutrition-gradient-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--nutrition-primary);
+    flex-shrink: 0;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.item-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.nutrition-benefits {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.benefit-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--nutrition-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+/* Better contrast for benefit tags in dark theme */
+[data-theme="dark"] .benefit-tag {
+    background: rgba(26, 26, 26, 0.9);
+    color: var(--nutrition-primary);
+    border: 1px solid rgba(255, 122, 71, 0.3);
+}
+
+/* Health Fruits Section */
+.health-fruits-modern {
+    padding: 6rem 0;
+    background: var(--card-bg);
+}
+
+/* Dark theme for health fruits section */
+[data-theme="dark"] .health-fruits-modern {
+    background: #121212;
+}
+
+.fruits-showcase {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.fruits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.fruit-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-large);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.fruit-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: var(--shadow-medium);
+}
+
+/* Ensure AOS doesn't break fruit cards */
+.fruit-card[data-aos] {
+    opacity: 1 !important;
+}
+
+.fruit-card.aos-animate {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.fruit-visual {
+    margin-bottom: 1.5rem;
+}
+
+.fruit-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+}
+
+/* Dark theme for fruit icons */
+[data-theme="dark"] .fruit-icon {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.fruit-details h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.fruit-details p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.vitamin-tags {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.vitamin-tag {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--nutrition-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+/* Better contrast for vitamin tags in dark theme */
+[data-theme="dark"] .vitamin-tag {
+    background: rgba(26, 26, 26, 0.9);
+    color: var(--nutrition-primary);
+    border: 1px solid rgba(255, 122, 71, 0.3);
+}
+
+.fruit-benefits-circle {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: var(--nutrition-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+.fruit-benefits-circle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid var(--nutrition-primary);
+    opacity: 0.3;
+    animation: pulse-nutrition 3s infinite;
+}
+
+.circle-center {
+    background: white;
+    border-radius: 50%;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Dark theme for circle center */
+[data-theme="dark"] .circle-center {
+    background: #1a1a1a;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--nutrition-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.circle-center h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.benefit-item i {
+    color: var(--nutrition-primary);
+    font-size: 0.8rem;
+}
+
+/* Diet Monitoring Section */
+.diet-monitoring-modern {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(247, 147, 30, 0.05));
+}
+
+/* Dark theme for diet monitoring section */
+[data-theme="dark"] .diet-monitoring-modern {
+    background: linear-gradient(135deg, rgba(255, 122, 71, 0.08), rgba(255, 165, 63, 0.08));
+}
+
+.monitoring-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.diet-schedule-card,
+.food-monitoring-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-large);
+    padding: 3rem;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--border-color);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ensure diet cards are always visible and in viewport */
+.diet-schedule-card[data-aos],
+.food-monitoring-card[data-aos] {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.diet-schedule-card.aos-animate,
+.food-monitoring-card.aos-animate {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.card-header-modern {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.header-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--nutrition-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.header-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.header-content p {
+    color: var(--text-secondary);
+}
+
+.schedule-timeline {
+    position: relative;
+}
+
+.schedule-timeline::before {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--nutrition-gradient);
+    border-radius: 2px;
+}
+
+.timeline-item-modern {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.timeline-item-modern:last-child {
+    margin-bottom: 0;
+}
+
+.time-point {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.time-badge-small {
+    background: var(--nutrition-gradient);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+}
+
+.time-point::after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--nutrition-primary);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 3px var(--nutrition-primary);
+}
+
+.activity-content h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.activity-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.monitoring-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.step-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 107, 53, 0.05);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--nutrition-primary);
+    transition: var(--transition);
+}
+
+.step-card:hover {
+    transform: translateX(10px);
+    background: rgba(255, 107, 53, 0.1);
+}
+
+/* Dark theme for step cards */
+[data-theme="dark"] .step-card {
+    background: rgba(255, 122, 71, 0.08);
+    border-left-color: var(--nutrition-primary);
+}
+
+[data-theme="dark"] .step-card:hover {
+    background: rgba(255, 122, 71, 0.15);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--nutrition-gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--nutrition-gradient-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--nutrition-primary);
+    flex-shrink: 0;
+}
+
+/* Nutrition Impact Section */
+.nutrition-impact-modern {
+    padding: 6rem 0;
+    background: var(--card-bg);
+}
+
+/* Dark theme for nutrition impact section */
+[data-theme="dark"] .nutrition-impact-modern {
+    background: #0f0f0f;
+}
+
+.impact-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.impact-orbit {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.orbit-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: var(--nutrition-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.center-content {
+    background: white;
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Dark theme for center content */
+[data-theme="dark"] .center-content {
+    background: #1a1a1a;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.center-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--nutrition-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.center-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.center-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.orbit-metrics {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.orbit-metric {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-medium);
+    border: 3px solid var(--nutrition-primary);
+    animation: orbit-rotate 20s linear infinite;
+}
+
+/* Dark theme for orbit metrics */
+[data-theme="dark"] .orbit-metric {
+    background: #1a1a1a;
+    border-color: var(--nutrition-primary);
+}
+
+.metric-1 { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+.metric-2 { top: 50%; right: 0; transform: translateY(-50%); animation-delay: -5s; }
+.metric-3 { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: -10s; }
+.metric-4 { top: 50%; left: 0; transform: translateY(-50%); animation-delay: -15s; }
+
+.metric-content {
+    text-align: center;
+}
+
+.metric-number {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--nutrition-primary);
+}
+
+.metric-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.impact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.detail-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    position: relative;
+}
+
+.detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.detail-card.primary::before { background: var(--nutrition-primary); }
+.detail-card.secondary::before { background: var(--nutrition-secondary); }
+.detail-card.tertiary::before { background: var(--nutrition-accent); }
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.detail-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.detail-card.primary .detail-icon { background: var(--nutrition-primary); }
+.detail-card.secondary .detail-icon { background: var(--nutrition-secondary); }
+.detail-card.tertiary .detail-icon { background: var(--nutrition-accent); }
+
+.detail-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+}
+
+.detail-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.detail-stat {
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.detail-card.primary .detail-stat {
+    background: rgba(39, 174, 96, 0.1);
+    color: var(--nutrition-primary);
+}
+
+.detail-card.secondary .detail-stat {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--nutrition-secondary);
+}
+
+.detail-card.tertiary .detail-stat {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--nutrition-accent);
+}
+
+/* Dark theme for detail stats */
+[data-theme="dark"] .detail-card.primary .detail-stat {
+    background: rgba(255, 122, 71, 0.15);
+    color: var(--nutrition-primary);
+}
+
+[data-theme="dark"] .detail-card.secondary .detail-stat {
+    background: rgba(255, 165, 63, 0.15);
+    color: var(--nutrition-secondary);
+}
+
+[data-theme="dark"] .detail-card.tertiary .detail-stat {
+    background: rgba(255, 87, 87, 0.15);
+    color: var(--nutrition-accent);
+}
+
+/* CTA Section */
+.nutrition-cta-modern {
+    padding: 6rem 0;
+    background: var(--nutrition-gradient);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.pattern-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.pattern-element {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    animation: float-nutrition 8s ease-in-out infinite;
+}
+
+.pe-1 { top: 10%; left: 5%; animation-delay: 0s; }
+.pe-2 { top: 70%; right: 10%; animation-delay: 2s; }
+.pe-3 { bottom: 10%; left: 15%; animation-delay: 4s; }
+.pe-4 { top: 40%; right: 5%; animation-delay: 6s; }
+
+.cta-content-modern {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-header {
+    margin-bottom: 3rem;
+}
+
+.cta-title-modern {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.cta-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.cta-btn {
+    position: relative;
+    padding: 1.2rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.cta-btn .btn-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-effect {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.cta-btn:hover .btn-effect {
+    left: 0;
+}
+
+.primary-btn {
+    background: white;
+    color: var(--nutrition-primary);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+.secondary-btn,
+.tertiary-btn {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.secondary-btn:hover,
+.tertiary-btn:hover {
+    background: white;
+    color: var(--nutrition-primary);
+    transform: translateY(-3px);
+}
+
+.cta-stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+}
+
+.cta-stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff3cd;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Animations */
+@keyframes float-nutrition {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(120deg); }
+    66% { transform: translateY(-10px) rotate(240deg); }
+}
+
+@keyframes pulse-nutrition {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.05); opacity: 0.1; }
+}
+
+@keyframes orbit-rotate {
+    from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+    .hero-content-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .meals-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .fruits-showcase {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .monitoring-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .impact-showcase {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .orbit-metric {
+        position: static;
+        display: inline-flex;
+        margin: 0.5rem;
+        animation: none;
+    }
+    
+    .impact-orbit {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .orbit-center {
+        position: static;
+        transform: none;
+    }
+    
+    .orbit-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title-modern {
+        font-size: 2.5rem;
+    }
+    
+    .section-title-modern {
+        font-size: 2.2rem;
+    }
+    
+    .cta-title-modern {
+        font-size: 2.2rem;
+    }
+    
+    .hero-metrics {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .visual-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .fruits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .fruit-benefits-circle {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .circle-center {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .schedule-timeline::before {
+        left: 30px;
+    }
+    
+    .time-point::after {
+        right: -45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nutrition-hero-modern {
+        min-height: 70vh;
+    }
+    
+    .hero-title-modern {
+        font-size: 2rem;
+    }
+    
+    .section-title-modern {
+        font-size: 1.8rem;
+    }
+    
+    .meal-card-modern {
+        margin: 0 1rem;
+    }
+    
+    .meal-header,
+    .meal-body {
+        padding: 1.5rem;
+    }
+    
+    .diet-schedule-card,
+    .food-monitoring-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .detail-card {
+        padding: 1.5rem;
+    }
+    
+    .fruit-benefits-circle {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .circle-center {
+        width: 200px;
+        height: 200px;
+        padding: 1.5rem;
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+.btn-hero:focus,
+.cta-btn:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.3);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .floating-elements,
+    .hero-bg-pattern,
+    .cta-bg-pattern {
+        display: none;
+    }
+    
+    .nutrition-main {
+        background: white !important;
+    }
+    
+    .meal-card-modern,
+    .fruit-card,
+    .detail-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}

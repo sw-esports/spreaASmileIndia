@@ -1,0 +1,31 @@
+<!-- Testimonial Card Component -->
+<div class="testimonial-card">
+    <div class="testimonial-content">
+        <div class="quote-icon">
+            <i class="fas fa-quote-left"></i>
+        </div>
+        <blockquote class="testimonial-quote">
+            <%= quote %>
+        </blockquote>
+    </div>
+    
+    <div class="testimonial-author">
+        <div class="author-image">
+            <img src="<%= image %>" alt="<%= author %>" loading="lazy">
+        </div>
+        <div class="author-info">
+            <h4 class="author-name"><%= author %></h4>
+            <p class="author-role"><%= role %></p>
+        </div>
+    </div>
+    
+    <div class="testimonial-rating">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+    </div>
+</div>

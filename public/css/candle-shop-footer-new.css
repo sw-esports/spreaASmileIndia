@@ -1,0 +1,606 @@
+/* Candle Shop Footer - Unique Class Names with Theme Support */
+:root {
+    /* Light Theme Variables */
+    --candleshop-bg-light: #ffffff;
+    --candleshop-accent-light: #ff6b35;
+    --candleshop-text-light: #2d3748;
+    --candleshop-text-dim-light: #4a5568;
+    --candleshop-border-light: #e2e8f0;
+    --candleshop-hover-light: #ff8c42;
+    --candleshop-shadow-light: rgba(0, 0, 0, 0.1);
+    --candleshop-card-bg-light: #f7fafc;
+    
+    /* Dark Theme Variables */
+    --candleshop-bg-dark: #1a202c;
+    --candleshop-accent-dark: #ff6b35;
+    --candleshop-text-dark: #e2e8f0;
+    --candleshop-text-dim-dark: #a0aec0;
+    --candleshop-border-dark: #2d3748;
+    --candleshop-hover-dark: #ff8c42;
+    --candleshop-shadow-dark: rgba(0, 0, 0, 0.3);
+    --candleshop-card-bg-dark: #2d3748;
+    
+    /* Default to light theme */
+    --candleshop-bg: var(--candleshop-bg-light);
+    --candleshop-accent: var(--candleshop-accent-light);
+    --candleshop-text: var(--candleshop-text-light);
+    --candleshop-text-dim: var(--candleshop-text-dim-light);
+    --candleshop-border: var(--candleshop-border-light);
+    --candleshop-hover: var(--candleshop-hover-light);
+    --candleshop-shadow: var(--candleshop-shadow-light);
+    --candleshop-card-bg: var(--candleshop-card-bg-light);
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] {
+    --candleshop-bg: var(--candleshop-bg-dark);
+    --candleshop-accent: var(--candleshop-accent-dark);
+    --candleshop-text: var(--candleshop-text-dark);
+    --candleshop-text-dim: var(--candleshop-text-dim-dark);
+    --candleshop-border: var(--candleshop-border-dark);
+    --candleshop-hover: var(--candleshop-hover-dark);
+    --candleshop-shadow: var(--candleshop-shadow-dark);
+    --candleshop-card-bg: var(--candleshop-card-bg-dark);
+}
+
+/* System preference support */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --candleshop-bg: var(--candleshop-bg-dark);
+        --candleshop-accent: var(--candleshop-accent-dark);
+        --candleshop-text: var(--candleshop-text-dark);
+        --candleshop-text-dim: var(--candleshop-text-dim-dark);
+        --candleshop-border: var(--candleshop-border-dark);
+        --candleshop-hover: var(--candleshop-hover-dark);
+        --candleshop-shadow: var(--candleshop-shadow-dark);
+        --candleshop-card-bg: var(--candleshop-card-bg-dark);
+    }
+}
+
+/* Main Footer Container */
+.candleshop-footer-wrapper {
+    background: var(--candleshop-bg);
+    color: var(--candleshop-text);
+    position: relative;
+    z-index: 10;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-top: 1px solid var(--candleshop-border);
+}
+
+.candleshop-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 20px;
+}
+
+/* Newsletter Section */
+.candleshop-newsletter-section {
+    background: linear-gradient(135deg, var(--candleshop-accent), var(--candleshop-hover));
+    padding: 40px 30px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 25px var(--candleshop-shadow);
+    transition: box-shadow 0.3s ease;
+}
+
+.candleshop-newsletter-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.candleshop-newsletter-title {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+}
+
+.candleshop-newsletter-desc {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.candleshop-input-wrapper {
+    display: flex;
+    background: white;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.candleshop-email-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    background: white;
+}
+
+.candleshop-email-input::placeholder {
+    color: #999;
+}
+
+.candleshop-subscribe-btn {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.candleshop-subscribe-btn:hover {
+    background: #555;
+    transform: translateX(3px);
+}
+
+.candleshop-newsletter-perks {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.candleshop-perk-item {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.candleshop-perk-item i {
+    color: white;
+}
+
+/* Main Footer Content */
+.candleshop-main-content {
+    margin-bottom: 40px;
+}
+
+.candleshop-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.candleshop-section-title {
+    color: var(--candleshop-accent);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+/* Shop Info Section */
+.candleshop-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.candleshop-logo-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--candleshop-accent), #ff8c42);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.candleshop-brand-name {
+    color: var(--candleshop-text);
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.candleshop-brand-tagline {
+    color: var(--candleshop-text-dim);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.candleshop-brand-description {
+    color: var(--candleshop-text-dim);
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+/* Social Links with Directional Hover */
+.candleshop-social-media {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.candleshop-social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: var(--candleshop-card-bg);
+    border: 1px solid var(--candleshop-border);
+    border-radius: 25px;
+    color: var(--candleshop-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+.candleshop-social-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--candleshop-accent);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.candleshop-social-btn:hover::before {
+    left: 0;
+}
+
+.candleshop-social-btn:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--candleshop-shadow);
+    border-color: transparent;
+}
+
+.candleshop-facebook:hover::before {
+    background: #1877f2;
+}
+
+.candleshop-instagram:hover::before {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.candleshop-linkedin:hover::before {
+    background: #0077b5;
+}
+
+.candleshop-youtube:hover::before {
+    background: #ff0000;
+}
+
+/* Footer Links */
+.candleshop-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.candleshop-nav-item {
+    margin-bottom: 12px;
+}
+
+.candleshop-nav-link {
+    color: var(--candleshop-text-dim);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.candleshop-nav-link:hover {
+    color: var(--candleshop-accent);
+    transform: translateX(5px);
+}
+
+.candleshop-nav-link i {
+    color: var(--candleshop-accent);
+    width: 16px;
+}
+
+/* Trust Badges */
+.candleshop-trust-area {
+    background: var(--candleshop-card-bg);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid var(--candleshop-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.candleshop-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.candleshop-trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: var(--candleshop-bg);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--candleshop-border);
+}
+
+.candleshop-trust-badge:hover {
+    background: var(--candleshop-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--candleshop-shadow);
+}
+
+.candleshop-trust-badge:hover .candleshop-trust-content strong,
+.candleshop-trust-badge:hover .candleshop-trust-content small {
+    color: white;
+}
+
+.candleshop-trust-badge:hover i {
+    color: white;
+}
+
+.candleshop-trust-badge i {
+    color: var(--candleshop-accent);
+    font-size: 1.5rem;
+}
+
+.candleshop-trust-content strong {
+    color: var(--candleshop-text);
+    font-size: 0.9rem;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.candleshop-trust-content small {
+    color: var(--candleshop-text-dim);
+    font-size: 0.8rem;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+/* Contact Section */
+.candleshop-contact-area {
+    background: var(--candleshop-card-bg);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid var(--candleshop-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.candleshop-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.candleshop-contact-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.candleshop-contact-item i {
+    color: var(--candleshop-accent);
+    font-size: 1.3rem;
+    margin-top: 5px;
+    min-width: 20px;
+}
+
+.candleshop-contact-details h5 {
+    color: var(--candleshop-text);
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.candleshop-contact-details p {
+    color: var(--candleshop-text-dim);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.candleshop-contact-details a {
+    color: var(--candleshop-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.candleshop-contact-details a:hover {
+    color: var(--candleshop-hover);
+}
+
+/* Footer Bottom */
+.candleshop-bottom-area {
+    border-top: 1px solid var(--candleshop-border);
+    padding: 25px 0;
+    transition: border-color 0.3s ease;
+}
+
+.candleshop-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.candleshop-copyright {
+    color: var(--candleshop-text-dim);
+    margin: 0;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.candleshop-footer-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Theme Toggle Button */
+.candleshop-theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--candleshop-card-bg);
+    border: 2px solid var(--candleshop-border);
+    border-radius: 25px;
+    color: var(--candleshop-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.candleshop-theme-toggle:hover {
+    background: var(--candleshop-accent);
+    color: white;
+    border-color: var(--candleshop-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--candleshop-shadow);
+}
+
+.candleshop-theme-icon {
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.candleshop-dark-icon {
+    display: none;
+}
+
+[data-theme="dark"] .candleshop-light-icon {
+    display: none;
+}
+
+[data-theme="dark"] .candleshop-dark-icon {
+    display: inline-block;
+}
+
+.candleshop-theme-text {
+    font-family: inherit;
+    transition: color 0.3s ease;
+}
+
+.candleshop-footer-badges {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.candleshop-badge {
+    background: var(--candleshop-accent);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Scroll to Top Button */
+.candleshop-scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--candleshop-accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    font-size: 1.2rem;
+}
+
+.candleshop-scroll-top.candleshop-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.candleshop-scroll-top:hover {
+    background: var(--candleshop-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .candleshop-newsletter-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .candleshop-content-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .candleshop-trust-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .candleshop-contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .candleshop-bottom-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .candleshop-footer-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .candleshop-social-media {
+        justify-content: center;
+    }
+    
+    .candleshop-newsletter-perks {
+        justify-content: center;
+    }
+    
+    .candleshop-theme-toggle {
+        order: -1; /* Show theme toggle first on mobile */
+    }
+}

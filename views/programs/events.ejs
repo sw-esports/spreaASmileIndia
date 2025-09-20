@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Celebrations - SASI NGO</title>
+    <link rel="stylesheet" href="/css/events.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <main class="events-main">
+        <!-- Hero Section -->
+        <section class="events-hero">
+            <div class="hero-bg">
+                <div class="hero-particles"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Events & Celebrations</span>
+                    </div>
+                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                        Celebrating Life <span class="text-gradient">Together</span>
+                    </h1>
+                    <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                        From traditional festivals to fun outings, we create memorable experiences that bring joy, 
+                        build community, and celebrate the cultural richness of our children's lives.
+                    </p>
+                    <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Annual Events</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Participants</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Festival Types</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual" data-aos="fade-left" data-aos-delay="500">
+                    <div class="visual-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Building Memories</h3>
+                        <p>Creating lasting bonds through shared celebrations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Festival Events Section -->
+        <section class="festival-events-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge" data-aos="fade-up">
+                        <i class="fas fa-star"></i>
+                        <span>Festival Celebrations</span>
+                    </div>
+                    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Traditional Festivals</h2>
+                    <p class="section-description" data-aos="fade-up" data-aos-delay="200">
+                        Celebrating India's rich cultural heritage through traditional festivals and ceremonies.
+                    </p>
+                </div>
+
+                <div class="events-grid">
+                    <!-- Diwali -->
+                    <div class="event-card festival-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=600&h=400&fit=crop&crop=center" alt="Diwali Celebration" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">Festival</div>
+                            <h3>Diwali Celebration</h3>
+                            <p>Festival of lights bringing joy, sweets, and traditional decorations. Children learn about Hindu culture while enjoying fireworks and rangoli making.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Diyas & Lights</span>
+                                <span class="feature-tag">Rangoli Art</span>
+                                <span class="feature-tag">Sweet Distribution</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>October/November</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Students</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Eid -->
+                    <div class="event-card festival-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="50" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1589395937738-5eda1beef217?w=600&h=400&fit=crop&crop=center" alt="Eid Celebration" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">Festival</div>
+                            <h3>Eid Celebration</h3>
+                            <p>Marking the end of Ramadan with prayers, special meals, and gift exchanges. Teaching children about Islamic traditions and values of sharing.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Special Prayers</span>
+                                <span class="feature-tag">Festive Meals</span>
+                                <span class="feature-tag">Gift Exchange</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>As per Calendar</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Students</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Christmas Party -->
+                    <div class="event-card festival-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="100" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=600&h=400&fit=crop&crop=center" alt="Christmas Party" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-tree"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">Festival</div>
+                            <h3>Christmas Party</h3>
+                            <p>Joyful Christmas celebrations with decorations, carols, and Santa visits. Children experience Christian traditions and the spirit of giving.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Christmas Tree</span>
+                                <span class="feature-tag">Carol Singing</span>
+                                <span class="feature-tag">Santa Visit</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>December 25th</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Students</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- National Events Section -->
+        <section class="national-events-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge" data-aos="fade-up">
+                        <i class="fas fa-flag"></i>
+                        <span>National Celebrations</span>
+                    </div>
+                    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Patriotic Events</h2>
+                    <p class="section-description" data-aos="fade-up" data-aos-delay="200">
+                        Instilling patriotism and national pride through important national celebrations.
+                    </p>
+                </div>
+
+                <div class="events-grid">
+                    <!-- Republic Day -->
+                    <div class="event-card national-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&h=400&fit=crop&crop=center" alt="Republic Day" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-flag-usa"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">National</div>
+                            <h3>Republic Day</h3>
+                            <p>Celebrating India's Constitution with flag hoisting, parade performances, and patriotic songs. Teaching children about democracy and civic duties.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Flag Hoisting</span>
+                                <span class="feature-tag">Parade</span>
+                                <span class="feature-tag">Patriotic Songs</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>January 26th</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Students</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Independence Day -->
+                    <div class="event-card national-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="50" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1597149456692-0652b119fbe8?w=600&h=400&fit=crop&crop=center" alt="Independence Day" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">National</div>
+                            <h3>Independence Day</h3>
+                            <p>Commemorating India's freedom with cultural programs, speeches, and the tricolor flag. Children learn about freedom fighters and national history.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Cultural Program</span>
+                                <span class="feature-tag">Speeches</span>
+                                <span class="feature-tag">Tricolor Ceremony</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>August 15th</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Students</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- International Yoga Day -->
+                    <div class="event-card wellness-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="100" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1506629905607-48142a4ac95e?w=600&h=400&fit=crop&crop=center" alt="Yoga Day" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">Wellness</div>
+                            <h3>International Yoga Day</h3>
+                            <p>Promoting physical and mental wellness through yoga sessions. Children learn breathing techniques, meditation, and the importance of healthy living.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Yoga Sessions</span>
+                                <span class="feature-tag">Meditation</span>
+                                <span class="feature-tag">Breathing Exercises</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>June 21st</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Ages</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Activities Section -->
+        <section class="fun-activities-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge" data-aos="fade-up">
+                        <i class="fas fa-smile"></i>
+                        <span>Fun Activities</span>
+                    </div>
+                    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Recreation & Entertainment</h2>
+                    <p class="section-description" data-aos="fade-up" data-aos-delay="200">
+                        Creating joyful memories through exciting outings and entertainment activities.
+                    </p>
+                </div>
+
+                <div class="events-grid">
+                    <!-- Water Park -->
+                    <div class="event-card fun-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop&crop=center" alt="Water Park Trip" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">Recreation</div>
+                            <h3>Water Park Adventures</h3>
+                            <p>Exciting water park trips during summer months. Children enjoy slides, pools, and water games while learning swimming and water safety.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Water Slides</span>
+                                <span class="feature-tag">Swimming</span>
+                                <span class="feature-tag">Water Games</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Summer Months</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>Age 8+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cinema Trips -->
+                    <div class="event-card fun-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="50" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1489599504644-b8b1e3083635?w=600&h=400&fit=crop&crop=center" alt="Cinema Trip" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">Entertainment</div>
+                            <h3>Cinema Experiences</h3>
+                            <p>Special movie screenings and cinema trips for children. Watching age-appropriate films that entertain while teaching valuable life lessons.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Movie Screenings</span>
+                                <span class="feature-tag">Popcorn Treats</span>
+                                <span class="feature-tag">Group Fun</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Monthly</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Ages</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sports Day -->
+                    <div class="event-card fun-card" data-aos="fade-up" data-aos-offset="30" data-aos-delay="100" data-aos-duration="400">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&crop=center" alt="Sports Day" loading="lazy">
+                            <div class="event-overlay">
+                                <div class="event-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-category">Sports</div>
+                            <h3>Annual Sports Day</h3>
+                            <p>Competitive sports events promoting physical fitness and team spirit. Various games and athletic competitions with prizes and certificates.</p>
+                            <div class="event-features">
+                                <span class="feature-tag">Athletic Events</span>
+                                <span class="feature-tag">Team Games</span>
+                                <span class="feature-tag">Prize Distribution</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>February</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>All Students</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Gallery Section -->
+        <section class="event-gallery-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge" data-aos="fade-up">
+                        <i class="fas fa-images"></i>
+                        <span>Event Gallery</span>
+                    </div>
+                    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Memorable Moments</h2>
+                    <p class="section-description" data-aos="fade-up" data-aos-delay="200">
+                        Capturing the joy and happiness from our various events and celebrations.
+                    </p>
+                </div>
+
+                <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200" data-aos-offset="30">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop&crop=center" alt="Event Gallery 1" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Diwali 2024</h4>
+                            <p>Children creating beautiful rangoli</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=400&h=300&fit=crop&crop=center" alt="Event Gallery 2" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Republic Day</h4>
+                            <p>Flag hoisting ceremony</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&h=300&fit=crop&crop=center" alt="Event Gallery 3" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Water Park Fun</h4>
+                            <p>Summer splash adventure</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1506629905607-48142a4ac95e?w=400&h=300&fit=crop&crop=center" alt="Event Gallery 4" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Yoga Day</h4>
+                            <p>Learning wellness together</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="events-cta-section">
+            <div class="container">
+                <div class="cta-content" data-aos="fade-up">
+                    <div class="cta-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h2>Support Our Events</h2>
+                    <p>Help us organize more memorable events and celebrations for our children. Your support brings joy and creates lasting memories.</p>
+                    <div class="cta-buttons">
+                        <a href="/get-involved/donate" class="btn-cta primary">
+                            <i class="fas fa-gift"></i>
+                            <span>Sponsor an Event</span>
+                        </a>
+                        <a href="/get-involved/volunteer" class="btn-cta secondary">
+                            <i class="fas fa-users"></i>
+                            <span>Volunteer Helper</span>
+                        </a>
+                        <a href="/contact" class="btn-cta outline">
+                            <i class="fas fa-envelope"></i>
+                            <span>Get Involved</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('../partials/footer') %>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 400,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 30,
+            delay: 0,
+            disable: false,
+            startEvent: 'DOMContentLoaded',
+            initClassName: 'aos-init',
+            animatedClassName: 'aos-animate',
+            useClassNames: false,
+            disableMutationObserver: false,
+            debounceDelay: 20,
+            throttleDelay: 50
+        });
+
+        // Force refresh AOS on page load
+        window.addEventListener('load', function() {
+            AOS.refresh();
+        });
+
+        // Image loading fallback
+        document.querySelectorAll('.event-image img, .gallery-item img').forEach(img => {
+            img.addEventListener('error', function() {
+                this.style.background = 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)';
+                this.style.display = 'none';
+                this.parentElement.style.background = 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)';
+            });
+        });
+    </script>
+</body>
+</html> 
+                    community building, and creating lasting memories for our children and supporters.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regular Events Section -->
+    <section class="regular-events-section" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Regular Events</h2>
+                <p class="section-description">Weekly and monthly activities that form the heart of our community</p>
+            </div>
+            
+            <div class="events-grid">
+                <div class="event-card featured-event" data-aos="zoom-in">
+                    <div class="event-image">
+                        <img src="/src/images/events/thursday-langar.jpg" alt="Thursday Langar Day" loading="lazy">
+                        <div class="event-badge">Weekly</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Thursday Langar & Activity Day</h3>
+                        <p class="event-description">
+                            Our signature weekly event where volunteers prepare traditional free kitchen meals 
+                            and engage children with games, lessons, and fun activities. This is the highlight 
+                            of our week and a favorite among volunteers and children alike.
+                        </p>
+                        <div class="event-details">
+                            <div class="detail-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>Every Thursday</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>2:00 PM - 5:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span>50+ children, 15-20 volunteers</span>
+                            </div>
+                        </div>
+                        <div class="event-activities">
+                            <span class="activity-tag">Free Meals</span>
+                            <span class="activity-tag">Games</span>
+                            <span class="activity-tag">Learning Activities</span>
+                            <span class="activity-tag">Art & Craft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="event-image">
+                        <img src="/src/images/events/daily-classes.jpg" alt="Daily Educational Activities" loading="lazy">
+                        <div class="event-badge">Daily</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Daily Educational Support</h3>
+                        <p class="event-description">
+                            Regular tutoring sessions, homework support, and skill development classes 
+                            conducted throughout the week for school-going children and adult learners.
+                        </p>
+                        <div class="event-activities">
+                            <span class="activity-tag">Tutoring</span>
+                            <span class="activity-tag">Homework Help</span>
+                            <span class="activity-tag">Skills Training</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="event-image">
+                        <img src="/src/images/events/parent-meetings.jpg" alt="Parent Community Meetings" loading="lazy">
+                        <div class="event-badge">Monthly</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Parent & Family Engagement</h3>
+                        <p class="event-description">
+                            Monthly gatherings with families of beneficiaries for progress reviews, 
+                            scholarship disbursement, and community building activities.
+                        </p>
+                        <div class="event-activities">
+                            <span class="activity-tag">Progress Reviews</span>
+                            <span class="activity-tag">Family Support</span>
+                            <span class="activity-tag">Community Building</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Annual Celebrations Section -->
+    <section class="annual-celebrations-section" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Annual Celebrations</h2>
+                <p class="section-description">Special occasions that create lasting memories</p>
+            </div>
+            
+            <div class="celebrations-timeline">
+                <div class="celebration-item" data-aos="fade-right">
+                    <div class="celebration-month">
+                        <h3>November</h3>
+                        <div class="celebration-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                    </div>
+                    <div class="celebration-content">
+                        <h4>Children's Day Celebration</h4>
+                        <p>Grand celebration with cultural performances by children, special guests, and gift distribution. Children showcase their talents through dances, plays, and songs.</p>
+                        <div class="celebration-highlights">
+                            <span>Cultural Performances</span>
+                            <span>Guest Speakers</span>
+                            <span>Gift Distribution</span>
+                            <span>Health Camps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="celebration-item" data-aos="fade-left">
+                    <div class="celebration-month">
+                        <h3>August</h3>
+                        <div class="celebration-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                    </div>
+                    <div class="celebration-content">
+                        <h4>Independence Day</h4>
+                        <p>Patriotic celebration with flag hoisting, national songs, and speeches about freedom and education as pathways to true independence.</p>
+                        <div class="celebration-highlights">
+                            <span>Flag Hoisting</span>
+                            <span>Patriotic Songs</span>
+                            <span>Speeches</span>
+                            <span>Cultural Program</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="celebration-item" data-aos="fade-right">
+                    <div class="celebration-month">
+                        <h3>March</h3>
+                        <div class="celebration-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                    </div>
+                    <div class="celebration-content">
+                        <h4>Holi Festival</h4>
+                        <p>Colorful celebration of the festival of colors with safe, organic colors, traditional sweets, and community participation.</p>
+                        <div class="celebration-highlights">
+                            <span>Safe Colors</span>
+                            <span>Traditional Sweets</span>
+                            <span>Community Participation</span>
+                            <span>Cultural Unity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="celebration-item" data-aos="fade-left">
+                    <div class="celebration-month">
+                        <h3>October</h3>
+                        <div class="celebration-icon">
+                            <i class="fas fa-diya"></i>
+                        </div>
+                    </div>
+                    <div class="celebration-content">
+                        <h4>Diwali Celebration</h4>
+                        <p>Festival of lights celebrated with lamp decoration, traditional sweets, and cultural programs highlighting the triumph of light over darkness.</p>
+                        <div class="celebration-highlights">
+                            <span>Lamp Decoration</span>
+                            <span>Sweets Distribution</span>
+                            <span>Cultural Programs</span>
+                            <span>Community Gathering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Campaigns Section -->
+    <section class="special-campaigns-section" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Special Campaigns</h2>
+                <p class="section-description">Targeted initiatives for specific causes and awareness</p>
+            </div>
+            
+            <div class="campaigns-grid">
+                <div class="campaign-card" data-aos="fade-up">
+                    <div class="campaign-image">
+                        <img src="/src/images/campaigns/health-awareness.jpg" alt="Health Awareness Campaign" loading="lazy">
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Health Awareness Campaigns</h3>
+                        <p>Regular health camps and awareness sessions focusing on hygiene, nutrition, and preventive healthcare for children and families.</p>
+                        <div class="campaign-impact">
+                            <div class="impact-stat">
+                                <span class="stat-number">180+</span>
+                                <span class="stat-label">Health Screenings</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="stat-number">54</span>
+                                <span class="stat-label">ECG Tests</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="campaign-image">
+                        <img src="/src/images/campaigns/education-enrollment.jpg" alt="School Enrollment Drive" loading="lazy">
+                    </div>
+                    <div class="campaign-content">
+                        <h3>School Enrollment Drives</h3>
+                        <p>Annual campaigns to identify out-of-school children and facilitate their enrollment in government schools with complete documentation support.</p>
+                        <div class="campaign-impact">
+                            <div class="impact-stat">
+                                <span class="stat-number">100+</span>
+                                <span class="stat-label">Children Enrolled</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="stat-number">95%</span>
+                                <span class="stat-label">Retention Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="campaign-image">
+                        <img src="/src/images/campaigns/women-empowerment.jpg" alt="Women Empowerment Campaign" loading="lazy">
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Women Empowerment Drives</h3>
+                        <p>Focused initiatives to train and empower women from slum communities through vocational skills and micro-enterprise development.</p>
+                        <div class="campaign-impact">
+                            <div class="impact-stat">
+                                <span class="stat-number">85+</span>
+                                <span class="stat-label">Women Trained</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="stat-number">70%</span>
+                                <span class="stat-label">Income Generation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fundraising Events Section -->
+    <section class="fundraising-events-section" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Fundraising Events</h2>
+                <p class="section-description">Special events that raise awareness and funds for our programs</p>
+            </div>
+            
+            <div class="fundraising-showcase">
+                <div class="fundraising-highlight" data-aos="fade-up">
+                    <div class="event-details-card">
+                        <div class="event-year">2016</div>
+                        <h3>Fashion Gala at Australian High Commission</h3>
+                        <p>
+                            Our most prestigious fundraising event featuring renowned fashion designers who donated 
+                            couture pieces for auction. The event raised significant funds for our vocational training centre.
+                        </p>
+                        <div class="event-features">
+                            <div class="feature-item">
+                                <i class="fas fa-tshirt"></i>
+                                <span>Designer Fashion Show</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-gavel"></i>
+                                <span>Charity Auction</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>Diplomatic Audience</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-rupee-sign"></i>
+                                <span>Major Funds Raised</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annual-fundraising" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Annual Charity Dinners</h3>
+                    <p>
+                        Sangita hosts annual charity dinners and cultural shows, inviting diplomats, entrepreneurs, 
+                        and media personalities to support our cause while enjoying performances by our children.
+                    </p>
+                    <div class="dinner-features">
+                        <span class="feature-tag">Cultural Performances</span>
+                        <span class="feature-tag">Networking</span>
+                        <span class="feature-tag">Silent Auctions</span>
+                        <span class="feature-tag">Impact Presentations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="upcoming-events-section" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Upcoming Events</h2>
+                <p class="section-description">Join us in our upcoming celebrations and activities</p>
+            </div>
+            
+            <div class="upcoming-grid">
+                <div class="upcoming-card" data-aos="zoom-in">
+                    <div class="upcoming-date">
+                        <div class="date-day">15</div>
+                        <div class="date-month">Nov</div>
+                        <div class="date-year">2025</div>
+                    </div>
+                    <div class="upcoming-content">
+                        <h3>Children's Day Mega Celebration</h3>
+                        <p>Grand celebration with cultural performances, health camp, and special guests</p>
+                        <div class="upcoming-time">
+                            <i class="fas fa-clock"></i>
+                            <span>10:00 AM - 4:00 PM</span>
+                        </div>
+                        <div class="upcoming-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Munirka Centre</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upcoming-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="upcoming-date">
+                        <div class="date-day">25</div>
+                        <div class="date-month">Dec</div>
+                        <div class="date-year">2025</div>
+                    </div>
+                    <div class="upcoming-content">
+                        <h3>Christmas Joy Celebration</h3>
+                        <p>Festive celebration with carol singing, gift distribution, and community feast</p>
+                        <div class="upcoming-time">
+                            <i class="fas fa-clock"></i>
+                            <span>2:00 PM - 6:00 PM</span>
+                        </div>
+                        <div class="upcoming-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Munirka Centre</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upcoming-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="upcoming-date">
+                        <div class="date-day">31</div>
+                        <div class="date-month">Dec</div>
+                        <div class="date-year">2025</div>
+                    </div>
+                    <div class="upcoming-content">
+                        <h3>New Year Hope Festival</h3>
+                        <p>Welcome 2026 with hope, dreams, and resolutions for a better future</p>
+                        <div class="upcoming-time">
+                            <i class="fas fa-clock"></i>
+                            <span>6:00 PM - 10:00 PM</span>
+                        </div>
+                        <div class="upcoming-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Munirka Centre</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved in Events Section -->
+    <section class="get-involved-events-section" data-aos="fade-up">
+        <div class="container">
+            <div class="involvement-content">
+                <h2>Be Part of Our Events</h2>
+                <p>Join us in creating memorable experiences for our children</p>
+                
+                <div class="involvement-options">
+                    <div class="involvement-option" data-aos="fade-right">
+                        <div class="involvement-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Volunteer at Events</h3>
+                        <p>Help organize, coordinate, and participate in our regular and special events</p>
+                        <a href="/get-involved/volunteer" class="btn btn-primary">Join as Volunteer</a>
+                    </div>
+
+                    <div class="involvement-option" data-aos="fade-up">
+                        <div class="involvement-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Sponsor Events</h3>
+                        <p>Support our events through sponsorship and make celebrations possible</p>
+                        <a href="/get-involved/collaborate" class="btn btn-secondary">Become Sponsor</a>
+                    </div>
+
+                    <div class="involvement-option" data-aos="fade-left">
+                        <div class="involvement-icon">
+                            <i class="fas fa-calendar-plus"></i>
+                        </div>
+                        <h3>Organize with Us</h3>
+                        <p>Partner with us to organize special events and campaigns</p>
+                        <a href="/contact" class="btn btn-outline">Plan Together</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>

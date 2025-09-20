@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= metaDescription %>">
+    <meta name="keywords" content="shopping cart, candles, checkout, handcrafted candles">
+    <meta name="author" content="Spread A Smile India">
+    <link rel="canonical" href="https://spreadasmileindia.org<%= currentPath %>">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/candle-shop.css">
+    <link rel="stylesheet" href="/css/candle-shop-footer-new.css">
+    
+    <!-- Enhanced Candle Shop Scripts -->
+    <script src="/js/candle-shop-enhanced.js" defer></script>
+    
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Candle Shop Navigation -->
+    <header class="shop-header">
+        <nav class="shop-navbar">
+            <div class="shop-nav-container">
+                <!-- Logo Section -->
+                <div class="shop-logo">
+                    <a href="/candle-shop" class="logo-link">
+                        <div class="logo-icon">
+                            <i class="fas fa-fire-flame-curved"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>SASI Candles</h1>
+                            <span>Handcrafted for a Cause</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="shop-nav-links">
+                    <a href="/candle-shop" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Shop
+                    </a>
+                    <a href="/candle-shop/cart" class="nav-link active">
+                        <i class="fas fa-shopping-cart"></i>
+                        Cart
+                    </a>
+                    <a href="/" class="nav-link back-to-main">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to SASI
+                    </a>
+                </div>
+                
+                <!-- Shop Actions -->
+                <div class="shop-actions">
+                    <!-- Cart -->
+                    <button class="cart-toggle" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="shop-main">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Shopping Cart</h1>
+                <nav class="breadcrumb">
+                    <a href="/candle-shop">Shop</a>
+                    <span class="separator">/</span>
+                    <span class="current">Cart</span>
+                </nav>
+            </div>
+
+            <!-- Cart Content -->
+            <div class="cart-page-content">
+                <div class="cart-main">
+                    <div class="cart-header-row">
+                        <h2>Your Items</h2>
+                        <button class="clear-cart-btn" onclick="clearCart()" id="clearCartBtn" style="display: none;">
+                            <i class="fas fa-trash"></i>
+                            Clear Cart
+                        </button>
+                    </div>
+
+                    <div class="cart-items-list" id="cartPageItems">
+                        <!-- Cart items will be populated by JavaScript -->
+                        <div class="empty-cart-page">
+                            <div class="empty-cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h3>Your cart is empty</h3>
+                            <p>Add some beautiful handcrafted candles to get started!</p>
+                            <a href="/candle-shop" class="btn btn-primary">
+                                <i class="fas fa-fire-flame-curved"></i>
+                                Shop Candles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="cartPageSubtotal">₹0</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="cartPageShipping">Free</span>
+                        </div>
+                        
+                        <div class="summary-row discount-row" id="discountRow" style="display: none;">
+                            <span>Discount</span>
+                            <span id="cartPageDiscount">-₹0</span>
+                        </div>
+                        
+                        <div class="summary-divider"></div>
+                        
+                        <div class="summary-row summary-total">
+                            <span>Total</span>
+                            <span id="cartPageTotal">₹0</span>
+                        </div>
+                        
+                        <div class="promo-code-section">
+                            <div class="promo-input-group">
+                                <input type="text" placeholder="Enter promo code" id="promoCodeInput">
+                                <button class="apply-promo-btn" onclick="applyPromoCode()">Apply</button>
+                            </div>
+                        </div>
+                        
+                        <div class="checkout-actions">
+                            <a href="/candle-shop/checkout" class="btn btn-primary checkout-btn" id="checkoutBtn" style="display: none;">
+                                <i class="fas fa-lock"></i>
+                                Secure Checkout
+                            </a>
+                            <a href="/candle-shop" class="btn btn-outline">
+                                <i class="fas fa-arrow-left"></i>
+                                Continue Shopping
+                            </a>
+                        </div>
+                        
+                        <div class="security-badges">
+                            <div class="security-badge">
+                                <i class="fas fa-lock"></i>
+                                <span>Secure Payment</span>
+                            </div>
+                            <div class="security-badge">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Fast Delivery</span>
+                            </div>
+                            <div class="security-badge">
+                                <i class="fas fa-undo"></i>
+                                <span>Easy Returns</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Products -->
+            <div class="recommended-section" id="recommendedSection" style="display: none;">
+                <h2>You might also like</h2>
+                <div class="recommended-products" id="recommendedProducts">
+                    <!-- Recommended products will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="shop-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SASI Candles</h3>
+                    <p>Handcrafted candles made by our beneficiaries. Every purchase supports our mission to transform lives through education and empowerment.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="/candle-shop/shipping">Shipping Info</a></li>
+                        <li><a href="/candle-shop/returns">Returns</a></li>
+                        <li><a href="/candle-shop/faq">FAQ</a></li>
+                        <li><a href="/contact">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Spread A Smile India. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Additional CSS for Cart Page -->
+    <style>
+        .page-header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--shop-border);
+            margin-bottom: 2rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--shop-text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .breadcrumb {
+            color: var(--shop-text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--shop-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb .separator {
+            margin: 0 0.5rem;
+        }
+        
+        .cart-page-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .cart-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .cart-header-row h2 {
+            margin: 0;
+            color: var(--shop-text-primary);
+        }
+        
+        .clear-cart-btn {
+            background: var(--shop-danger);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--shop-radius-md);
+            cursor: pointer;
+            transition: var(--shop-transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .clear-cart-btn:hover {
+            background: #c82333;
+        }
+        
+        .cart-page-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--shop-bg-primary);
+            border: 1px solid var(--shop-border);
+            border-radius: var(--shop-radius-lg);
+            margin-bottom: 1rem;
+        }
+        
+        .cart-page-item-image {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--shop-radius-md);
+            overflow: hidden;
+        }
+        
+        .cart-page-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-page-item-details h3 {
+            color: var(--shop-text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .cart-page-item-price {
+            color: var(--shop-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-page-item-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .cart-page-qty-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--shop-border);
+            border-radius: var(--shop-radius-md);
+            overflow: hidden;
+        }
+        
+        .cart-page-qty-controls button {
+            background: var(--shop-bg-secondary);
+            border: none;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            color: var(--shop-text-secondary);
+            transition: var(--shop-transition);
+        }
+        
+        .cart-page-qty-controls button:hover {
+            background: var(--shop-border);
+            color: var(--shop-text-primary);
+        }
+        
+        .cart-page-qty-controls input {
+            width: 60px;
+            text-align: center;
+            border: none;
+            padding: 0.5rem;
+            background: var(--shop-bg-primary);
+            color: var(--shop-text-primary);
+        }
+        
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--shop-text-muted);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--shop-radius-sm);
+            transition: var(--shop-transition);
+        }
+        
+        .remove-item-btn:hover {
+            color: var(--shop-danger);
+            background: rgba(220, 53, 69, 0.1);
+        }
+        
+        .empty-cart-page {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--shop-text-secondary);
+        }
+        
+        .empty-cart-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+        
+        .empty-cart-page h3 {
+            color: var(--shop-text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-card {
+            background: var(--shop-bg-primary);
+            border: 1px solid var(--shop-border);
+            border-radius: var(--shop-radius-lg);
+            padding: 2rem;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .summary-card h3 {
+            color: var(--shop-text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--shop-text-secondary);
+        }
+        
+        .summary-row.summary-total {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--shop-text-primary);
+        }
+        
+        .summary-divider {
+            height: 1px;
+            background: var(--shop-border);
+            margin: 1.5rem 0;
+        }
+        
+        .promo-code-section {
+            margin: 1.5rem 0;
+        }
+        
+        .promo-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .promo-input-group input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--shop-border);
+            border-radius: var(--shop-radius-md);
+            background: var(--shop-bg-secondary);
+            color: var(--shop-text-primary);
+        }
+        
+        .apply-promo-btn {
+            background: var(--shop-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--shop-radius-md);
+            cursor: pointer;
+            transition: var(--shop-transition);
+            font-weight: 600;
+        }
+        
+        .apply-promo-btn:hover {
+            background: var(--shop-primary-dark);
+        }
+        
+        .checkout-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .security-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--shop-border);
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--shop-text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .security-badge i {
+            color: var(--shop-success);
+        }
+        
+        .recommended-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--shop-border);
+        }
+        
+        .recommended-section h2 {
+            color: var(--shop-text-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .recommended-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-page-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .cart-page-item {
+                grid-template-columns: 80px 1fr;
+                gap: 1rem;
+            }
+            
+            .cart-page-item-image {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .cart-page-item-controls {
+                grid-column: 1 / -1;
+                margin-top: 1rem;
+            }
+            
+            .summary-card {
+                position: static;
+            }
+        }
+    </style>
+
+    <script>
+        // Extended cart functionality for cart page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCartPageItems();
+            
+            // Update cart page when cart changes
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'candleShopCart') {
+                    loadCartPageItems();
+                }
+            });
+        });
+
+        function loadCartPageItems() {
+            const cart = JSON.parse(localStorage.getItem('candleShopCart')) || [];
+            const cartPageItems = document.getElementById('cartPageItems');
+            const clearCartBtn = document.getElementById('clearCartBtn');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const recommendedSection = document.getElementById('recommendedSection');
+
+            if (cart.length === 0) {
+                cartPageItems.innerHTML = `
+                    <div class="empty-cart-page">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some beautiful handcrafted candles to get started!</p>
+                        <a href="/candle-shop" class="btn btn-primary">
+                            <i class="fas fa-fire-flame-curved"></i>
+                            Shop Candles
+                        </a>
+                    </div>
+                `;
+                clearCartBtn.style.display = 'none';
+                checkoutBtn.style.display = 'none';
+                recommendedSection.style.display = 'none';
+            } else {
+                cartPageItems.innerHTML = cart.map(item => `
+                    <div class="cart-page-item">
+                        <div class="cart-page-item-image">
+                            <img src="/src/images/shop/candles/${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-page-item-details">
+                            <h3>${item.name}</h3>
+                            <div class="cart-page-item-price">₹${item.price}</div>
+                            <div class="cart-page-item-controls">
+                                <div class="cart-page-qty-controls">
+                                    <button onclick="updateCartPageQuantity(${item.id}, ${item.quantity - 1})">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" value="${item.quantity}" min="1" max="${item.inStock}"
+                                           onchange="updateCartPageQuantity(${item.id}, parseInt(this.value))">
+                                    <button onclick="updateCartPageQuantity(${item.id}, ${item.quantity + 1})">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <button class="remove-item-btn" onclick="removeFromCartPage(${item.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                clearCartBtn.style.display = 'flex';
+                checkoutBtn.style.display = 'flex';
+                recommendedSection.style.display = 'block';
+            }
+
+            updateCartPageTotals();
+        }
+
+        function updateCartPageTotals() {
+            const cart = JSON.parse(localStorage.getItem('candleShopCart')) || [];
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const shipping = subtotal > 500 ? 0 : 50;
+            const total = subtotal + shipping;
+
+            document.getElementById('cartPageSubtotal').textContent = `₹${subtotal}`;
+            document.getElementById('cartPageShipping').textContent = shipping === 0 ? 'Free' : `₹${shipping}`;
+            document.getElementById('cartPageTotal').textContent = `₹${total}`;
+        }
+
+        function updateCartPageQuantity(productId, newQuantity) {
+            if (window.candleShop) {
+                candleShop.updateCartItemQuantity(productId, newQuantity);
+                setTimeout(loadCartPageItems, 100);
+            }
+        }
+
+        function removeFromCartPage(productId) {
+            if (window.candleShop) {
+                candleShop.removeFromCart(productId);
+                setTimeout(loadCartPageItems, 100);
+            }
+        }
+
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                localStorage.removeItem('candleShopCart');
+                if (window.candleShop) {
+                    candleShop.cart = [];
+                    candleShop.updateCartCount();
+                }
+                loadCartPageItems();
+            }
+        }
+
+        function applyPromoCode() {
+            const promoCode = document.getElementById('promoCodeInput').value.trim();
+            if (!promoCode) {
+                alert('Please enter a promo code');
+                return;
+            }
+
+            // Simulate promo code validation
+            const validCodes = {
+                'SAVE10': 10,
+                'WELCOME15': 15,
+                'STUDENT20': 20
+            };
+
+            if (validCodes[promoCode.toUpperCase()]) {
+                const discount = validCodes[promoCode.toUpperCase()];
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('cartPageDiscount').textContent = `-₹${Math.round(subtotal * discount / 100)}`;
+                alert(`Promo code applied! You saved ${discount}%`);
+                updateCartPageTotals();
+            } else {
+                alert('Invalid promo code');
+            }
+        }
+    </script>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+</body>
+</html>

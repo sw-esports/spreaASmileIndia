@@ -1,0 +1,36 @@
+<!-- Reel Card Component -->
+<div class="reel-card">
+    <div class="reel-media">
+        <% if (type === 'video') { %>
+            <video class="reel-video" 
+                   muted 
+                   loop 
+                   playsinline 
+                   preload="metadata"
+                   poster="<%= poster %>">
+                <source src="<%= media %>" type="video/mp4">
+            </video>
+            <div class="video-overlay">
+                <button class="reel-play-btn" aria-label="Play video">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+        <% } else { %>
+            <img src="<%= media %>" alt="Story image" loading="lazy">
+        <% } %>
+    </div>
+    
+    <div class="reel-content">
+        <p class="reel-caption"><%= caption %></p>
+        
+        <div class="reel-footer">
+            <div class="reel-engagement">
+                <button class="like-btn" aria-label="Like this story">
+                    <i class="fas fa-heart"></i>
+                    <span><%= likes %></span>
+                </button>
+            </div>
+            <span class="reel-time"><%= timeAgo %></span>
+        </div>
+    </div>
+</div>

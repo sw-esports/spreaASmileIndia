@@ -1,0 +1,318 @@
+<!-- Optimized Image Component with Lazy Loading and WebP Support -->
+<div class="image-container <%= containerClass || '' %>" data-aos="<%= animation || 'fade-up' %>" data-aos-delay="<%= delay || '0' %>">
+    <picture class="responsive-image">
+        <!-- WebP format for modern browsers -->
+        <% if (webp) { %>
+        <source srcset="<%= webp %>" type="image/webp">
+        <% } %>
+        
+        <!-- Responsive image sizes -->
+        <% if (sizes && sizes.length > 0) { %>
+            <% sizes.forEach(function(size) { %>
+                <source 
+                    media="(max-width: <%= size.maxWidth %>px)" 
+                    srcset="<%= size.src %>"
+                    <% if (size.webp) { %>type="image/webp"<% } %>
+                >
+            <% }); %>
+        <% } %>
+        
+        <!-- Main image with lazy loading -->
+        <img 
+            <% if (lazy !== false) { %>
+                data-src="<%= src %>"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 <%= width || 800 %> <%= height || 600 %>'%3E%3C/svg%3E"
+                class="lazy"
+            <% } else { %>
+                src="<%= src %>"
+            <% } %>
+            alt="<%= alt %>"
+            width="<%= width || 'auto' %>"
+            height="<%= height || 'auto' %>"
+            loading="<%= loading || 'lazy' %>"
+            class="image <%= imageClass || '' %>"
+            <% if (title) { %>title="<%= title %>"<% } %>
+        >
+        
+        <!-- Loading placeholder -->
+        <div class="image-placeholder">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+        </div>
+        
+        <!-- Image overlay for hover effects -->
+        <% if (overlay) { %>
+        <div class="image-overlay">
+            <div class="overlay-content">
+                <% if (overlay.icon) { %>
+                    <i class="<%= overlay.icon %>"></i>
+                <% } %>
+                <% if (overlay.text) { %>
+                    <span><%= overlay.text %></span>
+                <% } %>
+                <% if (overlay.button) { %>
+                    <a href="<%= overlay.button.link %>" class="btn btn-primary">
+                        <% if (overlay.button.icon) { %>
+                            <i class="<%= overlay.button.icon %>"></i>
+                        <% } %>
+                        <%= overlay.button.text %>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+    </picture>
+    
+    <!-- Image caption -->
+    <% if (caption) { %>
+    <div class="image-caption">
+        <% if (caption.icon) { %>
+            <i class="<%= caption.icon %>"></i>
+        <% } %>
+        <span><%= caption.text %></span>
+        <% if (caption.date) { %>
+            <time><%= caption.date %></time>
+        <% } %>
+    </div>
+    <% } %>
+</div>
+
+<style>
+/* Optimized Image Component Styles */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: var(--bg-secondary);
+}
+
+.image-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-image {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: all 0.4s ease;
+    object-fit: cover;
+}
+
+.image.lazy {
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+.image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.image:not(.lazy) + .image-placeholder,
+.image.loaded + .image-placeholder {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    animation: spin 1s linear infinite;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+                                rgba(247, 148, 29, 0.9), 
+                                rgba(237, 28, 36, 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    backdrop-filter: blur(2px);
+}
+
+.image-container:hover .image-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-content {
+    text-align: center;
+    color: white;
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.image-container:hover .overlay-content {
+    transform: translateY(0);
+}
+
+.overlay-content i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.overlay-content span {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover .image-caption {
+    transform: translateY(0);
+}
+
+.image-caption i {
+    color: var(--color-primary);
+}
+
+.image-caption time {
+    margin-left: auto;
+    opacity: 0.8;
+    font-size: 0.8rem;
+}
+
+/* Image Grid Layouts */
+.image-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.image-grid.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.image-grid.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.image-grid.grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.image-grid.masonry {
+    column-count: 3;
+    column-gap: 1.5rem;
+}
+
+.image-grid.masonry .image-container {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .image-grid.grid-2,
+    .image-grid.grid-3,
+    .image-grid.grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-grid.masonry {
+        column-count: 1;
+    }
+    
+    .overlay-content i {
+        font-size: 1.5rem;
+    }
+    
+    .overlay-content span {
+        font-size: 1rem;
+    }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .image-placeholder {
+    background: linear-gradient(45deg, #2a2a2a 25%, transparent 25%), 
+                linear-gradient(-45deg, #2a2a2a 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #2a2a2a 75%), 
+                linear-gradient(-45deg, transparent 75%, #2a2a2a 75%);
+}
+
+[data-theme="dark"] .image-container {
+    background: var(--bg-secondary);
+}
+</style>
+
+<script>
+// Image lazy loading functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const lazyImages = document.querySelectorAll('img.lazy');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                    
+                    // Fade in animation
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1)';
+                }
+            });
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+        });
+    }
+});
+</script>

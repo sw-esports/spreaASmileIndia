@@ -1,0 +1,702 @@
+/* Achievements Page Specific Styles */
+
+.achievements-hero-section {
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.achievements-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F7941D' fill-opacity='0.1'%3E%3Cpath d='M30 10l6 12h12l-9 8 3 12-12-8-12 8 3-12-9-8h12z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+}
+
+.achievements-hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    color: white;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(247, 148, 29, 0.2);
+    border: 1px solid rgba(247, 148, 29, 0.3);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    animation: bounceIn 1.2s ease-out 0.5s both;
+}
+
+.hero-badge i {
+    color: var(--color-primary);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+/* Milestones Section */
+.milestones-section {
+    padding: 80px 0;
+    background: var(--bg-primary);
+    animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+.milestones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.milestone-card {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    animation: slideInUp 0.6s ease-out both;
+    animation-delay: calc(var(--delay, 0) * 0.1s);
+}
+
+.milestone-card:nth-child(1) { --delay: 1; }
+.milestone-card:nth-child(2) { --delay: 2; }
+.milestone-card:nth-child(3) { --delay: 3; }
+.milestone-card:nth-child(4) { --delay: 4; }
+
+.milestone-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.milestone-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.milestone-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    animation: bounceIn 0.8s ease-out calc(var(--delay, 0) * 0.1s + 1.2s) both;
+}
+
+.milestone-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.3;
+    animation: pulse 2s infinite 2s;
+}
+
+.milestone-icon i {
+    font-size: 2rem;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.milestone-content h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.milestone-stat {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.milestone-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.milestone-year {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    animation: slideInRight 0.6s ease-out calc(var(--delay, 0) * 0.1s + 1.5s) both;
+}
+
+/* Awards Section */
+.awards-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+    animation: fadeInUp 0.8s ease-out 1.5s both;
+}
+
+.awards-timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 3rem;
+}
+
+.awards-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+    border-radius: 2px;
+    animation: scaleY 1.5s ease-out 2s both;
+    transform-origin: top;
+}
+
+.award-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    position: relative;
+    animation: slideInFromSide 0.8s ease-out both;
+    animation-delay: calc(var(--item-delay, 0) * 0.2s + 2.5s);
+}
+
+.award-item:nth-child(1) { --item-delay: 1; }
+.award-item:nth-child(2) { --item-delay: 2; }
+.award-item:nth-child(3) { --item-delay: 3; }
+.award-item:nth-child(4) { --item-delay: 4; }
+
+.award-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.award-year {
+    width: 120px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    background: var(--bg-primary);
+    padding: 1rem 0;
+    border-radius: 10px;
+    border: 2px solid var(--color-primary);
+    position: relative;
+    z-index: 2;
+    animation: bounceIn 0.6s ease-out calc(var(--item-delay, 0) * 0.2s + 3s) both;
+}
+
+.award-content {
+    flex: 1;
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    margin: 0 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.award-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.award-content::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+}
+
+.award-item:nth-child(odd) .award-content::before {
+    right: -30px;
+    border-left-color: var(--bg-primary);
+}
+
+.award-item:nth-child(even) .award-content::before {
+    left: -30px;
+    border-right-color: var(--bg-primary);
+}
+
+.award-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    animation: rotateIn 0.8s ease-out calc(var(--item-delay, 0) * 0.2s + 3.2s) both;
+}
+
+.award-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.award-content h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.award-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Impact Numbers Section */
+.impact-numbers-section {
+    padding: 80px 0;
+    background: var(--bg-primary);
+    animation: fadeInUp 0.8s ease-out 3.5s both;
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.number-card {
+    background: var(--bg-secondary);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: all 0.3s ease;
+    animation: scaleIn 0.6s ease-out both;
+    animation-delay: calc(var(--card-delay, 0) * 0.1s + 4s);
+}
+
+.number-card:nth-child(1) { --card-delay: 1; }
+.number-card:nth-child(2) { --card-delay: 2; }
+.number-card:nth-child(3) { --card-delay: 3; }
+.number-card:nth-child(4) { --card-delay: 4; }
+
+.number-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.number-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.number-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    animation: bounceIn 0.8s ease-out calc(var(--card-delay, 0) * 0.1s + 4.5s) both;
+}
+
+.number-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.3;
+    animation: pulse 2s infinite 5s;
+}
+
+.number-icon i {
+    font-size: 2rem;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.number-value {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.number-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.number-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Health Achievements Section */
+.health-achievements-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+    animation: fadeInUp 0.8s ease-out 5s both;
+}
+
+.health-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.health-card {
+    background: var(--bg-primary);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    animation: slideInUp 0.8s ease-out both;
+    animation-delay: calc(var(--health-delay, 0) * 0.3s + 5.5s);
+}
+
+.health-card:nth-child(1) { --health-delay: 1; }
+.health-card:nth-child(2) { --health-delay: 2; }
+
+.health-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.health-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.health-content {
+    padding: 2rem;
+}
+
+.health-content h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.health-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 15px;
+}
+
+.health-stat {
+    text-align: center;
+}
+
+.health-stat .stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    display: block;
+}
+
+.health-stat .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.health-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* CTA Section */
+.cta-section {
+    animation: fadeInUp 0.8s ease-out 6s both;
+}
+
+/* Enhanced Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromSide {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.award-item:nth-child(odd) {
+    animation-name: slideInFromRight;
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleY {
+    from {
+        transform: translateX(-50%) scaleY(0);
+    }
+    to {
+        transform: translateX(-50%) scaleY(1);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-180deg) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.1;
+    }
+}
+
+/* Fast load optimization - Show everything immediately on slow connections */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .milestones-grid,
+    .numbers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .health-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .awards-timeline::before {
+        left: 30px;
+    }
+    
+    .award-item,
+    .award-item:nth-child(odd) {
+        flex-direction: row;
+        animation-name: slideInFromSide;
+    }
+    
+    .award-year {
+        width: 80px;
+        font-size: 1rem;
+        padding: 0.75rem 0;
+    }
+    
+    .award-content {
+        margin-left: 2rem;
+        margin-right: 0;
+    }
+    
+    .award-content::before,
+    .award-item:nth-child(odd) .award-content::before {
+        left: -30px;
+        right: auto;
+        border-right-color: var(--bg-primary);
+        border-left-color: transparent;
+    }
+    
+    .health-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .milestone-card,
+    .award-content,
+    .number-card,
+    .health-content {
+        padding: 1.5rem;
+    }
+    
+    .milestone-year {
+        position: static;
+        margin-top: 1rem;
+        display: inline-block;
+    }
+    
+    .award-content {
+        margin-left: 1rem;
+    }
+    
+    .number-value {
+        font-size: 2.5rem;
+    }
+}

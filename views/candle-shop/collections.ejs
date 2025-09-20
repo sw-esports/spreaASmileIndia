@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= metaDescription %>">
+    <meta name="keywords" content="candle collections, handcrafted candles, artisan candles, NGO products">
+    <meta name="author" content="Spread A Smile India">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://spreadasmileindia.org<%= currentPath %>">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/candle-shop.css">
+    <link rel="stylesheet" href="/css/collections-enhanced.css">
+    <link rel="stylesheet" href="/css/candle-shop-enhanced-styles.css">
+    <link rel="stylesheet" href="/css/candle-shop-footer-new.css">
+    
+    <!-- Theme Initialization -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <!-- Product Data for JavaScript -->
+    <script>
+        window.candleProducts = <%-JSON.stringify(products)%>;
+        window.collectionsData = {
+            totalProducts: <%=products.length%>,
+            categories: <%-JSON.stringify(['classic', 'luxury', 'designer', 'sets', 'artisan', 'festive'])%>,
+            featuredCount: <%=products.filter(p => p.featured).length%>
+        };
+    </script>
+    
+    <!-- Enhanced Candle Shop Scripts -->
+    <script src="/js/candle-shop-enhanced-fixed.js" defer></script>
+    <script src="/js/candle-shop-ui-enhancements.js" defer></script>
+</head>
+<body>
+    <!-- Candle Shop Navigation -->
+    <%- include('../components/shop-header', { page: 'collections' }) %>
+
+    <!-- User Menu Dropdown -->
+    <%- include('../components/user-menu') %>
+
+    <!-- Shopping Cart Sidebar -->
+    <%- include('../components/cart-sidebar') %>
+
+    <!-- Main Content -->
+    <main class="collections-main">
+        <!-- Hero Section -->
+        <section class="collections-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Our Collections</h1>
+                    <p>Discover our curated collections of handcrafted candles, each telling a unique story of artisanal craftsmanship and social impact.</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <strong><%= products.length %></strong>
+                            <span>Total Products</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong><%= products.filter(p => p.featured).length %></strong>
+                            <span>Featured Items</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>6</strong>
+                            <span>Collections</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter and Search Bar -->
+        <section class="collections-filter">
+            <div class="container">
+                <div class="filter-bar">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="all">All Collections</button>
+                        <button class="filter-btn" data-category="classic">Classic</button>
+                        <button class="filter-btn" data-category="luxury">Luxury</button>
+                        <button class="filter-btn" data-category="designer">Designer</button>
+                        <button class="filter-btn" data-category="sets">Sets</button>
+                        <button class="filter-btn" data-category="artisan">Artisan</button>
+                        <button class="filter-btn" data-category="festive">Festive</button>
+                    </div>
+                    <div class="search-filter">
+                        <input type="text" id="collectionSearch" placeholder="Search collections..." class="search-input">
+                        <button class="search-btn" onclick="filterCollections()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collections Grid -->
+        <section class="collections-grid">
+            <div class="container">
+                <div class="grid">
+                    <!-- Classic Collection -->
+                    <div class="collection-card" data-category="classic">
+                        <div class="collection-image">
+                            <img src="/src/images/shop/candles/1redcandle.png" alt="Classic Collection" loading="lazy">
+                            <div class="collection-badge">
+                                <span><%= products.filter(p => p.category === 'classic').length %> Items</span>
+                            </div>
+                        </div>
+                        <div class="collection-content">
+                            <h3>Classic Collection</h3>
+                            <p>Timeless designs that never go out of style, perfect for any home.</p>
+                            <div class="collection-stats">
+                                <span class="product-count"><%= products.filter(p => p.category === 'classic').length %> Products</span>
+                                <span class="price-range">From ₹199</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="showCollectionProducts('classic')">
+                                Explore Collection
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Luxury Collection -->
+                    <div class="collection-card" data-category="luxury">
+                        <div class="collection-image">
+                            <img src="/src/images/shop/candles/big-glass-cup-candle.png" alt="Luxury Collection" loading="lazy">
+                            <div class="collection-badge">
+                                <span><%= products.filter(p => p.category === 'luxury').length %> Items</span>
+                            </div>
+                        </div>
+                        <div class="collection-content">
+                            <h3>Luxury Collection</h3>
+                            <p>Premium candles with sophisticated designs and premium materials.</p>
+                            <div class="collection-stats">
+                                <span class="product-count"><%= products.filter(p => p.category === 'luxury').length %> Products</span>
+                                <span class="price-range">From ₹449</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="showCollectionProducts('luxury')">
+                                Explore Collection
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Designer Collection -->
+                    <div class="collection-card" data-category="designer">
+                        <div class="collection-image">
+                            <img src="/src/images/shop/candles/setof4-candle-desgined.png" alt="Designer Collection" loading="lazy">
+                            <div class="collection-badge">
+                                <span><%= products.filter(p => p.category === 'designer').length %> Items</span>
+                            </div>
+                        </div>
+                        <div class="collection-content">
+                            <h3>Designer Collection</h3>
+                            <p>Artistic designs created by our talented beneficiaries.</p>
+                            <div class="collection-stats">
+                                <span class="product-count"><%= products.filter(p => p.category === 'designer').length %> Products</span>
+                                <span class="price-range">From ₹549</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="showCollectionProducts('designer')">
+                                Explore Collection
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sets Collection -->
+                    <div class="collection-card" data-category="sets">
+                        <div class="collection-image">
+                            <img src="/src/images/shop/candles/3set-white-candle.png" alt="Sets Collection" loading="lazy">
+                            <div class="collection-badge">
+                                <span><%= products.filter(p => p.category === 'sets').length %> Items</span>
+                            </div>
+                        </div>
+                        <div class="collection-content">
+                            <h3>Sets Collection</h3>
+                            <p>Carefully curated sets perfect for gifts or home decoration.</p>
+                            <div class="collection-stats">
+                                <span class="product-count"><%= products.filter(p => p.category === 'sets').length %> Products</span>
+                                <span class="price-range">From ₹899</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="showCollectionProducts('sets')">
+                                Explore Collection
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Artisan Collection -->
+                    <div class="collection-card" data-category="artisan">
+                        <div class="collection-image">
+                            <img src="/src/images/shop/candles/new-candle (1).jpg" alt="Artisan Collection" loading="lazy">
+                            <div class="collection-badge new">
+                                <span><%= products.filter(p => p.category === 'artisan').length %> Items</span>
+                            </div>
+                        </div>
+                        <div class="collection-content">
+                            <h3>Artisan Collection</h3>
+                            <p>Handcrafted masterpieces with unique artistic designs and premium quality.</p>
+                            <div class="collection-stats">
+                                <span class="product-count"><%= products.filter(p => p.category === 'artisan').length %> Products</span>
+                                <span class="price-range">From ₹349</span>
+                            </div>
+                            <button class="btn btn-primary" onclick="showCollectionProducts('artisan')">
+                                Explore Collection
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Festive Collection -->
+                    <div class="collection-card" data-category="festive">
+                        <div class="collection-image">
+                            <img src="/src/images/shop/candles/new-candle (6).jpg" alt="Festive Collection" loading="lazy">
+                            <div class="collection-badge">
+                                <span><%= products.filter(p => p.category === 'festive').length %> Items</span>
+                            </div>
+                        </div>
+                        <div class="collection-content">
+                            <h3>Festive Collection</h3>
+                            <p>Perfect candles for celebrations, festivals, and memorable moments.</p>
+                            <div class="collection-stats">
+                                <span class="product-count"><%= products.filter(p => p.category === 'festive').length %> Products</span>
+                                <span class="price-range">From ₹429</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="showCollectionProducts('festive')">
+                                Explore Collection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products by Collection -->
+        <% 
+        const collections = [
+            { id: 'classic', name: 'Classic Collection', category: 'classic' },
+            { id: 'luxury', name: 'Luxury Collection', category: 'luxury' },
+            { id: 'designer', name: 'Designer Collection', category: 'designer' },
+            { id: 'sets', name: 'Sets Collection', category: 'sets' },
+            { id: 'artisan', name: 'Artisan Collection', category: 'artisan' },
+            { id: 'festive', name: 'Festive Collection', category: 'festive' }
+        ];
+        %>
+
+        <% collections.forEach(collection => { %>
+            <% 
+            const collectionProducts = products.filter(p => p.category === collection.category);
+            %>
+            <% if (collectionProducts.length > 0) { %>
+                <section class="collection-products" id="<%= collection.id %>" data-collection="<%= collection.category %>">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2><%= collection.name %></h2>
+                            <p><%= collectionProducts.length %> handcrafted products</p>
+                            <button class="view-all-btn" onclick="toggleCollectionView('<%= collection.id %>')">
+                                <span class="view-text">View All</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="products-grid" id="grid-<%= collection.id %>">
+                            <% collectionProducts.slice(0, 4).forEach(product => { %>
+                                <%- include('../components/candle-card', { product: product }) %>
+                            <% }) %>
+                            
+                            <% if (collectionProducts.length > 4) { %>
+                                <div class="hidden-products" style="display: none;">
+                                    <% collectionProducts.slice(4).forEach(product => { %>
+                                        <%- include('../components/candle-card', { product: product }) %>
+                                    <% }) %>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </section>
+            <% } %>
+        <% }) %>
+
+        <!-- Special Features Section -->
+        <section class="collection-features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Handcrafted with Love</h3>
+                        <p>Each candle is carefully crafted by our skilled beneficiaries, ensuring unique quality and character.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Eco-Friendly Materials</h3>
+                        <p>We use sustainable, natural ingredients and eco-friendly packaging for all our candle collections.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Supporting Communities</h3>
+                        <p>Every purchase directly supports our mission to empower communities and create positive social impact.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Collection JavaScript -->
+    <script>
+        // Collection-specific functions
+        function showCollectionProducts(category) {
+            const section = document.getElementById(category);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Highlight the section briefly
+                section.style.background = 'var(--shop-bg-secondary)';
+                setTimeout(() => {
+                    section.style.background = '';
+                }, 2000);
+            }
+        }
+
+        function toggleCollectionView(collectionId) {
+            const grid = document.getElementById(`grid-${collectionId}`);
+            const hiddenProducts = grid.querySelector('.hidden-products');
+            const button = grid.parentElement.querySelector('.view-all-btn');
+            const viewText = button.querySelector('.view-text');
+            const icon = button.querySelector('i');
+
+            if (hiddenProducts && hiddenProducts.style.display === 'none') {
+                hiddenProducts.style.display = 'contents';
+                viewText.textContent = 'View Less';
+                icon.style.transform = 'rotate(180deg)';
+            } else if (hiddenProducts) {
+                hiddenProducts.style.display = 'none';
+                viewText.textContent = 'View All';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function filterCollections() {
+            const searchTerm = document.getElementById('collectionSearch').value.toLowerCase();
+            const collectionCards = document.querySelectorAll('.collection-card');
+            const productSections = document.querySelectorAll('.collection-products');
+
+            collectionCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                const matches = title.includes(searchTerm) || description.includes(searchTerm);
+                card.style.display = matches ? 'block' : 'none';
+            });
+
+            productSections.forEach(section => {
+                const sectionTitle = section.querySelector('h2').textContent.toLowerCase();
+                const matches = sectionTitle.includes(searchTerm);
+                section.style.display = matches ? 'block' : 'none';
+            });
+        }
+
+        // Initialize filter buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const searchInput = document.getElementById('collectionSearch');
+
+            // Ensure cart functionality is available
+            if (typeof window.candleShop === 'undefined' && typeof CandleShop !== 'undefined') {
+                window.candleShop = new CandleShop();
+            }
+
+            // Make sure cart toggle is available globally
+            if (!window.toggleCart) {
+                window.toggleCart = function() {
+                    if (window.candleShop && window.candleShop.toggleCart) {
+                        window.candleShop.toggleCart();
+                    } else {
+                        const cartSidebar = document.getElementById('cartSidebar');
+                        if (cartSidebar) {
+                            cartSidebar.classList.toggle('active');
+                        }
+                    }
+                };
+            }
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // Update active state
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter collections
+                    const collectionCards = document.querySelectorAll('.collection-card');
+                    const productSections = document.querySelectorAll('.collection-products');
+                    
+                    collectionCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    productSections.forEach(section => {
+                        if (category === 'all' || section.dataset.collection === category) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', filterCollections);
+            }
+        });
+    </script>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+</body>
+</html>

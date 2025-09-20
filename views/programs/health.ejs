@@ -1,0 +1,825 @@
+<%- include('../partials/header') %>
+
+<link rel="stylesheet" href="/css/health.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+<main class="health-main">
+    <!-- Hero Section with Modern Design -->
+    <section class="health-hero-modern" data-aos="fade-in">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-floating-elements">
+            <div class="floating-element heart"></div>
+            <div class="floating-element pill"></div>
+            <div class="floating-element stethoscope"></div>
+            <div class="floating-element plus"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content" data-aos="fade-right">
+                    <div class="hero-badge">
+                        <i class="fas fa-heart"></i>
+                        <span>Transforming Lives Through Healthcare</span>
+                    </div>
+                    
+                    <h1 class="hero-title-modern">
+                        <span class="title-line">Healthcare &</span>
+                        <span class="title-line gradient-text">Wellness</span>
+                        <span class="title-line">Program</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Providing comprehensive healthcare services that ensure the physical and mental well-being of children in our care. Our holistic approach includes regular medical check-ups, specialized treatments, preventive care, and health education programs.
+                    </p>
+                    
+                    <div class="hero-action-buttons">
+                        <a href="#services" class="btn-hero primary">
+                            <i class="fas fa-heart-circle-check"></i>
+                            <span>Our Health Services</span>
+                        </a>
+                        <a href="#impact" class="btn-hero secondary">
+                            <i class="fas fa-chart-line"></i>
+                            <span>See Our Impact</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual" data-aos="fade-left">
+                    <div class="visual-cards">
+                        <div class="visual-card card-1" data-aos="zoom-in" data-aos-delay="0">
+                            <div class="card-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="card-stats">
+                                <span class="number">500+</span>
+                                <span class="label">Children Treated</span>
+                            </div>
+                        </div>
+                        
+                        <div class="visual-card card-2" data-aos="zoom-in" data-aos-delay="30">
+                            <div class="card-icon">
+                                <i class="fas fa-hospital"></i>
+                            </div>
+                            <div class="card-stats">
+                                <span class="number">12+</span>
+                                <span class="label">Health Camps</span>
+                            </div>
+                        </div>
+                        
+                        <div class="visual-card card-3" data-aos="zoom-in" data-aos-delay="60">
+                            <div class="card-icon">
+                                <i class="fas fa-shield-virus"></i>
+                            </div>
+                            <div class="card-stats">
+                                <span class="number">100%</span>
+                                <span class="label">Vaccination Rate</span>
+                            </div>
+                        </div>
+                        
+                        <div class="visual-card card-4" data-aos="zoom-in" data-aos-delay="90">
+                            <div class="card-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="card-stats">
+                                <span class="number">24/7</span>
+                                <span class="label">Emergency Care</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image-container">
+                        <div class="image-frame">
+                            <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=400&fit=crop&crop=center" alt="Healthcare Team" loading="lazy">
+                        </div>
+                        <div class="image-decorations">
+                            <div class="decoration decoration-1"></div>
+                            <div class="decoration decoration-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Health Services -->
+    <section id="services" class="health-services-modern" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header-modern">
+                <div class="section-tag">
+                    <i class="fas fa-medical-kit"></i>
+                    <span>Our Core Services</span>
+                </div>
+                <h2 class="section-title-modern">
+                    <span>Comprehensive</span>
+                    <span class="gradient-text">Healthcare Solutions</span>
+                </h2>
+                <p class="section-description">
+                    From preventive care to specialized treatments, we provide a full spectrum of healthcare services designed to meet the unique needs of each child.
+                </p>
+            </div>
+            
+            <div class="services-grid-modern">
+                <!-- Primary Healthcare -->
+                <div class="service-card-modern primary-card" data-aos="slide-up" data-aos-delay="0">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon primary">
+                            <i class="fas fa-user-doctor"></i>
+                        </div>
+                        <div class="service-badge">Essential</div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3>Primary Healthcare</h3>
+                        <p>Regular medical check-ups, health monitoring, and basic medical treatments provided by qualified healthcare professionals.</p>
+                        
+                        <div class="service-features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Monthly health check-ups</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Growth and development monitoring</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Vital signs assessment</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-stats">
+                            <div class="stat">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Regular Checkups</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialized Screening -->
+                <div class="service-card-modern screening-card" data-aos="slide-up" data-aos-delay="30">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon screening">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div class="service-badge">Advanced</div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3>Specialized Screening</h3>
+                        <p>Early detection programs including vision, dental, blood tests, and comprehensive health screenings for preventive care.</p>
+                        
+                        <div class="service-features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-eye"></i>
+                                <span>Vision screening & free spectacles</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-tooth"></i>
+                                <span>Dental check-ups & care kits</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-vial"></i>
+                                <span>Blood tests & lab services</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-stats">
+                            <div class="stat">
+                                <span class="stat-number">220+</span>
+                                <span class="stat-label">Screenings Done</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Care -->
+                <div class="service-card-modern emergency-card" data-aos="slide-up" data-aos-delay="60">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon emergency">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <div class="service-badge">24/7</div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3>Emergency Care</h3>
+                        <p>Round-the-clock emergency medical support with partnerships to local hospitals and clinics for immediate care.</p>
+                        
+                        <div class="service-features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>24/7 emergency response</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-hospital"></i>
+                                <span>Hospital partnerships</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-phone-medical"></i>
+                                <span>Medical helpline support</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-stats">
+                            <div class="stat">
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vaccination Program -->
+                <div class="service-card-modern vaccination-card" data-aos="slide-up" data-aos-delay="90">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon vaccination">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <div class="service-badge">Complete</div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3>Vaccination Program</h3>
+                        <p>Complete immunization coverage following national guidelines to protect children from preventable diseases.</p>
+                        
+                        <div class="service-features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-shield-virus"></i>
+                                <span>Complete immunization schedule</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Regular vaccination drives</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Health record maintenance</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-stats">
+                            <div class="stat">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Coverage Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mental Health Support -->
+                <div class="service-card-modern mental-card" data-aos="slide-up" data-aos-delay="120">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon mental">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="service-badge">Holistic</div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3>Mental Health Support</h3>
+                        <p>Psychological counseling, trauma support, and mental wellness programs to ensure emotional well-being.</p>
+                        
+                        <div class="service-features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-comments"></i>
+                                <span>Individual counseling sessions</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>Group therapy programs</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-heart"></i>
+                                <span>Emotional wellness activities</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-stats">
+                            <div class="stat">
+                                <span class="stat-number">80%</span>
+                                <span class="stat-label">Recovery Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Women's Health -->
+                <div class="service-card-modern womens-card" data-aos="slide-up" data-aos-delay="150">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon womens">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <div class="service-badge">Specialized</div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h3>Women's Health</h3>
+                        <p>Specialized healthcare services for mothers and women, including cancer screening, reproductive health education, and preventive care.</p>
+                        
+                        <div class="service-features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-ribbon"></i>
+                                <span>Cancer screening programs</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-user-nurse"></i>
+                                <span>Professional counseling</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-heartbeat"></i>
+                                <span>Reproductive health education</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-stats">
+                            <div class="stat">
+                                <span class="stat-number">85+</span>
+                                <span class="stat-label">Women Screened</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Camps & Initiatives -->
+    <section class="health-initiatives-modern" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header-modern">
+                <div class="section-tag">
+                    <i class="fas fa-calendar-medical"></i>
+                    <span>Major Health Initiatives</span>
+                </div>
+                <h2 class="section-title-modern">
+                    <span>Transformative</span>
+                    <span class="gradient-text">Health Camps</span>
+                </h2>
+                <p class="section-description">
+                    Large-scale health initiatives bringing comprehensive medical care directly to communities in need through strategic partnerships and dedicated healthcare teams.
+                </p>
+            </div>
+            
+            <div class="initiatives-timeline">
+                <!-- Children's Day Health Camp -->
+                <div class="timeline-item" data-aos="slide-right" data-aos-delay="30">
+                    <div class="timeline-date">
+                        <div class="date-badge featured">
+                            <span class="month">Nov</span>
+                            <span class="day">13-14</span>
+                            <span class="year">2021</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-content">
+                        <div class="initiative-card featured-card">
+                            <div class="card-header">
+                                <div class="initiative-icon">
+                                    <i class="fas fa-child"></i>
+                                </div>
+                                <div class="partnership-badge">
+                                    <i class="fas fa-handshake"></i>
+                                    <span>Rotary Club Partnership</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <h3>Children's Day Health Camp</h3>
+                                <p class="partnership-info">Partnership with Rotary Club of Delhi Safdarjung</p>
+                                <p class="initiative-description">
+                                    Two-day comprehensive health camp at our Munirka centre providing extensive medical services to children and community members, setting new standards for community healthcare.
+                                </p>
+                                
+                                <div class="impact-metrics-grid">
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-vial"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">180+</span>
+                                            <span class="metric-label">Blood Tests</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-heartbeat"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">54</span>
+                                            <span class="metric-label">ECGs</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-tooth"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">100+</span>
+                                            <span class="metric-label">Dental Checks</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-pills"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">Free</span>
+                                            <span class="metric-label">Medications</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision Care Campaign -->
+                <div class="timeline-item" data-aos="slide-left" data-aos-delay="60">
+                    <div class="timeline-content">
+                        <div class="initiative-card vision-card">
+                            <div class="card-header">
+                                <div class="initiative-icon">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="partnership-badge">
+                                    <i class="fas fa-eye-low-vision"></i>
+                                    <span>Project Drishti</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <h3>Vision Care Campaign</h3>
+                                <p class="partnership-info">Rotary Eye Camp - Project Drishti</p>
+                                <p class="initiative-description">
+                                    Comprehensive eye screening program transforming lives through better vision, providing free spectacles and treatment to those who need it most.
+                                </p>
+                                
+                                <div class="impact-metrics-grid">
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">220+</span>
+                                            <span class="metric-label">People Screened</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-glasses"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">50+</span>
+                                            <span class="metric-label">Free Spectacles</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-eye-dropper"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">100%</span>
+                                            <span class="metric-label">Free Treatment</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">Annual</span>
+                                            <span class="metric-label">Program</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-date">
+                        <div class="date-badge vision">
+                            <span class="month">Feb</span>
+                            <span class="day">Ongoing</span>
+                            <span class="year">2022</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ongoing Programs -->
+                <div class="timeline-item" data-aos="slide-right" data-aos-delay="90">
+                    <div class="timeline-date">
+                        <div class="date-badge ongoing">
+                            <span class="month">Ongoing</span>
+                            <span class="day">Every</span>
+                            <span class="year">2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-content">
+                        <div class="initiative-card ongoing-card">
+                            <div class="card-header">
+                                <div class="initiative-icon">
+                                    <i class="fas fa-calendar-week"></i>
+                                </div>
+                                <div class="partnership-badge">
+                                    <i class="fas fa-infinity"></i>
+                                    <span>Continuous Care</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <h3>Regular Health Monitoring</h3>
+                                <p class="partnership-info">Continuous Care Program</p>
+                                <p class="initiative-description">
+                                    Ongoing health awareness sessions, vaccination programs, and partnerships with local clinics for continuous medical care and emergency support.
+                                </p>
+                                
+                                <div class="impact-metrics-grid">
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">Monthly</span>
+                                            <span class="metric-label">Health Camps</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-syringe"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">100%</span>
+                                            <span class="metric-label">Vaccination Rate</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-hospital"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">24/7</span>
+                                            <span class="metric-label">Emergency Care</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="metric-box">
+                                        <div class="metric-icon">
+                                            <i class="fas fa-handshake"></i>
+                                        </div>
+                                        <div class="metric-content">
+                                            <span class="metric-number">Multiple</span>
+                                            <span class="metric-label">Partnerships</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Impact Showcase -->
+    <section id="impact" class="health-impact-modern" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header-modern">
+                <div class="section-tag">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Our Impact</span>
+                </div>
+                <h2 class="section-title-modern">
+                    <span>Transforming Lives Through</span>
+                    <span class="gradient-text">Quality Healthcare</span>
+                </h2>
+                <p class="section-description">
+                    Every number tells a story of a life touched, a health challenge overcome, and a future made brighter through comprehensive healthcare.
+                </p>
+            </div>
+            
+            <div class="impact-showcase">
+                <div class="impact-visual" data-aos="fade-right">
+                    <div class="central-metric">
+                        <div class="metric-circle">
+                            <div class="metric-value">95%</div>
+                            <div class="metric-description">
+                                <span class="metric-label">Health Improvement</span>
+                                <span class="metric-sublabel">Success Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="surrounding-metrics">
+                        <div class="orbit-metric metric-1" data-aos="zoom-in" data-aos-delay="0">
+                            <div class="orbit-icon">
+                                <i class="fas fa-shield-virus"></i>
+                            </div>
+                            <div class="orbit-value">100%</div>
+                            <div class="orbit-label">Vaccination Coverage</div>
+                        </div>
+                        
+                        <div class="orbit-metric metric-2" data-aos="zoom-in" data-aos-delay="30">
+                            <div class="orbit-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="orbit-value">50+</div>
+                            <div class="orbit-label">Vision Corrections</div>
+                        </div>
+                        
+                        <div class="orbit-metric metric-3" data-aos="zoom-in" data-aos-delay="60">
+                            <div class="orbit-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="orbit-value">80%</div>
+                            <div class="orbit-label">Mental Health Recovery</div>
+                        </div>
+                        
+                        <div class="orbit-metric metric-4" data-aos="zoom-in" data-aos-delay="90">
+                            <div class="orbit-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="orbit-value">500+</div>
+                            <div class="orbit-label">Children Treated</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="impact-details" data-aos="fade-left">
+                    <div class="detail-cards">
+                        <div class="detail-card primary" data-aos="slide-up" data-aos-delay="0">
+                            <div class="detail-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>Health Improvement Rate</h4>
+                                <p>95% of children in our program show significant health improvements within 6 months of enrollment, demonstrating the effectiveness of our comprehensive care approach.</p>
+                                <div class="detail-metric">
+                                    <span class="metric-highlight">6 months average</span>
+                                    <span>improvement timeline</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-card secondary" data-aos="slide-up" data-aos-delay="30">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>Preventive Care Success</h4>
+                                <p>Through regular check-ups and preventive measures, we've achieved 100% vaccination coverage and reduced emergency medical cases by 85%.</p>
+                                <div class="detail-metric">
+                                    <span class="metric-highlight">85% reduction</span>
+                                    <span>in emergency cases</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-card tertiary" data-aos="slide-up" data-aos-delay="60">
+                            <div class="detail-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>Educational Health Impact</h4>
+                                <p>Healthy children learn better. Our healthcare program has contributed to a 40% improvement in school attendance and academic performance.</p>
+                                <div class="detail-metric">
+                                    <span class="metric-highlight">40% improvement</span>
+                                    <span>in school attendance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="health-cta-modern" data-aos="fade-up">
+        <div class="cta-bg-pattern"></div>
+        <div class="container">
+            <div class="cta-content-modern">
+                <div class="cta-header" data-aos="fade-up" data-aos-delay="30">
+                    <div class="cta-icon-large">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h2 class="cta-title-modern">
+                        <span>Join Our</span>
+                        <span class="gradient-text">Healthcare Mission</span>
+                    </h2>
+                    <p class="cta-description">
+                        Help us expand our healthcare reach and transform more lives. Your support can provide life-saving medical care, preventive treatments, and health education to children who need it most.
+                    </p>
+                </div>
+                
+                <div class="cta-ways-to-help" data-aos="fade-up" data-aos-delay="200">
+                    <div class="help-option medical" data-aos="flip-left" data-aos-delay="100">
+                        <div class="option-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Medical Professionals</h3>
+                        <p>Volunteer your expertise to provide direct medical care during our health camps and regular check-ups.</p>
+                        <a href="/get-involved/volunteer" class="option-btn">
+                            <span>Volunteer as Doctor</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="help-option sponsor" data-aos="flip-left" data-aos-delay="200">
+                        <div class="option-icon">
+                            <i class="fas fa-donate"></i>
+                        </div>
+                        <h3>Sponsor Health Camps</h3>
+                        <p>Fund comprehensive health camps that can serve hundreds of children and community members at once.</p>
+                        <a href="/get-involved/donate" class="option-btn">
+                            <span>Sponsor a Camp</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="help-option partner" data-aos="flip-left" data-aos-delay="300">
+                        <div class="option-icon">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <h3>Healthcare Partnerships</h3>
+                        <p>Partner with us as a healthcare organization to expand our medical services and reach more children.</p>
+                        <a href="/contact" class="option-btn">
+                            <span>Become a Partner</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="cta-emergency-contact" data-aos="fade-up" data-aos-delay="300">
+                    <div class="emergency-card">
+                        <div class="emergency-icon">
+                            <i class="fas fa-phone-volume"></i>
+                        </div>
+                        <div class="emergency-content">
+                            <h4>24/7 Emergency Medical Support</h4>
+                            <p>For urgent medical assistance or to report a health emergency for a child in our program</p>
+                            <a href="tel:+919999999999" class="emergency-number">
+                                <i class="fas fa-phone"></i>
+                                <span>+91 99999 99999</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 300,
+        easing: 'ease-out',
+        once: true,
+        offset: 20,
+        delay: 0
+    });
+
+    // Add smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add floating animation to hero elements
+    const floatingElements = document.querySelectorAll('.floating-element');
+    floatingElements.forEach((element, index) => {
+        element.style.animationDelay = `${index * 0.5}s`;
+    });
+
+    // Add hover effects for service cards
+    const serviceCards = document.querySelectorAll('.service-card-modern');
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+</script>
+
+<%- include('../partials/footer') %>

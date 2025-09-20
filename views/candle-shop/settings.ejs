@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= metaDescription %>">
+    <meta name="keywords" content="settings, preferences, SASI candles">
+    <meta name="author" content="Spread A Smile India">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/candle-shop.css">
+    <link rel="stylesheet" href="/css/candle-shop-footer-new.css">
+    
+    <!-- Enhanced Candle Shop Scripts -->
+    <script src="/js/candle-shop-enhanced-fixed.js" defer></script>
+    
+    <!-- Product Data for JavaScript -->
+    <script>
+        window.candleProducts = <%-JSON.stringify([])%>;
+    </script>
+    
+    <!-- Theme Initialization -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Candle Shop Navigation -->
+    <%- include('../components/shop-header', { page: 'settings' }) %>
+
+    <!-- User Menu Dropdown -->
+    <%- include('../components/user-menu') %>
+
+    <!-- Shopping Cart Sidebar -->
+    <%- include('../components/cart-sidebar') %>
+
+    <!-- Main Content -->
+    <main class="settings-main">
+        <div class="settings-container">
+            <!-- Coming Soon Section -->
+            <div class="coming-soon-content">
+                <div class="coming-soon-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog rotating"></i>
+                    </div>
+                </div>
+                
+                <div class="coming-soon-text">
+                    <h1>Settings</h1>
+                    <h2>Coming Soon!</h2>
+                    <p>We're working hard to bring you an amazing settings experience. Soon you'll be able to customize your account preferences, notification settings, privacy options, and much more.</p>
+                </div>
+
+                <div class="feature-preview">
+                    <h3>What's Coming:</h3>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h4>Notifications</h4>
+                            <p>Control when and how you receive updates about orders, promotions, and new products.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Privacy & Security</h4>
+                            <p>Manage your privacy preferences, password settings, and account security options.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h4>Appearance</h4>
+                            <p>Customize the look and feel of your shopping experience with themes and display options.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h4>Preferences</h4>
+                            <p>Set your favorite scents, candle types, and get personalized recommendations.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <h4>Payment Settings</h4>
+                            <p>Manage default payment methods, billing addresses, and subscription preferences.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h4>Regional Settings</h4>
+                            <p>Choose your language, currency, time zone, and regional preferences.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notify-section">
+                    <h3>Get Notified When It's Ready</h3>
+                    <p>Be the first to know when our new settings page goes live!</p>
+                    
+                    <form class="notify-form" onsubmit="notifyMe(event)">
+                        <div class="input-group">
+                            <input type="email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-bell"></i>
+                                Notify Me
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="back-navigation">
+                    <a href="/candle-shop/account" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Account
+                    </a>
+                    <a href="/candle-shop" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Continue Shopping
+                    </a>
+                </div>
+
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p>Development Progress: 75% Complete</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="shop-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-fire-flame-curved"></i>
+                        </div>
+                        <h3>SASI Candles</h3>
+                    </div>
+                    <p>Handcrafted candles made by our beneficiaries. Every purchase supports our mission to transform lives through education and empowerment.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/spreadasmileindia" target="_blank" rel="noopener noreferrer" class="social-link" title="Follow us on Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/spreadasmileindia" target="_blank" rel="noopener noreferrer" class="social-link" title="Like us on Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="social-link" title="Contact us on WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://youtube.com/@spreadasmileindia" target="_blank" rel="noopener noreferrer" class="social-link" title="Subscribe to our YouTube channel">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-shopping-bag"></i> Shop</h4>
+                    <ul>
+                        <li><a href="/candle-shop">All Candles</a></li>
+                        <li><a href="/candle-shop/collections">Collections</a></li>
+                        <li><a href="/candle-shop/new-arrivals">New Arrivals</a></li>
+                        <li><a href="/candle-shop/bestsellers">Best Sellers</a></li>
+                        <li><a href="/candle-shop/gifts">Gift Sets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-heart"></i> About SASI</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/about/mission">Our Mission</a></li>
+                        <li><a href="/about/founder">Our Founder</a></li>
+                        <li><a href="/about/team">Our Team</a></li>
+                        <li><a href="/">Main Website</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-headset"></i> Support</h4>
+                    <ul>
+                        <li><a href="/impact/stories">Impact Stories</a></li>
+                        <li><a href="/programs">Our Programs</a></li>
+                        <li><a href="/get-involved">Get Involved</a></li>
+                        <li><a href="/media">Media & Press</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section footer-newsletter">
+                    <h4><i class="fas fa-envelope"></i> Stay Connected</h4>
+                    <p>Subscribe to get updates on new arrivals and exclusive offers!</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input">
+                        <button class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>shop@spreadasmileindia.org</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Spread A Smile India. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/terms">Terms of Service</a>
+                        <a href="/refund">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .settings-main {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .settings-container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .coming-soon-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .coming-soon-icon {
+            margin-bottom: 2rem;
+        }
+
+        .icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(255, 127, 39, 0.3);
+        }
+
+        .icon-wrapper i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .rotating {
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .coming-soon-text h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .coming-soon-text h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .feature-preview h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .notify-section {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .notify-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .notify-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .notify-form .input-group {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .notify-form input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .back-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .progress-indicator {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-indicator p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .coming-soon-content {
+                padding: 2rem 1rem;
+            }
+
+            .coming-soon-text h1 {
+                font-size: 2rem;
+            }
+
+            .coming-soon-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notify-form .input-group {
+                flex-direction: column;
+            }
+
+            .back-navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <script>
+        function notifyMe(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Simulate notification signup
+            alert(`Thank you! We'll notify ${email} when the settings page is ready.`);
+            event.target.reset();
+        }
+
+        // Add some interactivity to the progress bar
+        setTimeout(() => {
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '80%';
+            document.querySelector('.progress-indicator p').textContent = 'Development Progress: 80% Complete';
+        }, 2000);
+    </script>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+</body>
+</html>

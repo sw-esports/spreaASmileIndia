@@ -1,0 +1,35 @@
+<!-- Impact Card Component -->
+<div class="impact-card impact-card-<%= color %>" data-aos="fade-up" data-aos-delay="<%= delay || 0 %>">
+    <div class="card-header">
+        <div class="card-icon">
+            <i class="<%= icon %>"></i>
+        </div>
+        <div class="card-progress">
+            <svg class="progress-ring" width="60" height="60">
+                <circle class="progress-ring-bg" cx="30" cy="30" r="25"></circle>
+                <circle class="progress-ring-fill" 
+                        cx="30" 
+                        cy="30" 
+                        r="25" 
+                        data-progress="<%= progress %>"></circle>
+            </svg>
+            <span class="progress-text">0%</span>
+        </div>
+    </div>
+    
+    <div class="card-content">
+        <div class="card-stats">
+            <span class="stat-number" data-target="<%= number %>">0</span>
+            <% if (suffix) { %><span class="stat-suffix"><%= suffix %></span><% } %>
+        </div>
+        <h3 class="card-title"><%= label %></h3>
+        <p class="card-description"><%= description %></p>
+    </div>
+    
+    <div class="card-footer">
+        <div class="impact-indicator">
+            <div class="indicator-dot"></div>
+            <span>Making Impact</span>
+        </div>
+    </div>
+</div>

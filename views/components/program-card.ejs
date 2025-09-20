@@ -1,0 +1,49 @@
+<!-- Program Card Component -->
+<div class="card program-card" data-aos="fade-up" data-aos-delay="<%= delay || 0 %>">
+    <div class="card-image">
+        <picture>
+            <source srcset="<%= image %>.webp" type="image/webp">
+            <img src="<%= image %>" alt="<%= title %>" loading="lazy" class="optimized-img">
+        </picture>
+        <div class="card-overlay">
+            <div class="card-icon">
+                <i class="<%= icon %>"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-content">
+        <div class="card-header">
+            <h3 class="card-title"><%= title %></h3>
+            <% if (typeof badge !== 'undefined') { %>
+                <span class="card-badge"><%= badge %></span>
+            <% } %>
+        </div>
+        
+        <p class="card-description"><%= description %></p>
+        
+        <% if (typeof stats !== 'undefined') { %>
+            <div class="card-stats">
+                <% stats.forEach(stat => { %>
+                    <div class="stat-item">
+                        <span class="stat-number"><%= stat.number %></span>
+                        <span class="stat-label"><%= stat.label %></span>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+        
+        <div class="card-actions">
+            <a href="<%= link %>" class="btn btn-primary btn-sm">
+                <span>Learn More</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <% if (typeof donateLink !== 'undefined') { %>
+                <a href="<%= donateLink %>" class="btn btn-outline btn-sm">
+                    <i class="fas fa-heart"></i>
+                    <span>Support</span>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Spread A Smile India - Transforming lives of street children in Delhi since 2005. Education, healthcare, nutrition, and empowerment programs.' %>">
+    <meta name="keywords" content="NGO Delhi, street children, education support, charity India, Sangita Mehra, Munirka, volunteer, donate">
+    <meta name="author" content="Spread A Smile India">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://spreadasmileindia.org<%= typeof currentPath !== 'undefined' ? currentPath : '' %>">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Transforming lives of street children through education and empowerment since 2005.' %>">
+    <meta property="og:image" content="https://spreadasmileindia.org/src/images/og-image.jpg">
+    <meta property="og:url" content="https://spreadasmileindia.org<%= typeof currentPath !== 'undefined' ? currentPath : '' %>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spread A Smile India">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= title %>">
+    <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Transforming lives of street children through education and empowerment since 2005.' %>">
+    <meta name="twitter:image" content="https://spreadasmileindia.org/src/images/twitter-card.jpg">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/src/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/icons/favicon-16x16.png">
+    <link rel="manifest" href="/src/icons/manifest.json">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Spread A Smile India",
+        "description": "Delhi-based NGO transforming lives of street children through education and empowerment since 2005",
+        "url": "https://spreadasmileindia.org",
+        "logo": "https://spreadasmileindia.org/src/images/logo.png",
+        "founder": {
+            "@type": "Person",
+            "name": "Sangita Mehra"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "108/A 1st Floor, Mandir Wali Gali",
+            "addressLocality": "Munirka Village",
+            "addressRegion": "Delhi",
+            "postalCode": "110067",
+            "addressCountry": "IN"
+        },
+        "telephone": "+91-97178-66620",
+        "sameAs": [
+            "https://instagram.com/sangitamehra1",
+            "https://facebook.com/SpreadASmileIndia"
+        ]
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/navbar-enhanced.css">
+    <link rel="stylesheet" href="/css/mobile-responsive.css">
+    <% if (page === 'home') { %>
+    <link rel="stylesheet" href="/css/homepage.css">
+    <% } %>
+    
+    <!-- Performance & Accessibility Scripts -->
+    <script src="/js/mobile-optimizer.js" defer></script>
+    <script src="/js/performance-optimizer.js" defer></script>
+    <script src="/js/accessibility-enhancer.js" defer></script>
+    <script src="/js/error-handler.js" defer></script>
+    <script src="/js/ui-enhancer.js" defer></script>
+    <script src="/js/search-enhancer.js" defer></script>
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Theme Initialization Script (runs before page load to prevent flash) -->
+    <script>
+        (function() {
+            // Immediately apply saved theme or default to light
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            console.log('🚀 Early theme initialization:', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo Section -->
+                <div class="logo-section" data-aos="fade-right">
+                    <div class="logo">
+                        <div class="logo-image">
+                            <img src="/src/images/logo.png" alt="Spread A Smile India Logo" class="main-logo">
+                        </div>
+                        <div class="logo-text">
+                            <h1 class="logo-title">Spread A Smile</h1>
+                            <span class="logo-subtitle">India</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="nav-center">
+                    <ul class="nav-menu" data-aos="fade-down">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link <%= page === 'home' ? 'active' : '' %>">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-home nav-icon"></i>
+                                    <span class="nav-text">Home</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <a href="/about" class="nav-link <%= page === 'about' ? 'active' : '' %>">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <span class="nav-text">About</span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/about/mission"><i class="fas fa-bullseye"></i> Mission & Vision</a></li>
+                                <li><a href="/about/history"><i class="fas fa-history"></i> Our Story</a></li>
+                                <li><a href="/about/founder"><i class="fas fa-user-tie"></i> Founder</a></li>
+                                <li><a href="/about/team"><i class="fas fa-users"></i> Our Team</a></li>
+                                <li><a href="/about/partners"><i class="fas fa-handshake"></i> Partners</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <a href="/programs" class="nav-link <%= page === 'programs' ? 'active' : '' %>">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-graduation-cap nav-icon"></i>
+                                    <span class="nav-text">Programs</span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/programs/education"><i class="fas fa-book"></i> Education</a></li>
+                                <li><a href="/programs/health"><i class="fas fa-heartbeat"></i> Health Care</a></li>
+                                <li><a href="/programs/nutrition"><i class="fas fa-apple-alt"></i> Nutrition</a></li>
+                                <li><a href="/programs/vocational"><i class="fas fa-tools"></i> Skills Training</a></li>
+                                <li><a href="/programs/events"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <a href="/impact" class="nav-link <%= page === 'impact' ? 'active' : '' %>">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-chart-line nav-icon"></i>
+                                    <span class="nav-text">Impact</span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/impact/achievements"><i class="fas fa-trophy"></i> Achievements</a></li>
+                                <li><a href="/impact/stories"><i class="fas fa-star"></i> Success Stories</a></li>
+                                <li><a href="/impact/testimonials"><i class="fas fa-quote-left"></i> Testimonials</a></li>
+                                <li><a href="/impact/reports"><i class="fas fa-file-alt"></i> Reports</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <a href="/get-involved" class="nav-link <%= page === 'get-involved' ? 'active' : '' %>">
+                                <div class="nav-link-content">
+                                    <i class="fas fa-hands-helping nav-icon"></i>
+                                    <span class="nav-text">Get Involved</span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/get-involved/volunteer"><i class="fas fa-hand-holding-heart"></i> Volunteer</a></li>
+                                <li><a href="/get-involved/donate"><i class="fas fa-heart"></i> Donate</a></li>
+                                <li><a href="/get-involved/partners"><i class="fas fa-users-cog"></i> Partner</a></li>
+                                <li><a href="/get-involved/careers"><i class="fas fa-briefcase"></i> Careers</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Right Actions -->
+                <div class="nav-actions" data-aos="fade-left">
+                    <!-- Search Button -->
+                    <button class="search-btn mobile-hide" onclick="openSearchModal()" aria-label="Search website" title="Search (Ctrl+K)">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <!-- Red Heart Donate Button -->
+                    <a href="/get-involved/donate" class="btn-donate-heart">
+                        <i class="fas fa-heart heart-icon"></i>
+                        <span class="btn-text">Donate</span>
+                    </a>
+                    
+                    <!-- User Dropdown Menu -->
+                    <div class="user-dropdown">
+                        <button class="user-menu-btn" onclick="toggleUserMenu()" aria-label="User menu">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="/auth/login" class="dropdown-item">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Login</span>
+                            </a>
+                            <a href="/auth/register" class="dropdown-item">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Register</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button onclick="toggleTheme()" class="dropdown-item theme-toggle-item">
+                                <i class="fas fa-sun theme-icon-light"></i>
+                                <i class="fas fa-moon theme-icon-dark"></i>
+                                <span>Toggle Theme</span>
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <a href="/contact" class="dropdown-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                            <a href="/about" class="dropdown-item">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About Us</span>
+                            </a>
+                            <a href="/get-involved/volunteer" class="dropdown-item">
+                                <i class="fas fa-hands-helping"></i>
+                                <span>Volunteer</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>

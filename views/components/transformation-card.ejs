@@ -1,0 +1,31 @@
+<!-- Transformation Card Component -->
+<div class="transformation-card" data-aos="fade-up" data-aos-delay="<%= delay || 0 %>">
+    <div class="card-media">
+        <% if (type === 'video') { %>
+            <video class="transformation-video" 
+                   muted 
+                   loop 
+                   playsinline 
+                   preload="metadata"
+                   poster="<%= poster %>">
+                <source src="<%= media %>" type="video/mp4">
+            </video>
+            <div class="play-overlay">
+                <button class="play-btn" aria-label="Play video">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+        <% } else { %>
+            <img src="<%= media %>" alt="<%= title %>" loading="lazy">
+        <% } %>
+        
+        <div class="card-overlay">
+            <div class="overlay-content">
+                <h3 class="card-title"><%= title %></h3>
+                <p class="card-caption"><%= caption %></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-hover-effect"></div>
+</div>

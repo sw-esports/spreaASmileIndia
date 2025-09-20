@@ -1,0 +1,83 @@
+<!-- Shop Header Component -->
+<header class="shop-header">
+    <nav class="shop-navbar">
+        <div class="shop-nav-container">
+            <!-- Logo Section -->
+            <div class="shop-logo">
+                <a href="/candle-shop" class="logo-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-fire-flame-curved"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>SASI Candles</h1>
+                        <span>Handcrafted for a Cause</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="shop-nav-links">
+                <a href="/candle-shop" class="nav-link <%= page === 'shop-home' ? 'active' : '' %>">
+                    <i class="fas fa-home"></i>
+                    Shop
+                </a>
+                <a href="/candle-shop/collections" class="nav-link <%= page === 'collections' ? 'active' : '' %>">
+                    <i class="fas fa-layer-group"></i>
+                    Collections
+                </a>
+                <a href="/about" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    Our Story
+                </a>
+                <a href="/" class="nav-link back-to-main">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to SASI
+                </a>
+            </div>
+            
+            <!-- Shop Actions -->
+            <div class="shop-actions">
+                <!-- Search -->
+                <button class="shop-search-btn mobile-hide" onclick="toggleShopSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <!-- Cart -->
+                <button class="cart-toggle" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                
+                <!-- Theme Toggle -->
+                <button class="theme-toggle-btn" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- User Profile -->
+                <button class="user-profile-btn" onclick="showUserMenu()">
+                    <i class="fas fa-user"></i>
+                </button>
+                
+                <!-- Mobile Menu -->
+                <button class="mobile-menu-btn" onclick="toggleShopMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Search Bar (Hidden by default) -->
+    <div class="shop-search-bar" id="shopSearchBar">
+        <div class="search-container">
+            <input type="text" id="shopSearchInput" placeholder="Search for candles...">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="search-close" onclick="toggleShopSearch()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+</header>

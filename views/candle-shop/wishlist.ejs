@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= metaDescription %>">
+    <meta name="keywords" content="wishlist, saved items, SASI candles">
+    <meta name="author" content="Spread A Smile India">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/candle-shop.css">
+    <link rel="stylesheet" href="/css/candle-shop-account.css">
+    <link rel="stylesheet" href="/css/candle-shop-footer-new.css">
+    
+    <!-- Enhanced Candle Shop Scripts -->
+    <script src="/js/candle-shop-enhanced-fixed.js" defer></script>
+    
+    <!-- Product Data for JavaScript -->
+    <script>
+        window.candleProducts = <%-JSON.stringify(products)%>;
+    </script>
+    
+    <!-- Theme Initialization -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('spreadasmile-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Candle Shop Navigation -->
+    <%- include('../components/shop-header', { page: 'wishlist' }) %>
+
+    <!-- User Menu Dropdown -->
+    <%- include('../components/user-menu') %>
+
+    <!-- Shopping Cart Sidebar -->
+    <%- include('../components/cart-sidebar') %>
+
+    <!-- Main Content -->
+    <main class="wishlist-main">
+        <div class="wishlist-container">
+            <div class="wishlist-header">
+                <h1>My Wishlist</h1>
+                <p>Items you've saved for later</p>
+                <div class="wishlist-stats">
+                    <span class="item-count">7 items</span>
+                    <button class="btn btn-outline" onclick="shareWishlist()">
+                        <i class="fas fa-share"></i>
+                        Share Wishlist
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wishlist Controls -->
+            <div class="wishlist-controls">
+                <div class="view-options">
+                    <button class="view-btn active" data-view="grid">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+                <div class="sort-options">
+                    <select id="sortSelect">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name A-Z</option>
+                    </select>
+                </div>
+                <div class="bulk-actions">
+                    <button class="btn btn-outline" onclick="selectAll()">
+                        <i class="fas fa-check-square"></i>
+                        Select All
+                    </button>
+                    <button class="btn btn-primary" onclick="addSelectedToCart()" disabled id="addToCartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add Selected to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wishlist Items -->
+            <div class="wishlist-grid" id="wishlistGrid">
+                <!-- Wishlist Item 1 -->
+                <div class="wishlist-item" data-price="799" data-name="lavender-bliss" data-added="2024-03-15">
+                    <div class="item-checkbox">
+                        <input type="checkbox" class="item-select" onchange="updateBulkActions()">
+                    </div>
+                    <div class="item-image">
+                        <img src="/src/images/candles/lavender-bliss.jpg" alt="Lavender Bliss Candle">
+                        <div class="item-overlay">
+                            <button class="quick-view-btn" onclick="quickView('lavender-bliss')">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="stock-status in-stock">
+                            <i class="fas fa-check"></i>
+                            In Stock
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Lavender Bliss Candle</h3>
+                        <p class="item-description">Soothing lavender scented candle for relaxation</p>
+                        <div class="item-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(128 reviews)</span>
+                        </div>
+                        <div class="item-price">
+                            <span class="current-price">₹799</span>
+                            <span class="original-price">₹999</span>
+                            <span class="discount">20% off</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn-primary btn-full" onclick="addToCart('lavender-bliss')">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                            <button class="btn btn-outline" onclick="removeFromWishlist('lavender-bliss')">
+                                <i class="fas fa-trash"></i>
+                                Remove
+                            </button>
+                        </div>
+                        <div class="item-meta">
+                            <span class="added-date">Added on March 15, 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Item 2 -->
+                <div class="wishlist-item" data-price="899" data-name="vanilla-dreams" data-added="2024-03-18">
+                    <div class="item-checkbox">
+                        <input type="checkbox" class="item-select" onchange="updateBulkActions()">
+                    </div>
+                    <div class="item-image">
+                        <img src="/src/images/candles/vanilla-dreams.jpg" alt="Vanilla Dreams Candle">
+                        <div class="item-overlay">
+                            <button class="quick-view-btn" onclick="quickView('vanilla-dreams')">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="stock-status low-stock">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Low Stock
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Vanilla Dreams Candle</h3>
+                        <p class="item-description">Sweet vanilla scented candle for cozy evenings</p>
+                        <div class="item-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(95 reviews)</span>
+                        </div>
+                        <div class="item-price">
+                            <span class="current-price">₹899</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn-primary btn-full" onclick="addToCart('vanilla-dreams')">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                            <button class="btn btn-outline" onclick="removeFromWishlist('vanilla-dreams')">
+                                <i class="fas fa-trash"></i>
+                                Remove
+                            </button>
+                        </div>
+                        <div class="item-meta">
+                            <span class="added-date">Added on March 18, 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Item 3 -->
+                <div class="wishlist-item" data-price="599" data-name="rose-garden" data-added="2024-03-20">
+                    <div class="item-checkbox">
+                        <input type="checkbox" class="item-select" onchange="updateBulkActions()">
+                    </div>
+                    <div class="item-image">
+                        <img src="/src/images/candles/rose-garden.jpg" alt="Rose Garden Candle">
+                        <div class="item-overlay">
+                            <button class="quick-view-btn" onclick="quickView('rose-garden')">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="stock-status out-of-stock">
+                            <i class="fas fa-times"></i>
+                            Out of Stock
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Rose Garden Candle</h3>
+                        <p class="item-description">Elegant rose scented candle for romantic ambiance</p>
+                        <div class="item-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(87 reviews)</span>
+                        </div>
+                        <div class="item-price">
+                            <span class="current-price">₹599</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn-outline btn-full" onclick="notifyWhenAvailable('rose-garden')" disabled>
+                                <i class="fas fa-bell"></i>
+                                Notify When Available
+                            </button>
+                            <button class="btn btn-outline" onclick="removeFromWishlist('rose-garden')">
+                                <i class="fas fa-trash"></i>
+                                Remove
+                            </button>
+                        </div>
+                        <div class="item-meta">
+                            <span class="added-date">Added on March 20, 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More wishlist items... -->
+                <div class="wishlist-item" data-price="1299" data-name="citrus-burst" data-added="2024-03-12">
+                    <div class="item-checkbox">
+                        <input type="checkbox" class="item-select" onchange="updateBulkActions()">
+                    </div>
+                    <div class="item-image">
+                        <img src="/src/images/candles/citrus-burst.jpg" alt="Citrus Burst Candle Set">
+                        <div class="item-overlay">
+                            <button class="quick-view-btn" onclick="quickView('citrus-burst')">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="stock-status in-stock">
+                            <i class="fas fa-check"></i>
+                            In Stock
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Citrus Burst Candle Set</h3>
+                        <p class="item-description">Energizing citrus blend candle collection</p>
+                        <div class="item-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(156 reviews)</span>
+                        </div>
+                        <div class="item-price">
+                            <span class="current-price">₹1,299</span>
+                            <span class="original-price">₹1,599</span>
+                            <span class="discount">19% off</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn-primary btn-full" onclick="addToCart('citrus-burst')">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                            <button class="btn btn-outline" onclick="removeFromWishlist('citrus-burst')">
+                                <i class="fas fa-trash"></i>
+                                Remove
+                            </button>
+                        </div>
+                        <div class="item-meta">
+                            <span class="added-date">Added on March 12, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty Wishlist State -->
+            <div class="empty-wishlist" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Your Wishlist is Empty</h3>
+                <p>Save items you love to your wishlist and come back to them later.</p>
+                <a href="/candle-shop" class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i>
+                    Browse Candles
+                </a>
+            </div>
+
+            <!-- Recommended Items -->
+            <section class="recommended-section">
+                <h2>You Might Also Like</h2>
+                <div class="recommended-grid">
+                    <div class="recommended-item">
+                        <img src="/src/images/candles/eucalyptus-mint.jpg" alt="Eucalyptus Mint">
+                        <h4>Eucalyptus Mint</h4>
+                        <span class="price">₹749</span>
+                        <button class="btn btn-outline" onclick="addToWishlist('eucalyptus-mint')">
+                            <i class="far fa-heart"></i>
+                            Add to Wishlist
+                        </button>
+                    </div>
+                    <div class="recommended-item">
+                        <img src="/src/images/candles/ocean-breeze.jpg" alt="Ocean Breeze">
+                        <h4>Ocean Breeze</h4>
+                        <span class="price">₹849</span>
+                        <button class="btn btn-outline" onclick="addToWishlist('ocean-breeze')">
+                            <i class="far fa-heart"></i>
+                            Add to Wishlist
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+
+    <script>
+        // View toggle functionality
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const view = this.dataset.view;
+                const grid = document.getElementById('wishlistGrid');
+                
+                if (view === 'list') {
+                    grid.classList.add('list-view');
+                } else {
+                    grid.classList.remove('list-view');
+                }
+            });
+        });
+
+        // Sort functionality
+        document.getElementById('sortSelect').addEventListener('change', function() {
+            const sortBy = this.value;
+            sortWishlistItems(sortBy);
+        });
+
+        function sortWishlistItems(sortBy) {
+            const grid = document.getElementById('wishlistGrid');
+            const items = Array.from(grid.querySelectorAll('.wishlist-item'));
+            
+            items.sort((a, b) => {
+                switch (sortBy) {
+                    case 'newest':
+                        return new Date(b.dataset.added) - new Date(a.dataset.added);
+                    case 'oldest':
+                        return new Date(a.dataset.added) - new Date(b.dataset.added);
+                    case 'price-low':
+                        return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+                    case 'price-high':
+                        return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+                    case 'name':
+                        return a.dataset.name.localeCompare(b.dataset.name);
+                    default:
+                        return 0;
+                }
+            });
+            
+            items.forEach(item => grid.appendChild(item));
+        }
+
+        // Bulk actions
+        function selectAll() {
+            const checkboxes = document.querySelectorAll('.item-select');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            
+            checkboxes.forEach(cb => cb.checked = !allChecked);
+            updateBulkActions();
+        }
+
+        function updateBulkActions() {
+            const selectedItems = document.querySelectorAll('.item-select:checked');
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            
+            if (selectedItems.length > 0) {
+                addToCartBtn.disabled = false;
+                addToCartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Add ${selectedItems.length} to Cart`;
+            } else {
+                addToCartBtn.disabled = true;
+                addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Add Selected to Cart';
+            }
+        }
+
+        function addSelectedToCart() {
+            const selectedItems = document.querySelectorAll('.item-select:checked');
+            const itemNames = Array.from(selectedItems).map(cb => {
+                return cb.closest('.wishlist-item').dataset.name;
+            });
+            
+            alert(`Adding ${itemNames.length} items to cart: ${itemNames.join(', ')}`);
+        }
+
+        // Individual item actions
+        function addToCart(itemName) {
+            alert(`Adding ${itemName} to cart!`);
+        }
+
+        function removeFromWishlist(itemName) {
+            if (confirm(`Remove ${itemName} from your wishlist?`)) {
+                // Find and remove the item
+                const item = document.querySelector(`[data-name="${itemName}"]`);
+                if (item) {
+                    item.remove();
+                    updateItemCount();
+                }
+            }
+        }
+
+        function quickView(itemName) {
+            alert(`Quick view for ${itemName}. This feature will be implemented soon!`);
+        }
+
+        function notifyWhenAvailable(itemName) {
+            alert(`You'll be notified when ${itemName} is back in stock!`);
+        }
+
+        function addToWishlist(itemName) {
+            alert(`Added ${itemName} to your wishlist!`);
+        }
+
+        function shareWishlist() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My SASI Candles Wishlist',
+                    text: 'Check out my wishlist of beautiful handcrafted candles!',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Wishlist link copied to clipboard!');
+                });
+            }
+        }
+
+        function updateItemCount() {
+            const itemCount = document.querySelectorAll('.wishlist-item').length;
+            document.querySelector('.item-count').textContent = `${itemCount} items`;
+            
+            // Show empty state if no items
+            if (itemCount === 0) {
+                document.getElementById('wishlistGrid').style.display = 'none';
+                document.querySelector('.empty-wishlist').style.display = 'block';
+            }
+        }
+    </script>
+
+    <!-- Candle Shop Footer -->
+    <%- include('../components/candle-shop-footer') %>
+</body>
+</html>
