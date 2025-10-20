@@ -13,9 +13,9 @@ yarn-error.log*
 .env.production.local
 
 # Large image files - NEVER COMMIT THESE
-*.jpg
-*.jpeg
-*.png
+# *.jpg
+# *.jpeg
+# *.png
 *.gif
 *.bmp
 *.tiff
@@ -59,12 +59,12 @@ yarn-error.log*
 *.tar
 *.gz
 
-# Entire image directories - NEVER COMMIT THESE
-public/src/images/
-public/src/icons/
-**/images/
-**/photos/
-**/media/
+# # Entire image directories - NEVER COMMIT THESE
+# public/src/images/
+# public/src/icons/
+# **/images/
+# **/photos/
+# **/media/
 
 # Keep only essential files (exceptions to above rules)
 !favicon.ico
