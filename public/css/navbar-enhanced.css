@@ -161,7 +161,7 @@
 
 .logo-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #1f2937;
     margin: 0;
@@ -174,7 +174,7 @@
 
 .logo-subtitle {
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
     color: #F7941D;
     letter-spacing: 0.05em;
@@ -366,11 +366,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
+   
 }
 
 .logo-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
     margin: 0;
     background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
@@ -382,10 +383,11 @@
 
 .logo-subtitle {
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
+    font-size: 1.4rem;
     font-weight: 500;
     color: var(--text-secondary);
     letter-spacing: 2px;
+   margin-left: 2rem;
     text-transform: uppercase;
 }
 
