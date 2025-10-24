@@ -1,0 +1,22 @@
+# Robots.txt for Spread A Smile India
+# https://spreadasmileindia.org
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://spreadasmileindia.org/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /candle-shop/account
+Disallow: /candle-shop/orders
+Disallow: /candle-shop/settings
+Disallow: /candle-shop/checkout
+Disallow: /api/
+
+# Allow public shop pages
+Allow: /candle-shop/
+Allow: /candle-shop/collections
+
+# Crawl-delay for politeness
+Crawl-delay: 1
