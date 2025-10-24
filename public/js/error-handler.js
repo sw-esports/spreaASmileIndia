@@ -59,7 +59,8 @@ class ErrorHandler {
         // User-friendly error handling
         switch (error.type) {
             case 'Network Error':
-                this.showRetryableError('Connection lost. Please check your internet connection.');
+                // Don't show toast for network errors - too annoying
+                console.warn('Network error:', error.message);
                 break;
             case 'Form Validation':
                 this.showFormError(error.element, error.message);
@@ -68,7 +69,8 @@ class ErrorHandler {
                 this.handleImageError(error.element);
                 break;
             default:
-                this.showGenericError('Something went wrong. Please try again.');
+                // Only log to console, don't show toast
+                console.error('Error:', error.message);
         }
     }
 
@@ -76,35 +78,16 @@ class ErrorHandler {
      * Network Error Handling
      */
     setupNetworkErrorHandling() {
-        // Intercept fetch requests
-        const originalFetch = window.fetch;
-        window.fetch = async (...args) => {
-            try {
-                const response = await originalFetch(...args);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                return response;
-            } catch (error) {
-                this.handleError({
-                    type: 'Network Error',
-                    message: error.message,
-                    url: args[0]
-                });
-                throw error;
-            }
-        };
-
-        // Monitor online/offline status
+        // Disabled - causes annoying toasts for missing resources
+        // Only log to console instead
+        
+        // Monitor online/offline status (silently)
         window.addEventListener('online', () => {
-            this.showSuccess('Connection restored!');
-            this.retryFailedRequests();
+            console.log('Connection restored');
         });
 
         window.addEventListener('offline', () => {
-            this.showWarning('You are currently offline. Some features may not work.');
+            console.warn('You are currently offline');
         });
     }
 

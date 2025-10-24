@@ -927,20 +927,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Page entrance animation
-    gsap.fromTo('main', {
-        opacity: 0,
-        y: 30
-    }, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        delay: 0.2
-    });
+    // Page entrance animation (only if main element exists)
+    const mainElement = document.querySelector('main');
+    if (mainElement && typeof gsap !== 'undefined') {
+        gsap.fromTo(mainElement, {
+            opacity: 0,
+            y: 30
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+            delay: 0.2
+        });
+    }
     
-    // Animate elements on scroll
-    gsap.utils.toArray('[data-aos]').forEach(element => {
+    // Animate elements on scroll (only if GSAP is loaded)
+    if (typeof gsap !== 'undefined') {
+        gsap.utils.toArray('[data-aos]').forEach(element => {
         const animation = element.getAttribute('data-aos');
         const delay = element.getAttribute('data-aos-delay') || 0;
         
@@ -975,11 +979,12 @@ document.addEventListener('DOMContentLoaded', function() {
             duration: 0.8,
             ease: "power2.out",
             scrollTrigger: {
-                trigger: element,
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            },
             delay: delay / 1000
+        });
+        });
+    }
+    
+    console.log('🌟 Spread A Smile India website loaded with enhanced animations!');
         });
     });
     
