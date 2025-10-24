@@ -25,7 +25,6 @@ class AccessibilityEnhancer {
      */
     enhanceKeyboardNavigation() {
         // Skip to main content link
-        this.addSkipLink();
 
         // Enhanced dropdown navigation
         document.querySelectorAll('.has-dropdown').forEach(dropdown => {
@@ -74,42 +73,7 @@ class AccessibilityEnhancer {
 
     /**
      * Add skip to main content link
-     */
-    addSkipLink() {
-        const skipLink = document.createElement('a');
-        skipLink.href = '#main';
-        skipLink.textContent = 'Skip to main content';
-        skipLink.className = 'skip-link';
-        skipLink.style.cssText = `
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: var(--color-primary);
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            border-radius: 4px;
-            z-index: 10000;
-            transition: top 0.3s;
-        `;
-
-        skipLink.addEventListener('focus', () => {
-            skipLink.style.top = '6px';
-        });
-
-        skipLink.addEventListener('blur', () => {
-            skipLink.style.top = '-40px';
-        });
-
-        document.body.insertBefore(skipLink, document.body.firstChild);
-
-        // Ensure main content has ID
-        const main = document.querySelector('main') || document.querySelector('[role="main"]');
-        if (main && !main.id) {
-            main.id = 'main';
-        }
-    }
-
+ 
     /**
      * Improve Screen Reader Support
      */
