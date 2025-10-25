@@ -4,6 +4,7 @@
  */
 
 const Event = require('../models/Event');
+const Admin = require('../models/Admin');
 const { uploadToImageKit, deleteFromImageKit } = require('../config/imagekit');
 
 // @desc    Get all events (for admin panel)
@@ -32,11 +33,16 @@ exports.getAllEvents = async (req, res) => {
       .populate('createdBy', 'name email')
       .populate('updatedBy', 'name email');
     
+    const admin = await Admin.findById(req.session.adminId);
+    
     res.render('admin/events/index', {
       title: 'Manage Events - Admin Panel',
       page: 'admin-events',
       events,
-      filters: { category, status, search }
+      filters: { category, status, search },
+      admin: admin,
+      adminName: req.session.adminName,
+      adminRole: req.session.adminRole
     });
     
   } catch (error) {
@@ -52,11 +58,24 @@ exports.getAllEvents = async (req, res) => {
 // @desc    Show create event form
 // @route   GET /admin/events/create
 // @access  Private
-exports.showCreateForm = (req, res) => {
-  res.render('admin/events/create', {
-    title: 'Create New Event - Admin Panel',
-    page: 'admin-events'
-  });
+exports.showCreateForm = async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.session.adminId);
+    
+    res.render('admin/events/create', {
+      title: 'Create New Event - Admin Panel',
+      page: 'admin-events',
+      admin: admin,
+      adminName: req.session.adminName,
+      adminRole: req.session.adminRole
+    });
+  } catch (error) {
+    console.error('Error loading create form:', error);
+    res.status(500).render('error', {
+      title: 'Error',
+      message: 'Failed to load create form'
+    });
+  }
 };
 
 // @desc    Create new event
@@ -189,10 +208,15 @@ exports.showEditForm = async (req, res) => {
       });
     }
     
+    const admin = await Admin.findById(req.session.adminId);
+    
     res.render('admin/events/edit', {
       title: `Edit Event: ${event.title} - Admin Panel`,
       page: 'admin-events',
-      event
+      event,
+      admin: admin,
+      adminName: req.session.adminName,
+      adminRole: req.session.adminRole
     });
     
   } catch (error) {

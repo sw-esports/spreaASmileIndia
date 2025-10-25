@@ -65,127 +65,6 @@
             min-height: 100vh;
         }
 
-        /* Sidebar Styles */
-        .sidebar {
-            width: 280px;
-            background: var(--sidebar-bg);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid var(--border-color);
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 100;
-        }
-
-        .sidebar-header {
-            padding: 30px 25px;
-            border-bottom: 1px solid var(--border-color);
-            background: var(--program-gradient);
-        }
-
-        .sidebar-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: white;
-        }
-
-        .sidebar-logo img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-        .sidebar-logo .text h2 {
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .sidebar-logo .text p {
-            font-size: 12px;
-            opacity: 0.9;
-            color: white;
-        }
-
-        .sidebar-nav {
-            padding: 20px 0;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 25px;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            background: linear-gradient(135deg, rgba(247, 148, 29, 0.1), rgba(237, 28, 36, 0.1));
-            color: var(--color-primary);
-        }
-
-        .nav-link i {
-            width: 20px;
-            margin-right: 12px;
-        }
-
-        .nav-folder {
-            margin: 0 12px;
-        }
-
-        .nav-folder-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 13px;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .nav-folder-header:hover {
-            background: linear-gradient(135deg, rgba(247, 148, 29, 0.1), rgba(237, 28, 36, 0.1));
-            color: var(--color-primary);
-        }
-
-        .folder-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .folder-arrow {
-            font-size: 12px;
-            transition: transform 0.3s;
-        }
-
-        .nav-folder.open .folder-arrow {
-            transform: rotate(180deg);
-        }
-
-        .nav-folder-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .nav-folder.open .nav-folder-content {
-            max-height: 500px;
-        }
-
-        .nav-link.submenu {
-            padding-left: 50px;
-            font-size: 13px;
-        }
-
         /* Theme Toggle Button */
         .theme-toggle {
             position: fixed;
@@ -623,57 +502,14 @@
 
     <div class="admin-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo">
-                    <img src="https://ik.imagekit.io/l15cczdgu/Assets/logo.png?updatedAt=1761389196069" alt="SASI Logo">
-                    <div class="text">
-                        <h2>SASI Admin</h2>
-                        <p>Content Management</p>
-                    </div>
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="/admin/dashboard" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    Dashboard
-                </a>
-                
-                <div class="nav-folder open">
-                    <div class="nav-folder-header" onclick="toggleFolder(this)">
-                        <div class="folder-title">
-                            <i class="fas fa-folder-open"></i>
-                            <span>Programs</span>
-                        </div>
-                        <i class="fas fa-chevron-down folder-arrow"></i>
-                    </div>
-                    <div class="nav-folder-content">
-                        <a href="/admin/events" class="nav-link submenu">
-                            <i class="fas fa-calendar-alt"></i>
-                            Events
-                        </a>
-                        <a href="/admin/education" class="nav-link submenu active">
-                            <i class="fas fa-graduation-cap"></i>
-                            Education
-                        </a>
-                        <a href="/admin/programs" class="nav-link submenu">
-                            <i class="fas fa-th-large"></i>
-                            Programs
-                        </a>
-                    </div>
-                </div>
-
-                <a href="/" target="_blank" class="nav-link">
-                    <i class="fas fa-globe"></i>
-                    View Website
-                </a>
-                <a href="/admin/logout" class="nav-link" style="color: var(--color-secondary);">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </a>
-            </nav>
-        </aside>
+        <%- include('../partials/sidebar', { 
+            activePage: 'education',
+            useLogo: true,
+            showUserInfo: true,
+            admin: admin,
+            adminName: adminName,
+            adminRole: adminRole
+        }) %>
 
         <!-- Main Content -->
         <main class="main-content">

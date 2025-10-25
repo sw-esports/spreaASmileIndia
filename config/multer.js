@@ -19,12 +19,12 @@ const fileFilter = (req, file, cb) => {
   const extname = path.extname(file.originalname).toLowerCase().slice(1);
   const mimetype = file.mimetype;
   
-  if (file.fieldname === 'poster' || file.fieldname === 'gallery') {
+  if (file.fieldname === 'poster' || file.fieldname === 'gallery' || file.fieldname === 'image') {
     // Check if image
     if (allowedImageTypes.test(extname) && mimetype.startsWith('image/')) {
       return cb(null, true);
     } else {
-      return cb(new Error('Only image files (JPEG, JPG, PNG, WebP, GIF) are allowed for posters and gallery!'), false);
+      return cb(new Error('Only image files (JPEG, JPG, PNG, WebP, GIF) are allowed for images!'), false);
     }
   } else if (file.fieldname === 'video') {
     // Check if video
@@ -34,7 +34,7 @@ const fileFilter = (req, file, cb) => {
       return cb(new Error('Only video files (MP4, AVI, MOV, WMV, WebM) are allowed!'), false);
     }
   } else {
-    return cb(new Error('Unexpected field name!'), false);
+    return cb(new Error(`Unexpected field name: ${file.fieldname}. Expected: poster, gallery, image, or video`), false);
   }
 };
 
@@ -53,6 +53,7 @@ module.exports = {
   // Single file uploads
   uploadPoster: upload.single('poster'),
   uploadVideo: upload.single('video'),
+  uploadSingleImage: upload.single('image'),
   
   // Multiple files upload
   uploadGallery: upload.array('gallery', 10), // Max 10 images

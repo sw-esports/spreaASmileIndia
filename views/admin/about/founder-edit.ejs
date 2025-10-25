@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || 'Edit Founder Profile - Admin' %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Quill WYSIWYG Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        /* Root CSS Variables - SASI Brand Colors */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #FFF8F0;
+            --color-primary: #F7941D;
+            --color-secondary: #ED1C24;
+            --color-accent: #EC4F78;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: rgba(229, 231, 235, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --sidebar-bg: rgba(255, 255, 255, 0.98);
+            --card-bg: #ffffff;
+            --event-gradient: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --color-primary: #F7941D;
+            --color-secondary: #ED1C24;
+            --color-accent: #EC4F78;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --border-color: #333;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --sidebar-bg: #1a1a1a;
+            --card-bg: #1a1a1a;
+            --event-gradient: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--event-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-header h1 i {
+            color: var(--color-primary);
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #16a34a;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #dc2626;
+        }
+
+        /* Form Styles */
+        .form-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+        }
+
+        .form-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-card h2 i {
+            color: var(--color-primary);
+        }
+
+        .form-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-group label span {
+            color: var(--color-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(247, 148, 29, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Image Upload */
+        .image-upload-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            background: var(--bg-secondary);
+        }
+
+        .image-upload-container:hover {
+            border-color: var(--color-primary);
+            background: var(--bg-primary);
+        }
+
+        .image-preview {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .image-preview img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: var(--shadow-md);
+        }
+
+        .image-upload-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--event-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .image-upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-delete {
+            background: var(--color-secondary);
+        }
+
+        /* Dynamic List Items */
+        .dynamic-list {
+            margin-top: 15px;
+        }
+
+        .list-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .list-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .list-item-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: var(--color-secondary);
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-icon:hover {
+            background: var(--color-secondary);
+            color: white;
+        }
+
+        .add-item-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .add-item-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: rgba(247, 148, 29, 0.05);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--event-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* Quill Editor Customization */
+        .ql-container {
+            min-height: 200px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .ql-toolbar {
+            background: var(--bg-secondary);
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        [data-theme="dark"] .ql-toolbar,
+        [data-theme="dark"] .ql-container {
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .ql-stroke {
+            stroke: var(--text-primary);
+        }
+
+        [data-theme="dark"] .ql-fill {
+            fill: var(--text-primary);
+        }
+
+        [data-theme="dark"] .ql-picker-label {
+            color: var(--text-primary);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+            <span id="theme-text">Dark Mode</span>
+        </button>
+
+        <!-- Sidebar -->
+        <%- include('../partials/sidebar', { 
+            activePage: 'founder',
+            useLogo: true,
+            showUserInfo: true,
+            admin: admin,
+            adminName: adminName,
+            adminRole: adminRole
+        }) %>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <a href="/admin/dashboard">Dashboard</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="/admin/about/founder">About</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Founder Profile</span>
+                </div>
+                <h1><i class="fas fa-user-tie"></i> Edit Founder Profile</h1>
+                <p>Manage Sangeeta Mehra's profile information, images, and achievements</p>
+            </div>
+
+            <% if (locals.message) { %>
+                <div class="alert alert-<%= message.type %>">
+                    <i class="fas fa-<%= message.type === 'success' ? 'check-circle' : 'exclamation-circle' %>"></i>
+                    <%= message.text %>
+                </div>
+            <% } %>
+
+            <form action="/admin/about/founder" method="POST" id="founderForm">
+                <!-- Basic Information -->
+                <div class="form-card">
+                    <h2><i class="fas fa-user"></i> Basic Information</h2>
+                    <p>Update founder's name, title, and tagline</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name <span>*</span></label>
+                            <input type="text" name="name" value="<%= founder ? founder.name : '' %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Title <span>*</span></label>
+                            <input type="text" name="title" value="<%= founder ? founder.title : '' %>" required>
+                            <small>e.g., Founder & Director</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tagline <span>*</span></label>
+                        <input type="text" name="tagline" value="<%= founder ? founder.tagline : '' %>" required>
+                        <small>A short, memorable phrase that captures their journey</small>
+                    </div>
+                </div>
+
+                <!-- Profile Images -->
+                <div class="form-card">
+                    <h2><i class="fas fa-images"></i> Profile Images</h2>
+                    <p>Upload or update founder's photos</p>
+
+                    <div class="form-row">
+                        <!-- Profile Image -->
+                        <div class="form-group">
+                            <label>Main Profile Image <span>*</span></label>
+                            <div class="image-upload-container">
+                                <div class="image-preview" id="profileImagePreview">
+                                    <% if (founder && founder.profileImage && founder.profileImage.url) { %>
+                                        <img src="<%= founder.getProfileImageUrl() %>" alt="Profile Image">
+                                    <% } else { %>
+                                        <i class="fas fa-user-circle" style="font-size: 80px; color: var(--text-secondary);"></i>
+                                    <% } %>
+                                </div>
+                                <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                                <button type="button" class="image-upload-btn" onclick="document.getElementById('profileImageInput').click()">
+                                    <i class="fas fa-upload"></i> Choose Image
+                                </button>
+                                <% if (founder && founder.profileImage && founder.profileImage.fileId) { %>
+                                    <button type="button" class="image-upload-btn btn-delete" onclick="deleteImage('profile')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Image -->
+                        <div class="form-group">
+                            <label>Secondary Image</label>
+                            <div class="image-upload-container">
+                                <div class="image-preview" id="secondaryImagePreview">
+                                    <% if (founder && founder.secondaryImage && founder.secondaryImage.url) { %>
+                                        <img src="<%= founder.getSecondaryImageUrl() %>" alt="Secondary Image">
+                                    <% } else { %>
+                                        <i class="fas fa-image" style="font-size: 80px; color: var(--text-secondary);"></i>
+                                    <% } %>
+                                </div>
+                                <input type="file" id="secondaryImageInput" accept="image/*" style="display: none;">
+                                <button type="button" class="image-upload-btn" onclick="document.getElementById('secondaryImageInput').click()">
+                                    <i class="fas fa-upload"></i> Choose Image
+                                </button>
+                                <% if (founder && founder.secondaryImage && founder.secondaryImage.fileId) { %>
+                                    <button type="button" class="image-upload-btn btn-delete" onclick="deleteImage('secondary')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biography -->
+                <div class="form-card">
+                    <h2><i class="fas fa-book"></i> Biography</h2>
+                    <p>Write a compelling story about the founder's journey</p>
+
+                    <div class="form-group">
+                        <label>Short Bio <span>*</span></label>
+                        <textarea name="shortBio" rows="3" required><%= founder ? founder.shortBio : '' %></textarea>
+                        <small>A brief introduction (1-2 sentences) for quick overview</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Full Biography <span>*</span></label>
+                        <div id="fullBioEditor"></div>
+                        <textarea name="fullBio" id="fullBioInput" style="display: none;"></textarea>
+                        <small>Detailed biography covering their journey, impact, and vision</small>
+                    </div>
+                </div>
+
+                <!-- Journey Phases -->
+                <div class="form-card">
+                    <h2><i class="fas fa-route"></i> Journey Phases</h2>
+                    <p>Define the key phases of the founder's transformative journey</p>
+
+                    <div class="dynamic-list" id="journeyList">
+                        <% if (founder && founder.journey && founder.journey.length > 0) { %>
+                            <% founder.journey.forEach((phase, index) => { %>
+                                <div class="list-item" data-index="<%= index %>">
+                                    <div class="list-item-header">
+                                        <span class="list-item-title">Phase <%= index + 1 %>: <%= phase.phase %></span>
+                                        <button type="button" class="btn-icon" onclick="removeJourneyPhase(<%= index %>)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Phase Title</label>
+                                            <input type="text" class="journey-phase" value="<%= phase.phase %>" placeholder="e.g., The Awakening">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Icon Class</label>
+                                            <input type="text" class="journey-icon" value="<%= phase.icon %>" placeholder="e.g., fas fa-heart">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="journey-description" rows="3"><%= phase.description %></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Order</label>
+                                        <input type="number" class="journey-order" value="<%= phase.order %>" min="1">
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    <button type="button" class="add-item-btn" onclick="addJourneyPhase()">
+                        <i class="fas fa-plus"></i> Add Journey Phase
+                    </button>
+                    <input type="hidden" name="journeyData" id="journeyData">
+                </div>
+
+                <!-- Achievements -->
+                <div class="form-card">
+                    <h2><i class="fas fa-trophy"></i> Achievements & Recognition</h2>
+                    <p>Highlight awards, media features, and major milestones</p>
+
+                    <div class="dynamic-list" id="achievementsList">
+                        <% if (founder && founder.achievements && founder.achievements.length > 0) { %>
+                            <% founder.achievements.forEach((achievement, index) => { %>
+                                <div class="list-item" data-index="<%= index %>">
+                                    <div class="list-item-header">
+                                        <span class="list-item-title"><%= achievement.title %></span>
+                                        <button type="button" class="btn-icon" onclick="removeAchievement(<%= index %>)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" class="achievement-title" value="<%= achievement.title %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Year</label>
+                                            <input type="text" class="achievement-year" value="<%= achievement.year %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="achievement-description" rows="2"><%= achievement.description %></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Icon Class</label>
+                                            <input type="text" class="achievement-icon" value="<%= achievement.icon || '' %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Link (optional)</label>
+                                            <input type="text" class="achievement-link" value="<%= achievement.link || '' %>" placeholder="https://example.com">
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    <button type="button" class="add-item-btn" onclick="addAchievement()">
+                        <i class="fas fa-plus"></i> Add Achievement
+                    </button>
+                    <input type="hidden" name="achievementsData" id="achievementsData">
+                </div>
+
+                <!-- Work Highlights -->
+                <div class="form-card">
+                    <h2><i class="fas fa-hands-helping"></i> Work Highlights</h2>
+                    <p>Showcase the impact on street children, women empowerment, education, and healthcare</p>
+
+                    <!-- Street Children -->
+                    <h3 style="margin-top: 20px; color: var(--text-primary); font-size: 18px;"><i class="fas fa-child"></i> Street Children</h3>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="streetChildrenTitle" value="<%= founder && founder.workHighlights ? founder.workHighlights.streetChildren.title : '' %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="streetChildrenDescription" rows="4"><%= founder && founder.workHighlights ? founder.workHighlights.streetChildren.description : '' %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Impact Number</label>
+                        <input type="text" name="streetChildrenImpact" value="<%= founder && founder.workHighlights ? founder.workHighlights.streetChildren.impactNumber : '' %>" placeholder="e.g., 300+">
+                    </div>
+
+                    <!-- Women Empowerment -->
+                    <h3 style="margin-top: 30px; color: var(--text-primary); font-size: 18px;"><i class="fas fa-female"></i> Women Empowerment</h3>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="womenEmpowermentTitle" value="<%= founder && founder.workHighlights ? founder.workHighlights.womenEmpowerment.title : '' %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="womenEmpowermentDescription" rows="4"><%= founder && founder.workHighlights ? founder.workHighlights.womenEmpowerment.description : '' %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Impact Number</label>
+                        <input type="text" name="womenEmpowermentImpact" value="<%= founder && founder.workHighlights ? founder.workHighlights.womenEmpowerment.impactNumber : '' %>" placeholder="e.g., 85+">
+                    </div>
+
+                    <!-- Education -->
+                    <h3 style="margin-top: 30px; color: var(--text-primary); font-size: 18px;"><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="educationTitle" value="<%= founder && founder.workHighlights ? founder.workHighlights.education.title : '' %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="educationDescription" rows="4"><%= founder && founder.workHighlights ? founder.workHighlights.education.description : '' %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Impact Number</label>
+                        <input type="text" name="educationImpact" value="<%= founder && founder.workHighlights ? founder.workHighlights.education.impactNumber : '' %>" placeholder="e.g., 85%">
+                    </div>
+
+                    <!-- Healthcare -->
+                    <h3 style="margin-top: 30px; color: var(--text-primary); font-size: 18px;"><i class="fas fa-heartbeat"></i> Healthcare</h3>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="healthcareTitle" value="<%= founder && founder.workHighlights ? founder.workHighlights.healthcare.title : '' %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="healthcareDescription" rows="4"><%= founder && founder.workHighlights ? founder.workHighlights.healthcare.description : '' %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Impact Number</label>
+                        <input type="text" name="healthcareImpact" value="<%= founder && founder.workHighlights ? founder.workHighlights.healthcare.impactNumber : '' %>" placeholder="e.g., 180+">
+                    </div>
+                </div>
+
+                <!-- Philosophy -->
+                <div class="form-card">
+                    <h2><i class="fas fa-lightbulb"></i> Leadership Philosophy</h2>
+                    <p>Define the core values that guide the founder's work</p>
+
+                    <div class="dynamic-list" id="philosophyList">
+                        <% if (founder && founder.philosophy && founder.philosophy.length > 0) { %>
+                            <% founder.philosophy.forEach((value, index) => { %>
+                                <div class="list-item" data-index="<%= index %>">
+                                    <div class="list-item-header">
+                                        <span class="list-item-title"><%= value.value %></span>
+                                        <button type="button" class="btn-icon" onclick="removePhilosophy(<%= index %>)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Value Name</label>
+                                            <input type="text" class="philosophy-value" value="<%= value.value %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Icon Class</label>
+                                            <input type="text" class="philosophy-icon" value="<%= value.icon %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="philosophy-description" rows="2"><%= value.description %></textarea>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    <button type="button" class="add-item-btn" onclick="addPhilosophy()">
+                        <i class="fas fa-plus"></i> Add Philosophy Value
+                    </button>
+                    <input type="hidden" name="philosophyData" id="philosophyData">
+                </div>
+
+                <!-- Social Media -->
+                <div class="form-card">
+                    <h2><i class="fas fa-share-alt"></i> Social Media</h2>
+                    <p>Add social media profile links</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fab fa-instagram"></i> Instagram</label>
+                            <input type="url" name="instagram" value="<%= founder && founder.socialMedia ? founder.socialMedia.instagram : '' %>" placeholder="https://instagram.com/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fab fa-facebook"></i> Facebook</label>
+                            <input type="url" name="facebook" value="<%= founder && founder.socialMedia ? founder.socialMedia.facebook : '' %>" placeholder="https://facebook.com/username">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fab fa-linkedin"></i> LinkedIn</label>
+                            <input type="url" name="linkedin" value="<%= founder && founder.socialMedia ? founder.socialMedia.linkedin : '' %>" placeholder="https://linkedin.com/in/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fab fa-twitter"></i> Twitter/X</label>
+                            <input type="url" name="twitter" value="<%= founder && founder.socialMedia ? founder.socialMedia.twitter : '' %>" placeholder="https://twitter.com/username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fab fa-youtube"></i> YouTube</label>
+                        <input type="url" name="youtube" value="<%= founder && founder.socialMedia ? founder.socialMedia.youtube : '' %>" placeholder="https://youtube.com/@channel">
+                    </div>
+                </div>
+
+                <!-- Personal Message & Quote -->
+                <div class="form-card">
+                    <h2><i class="fas fa-quote-left"></i> Personal Message & Quote</h2>
+                    <p>Add a heartfelt message and inspiring quote</p>
+
+                    <div class="form-group">
+                        <label>Personal Message <span>*</span></label>
+                        <div id="personalMessageEditor"></div>
+                        <textarea name="personalMessage" id="personalMessageInput" style="display: none;"></textarea>
+                        <small>A message from the founder to visitors and supporters</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Inspirational Quote <span>*</span></label>
+                        <textarea name="quote" rows="3" required><%= founder ? founder.quote : '' %></textarea>
+                        <small>A memorable quote that captures their philosophy</small>
+                    </div>
+                </div>
+
+                <!-- Media Features -->
+                <div class="form-card">
+                    <h2><i class="fas fa-newspaper"></i> Media Features</h2>
+                    <p>Press coverage, interviews, and media appearances</p>
+
+                    <div class="dynamic-list" id="mediaFeaturesList">
+                        <% if (founder && founder.mediaFeatures && founder.mediaFeatures.length > 0) { %>
+                            <% founder.mediaFeatures.forEach((feature, index) => { %>
+                                <div class="list-item" data-index="<%= index %>">
+                                    <div class="list-item-header">
+                                        <span class="list-item-title"><%= feature.title %></span>
+                                        <button type="button" class="btn-icon" onclick="removeMediaFeature(<%= index %>)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" class="media-title" value="<%= feature.title %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Publication</label>
+                                            <input type="text" class="media-publication" value="<%= feature.publication %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="media-description" rows="2"><%= feature.description %></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Date</label>
+                                            <input type="date" class="media-date" value="<%= feature.date ? new Date(feature.date).toISOString().split('T')[0] : '' %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Icon Class</label>
+                                            <input type="text" class="media-icon" value="<%= feature.icon || '' %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Link (optional)</label>
+                                        <input type="text" class="media-link" value="<%= feature.link || '' %>" placeholder="https://example.com">
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    <button type="button" class="add-item-btn" onclick="addMediaFeature()">
+                        <i class="fas fa-plus"></i> Add Media Feature
+                    </button>
+                    <input type="hidden" name="mediaFeaturesData" id="mediaFeaturesData">
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                    <a href="/admin/dashboard" class="btn-secondary">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Quill WYSIWYG Editor -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            
+            document.getElementById('theme-text').textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            document.querySelector('.theme-toggle i').className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            localStorage.setItem('admin-theme', newTheme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('admin-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+            document.getElementById('theme-text').textContent = 'Light Mode';
+            document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+        }
+
+        // Toggle folder
+        function toggleFolder(header) {
+            const folder = header.parentElement;
+            folder.classList.toggle('open');
+        }
+
+        // Initialize Quill editors
+        const fullBioQuill = new Quill('#fullBioEditor', {
+            theme: 'snow',
+            placeholder: 'Write the full biography...',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['link'],
+                    ['clean']
+                ]
+            }
+        });
+
+        const personalMessageQuill = new Quill('#personalMessageEditor', {
+            theme: 'snow',
+            placeholder: 'Write a personal message...',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Set initial values for Quill editors
+        <% if (founder && founder.fullBio) { %>
+            fullBioQuill.root.innerHTML = `<%= founder.fullBio.replace(/`/g, '\\`').replace(/\n/g, ' ') %>`;
+        <% } %>
+
+        <% if (founder && founder.personalMessage) { %>
+            personalMessageQuill.root.innerHTML = `<%= founder.personalMessage.replace(/`/g, '\\`').replace(/\n/g, ' ') %>`;
+        <% } %>
+
+        // Image Upload Functions
+        document.getElementById('profileImageInput').addEventListener('change', function(e) {
+            uploadImage(e.target.files[0], 'profile');
+        });
+
+        document.getElementById('secondaryImageInput').addEventListener('change', function(e) {
+            uploadImage(e.target.files[0], 'secondary');
+        });
+
+        async function uploadImage(file, type) {
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const endpoint = type === 'profile' 
+                ? '/admin/about/founder/upload-profile-image'
+                : '/admin/about/founder/upload-secondary-image';
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error uploading image: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert('Error uploading image');
+            }
+        }
+
+        async function deleteImage(type) {
+            if (!confirm('Are you sure you want to delete this image?')) return;
+
+            const endpoint = type === 'profile'
+                ? '/admin/about/founder/profile-image'
+                : '/admin/about/founder/secondary-image';
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error deleting image: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('Error deleting image');
+            }
+        }
+
+        // Journey Phase Functions
+        function addJourneyPhase() {
+            const list = document.getElementById('journeyList');
+            const index = list.children.length;
+            
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.setAttribute('data-index', index);
+            item.innerHTML = `
+                <div class="list-item-header">
+                    <span class="list-item-title">New Journey Phase</span>
+                    <button type="button" class="btn-icon" onclick="removeJourneyPhase(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phase Title</label>
+                        <input type="text" class="journey-phase" placeholder="e.g., The Awakening">
+                    </div>
+                    <div class="form-group">
+                        <label>Icon Class</label>
+                        <input type="text" class="journey-icon" placeholder="e.g., fas fa-heart">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="journey-description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Order</label>
+                    <input type="number" class="journey-order" value="${index + 1}" min="1">
+                </div>
+            `;
+            list.appendChild(item);
+        }
+
+        function removeJourneyPhase(index) {
+            const item = document.querySelector(`#journeyList .list-item[data-index="${index}"]`);
+            if (item && confirm('Remove this journey phase?')) {
+                item.remove();
+            }
+        }
+
+        // Achievement Functions
+        function addAchievement() {
+            const list = document.getElementById('achievementsList');
+            const index = list.children.length;
+            
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.setAttribute('data-index', index);
+            item.innerHTML = `
+                <div class="list-item-header">
+                    <span class="list-item-title">New Achievement</span>
+                    <button type="button" class="btn-icon" onclick="removeAchievement(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="achievement-title">
+                    </div>
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input type="text" class="achievement-year">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="achievement-description" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Icon Class</label>
+                        <input type="text" class="achievement-icon" placeholder="e.g., fas fa-trophy">
+                    </div>
+                    <div class="form-group">
+                        <label>Link (optional)</label>
+                        <input type="text" class="achievement-link" placeholder="https://example.com">
+                    </div>
+                </div>
+            `;
+            list.appendChild(item);
+        }
+
+        function removeAchievement(index) {
+            const item = document.querySelector(`#achievementsList .list-item[data-index="${index}"]`);
+            if (item && confirm('Remove this achievement?')) {
+                item.remove();
+            }
+        }
+
+        // Philosophy Functions
+        function addPhilosophy() {
+            const list = document.getElementById('philosophyList');
+            const index = list.children.length;
+            
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.setAttribute('data-index', index);
+            item.innerHTML = `
+                <div class="list-item-header">
+                    <span class="list-item-title">New Philosophy Value</span>
+                    <button type="button" class="btn-icon" onclick="removePhilosophy(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Value Name</label>
+                        <input type="text" class="philosophy-value">
+                    </div>
+                    <div class="form-group">
+                        <label>Icon Class</label>
+                        <input type="text" class="philosophy-icon" placeholder="e.g., fas fa-heart">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="philosophy-description" rows="2"></textarea>
+                </div>
+            `;
+            list.appendChild(item);
+        }
+
+        function removePhilosophy(index) {
+            const item = document.querySelector(`#philosophyList .list-item[data-index="${index}"]`);
+            if (item && confirm('Remove this philosophy value?')) {
+                item.remove();
+            }
+        }
+
+        // Media Feature Functions
+        function addMediaFeature() {
+            const list = document.getElementById('mediaFeaturesList');
+            const index = list.children.length;
+            
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.setAttribute('data-index', index);
+            item.innerHTML = `
+                <div class="list-item-header">
+                    <span class="list-item-title">New Media Feature</span>
+                    <button type="button" class="btn-icon" onclick="removeMediaFeature(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="media-title">
+                    </div>
+                    <div class="form-group">
+                        <label>Publication</label>
+                        <input type="text" class="media-publication">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="media-description" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" class="media-date">
+                    </div>
+                    <div class="form-group">
+                        <label>Icon Class</label>
+                        <input type="text" class="media-icon" placeholder="e.g., fas fa-newspaper">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Link (optional)</label>
+                    <input type="text" class="media-link" placeholder="https://example.com">
+                </div>
+            `;
+            list.appendChild(item);
+        }
+
+        function removeMediaFeature(index) {
+            const item = document.querySelector(`#mediaFeaturesList .list-item[data-index="${index}"]`);
+            if (item && confirm('Remove this media feature?')) {
+                item.remove();
+            }
+        }
+
+        // Form Submission
+        document.getElementById('founderForm').addEventListener('submit', function(e) {
+            console.log('Form submitting...');
+            
+            // Update hidden inputs with Quill content
+            document.getElementById('fullBioInput').value = fullBioQuill.root.innerHTML;
+            document.getElementById('personalMessageInput').value = personalMessageQuill.root.innerHTML;
+
+            // Collect journey data
+            const journeyItems = document.querySelectorAll('#journeyList .list-item');
+            const journey = Array.from(journeyItems).map(item => ({
+                phase: item.querySelector('.journey-phase').value,
+                icon: item.querySelector('.journey-icon').value,
+                description: item.querySelector('.journey-description').value,
+                order: parseInt(item.querySelector('.journey-order').value)
+            }));
+            document.getElementById('journeyData').value = JSON.stringify(journey);
+            console.log('Journey data:', journey);
+
+            // Collect achievements data
+            const achievementItems = document.querySelectorAll('#achievementsList .list-item');
+            const achievements = Array.from(achievementItems).map(item => {
+                const achievement = {
+                    title: item.querySelector('.achievement-title').value,
+                    description: item.querySelector('.achievement-description').value,
+                    year: item.querySelector('.achievement-year').value,
+                    icon: item.querySelector('.achievement-icon').value
+                };
+                const link = item.querySelector('.achievement-link').value.trim();
+                if (link) achievement.link = link;
+                return achievement;
+            });
+            document.getElementById('achievementsData').value = JSON.stringify(achievements);
+            console.log('Achievements data:', achievements);
+
+            // Collect philosophy data
+            const philosophyItems = document.querySelectorAll('#philosophyList .list-item');
+            const philosophy = Array.from(philosophyItems).map(item => ({
+                value: item.querySelector('.philosophy-value').value,
+                icon: item.querySelector('.philosophy-icon').value,
+                description: item.querySelector('.philosophy-description').value
+            }));
+            document.getElementById('philosophyData').value = JSON.stringify(philosophy);
+            console.log('Philosophy data:', philosophy);
+
+            // Collect media features data
+            const mediaItems = document.querySelectorAll('#mediaFeaturesList .list-item');
+            const mediaFeatures = Array.from(mediaItems).map(item => {
+                const feature = {
+                    title: item.querySelector('.media-title').value,
+                    publication: item.querySelector('.media-publication').value,
+                    description: item.querySelector('.media-description').value,
+                    date: item.querySelector('.media-date').value,
+                    icon: item.querySelector('.media-icon').value
+                };
+                const link = item.querySelector('.media-link').value.trim();
+                if (link) feature.link = link;
+                return feature;
+            });
+            document.getElementById('mediaFeaturesData').value = JSON.stringify(mediaFeatures);
+            console.log('Media features data:', mediaFeatures);
+        });
+    </script>
+</body>
+</html>

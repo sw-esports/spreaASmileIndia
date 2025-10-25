@@ -1,14 +1,20 @@
 const Program = require('../models/Program');
+const Admin = require('../models/Admin');
 
 // Get all programs
 exports.getAllPrograms = async (req, res) => {
     try {
         const programs = await Program.find().sort({ order: 1, createdAt: -1 });
+        const admin = await Admin.findById(req.session.adminId);
+        
         res.render('admin/programs/index', {
             title: 'Manage Programs - Admin',
             page: 'admin',
             theme: req.session.theme || 'light',
-            programs
+            programs,
+            admin: admin,
+            adminName: req.session.adminName,
+            adminRole: req.session.adminRole
         });
     } catch (error) {
         console.error('Error fetching programs:', error);
@@ -22,12 +28,27 @@ exports.getAllPrograms = async (req, res) => {
 };
 
 // Show create form
-exports.showCreateForm = (req, res) => {
-    res.render('admin/programs/create', {
-        title: 'Create Program - Admin',
-        page: 'admin',
-        theme: req.session.theme || 'light'
-    });
+exports.showCreateForm = async (req, res) => {
+    try {
+        const admin = await Admin.findById(req.session.adminId);
+        
+        res.render('admin/programs/create', {
+            title: 'Create Program - Admin',
+            page: 'admin',
+            theme: req.session.theme || 'light',
+            admin: admin,
+            adminName: req.session.adminName,
+            adminRole: req.session.adminRole
+        });
+    } catch (error) {
+        console.error('Error loading create form:', error);
+        res.status(500).render('error', {
+            title: 'Error',
+            page: 'error',
+            theme: req.session.theme || 'light',
+            message: 'Failed to load create form'
+        });
+    }
 };
 
 // Create new program
@@ -93,11 +114,16 @@ exports.showEditForm = async (req, res) => {
             description: program.fullDescription
         };
         
+        const admin = await Admin.findById(req.session.adminId);
+        
         res.render('admin/programs/edit', {
             title: `Edit ${program.title} - Admin`,
             page: 'admin',
             theme: req.session.theme || 'light',
-            program: programData
+            program: programData,
+            admin: admin,
+            adminName: req.session.adminName,
+            adminRole: req.session.adminRole
         });
     } catch (error) {
         console.error('Error fetching program:', error);

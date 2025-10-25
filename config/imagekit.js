@@ -69,11 +69,16 @@ const deleteFromImageKit = async (fileId) => {
 
 /**
  * Get optimized image URL with transformations
- * @param {String} filePath - ImageKit file path
+ * @param {String} filePath - ImageKit file path (e.g., '/founder/image.jpg')
  * @param {Object} options - Transformation options
  * @returns {String} Transformed image URL
  */
 const getOptimizedImageUrl = (filePath, options = {}) => {
+    if (!filePath) {
+        console.warn('⚠️  No filePath provided to getOptimizedImageUrl');
+        return '';
+    }
+
     const {
         width = null,
         height = null,
@@ -94,20 +99,33 @@ const getOptimizedImageUrl = (filePath, options = {}) => {
     if (crop) transformations.push(`c-${crop}`);
     if (focus) transformations.push(`fo-${focus}`);
 
-    // Clean filePath (remove leading slash if present)
-    const cleanFilePath = filePath.startsWith('/') ? filePath.substring(1) : filePath;
+    // Clean filePath - ensure it starts with /
+    let cleanFilePath = filePath;
+    if (!cleanFilePath.startsWith('/')) {
+        cleanFilePath = '/' + cleanFilePath;
+    }
     
-    // Build URL with transformations properly structured
+    // Remove endpoint URL if it's already in the filePath (shouldn't happen, but safety check)
+    if (cleanFilePath.includes('ik.imagekit.io')) {
+        console.warn('⚠️  FilePath contains full URL, extracting path only');
+        const urlObj = new URL(cleanFilePath);
+        cleanFilePath = urlObj.pathname;
+    }
+
+    // Get base URL endpoint (remove trailing slash if present)
+    const baseUrl = process.env.IMAGEKIT_URL_ENDPOINT.replace(/\/$/, '');
+    
+    // Build URL with transformations
     // Format: https://ik.imagekit.io/endpoint/tr:w-400,q-80,f-webp/folder/image.png
     if (transformations.length > 0) {
         const transformString = `tr:${transformations.join(',')}`;
-        const finalUrl = `${process.env.IMAGEKIT_URL_ENDPOINT}/${transformString}/${cleanFilePath}`;
-        console.log('🖼️  Generated optimized URL:', finalUrl);
+        const finalUrl = `${baseUrl}${cleanFilePath}?${transformString}`;
+        console.log('🖼️  Generated transformed URL:', finalUrl);
         return finalUrl;
     }
     
     // No transformations - return original URL
-    const finalUrl = `${process.env.IMAGEKIT_URL_ENDPOINT}/${cleanFilePath}`;
+    const finalUrl = `${baseUrl}${cleanFilePath}`;
     console.log('🖼️  Generated original URL:', finalUrl);
     return finalUrl;
 };
@@ -118,9 +136,21 @@ const getOptimizedImageUrl = (filePath, options = {}) => {
  * @returns {String} Video URL
  */
 const getVideoUrl = (filePath) => {
-    // Clean filePath (remove leading slash if present)
-    const cleanFilePath = filePath.startsWith('/') ? filePath.substring(1) : filePath;
-    const finalUrl = `${process.env.IMAGEKIT_URL_ENDPOINT}/${cleanFilePath}`;
+    if (!filePath) {
+        console.warn('⚠️  No filePath provided to getVideoUrl');
+        return '';
+    }
+
+    // Clean filePath - ensure it starts with /
+    let cleanFilePath = filePath;
+    if (!cleanFilePath.startsWith('/')) {
+        cleanFilePath = '/' + cleanFilePath;
+    }
+
+    // Get base URL endpoint (remove trailing slash if present)
+    const baseUrl = process.env.IMAGEKIT_URL_ENDPOINT.replace(/\/$/, '');
+    
+    const finalUrl = `${baseUrl}${cleanFilePath}`;
     console.log('🎥 Generated video URL:', finalUrl);
     return finalUrl;
 };

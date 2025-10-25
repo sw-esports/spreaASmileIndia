@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || 'Edit History Page' %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <%- include('../partials/sidebar', { 
+            activePage: 'history',
+            showUserInfo: true,
+            useLogo: true,
+            admin: admin,
+            adminName: adminName,
+            adminRole: adminRole
+        }) %>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-history"></i> Edit History Page</h1>
+                    <p class="subtitle">Manage organization history, founder story, timeline, and milestones</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <form id="historyForm" class="admin-form">
+                    <!-- Hero Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-image"></i> Hero Section</h3>
+                        
+                        <div class="form-group">
+                            <label for="heroTitle">Title *</label>
+                            <input type="text" id="heroTitle" name="heroTitle" value="<%= history.heroSection.title %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="heroSubtitle">Subtitle *</label>
+                            <input type="text" id="heroSubtitle" name="heroSubtitle" value="<%= history.heroSection.subtitle %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="heroDescription">Description</label>
+                            <textarea id="heroDescription" name="heroDescription" rows="3"><%= history.heroSection.description || '' %></textarea>
+                        </div>
+
+                        <!-- Background Image Upload -->
+                        <div class="form-group">
+                            <label>Background Image</label>
+                            <div class="image-upload-section">
+                                <div class="image-preview-large" id="backgroundImagePreview">
+                                    <% if (history.heroSection.backgroundImage && history.heroSection.backgroundImage.url) { %>
+                                        <img src="<%= history.getBackgroundImageUrl() %>" alt="Background">
+                                    <% } else { %>
+                                        <div class="placeholder-image">
+                                            <i class="fas fa-image"></i>
+                                            <p>No background image</p>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <input type="file" id="backgroundImageInput" accept="image/*" style="display: none;">
+                                <button type="button" class="image-upload-btn" onclick="document.getElementById('backgroundImageInput').click()">
+                                    <i class="fas fa-upload"></i> Upload Background
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Founder Story Section (The Beginning) -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user-circle"></i> Founder Story Section</h3>
+                        
+                        <!-- Hero Image (Founder Image) -->
+                        <div class="form-group">
+                            <label>Founder Image</label>
+                            <div class="image-upload-section">
+                                <div class="image-preview-medium" id="heroImagePreview">
+                                    <% if (history.heroSection.heroImage && history.heroSection.heroImage.url) { %>
+                                        <img src="<%= history.getHeroImageUrl() %>" alt="Founder">
+                                    <% } else { %>
+                                        <div class="placeholder-image">
+                                            <i class="fas fa-user"></i>
+                                            <p>No founder image</p>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <input type="file" id="heroImageInput" accept="image/*" style="display: none;">
+                                <button type="button" class="image-upload-btn" onclick="document.getElementById('heroImageInput').click()">
+                                    <i class="fas fa-upload"></i> Upload Founder Image
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="heroQuote">Quote</label>
+                                <input type="text" id="heroQuote" name="heroQuote" value="<%= history.heroSection.quote || 'I decided to lose myself in the service of others' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="heroQuoteAuthor">Quote Author</label>
+                                <input type="text" id="heroQuoteAuthor" name="heroQuoteAuthor" value="<%= history.heroSection.quoteAuthor || 'Sangita Mehra' %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="beginningTitle">Section Title</label>
+                            <input type="text" id="beginningTitle" name="beginningTitle" value="<%= history.beginningSection && history.beginningSection.title ? history.beginningSection.title : 'The Beginning' %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="beginningIntro">Introduction Text</label>
+                            <textarea id="beginningIntro" name="beginningIntro" rows="3"><%= history.beginningSection && history.beginningSection.intro ? history.beginningSection.intro : '' %></textarea>
+                        </div>
+
+                        <!-- Beginning Details (Icon Cards) -->
+                        <div class="form-group">
+                            <label>Detail Cards</label>
+                            <div id="beginningDetailsContainer">
+                                <% if (history.beginningSection && history.beginningSection.details && history.beginningSection.details.length > 0) { %>
+                                    <% history.beginningSection.details.forEach((detail, index) => { %>
+                                        <div class="detail-card-item" data-index="<%= index %>">
+                                            <div class="detail-header">
+                                                <h4>Card #<%= index + 1 %></h4>
+                                                <button type="button" class="btn-danger-small" onclick="removeDetail(<%= index %>)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Icon (Font Awesome)</label>
+                                                    <input type="text" class="detail-icon" value="<%= detail.icon || '' %>" placeholder="fa-heart">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input type="text" class="detail-title" value="<%= detail.title || '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea class="detail-description" rows="2"><%= detail.description || '' %></textarea>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                <% } %>
+                            </div>
+                            <button type="button" class="btn-secondary" onclick="addDetail()">
+                                <i class="fas fa-plus"></i> Add Detail Card
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Introduction Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-align-left"></i> Introduction</h3>
+                        <div class="form-group">
+                            <label>Content</label>
+                            <div id="introEditor" style="height: 200px;"><%= history.introduction || '' %></div>
+                            <input type="hidden" id="introduction" name="introduction">
+                        </div>
+                    </div>
+
+                    <!-- Timeline Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-stream"></i> Timeline</h3>
+                        <p class="section-description">Add key moments in the organization's history</p>
+                        
+                        <div id="timelineContainer">
+                            <% if (history.timeline && history.timeline.length > 0) { %>
+                                <% history.timeline.forEach((item, index) => { %>
+                                    <div class="timeline-item" data-index="<%= index %>">
+                                        <div class="timeline-header">
+                                            <h4>Timeline Item #<%= index + 1 %></h4>
+                                            <button type="button" class="btn-danger-small" onclick="removeTimelineItem(<%= index %>)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Year</label>
+                                                <input type="number" class="timeline-year" value="<%= item.year %>" min="1900" max="2100">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <input type="text" class="timeline-title" value="<%= item.title %>">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea class="timeline-description" rows="3"><%= item.description %></textarea>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Icon (Font Awesome class)</label>
+                                                <input type="text" class="timeline-icon" value="<%= item.icon || '' %>" placeholder="fa-rocket">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Image</label>
+                                            <div class="timeline-image-section">
+                                                <% if (item.image && item.image.url) { %>
+                                                    <img src="<%= history.getTimelineImageUrl(item) %>" alt="Timeline" class="timeline-preview">
+                                                <% } else { %>
+                                                    <div class="timeline-placeholder">No image</div>
+                                                <% } %>
+                                                <input type="file" class="timeline-image-input" accept="image/*" style="display: none;" data-index="<%= index %>">
+                                                <button type="button" class="btn-secondary-small" onclick="document.querySelectorAll('.timeline-image-input')[<%= index %>].click()">
+                                                    <i class="fas fa-upload"></i> Upload
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Achievements (one per line)</label>
+                                            <textarea class="timeline-achievements" rows="3" placeholder="Achievement 1&#10;Achievement 2"><%= item.achievements ? item.achievements.join('\n') : '' %></textarea>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            <% } %>
+                        </div>
+
+                        <button type="button" class="btn-secondary" onclick="addTimelineItem()">
+                            <i class="fas fa-plus"></i> Add Timeline Item
+                        </button>
+                    </div>
+
+                    <!-- Milestones Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-trophy"></i> Milestones</h3>
+                        <p class="section-description">Add significant achievements and milestones</p>
+                        
+                        <div id="milestonesContainer">
+                            <% if (history.milestones && history.milestones.length > 0) { %>
+                                <% history.milestones.forEach((item, index) => { %>
+                                    <div class="milestone-item" data-index="<%= index %>">
+                                        <div class="milestone-header">
+                                            <h4>Milestone #<%= index + 1 %></h4>
+                                            <button type="button" class="btn-danger-small" onclick="removeMilestone(<%= index %>)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Year</label>
+                                                <input type="number" class="milestone-year" value="<%= item.year %>" min="1900" max="2100">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <input type="text" class="milestone-title" value="<%= item.title %>">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea class="milestone-description" rows="2"><%= item.description %></textarea>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            <% } %>
+                        </div>
+
+                        <button type="button" class="btn-secondary" onclick="addMilestone()">
+                            <i class="fas fa-plus"></i> Add Milestone
+                        </button>
+                    </div>
+
+                    <!-- Impact Statistics -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-chart-line"></i> Impact Statistics</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="childrenImpacted">Children Impacted</label>
+                                <input type="number" id="childrenImpacted" name="childrenImpacted" value="<%= history.impact ? history.impact.childrenImpacted : 0 %>" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="volunteersEngaged">Volunteers Engaged</label>
+                                <input type="number" id="volunteersEngaged" name="volunteersEngaged" value="<%= history.impact ? history.impact.volunteersEngaged : 0 %>" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="programsLaunched">Programs Launched</label>
+                                <input type="number" id="programsLaunched" name="programsLaunched" value="<%= history.impact ? history.impact.programsLaunched : 0 %>" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="awardsReceived">Awards Received</label>
+                                <input type="number" id="awardsReceived" name="awardsReceived" value="<%= history.impact ? history.impact.awardsReceived : 0 %>" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        <%- include('../partials/admin-styles') %>
+
+        .section-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .image-upload-section {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .image-preview-large {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+        }
+
+        .image-preview-medium {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+        }
+
+        .image-preview-large img,
+        .image-preview-medium img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder-image {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .placeholder-image i {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            opacity: 0.3;
+        }
+
+        .timeline-item, .milestone-item, .detail-card-item {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-header, .milestone-header, .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .timeline-header h4, .milestone-header h4, .detail-header h4 {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .btn-danger-small, .btn-secondary-small {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-danger-small {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger-small:hover {
+            background: #dc2626;
+        }
+
+        .btn-secondary-small {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary-small:hover {
+            background: var(--hover-bg);
+        }
+
+        .timeline-image-section {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .timeline-preview {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+
+        .timeline-placeholder {
+            width: 150px;
+            height: 100px;
+            border-radius: 8px;
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .image-upload-btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            background: var(--event-gradient);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .image-upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(247, 148, 29, 0.3);
+        }
+
+        .ql-container {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // Initialize Quill editor
+        const introQuill = new Quill('#introEditor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['link'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Detail cards management
+        let detailCounter = <%= history.beginningSection && history.beginningSection.details ? history.beginningSection.details.length : 0 %>;
+
+        function addDetail() {
+            const container = document.getElementById('beginningDetailsContainer');
+            const index = detailCounter++;
+            
+            const itemHtml = `
+                <div class="detail-card-item" data-index="${index}">
+                    <div class="detail-header">
+                        <h4>Card #${index + 1}</h4>
+                        <button type="button" class="btn-danger-small" onclick="removeDetail(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Icon (Font Awesome)</label>
+                            <input type="text" class="detail-icon" value="" placeholder="fa-heart">
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="detail-title" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="detail-description" rows="2"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', itemHtml);
+        }
+
+        function removeDetail(index) {
+            const item = document.querySelector(`.detail-card-item[data-index="${index}"]`);
+            if (item && confirm('Remove this detail card?')) {
+                item.remove();
+            }
+        }
+
+        // Timeline management
+        let timelineCounter = <%= history.timeline.length %>;
+
+        function addTimelineItem() {
+            const container = document.getElementById('timelineContainer');
+            const index = timelineCounter++;
+            
+            const itemHtml = `
+                <div class="timeline-item" data-index="${index}">
+                    <div class="timeline-header">
+                        <h4>Timeline Item #${index + 1}</h4>
+                        <button type="button" class="btn-danger-small" onclick="removeTimelineItem(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Year</label>
+                            <input type="number" class="timeline-year" value="${new Date().getFullYear()}" min="1900" max="2100">
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="timeline-title" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="timeline-description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Icon (Font Awesome class)</label>
+                            <input type="text" class="timeline-icon" value="" placeholder="fa-rocket">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image</label>
+                        <div class="timeline-image-section">
+                            <div class="timeline-placeholder">No image</div>
+                            <input type="file" class="timeline-image-input" accept="image/*" style="display: none;" data-index="${index}">
+                            <button type="button" class="btn-secondary-small" onclick="this.previousElementSibling.click()">
+                                <i class="fas fa-upload"></i> Upload
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Achievements (one per line)</label>
+                        <textarea class="timeline-achievements" rows="3" placeholder="Achievement 1&#10;Achievement 2"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', itemHtml);
+        }
+
+        function removeTimelineItem(index) {
+            const item = document.querySelector(`.timeline-item[data-index="${index}"]`);
+            if (item && confirm('Remove this timeline item?')) {
+                item.remove();
+            }
+        }
+
+        // Milestone management
+        let milestoneCounter = <%= history.milestones.length %>;
+
+        function addMilestone() {
+            const container = document.getElementById('milestonesContainer');
+            const index = milestoneCounter++;
+            
+            const itemHtml = `
+                <div class="milestone-item" data-index="${index}">
+                    <div class="milestone-header">
+                        <h4>Milestone #${index + 1}</h4>
+                        <button type="button" class="btn-danger-small" onclick="removeMilestone(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Year</label>
+                            <input type="number" class="milestone-year" value="${new Date().getFullYear()}" min="1900" max="2100">
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="milestone-title" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="milestone-description" rows="2"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', itemHtml);
+        }
+
+        function removeMilestone(index) {
+            const item = document.querySelector(`.milestone-item[data-index="${index}"]`);
+            if (item && confirm('Remove this milestone?')) {
+                item.remove();
+            }
+        }
+
+        // Handle timeline image uploads
+        document.addEventListener('change', async function(e) {
+            if (e.target.classList.contains('timeline-image-input')) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const index = e.target.dataset.index;
+                const formData = new FormData();
+                formData.append('image', file);
+                formData.append('timelineIndex', index);
+
+                try {
+                    const response = await fetch(`/admin/about/history/upload-timeline-image`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        alert('Timeline image uploaded successfully!');
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error uploading timeline image');
+                }
+            }
+        });
+
+        // Handle background image upload
+        document.getElementById('backgroundImageInput').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('/admin/about/history/upload-background', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const preview = document.getElementById('backgroundImagePreview');
+                    preview.innerHTML = `<img src="${data.image.url}" alt="Background">`;
+                    alert('Background image uploaded successfully!');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error uploading background image');
+            }
+        });
+
+        // Handle hero image upload
+        document.getElementById('heroImageInput').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('/admin/about/history/upload-hero-image', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const preview = document.getElementById('heroImagePreview');
+                    preview.innerHTML = `<img src="${data.image.url}" alt="Founder">`;
+                    alert('Founder image uploaded successfully!');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error uploading founder image');
+            }
+        });
+
+        // Form submission
+        document.getElementById('historyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Get introduction HTML from Quill
+            document.getElementById('introduction').value = introQuill.root.innerHTML;
+
+            // Collect beginning details data
+            const beginningDetails = [];
+            document.querySelectorAll('.detail-card-item').forEach((item, idx) => {
+                beginningDetails.push({
+                    icon: item.querySelector('.detail-icon').value,
+                    title: item.querySelector('.detail-title').value,
+                    description: item.querySelector('.detail-description').value
+                });
+            });
+
+            // Collect timeline data
+            const timelineItems = [];
+            document.querySelectorAll('.timeline-item').forEach((item, idx) => {
+                const achievements = item.querySelector('.timeline-achievements').value
+                    .split('\n')
+                    .filter(a => a.trim())
+                    .map(a => a.trim());
+
+                timelineItems.push({
+                    year: parseInt(item.querySelector('.timeline-year').value),
+                    title: item.querySelector('.timeline-title').value,
+                    description: item.querySelector('.timeline-description').value,
+                    icon: item.querySelector('.timeline-icon').value,
+                    achievements: achievements
+                });
+            });
+
+            // Collect milestones data
+            const milestones = [];
+            document.querySelectorAll('.milestone-item').forEach((item, idx) => {
+                milestones.push({
+                    year: parseInt(item.querySelector('.milestone-year').value),
+                    title: item.querySelector('.milestone-title').value,
+                    description: item.querySelector('.milestone-description').value
+                });
+            });
+
+            // Prepare form data
+            const formData = new FormData(this);
+            formData.set('timeline', JSON.stringify(timelineItems));
+            formData.set('milestones', JSON.stringify(milestones));
+            formData.set('beginningDetails', JSON.stringify(beginningDetails));
+
+            try {
+                const response = await fetch('/admin/about/history', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('History page updated successfully!');
+                    window.location.reload();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error updating history page');
+            }
+        });
+    </script>
+</body>
+</html>

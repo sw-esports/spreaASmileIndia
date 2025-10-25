@@ -4,6 +4,7 @@
  */
 
 const EducationProgram = require('../models/EducationProgram');
+const Admin = require('../models/Admin');
 const { uploadToImageKit, deleteFromImageKit } = require('../config/imagekit');
 
 // @desc    Get all education programs (for admin panel)
@@ -32,11 +33,16 @@ exports.getAllPrograms = async (req, res) => {
       .populate('createdBy', 'name email')
       .populate('updatedBy', 'name email');
     
+    const admin = await Admin.findById(req.session.adminId);
+    
     res.render('admin/education/index', {
       title: 'Manage Education Programs - Admin Panel',
       page: 'admin-education',
       programs,
-      filters: { category, status, search }
+      filters: { category, status, search },
+      admin: admin,
+      adminName: req.session.adminName,
+      adminRole: req.session.adminRole
     });
     
   } catch (error) {
@@ -52,11 +58,24 @@ exports.getAllPrograms = async (req, res) => {
 // @desc    Show create program form
 // @route   GET /admin/education/create
 // @access  Private
-exports.showCreateForm = (req, res) => {
-  res.render('admin/education/create', {
-    title: 'Create New Program - Admin Panel',
-    page: 'admin-education'
-  });
+exports.showCreateForm = async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.session.adminId);
+    
+    res.render('admin/education/create', {
+      title: 'Create New Program - Admin Panel',
+      page: 'admin-education',
+      admin: admin,
+      adminName: req.session.adminName,
+      adminRole: req.session.adminRole
+    });
+  } catch (error) {
+    console.error('Error loading create form:', error);
+    res.status(500).render('error', {
+      title: 'Error',
+      message: 'Failed to load create form'
+    });
+  }
 };
 
 // @desc    Create new education program
@@ -176,10 +195,15 @@ exports.showEditForm = async (req, res) => {
       });
     }
     
+    const admin = await Admin.findById(req.session.adminId);
+    
     res.render('admin/education/edit', {
       title: `Edit Program: ${program.title} - Admin Panel`,
       page: 'admin-education',
-      program
+      program,
+      admin: admin,
+      adminName: req.session.adminName,
+      adminRole: req.session.adminRole
     });
     
   } catch (error) {

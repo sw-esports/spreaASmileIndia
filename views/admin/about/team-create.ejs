@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || 'Add Team Member' %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <%- include('../partials/sidebar', { 
+            activePage: 'team',
+            showUserInfo: true,
+            useLogo: true,
+            admin: admin,
+            adminName: adminName,
+            adminRole: adminRole
+        }) %>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-user-plus"></i> Add Team Member</h1>
+                    <p class="subtitle">Add a new member to your team</p>
+                </div>
+                <a href="/admin/about/team" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Team
+                </a>
+            </div>
+
+            <div class="content-card">
+                <form action="/admin/about/team/create" method="POST" class="admin-form">
+                    <!-- Hidden field to store image data -->
+                    <input type="hidden" id="profileImageData" name="profileImageData" value="">
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-image"></i> Profile Image</h3>
+                        
+                        <div class="image-upload-section">
+                            <div class="image-preview" id="profileImagePreview">
+                                <img src="" alt="Profile Preview" id="previewImage" style="display: none;">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <i class="fas fa-user-circle"></i>
+                                    <p>No image uploaded</p>
+                                </div>
+                            </div>
+                            
+                            <div class="image-actions">
+                                <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                                <button type="button" class="btn-primary" onclick="document.getElementById('profileImageInput').click()">
+                                    <i class="fas fa-upload"></i> Upload Image
+                                </button>
+                                <button type="button" class="btn-danger" id="removeImageBtn" onclick="removeImage()" style="display: none;">
+                                    <i class="fas fa-trash"></i> Remove Image
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="role">Role/Position *</label>
+                                <input type="text" id="role" name="role" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="category">Team Category *</label>
+                                <select id="category" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Leadership">Leadership</option>
+                                    <option value="Educational Team">Educational Team</option>
+                                    <option value="Support Team">Support Team</option>
+                                    <option value="Support Helpers">Support Helpers</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bio">Bio *</label>
+                            <textarea id="bio" name="bio" rows="5" placeholder="Brief biography of the team member" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="achievements">Achievements/Skills</label>
+                            <textarea id="achievements" name="achievements" rows="4" placeholder="Enter achievements/skills (one per line)&#10;Example:&#10;10+ years in education&#10;Master's in Social Work&#10;Child psychology expert"></textarea>
+                            <small>Enter one achievement per line</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="email@example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="order">Display Order</label>
+                                <input type="number" id="order" name="order" value="0" min="0">
+                                <small>Lower numbers appear first</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="joinedDate">Joined Date</label>
+                                <input type="date" id="joinedDate" name="joinedDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-share-alt"></i> Social Media Links</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="linkedin"><i class="fab fa-linkedin"></i> LinkedIn</label>
+                                <input type="text" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/username">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="twitter"><i class="fab fa-twitter"></i> Twitter</label>
+                                <input type="text" id="twitter" name="twitter" placeholder="https://twitter.com/username">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="facebook"><i class="fab fa-facebook"></i> Facebook</label>
+                                <input type="text" id="facebook" name="facebook" placeholder="https://facebook.com/username">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instagram"><i class="fab fa-instagram"></i> Instagram</label>
+                                <input type="text" id="instagram" name="instagram" placeholder="https://instagram.com/username">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Create Team Member
+                        </button>
+                        <a href="/admin/about/team" class="btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        <%- include('../partials/admin-styles') %>
+
+        .image-upload-section {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .image-preview {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #d1d5db;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-placeholder {
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        .upload-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .upload-placeholder p {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .image-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+    </style>
+
+    <script>
+        const imageInput = document.getElementById('profileImageInput');
+        const previewImage = document.getElementById('previewImage');
+        const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+        const removeImageBtn = document.getElementById('removeImageBtn');
+        const profileImageData = document.getElementById('profileImageData');
+
+        // Handle image selection
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Validate file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Image size must be less than 5MB');
+                    return;
+                }
+
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select an image file');
+                    return;
+                }
+
+                // Read and preview the image
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImage.src = event.target.result;
+                    previewImage.style.display = 'block';
+                    uploadPlaceholder.style.display = 'none';
+                    removeImageBtn.style.display = 'block';
+
+                    // Store image data as base64
+                    profileImageData.value = JSON.stringify({
+                        data: event.target.result,
+                        filename: file.name,
+                        mimetype: file.type
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Remove image
+        function removeImage() {
+            previewImage.src = '';
+            previewImage.style.display = 'none';
+            uploadPlaceholder.style.display = 'block';
+            removeImageBtn.style.display = 'none';
+            imageInput.value = '';
+            profileImageData.value = '';
+        }
+    </script>
+</body>
+</html>

@@ -184,15 +184,10 @@ exports.showDashboard = async (req, res) => {
 
 // Middleware to check if admin is authenticated
 exports.isAuthenticated = (req, res, next) => {
-  console.log('🔒 isAuthenticated check:', {
-    hasSession: !!req.session,
-    adminId: req.session?.adminId,
-    sessionID: req.sessionID,
-    cookies: req.headers.cookie
-  });
+
   
   if (req.session.adminId) {
-    console.log('✅ Admin authenticated, proceeding...');
+   
     return next();
   }
   

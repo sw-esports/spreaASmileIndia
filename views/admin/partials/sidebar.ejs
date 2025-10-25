@@ -1,0 +1,322 @@
+<!-- Admin Sidebar Component with Styles -->
+<style>
+    /* Sidebar Styles */
+    .sidebar {
+        width: 280px;
+        background: var(--sidebar-bg);
+        backdrop-filter: blur(20px);
+        border-right: 1px solid var(--border-color);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: 100;
+    }
+
+    .sidebar-header {
+        padding: 30px 25px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .sidebar-logo img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--event-gradient);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .sidebar-logo .text h2,
+    .logo-text h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 2px;
+    }
+
+    .sidebar-logo .text p,
+    .logo-text p {
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    /* Sidebar User Info */
+    .sidebar-user {
+        padding: 20px 25px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .user-info .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--event-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 20px;
+        overflow: hidden;
+    }
+
+    .user-info .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .user-info .details h3 {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 2px;
+    }
+
+    .user-info .details p {
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    .sidebar-nav {
+        padding: 20px 15px;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 15px;
+        border-radius: 8px;
+        color: var(--text-primary);
+        text-decoration: none;
+        margin-bottom: 5px;
+        transition: all 0.3s;
+        font-size: 14px;
+    }
+
+    .nav-link:hover {
+        background: var(--bg-secondary);
+        transform: translateX(5px);
+    }
+
+    .nav-link.active {
+        background: var(--event-gradient);
+        color: white;
+    }
+
+    .nav-link i {
+        font-size: 16px;
+        width: 20px;
+    }
+
+    .nav-folder {
+        margin-bottom: 10px;
+    }
+
+    .nav-folder-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .nav-folder-header:hover {
+        background: var(--bg-secondary);
+    }
+
+    .folder-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-primary);
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .folder-arrow {
+        color: var(--text-secondary);
+        font-size: 12px;
+        transition: transform 0.3s;
+    }
+
+    .nav-folder.open .folder-arrow {
+        transform: rotate(180deg);
+    }
+
+    .nav-folder-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding-left: 15px;
+    }
+
+    .nav-folder.open .nav-folder-content {
+        max-height: 500px;
+    }
+
+    .nav-link.submenu {
+        font-size: 13px;
+        padding: 10px 15px;
+    }
+
+    /* Sidebar scroll styling */
+    .sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 3px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover {
+        background: var(--color-primary);
+    }
+</style>
+
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            <% if (locals.useLogo) { %>
+                <img src="https://ik.imagekit.io/l15cczdgu/Assets/logo.png?updatedAt=1761389196069" alt="SASI Logo">
+                <div class="text">
+                    <h2>SASI Admin</h2>
+                    <p>Content Management</p>
+                </div>
+            <% } else { %>
+                <div class="logo-icon">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <div class="logo-text">
+                    <h2>SASI Admin</h2>
+                    <p>Content Management</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <% if (locals.showUserInfo && locals.admin) { %>
+    <div class="sidebar-user">
+        <div class="user-info">
+            <% if (admin.profilePicture && admin.profilePicture.url) { %>
+                <div class="avatar">
+                    <img src="<%= admin.getProfilePictureUrl({ width: 90, quality: 85 }) %>" alt="<%= locals.adminName || 'Admin' %>">
+                </div>
+            <% } else { %>
+                <div class="avatar">
+                    <%= locals.adminName ? adminName.charAt(0).toUpperCase() : 'A' %>
+                </div>
+            <% } %>
+            <div class="details">
+                <h3><%= locals.adminName || 'Admin' %></h3>
+                <p><%= locals.adminRole || 'Administrator' %></p>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    <nav class="sidebar-nav">
+        <a href="/admin/dashboard" class="nav-link <%= activePage === 'dashboard' ? 'active' : '' %>">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </a>
+        
+        <div class="nav-folder <%= ['events', 'education', 'programs'].includes(activePage) ? 'open' : '' %>">
+            <div class="nav-folder-header" onclick="toggleFolder(this)">
+                <div class="folder-title">
+                    <i class="fas fa-folder<%= ['events', 'education', 'programs'].includes(activePage) ? '-open' : '' %>"></i>
+                    <span>Programs</span>
+                </div>
+                <i class="fas fa-chevron-down folder-arrow"></i>
+            </div>
+            <div class="nav-folder-content">
+                <a href="/admin/events" class="nav-link submenu <%= activePage === 'events' ? 'active' : '' %>">
+                    <i class="fas fa-calendar-alt"></i>
+                    Events
+                </a>
+                <a href="/admin/education" class="nav-link submenu <%= activePage === 'education' ? 'active' : '' %>">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </a>
+                <a href="/admin/programs" class="nav-link submenu <%= activePage === 'programs' ? 'active' : '' %>">
+                    <i class="fas fa-th-large"></i>
+                    Programs
+                </a>
+            </div>
+        </div>
+
+        <div class="nav-folder <%= ['founder', 'team', 'history'].includes(activePage) ? 'open' : '' %>">
+            <div class="nav-folder-header" onclick="toggleFolder(this)">
+                <div class="folder-title">
+                    <i class="fas fa-folder<%= ['founder', 'team', 'history'].includes(activePage) ? '-open' : '' %>"></i>
+                    <span>About</span>
+                </div>
+                <i class="fas fa-chevron-down folder-arrow"></i>
+            </div>
+            <div class="nav-folder-content">
+                <a href="/admin/about/founder" class="nav-link submenu <%= activePage === 'founder' ? 'active' : '' %>">
+                    <i class="fas fa-user-tie"></i>
+                    Founder
+                </a>
+                <a href="/admin/about/team" class="nav-link submenu <%= activePage === 'team' ? 'active' : '' %>">
+                    <i class="fas fa-users"></i>
+                    Team
+                </a>
+                <a href="/admin/about/history" class="nav-link submenu <%= activePage === 'history' ? 'active' : '' %>">
+                    <i class="fas fa-book"></i>
+                    History
+                </a>
+            </div>
+        </div>
+
+        <a href="/" target="_blank" class="nav-link">
+            <i class="fas fa-globe"></i>
+            View Website
+        </a>
+        <a href="/admin/logout" class="nav-link" style="color: var(--color-secondary);">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+    </nav>
+</aside>
+
+<script>
+    // Toggle folder function
+    function toggleFolder(header) {
+        const folder = header.parentElement;
+        folder.classList.toggle('open');
+    }
+</script>
