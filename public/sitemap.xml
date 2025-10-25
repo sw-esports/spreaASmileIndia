@@ -6,7 +6,7 @@
 
     <!-- Homepage -->
     <url>
-        <loc>https://spreadasmileindia.org/</loc>
+        <loc>https://www.spreadasmileindia.com/</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
@@ -14,37 +14,37 @@
 
     <!-- About Section -->
     <url>
-        <loc>https://spreadasmileindia.org/about</loc>
+        <loc>https://www.spreadasmileindia.com/about</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/about/mission</loc>
+        <loc>https://www.spreadasmileindia.com/about/mission</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/about/history</loc>
+        <loc>https://www.spreadasmileindia.com/about/history</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/about/founder</loc>
+        <loc>https://www.spreadasmileindia.com/about/founder</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/about/team</loc>
+        <loc>https://www.spreadasmileindia.com/about/team</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/about/partners</loc>
+        <loc>https://www.spreadasmileindia.com/about/partners</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
@@ -52,37 +52,37 @@
 
     <!-- Programs Section -->
     <url>
-        <loc>https://spreadasmileindia.org/programs</loc>
+        <loc>https://www.spreadasmileindia.com/programs</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/programs/education</loc>
+        <loc>https://www.spreadasmileindia.com/programs/education</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/programs/health</loc>
+        <loc>https://www.spreadasmileindia.com/programs/health</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/programs/nutrition</loc>
+        <loc>https://www.spreadasmileindia.com/programs/nutrition</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/programs/vocational</loc>
+        <loc>https://www.spreadasmileindia.com/programs/vocational</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/programs/events</loc>
+        <loc>https://www.spreadasmileindia.com/programs/events</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
@@ -90,31 +90,31 @@
 
     <!-- Impact Section -->
     <url>
-        <loc>https://spreadasmileindia.org/impact</loc>
+        <loc>https://www.spreadasmileindia.com/impact</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/impact/achievements</loc>
+        <loc>https://www.spreadasmileindia.com/impact/achievements</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/impact/stories</loc>
+        <loc>https://www.spreadasmileindia.com/impact/stories</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/impact/testimonials</loc>
+        <loc>https://www.spreadasmileindia.com/impact/testimonials</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/impact/reports</loc>
+        <loc>https://www.spreadasmileindia.com/impact/reports</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>quarterly</changefreq>
         <priority>0.7</priority>
@@ -122,31 +122,31 @@
 
     <!-- Get Involved Section -->
     <url>
-        <loc>https://spreadasmileindia.org/get-involved</loc>
+        <loc>https://www.spreadasmileindia.com/get-involved</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/get-involved/volunteer</loc>
+        <loc>https://www.spreadasmileindia.com/get-involved/volunteer</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/get-involved/donate</loc>
+        <loc>https://www.spreadasmileindia.com/get-involved/donate</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/get-involved/partners</loc>
+        <loc>https://www.spreadasmileindia.com/get-involved/partners</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/get-involved/careers</loc>
+        <loc>https://www.spreadasmileindia.com/get-involved/careers</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -154,7 +154,7 @@
 
     <!-- Media Section -->
     <url>
-        <loc>https://spreadasmileindia.org/media</loc>
+        <loc>https://www.spreadasmileindia.com/media</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
@@ -162,37 +162,37 @@
 
     <!-- Candle Shop Section -->
     <url>
-        <loc>https://spreadasmileindia.org/candle-shop</loc>
+        <loc>https://www.spreadasmileindia.com/candle-shop</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/candle-shop/collections</loc>
+        <loc>https://www.spreadasmileindia.com/candle-shop/collections</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/candle-shop/cart</loc>
+        <loc>https://www.spreadasmileindia.com/candle-shop/cart</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/candle-shop/wishlist</loc>
+        <loc>https://www.spreadasmileindia.com/candle-shop/wishlist</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/candle-shop/login</loc>
+        <loc>https://www.spreadasmileindia.com/candle-shop/login</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/candle-shop/register</loc>
+        <loc>https://www.spreadasmileindia.com/candle-shop/register</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
@@ -200,37 +200,37 @@
 
     <!-- Contact & Footer Pages -->
     <url>
-        <loc>https://spreadasmileindia.org/contact</loc>
+        <loc>https://www.spreadasmileindia.com/contact</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/privacy-policy</loc>
+        <loc>https://www.spreadasmileindia.com/privacy-policy</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/terms-of-service</loc>
+        <loc>https://www.spreadasmileindia.com/terms-of-service</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/refund-policy</loc>
+        <loc>https://www.spreadasmileindia.com/refund-policy</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/shipping-policy</loc>
+        <loc>https://www.spreadasmileindia.com/shipping-policy</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://spreadasmileindia.org/faq</loc>
+        <loc>https://www.spreadasmileindia.com/faq</loc>
         <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>

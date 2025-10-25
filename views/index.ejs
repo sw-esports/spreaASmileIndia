@@ -1,8 +1,7 @@
 <%- include('partials/header', { title: 'Home - Spread A Smile India', page: 'home' }) %>
 
 <!-- Add CSS Links -->
-<link rel="stylesheet" href="./css/landing.css">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<link rel="stylesheet" href="/css/landing.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,10 +13,13 @@
             <!-- Slide 1 - Image -->
             <div class="carousel-slide active" data-slide="0">
             <div class="slide-content">
-                <img src="./src/images/landing-page/lading-page4.webp" 
+                <img src="/src/images/landing-page/lading-page4.webp" 
                      alt="Children learning in classroom" 
                      class="slide-image" 
-                     loading="eager">
+                     width="1920"
+                     height="1080"
+                     fetchpriority="high"
+                     decoding="async">
                 <div class="slide-overlay">
                     <div class="hero-content">
                         <h1 class="hero-title" data-aos="fade-up">Transforming Lives Through Education</h1>
@@ -42,9 +44,11 @@
         <!-- Slide 2 - Image -->
         <div class="carousel-slide" data-slide="1">
             <div class="slide-content">
-                <img src="./src/images/landing-page/lading-page2.webp" 
+                <img src="/src/images/landing-page/lading-page2.webp" 
                      alt="Community Leadership" 
                      class="slide-image" 
+                     width="1920"
+                     height="1080"
                      loading="lazy">
                 <div class="slide-overlay">
                     <div class="hero-content">
@@ -70,8 +74,8 @@
         <!-- Slide 3 - Video -->
         <div class="carousel-slide" data-slide="2">
             <div class="slide-content">
-                <video class="slide-video" autoplay muted loop playsinline preload="metadata">
-                    <source src="./src/images/landing-page/landing-page.mp4" type="video/mp4">
+                <video class="slide-video" autoplay muted loop playsinline preload="none">
+                    <source src="/src/images/landing-page/landing-page.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="video-play-btn">
@@ -250,8 +254,10 @@
             </div>
             <div class="about-image" data-aos="fade-left">
                 <div class="image-container">
-                    <img src="./src/images/landing-page/lading-page1.webp" 
+                    <img src="/src/images/landing-page/lading-page1.webp" 
                          alt="Our mission in action" 
+                         width="800"
+                         height="600"
                          loading="lazy">
                     <div class="image-overlay">
                         <!-- <div class="overlay-content">
@@ -277,7 +283,7 @@
         
         <div class="team-grid">
             <%- include('components/team-card', {
-                image: './src/images/team/sangita-mehra.webp',
+                image: '/src/images/team/sangita-mehra.webp',
                 name: 'Sangita Mehra',
                 role: 'Founder & Director',
                 bio: 'Former fashion designer from Mehrasons Jewellers family who gave up her business to transform street children\'s lives through education since 2005.',
@@ -289,7 +295,7 @@
             }) %>
             
             <%- include('components/team-card', {
-                image: './src/images/team/op-chabra.webp',
+                image: '/src/images/team/op-chabra.webp',
                 name: 'OP Chabra Sir',
                 role: 'Manager & Co-founder',
                 bio: 'Manages operations and financial aspects including accounts and administrative affairs. His strategic oversight ensures smooth functioning of all organizational activities and sustainable growth.',
@@ -301,7 +307,7 @@
             }) %>
             
             <%- include('components/team-card', {
-                image: './src/images/team/maddy-sir.webp',
+                image: '/src/images/team/maddy-sir.webp',
                 name: 'Maddy',
                 role: 'Co-founder & Operations Handler',
                 bio: 'Handles execution and manages candle workshop operations. His hands-on approach ensures quality implementation of programs and maintains direct connection with beneficiaries and community members.',
@@ -313,7 +319,7 @@
             }) %>
             
             <%- include('components/team-card', {
-                image: './src/images/team/vicky-sir.webp',
+                image: '/src/images/team/vicky-sir.webp',
                 name: 'Vicky Rawat',
                 role: 'Co-founder & Technical Support',
                 bio: 'Provides teaching technical support and assists in NGO execution. His expertise in technical aspects and educational methodologies enhances the quality of our programs and training initiatives.',
@@ -524,7 +530,7 @@
 <div class="loading-screen" id="loadingScreen">
     <div class="loading-content">
         <div class="loading-logo">
-            <img src="./src/images/logo.png" alt="Spread A Smile India">
+            <img src="/src/images/logo.png" alt="Spread A Smile India">
         </div>
         <div class="loading-spinner"></div>
         <p>Loading...</p>
@@ -532,17 +538,7 @@
 </div>
 
 <!-- JavaScript -->
-<script src="./js/landing.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    // Initialize AOS
-    AOS.init({
-        duration: 800,
-        easing: 'ease-out-cubic',
-        once: true,
-        offset: 100
-    });
-</script>
+<script src="/js/landing.js"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSKX9N0SB1"></script>
 <script>

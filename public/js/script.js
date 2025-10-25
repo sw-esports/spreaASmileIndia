@@ -979,14 +979,14 @@ document.addEventListener('DOMContentLoaded', function() {
             duration: 0.8,
             ease: "power2.out",
             scrollTrigger: {
+                trigger: element,
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            },
             delay: delay / 1000
         });
         });
     }
-    
-    console.log('🌟 Spread A Smile India website loaded with enhanced animations!');
-        });
-    });
     
     console.log('🌟 Spread A Smile India website loaded with enhanced animations!');
 });

@@ -1,11 +1,11 @@
 # Robots.txt for Spread A Smile India
-# https://spreadasmileindia.org
+# https://www.spreadasmileindia.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://spreadasmileindia.org/sitemap.xml
+Sitemap: https://www.spreadasmileindia.com/sitemap.xml
 
 # Disallow admin and private areas
 Disallow: /candle-shop/account

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Events - Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/events.css">
+    <style>
+        /* Root CSS Variables - SASI Brand Colors */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #FFF8F0;
+            --color-primary: #F7941D;
+            --color-secondary: #ED1C24;
+            --color-accent: #EC4F78;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: rgba(229, 231, 235, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            
+            --sidebar-bg: rgba(255, 255, 255, 0.98);
+            --card-bg: #ffffff;
+            --event-gradient: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1C1C1C;
+            --bg-secondary: #121821;
+            --color-primary: #F7941D;
+            --color-secondary: #ED1C24;
+            --color-accent: #FF7FA2;
+            --text-primary: #E6E6E6;
+            --text-secondary: #B3B3B3;
+            --border-color: rgba(75, 85, 99, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            
+            --sidebar-bg: #1f2937;
+            --card-bg: #1f2937;
+            --event-gradient: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 30px 25px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--event-gradient);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .sidebar-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .sidebar-logo .text h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .sidebar-logo .text p {
+            font-size: 12px;
+            opacity: 0.9;
+            color: white;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, rgba(247, 148, 29, 0.1), rgba(237, 28, 36, 0.1));
+            color: var(--color-primary);
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 12px;
+        }
+
+        .nav-folder {
+            margin: 0 12px;
+        }
+
+        .nav-folder-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-folder-header:hover {
+            background: linear-gradient(135deg, rgba(247, 148, 29, 0.1), rgba(237, 28, 36, 0.1));
+            color: var(--color-primary);
+        }
+
+        .folder-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .folder-arrow {
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        .nav-folder.open .folder-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-folder-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-folder.open .nav-folder-content {
+            max-height: 500px;
+        }
+
+        .nav-link.submenu {
+            padding-left: 50px;
+            font-size: 13px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--event-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+            flex: 1;
+            background: var(--bg-secondary);
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+            padding-top: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+        }
+
+        .actions-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(247, 148, 29, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--event-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(247, 148, 29, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 148, 29, 0.4);
+        }
+
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Reuse event card styles from events.css but with admin modifications */
+        .event-card {
+            background: var(--card-bg);
+            position: relative;
+        }
+
+        /* Edit Button Overlay on Cards */
+        .event-edit-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--color-primary);
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .event-card:hover .event-edit-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .event-edit-btn:hover {
+            background: var(--event-gradient);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .alert-success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #9ae6b4;
+        }
+
+        .alert-error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #fc8181;
+        }
+
+        [data-theme="dark"] .alert-success {
+            background: rgba(72, 187, 120, 0.2);
+            color: #9ae6b4;
+        }
+
+        [data-theme="dark"] .alert-error {
+            background: rgba(252, 129, 129, 0.2);
+            color: #fc8181;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 2px dashed var(--border-color);
+        }
+
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+            color: var(--text-secondary);
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .category-header i {
+            font-size: 24px;
+            color: var(--color-primary);
+        }
+
+        .category-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .category-badge {
+            background: var(--event-gradient);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+        <i class="fas fa-moon"></i>
+        <span id="themeText">Dark</span>
+    </button>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="https://ik.imagekit.io/l15cczdgu/Assets/logo.png?updatedAt=1761389196069" alt="SASI Logo">
+                    <div class="text">
+                        <h2>SASI Admin</h2>
+                        <p>Content Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                
+                <div class="nav-folder open">
+                    <div class="nav-folder-header" onclick="toggleFolder(this)">
+                        <div class="folder-title">
+                            <i class="fas fa-folder-open"></i>
+                            <span>Programs</span>
+                        </div>
+                        <i class="fas fa-chevron-down folder-arrow"></i>
+                    </div>
+                    <div class="nav-folder-content">
+                        <a href="/admin/events" class="nav-link submenu active">
+                            <i class="fas fa-calendar-alt"></i>
+                            Events
+                        </a>
+                        <a href="/admin/education" class="nav-link submenu">
+                            <i class="fas fa-graduation-cap"></i>
+                            Education
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/" target="_blank" class="nav-link">
+                    <i class="fas fa-globe"></i>
+                    View Website
+                </a>
+                <a href="/admin/logout" class="nav-link" style="color: var(--color-secondary);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1><i class="fas fa-list"></i> All Events</h1>
+                <p>Manage and organize all your event posts</p>
+            </div>
+
+            <% if (locals.message) { %>
+                <div class="alert alert-<%= message.type %>">
+                    <i class="fas fa-<%= message.type === 'success' ? 'check-circle' : 'exclamation-circle' %>"></i>
+                    <%= message.text %>
+                </div>
+            <% } %>
+
+            <div class="actions-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search events by title, category...">
+                </div>
+                <a href="/admin/events/create" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Create New Event
+                </a>
+            </div>
+
+            <% if (events && events.length > 0) { %>
+                <%
+                // Section configuration
+                const sectionConfig = {
+                    festival: { icon: 'fa-star', title: 'Festival Events', cardClass: 'festival-card' },
+                    national: { icon: 'fa-flag', title: 'National Events', cardClass: 'national-card' },
+                    wellness: { icon: 'fa-leaf', title: 'Wellness Events', cardClass: 'wellness-card' },
+                    recreation: { icon: 'fa-water', title: 'Recreation Events', cardClass: 'fun-card' },
+                    entertainment: { icon: 'fa-film', title: 'Entertainment Events', cardClass: 'fun-card' },
+                    sports: { icon: 'fa-trophy', title: 'Sports Events', cardClass: 'fun-card' },
+                    campaign: { icon: 'fa-bullhorn', title: 'Campaign Events', cardClass: 'campaign-card' },
+                    fundraising: { icon: 'fa-hand-holding-heart', title: 'Fundraising Events', cardClass: 'fundraising-card' },
+                    regular: { icon: 'fa-calendar-check', title: 'Regular Events', cardClass: 'regular-card' },
+                    other: { icon: 'fa-calendar-alt', title: 'Other Events', cardClass: 'event-card' }
+                };
+
+                // Group events by category
+                const eventsByCategory = {};
+                events.forEach(event => {
+                    const cat = event.category || 'other';
+                    if (!eventsByCategory[cat]) eventsByCategory[cat] = [];
+                    eventsByCategory[cat].push(event);
+                });
+                %>
+
+                <% Object.keys(sectionConfig).forEach(category => { %>
+                    <% const categoryEvents = eventsByCategory[category]; %>
+                    <% if (categoryEvents && categoryEvents.length > 0) { %>
+                        <div class="category-section">
+                            <div class="category-header">
+                                <i class="fas <%= sectionConfig[category].icon %>"></i>
+                                <h2><%= sectionConfig[category].title %></h2>
+                                <span class="category-badge"><%= categoryEvents.length %> Events</span>
+                            </div>
+                            <div class="events-grid">
+                                <% categoryEvents.forEach(event => { %>
+                                    <%
+                                    // Apply ImageKit transformations to poster URL
+                                    let optimizedPosterUrl = event.poster?.url || '';
+                                    if (optimizedPosterUrl && optimizedPosterUrl.includes('ik.imagekit.io')) {
+                                        const parts = optimizedPosterUrl.split('ik.imagekit.io/');
+                                        if (parts.length === 2) {
+                                            const [baseUrl, pathWithId] = parts;
+                                            const pathParts = pathWithId.split('/');
+                                            const imageKitId = pathParts[0];
+                                            const filePath = '/' + pathParts.slice(1).join('/');
+                                            optimizedPosterUrl = `${baseUrl}ik.imagekit.io/${imageKitId}/tr:w-600,q-85,f-webp${filePath}`;
+                                        }
+                                    }
+
+                                    // Get icon based on category
+                                    const categoryIcons = {
+                                        'festival': 'fa-fire',
+                                        'national': 'fa-flag-usa',
+                                        'wellness': 'fa-leaf',
+                                        'recreation': 'fa-water',
+                                        'entertainment': 'fa-film',
+                                        'sports': 'fa-trophy',
+                                        'campaign': 'fa-bullhorn',
+                                        'fundraising': 'fa-hand-holding-heart',
+                                        'regular': 'fa-calendar-alt'
+                                    };
+                                    const iconClass = categoryIcons[event.category] || 'fa-calendar-alt';
+                                    const features = event.features || [];
+                                    
+                                    // Check if event has video
+                                    const hasVideo = event.video && event.video.url;
+                                    const videoUrl = hasVideo ? event.video.url : '';
+                                    %>
+
+                                    <div class="event-card <%= sectionConfig[category].cardClass %> <%= hasVideo ? 'has-video' : '' %>" 
+                                         data-event-id="<%= event._id %>"
+                                         <% if (hasVideo) { %>data-video-url="<%= videoUrl %>"<% } %>>
+                                        <div class="event-image" <% if (hasVideo) { %>onclick="event.stopPropagation(); playEventVideo(this)" style="cursor: pointer;"<% } %>>
+                                            <% if (optimizedPosterUrl) { %>
+                                                <img src="<%= optimizedPosterUrl %>" alt="<%= event.title %>" loading="lazy">
+                                            <% } else { %>
+                                                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas <%= iconClass %>" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+                                                </div>
+                                            <% } %>
+                                            <% if (hasVideo) { %>
+                                                <div class="video-play-overlay">
+                                                    <i class="fas fa-play-circle"></i>
+                                                </div>
+                                            <% } %>
+                                            <div class="event-overlay">
+                                                <div class="event-icon">
+                                                    <i class="fas <%= iconClass %>"></i>
+                                                </div>
+                                            </div>
+                                            <a href="/admin/events/<%= event._id %>/edit" class="event-edit-btn" title="Edit Event">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </div>
+                                        <div class="event-content">
+                                            <div class="event-category"><%= event.type || event.category %></div>
+                                            <h3><%= event.title %></h3>
+                                            <p><%= event.description %></p>
+                                            
+                                            <% if (features && features.length > 0) { %>
+                                                <div class="event-features">
+                                                    <% features.slice(0, 3).forEach(feature => { %>
+                                                        <span class="feature-tag"><%= feature %></span>
+                                                    <% }) %>
+                                                </div>
+                                            <% } %>
+                                            
+                                            <div class="event-details">
+                                                <div class="detail">
+                                                    <i class="fas fa-calendar"></i>
+                                                    <span><%= event.eventDate %></span>
+                                                </div>
+                                                <div class="detail">
+                                                    <i class="fas fa-users"></i>
+                                                    <span><%= event.participants %></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% } else { %>
+                <div class="empty-state">
+                    <div class="icon">
+                        <i class="fas fa-calendar-times"></i>
+                    </div>
+                    <h3>No Events Yet</h3>
+                    <p>Create your first event to get started</p>
+                    <a href="/admin/events/create" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Create First Event
+                    </a>
+                </div>
+            <% } %>
+        </main>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('admin-theme', newTheme);
+            
+            // Update button text and icon
+            const themeText = document.getElementById('themeText');
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = themeToggle.querySelector('i');
+            
+            if (newTheme === 'dark') {
+                themeText.textContent = 'Light';
+                icon.className = 'fas fa-sun';
+            } else {
+                themeText.textContent = 'Dark';
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // Load saved theme on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('admin-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const themeText = document.getElementById('themeText');
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = themeToggle.querySelector('i');
+            
+            if (savedTheme === 'dark') {
+                themeText.textContent = 'Light';
+                icon.className = 'fas fa-sun';
+            } else {
+                themeText.textContent = 'Dark';
+                icon.className = 'fas fa-moon';
+            }
+        });
+
+        // Folder toggle
+        function toggleFolder(element) {
+            const folder = element.parentElement;
+            folder.classList.toggle('open');
+        }
+
+        // Search functionality
+        document.getElementById('searchInput')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            eventCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+            
+            // Hide empty category sections
+            document.querySelectorAll('.category-section').forEach(section => {
+                const visibleCards = section.querySelectorAll('.event-card:not([style*="display: none"])');
+                section.style.display = visibleCards.length > 0 ? '' : 'none';
+            });
+        });
+
+        // Auto-hide alerts
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.transition = 'all 0.5s ease-out';
+                alert.style.opacity = '0';
+                alert.style.transform = 'translateY(-10px)';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
+
+        // Video Modal Functions
+        function playEventVideo(element) {
+            const card = element.closest('.event-card');
+            const videoUrl = card.getAttribute('data-video-url');
+            if (videoUrl) {
+                openVideoModal(videoUrl);
+            }
+        }
+
+        function openVideoModal(videoUrl) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            const source = video.querySelector('source');
+            
+            source.src = videoUrl;
+            video.load();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            video.pause();
+            video.currentTime = 0;
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+    </script>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal" style="display: none;">
+        <div class="video-modal-overlay" onclick="closeVideoModal()"></div>
+        <div class="video-modal-content">
+            <button class="video-close-btn" onclick="closeVideoModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <video id="modalVideo" controls autoplay style="width: 100%; max-width: 900px; border-radius: 12px;">
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <style>
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .video-modal-content {
+            position: relative;
+            z-index: 10001;
+            padding: 20px;
+            max-width: 95%;
+        }
+
+        .video-close-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #333;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 10002;
+        }
+
+        .video-close-btn:hover {
+            transform: scale(1.1);
+            background: #f44336;
+            color: white;
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .event-card.has-video .event-image:hover .video-play-overlay {
+            opacity: 1;
+        }
+
+        .video-play-overlay i {
+            font-size: 28px;
+            color: var(--primary);
+            margin-left: 4px;
+        }
+    </style>
+</body>
+</html>

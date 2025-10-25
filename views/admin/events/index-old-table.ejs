@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Events - Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fdfcdc 0%, #fed9b7 25%, #f8a5c2 50%, #b8d4e3 75%, #c9e4f0 100%);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Include same sidebar styles */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 30px 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, #f8a5c2 0%, #fed9b7 100%);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #2d3748;
+        }
+
+        .sidebar-logo .icon {
+            font-size: 32px;
+        }
+
+        .sidebar-logo .text h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .sidebar-logo .text p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(248, 165, 194, 0.1);
+            color: #f8a5c2;
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 12px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+            flex: 1;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #718096;
+        }
+
+        .actions-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #f8a5c2;
+            box-shadow: 0 0 0 4px rgba(248, 165, 194, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f8a5c2 0%, #fed9b7 100%);
+            color: #2d3748;
+            box-shadow: 0 4px 12px rgba(248, 165, 194, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 165, 194, 0.4);
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, rgba(248, 165, 194, 0.1) 0%, rgba(254, 217, 183, 0.1) 100%);
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 700;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f7fafc;
+            color: #2d3748;
+            font-size: 14px;
+        }
+
+        tbody tr {
+            transition: all 0.3s;
+        }
+
+        tbody tr:hover {
+            background: rgba(248, 165, 194, 0.05);
+        }
+
+        .event-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .event-thumbnail {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f8a5c2, #fed9b7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .event-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .event-details h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .event-details p {
+            font-size: 12px;
+            color: #a0aec0;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .badge-published {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .badge-draft {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .badge-archived {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .badge-featured {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .icon-btn.edit {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+
+        .icon-btn.edit:hover {
+            background: #90cdf4;
+            transform: scale(1.05);
+        }
+
+        .icon-btn.delete {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .icon-btn.delete:hover {
+            background: #fc8181;
+            transform: scale(1.05);
+        }
+
+        .nav-link.submenu {
+            padding-left: 50px;
+            font-size: 13px;
+        }
+
+        .nav-folder {
+            margin: 0 12px;
+        }
+
+        .nav-folder-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 13px;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-folder-header:hover {
+            background: rgba(248, 165, 194, 0.1);
+            color: #f8a5c2;
+        }
+
+        .folder-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .folder-title i {
+            width: 20px;
+        }
+
+        .folder-arrow {
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        .nav-folder.open .folder-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-folder-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: #718096;
+            margin-bottom: 24px;
+        }
+
+        .alert {
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .alert-success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #9ae6b4;
+        }
+
+        .alert-error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #fc8181;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="../src/images/logo.webp" alt="SASI Logo" style="width: 40px; height: 40px; object-fit: contain;">
+                    <div class="text">
+                        <h2>SASI Admin</h2>
+                        <p>Content Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                
+                <div class="nav-folder open">
+                    <div class="nav-folder-header" onclick="toggleFolder(this)">
+                        <div class="folder-title">
+                            <i class="fas fa-folder-open"></i>
+                            <span>Programs</span>
+                        </div>
+                        <i class="fas fa-chevron-down folder-arrow"></i>
+                    </div>
+                    <div class="nav-folder-content" style="max-height: 500px;">
+                        <a href="/admin/events" class="nav-link submenu active">
+                            <i class="fas fa-calendar-alt"></i>
+                            Events
+                        </a>
+                        <a href="/admin/events/create" class="nav-link submenu">
+                            <i class="fas fa-plus"></i>
+                            Create New
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/" target="_blank" class="nav-link">
+                    <i class="fas fa-globe"></i>
+                    View Website
+                </a>
+                <a href="/admin/logout" class="nav-link" style="color: #e53e3e;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1><i class="fas fa-list"></i> All Events</h1>
+                <p>Manage and organize all your event posts</p>
+            </div>
+
+            <% if (locals.message) { %>
+                <div class="alert alert-<%= message.type %>">
+                    <i class="fas fa-<%= message.type === 'success' ? 'check-circle' : 'exclamation-circle' %>"></i>
+                    <%= message.text %>
+                </div>
+            <% } %>
+
+            <div class="actions-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search events by title, category...">
+                </div>
+                <a href="/admin/events/create" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Create New Event
+                </a>
+            </div>
+
+            <div class="table-container">
+                <% if (events && events.length > 0) { %>
+                    <table id="eventsTable">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% events.forEach(event => { %>
+                                <tr>
+                                    <td>
+                                        <div class="event-info">
+                                            <div class="event-thumbnail">
+                                                <% if (event.poster && event.poster.url) { %>
+                                                    <% 
+                                                        // Apply ImageKit transformations: w-300, q-85, f-webp
+                                                        let optimizedUrl = event.poster.url;
+                                                        if (optimizedUrl.includes('ik.imagekit.io')) {
+                                                            const parts = optimizedUrl.split('ik.imagekit.io/');
+                                                            if (parts.length === 2) {
+                                                                const [baseUrl, pathWithId] = parts;
+                                                                const pathParts = pathWithId.split('/');
+                                                                const imageKitId = pathParts[0];
+                                                                const filePath = '/' + pathParts.slice(1).join('/');
+                                                                optimizedUrl = `${baseUrl}ik.imagekit.io/${imageKitId}/tr:w-300,q-85,f-webp${filePath}`;
+                                                            }
+                                                        }
+                                                    %>
+                                                    <img src="<%= optimizedUrl %>" alt="<%= event.title %>">
+                                                <% } else { %>
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                <% } %>
+                                            </div>
+                                            <div class="event-details">
+                                                <h3><%= event.title %></h3>
+                                                <p><%= event.description.substring(0, 60) %>...</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span style="text-transform: capitalize; font-weight: 500;">
+                                            <%= event.category %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-<%= event.status %>">
+                                            <%= event.status %>
+                                        </span>
+                                        <% if (event.isFeatured) { %>
+                                            <span class="badge badge-featured">Featured</span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <%= new Date(event.createdAt).toLocaleDateString('en-IN', { 
+                                            month: 'short', 
+                                            day: 'numeric', 
+                                            year: 'numeric' 
+                                        }) %>
+                                    </td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a href="/admin/events/<%= event._id %>/edit" class="icon-btn edit" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button class="icon-btn delete" onclick="deleteEvent('<%= event._id %>', '<%= event.title %>')" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <div class="empty-state">
+                        <div class="icon">
+                            <i class="fas fa-calendar-times"></i>
+                        </div>
+                        <h3>No Events Yet</h3>
+                        <p>Create your first event to get started</p>
+                        <a href="/admin/events/create" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Create First Event
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleFolder(element) {
+            const folder = element.parentElement;
+            folder.classList.toggle('open');
+        }
+
+        // Search functionality
+        document.getElementById('searchInput')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#eventsTable tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Delete event
+        function deleteEvent(eventId, eventTitle) {
+            if (confirm(`Are you sure you want to delete "${eventTitle}"?\n\nThis action cannot be undone.`)) {
+                fetch(`/admin/events/${eventId}/delete`, {
+                    method: 'POST'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Failed to delete event');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to delete event');
+                });
+            }
+        }
+
+        // Auto-hide alerts
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.transition = 'all 0.5s ease-out';
+                alert.style.opacity = '0';
+                alert.style.transform = 'translateY(-10px)';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>

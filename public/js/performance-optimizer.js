@@ -179,7 +179,7 @@ class PerformanceOptimizer {
         // Preload critical images
         const criticalImages = [
             '/src/images/logo.png',
-            '/src/images/hero-bg-1.jpg'
+            '/src/images/landing-page/lading-page4.webp' // Hero image
         ];
 
         criticalImages.forEach(src => {

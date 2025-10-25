@@ -1,0 +1,91 @@
+<%
+/**
+ * Event Card Component
+ * Reusable event card matching frontend design
+ * 
+ * Parameters:
+ * - event: Event object with title, description, category, poster, etc.
+ * - showEditButton: Boolean - whether to show edit button (for admin panel)
+ * - categoryClass: String - CSS class based on category (festival-card, national-card, etc.)
+ */
+
+const event = locals.event;
+const showEditButton = locals.showEditButton || false;
+const categoryClass = locals.categoryClass || `${event.category}-card`;
+
+// Apply ImageKit transformations to poster URL
+let optimizedPosterUrl = event.poster?.url || '';
+if (optimizedPosterUrl && optimizedPosterUrl.includes('ik.imagekit.io')) {
+    const parts = optimizedPosterUrl.split('ik.imagekit.io/');
+    if (parts.length === 2) {
+        const [baseUrl, pathWithId] = parts;
+        const pathParts = pathWithId.split('/');
+        const imageKitId = pathParts[0];
+        const filePath = '/' + pathParts.slice(1).join('/');
+        optimizedPosterUrl = `${baseUrl}ik.imagekit.io/${imageKitId}/tr:w-600,q-85,f-webp${filePath}`;
+    }
+}
+
+// Get icon based on category
+const categoryIcons = {
+    'festival': 'fa-fire',
+    'national': 'fa-flag-usa',
+    'wellness': 'fa-leaf',
+    'recreation': 'fa-water',
+    'entertainment': 'fa-film',
+    'sports': 'fa-trophy',
+    'campaign': 'fa-bullhorn',
+    'fundraising': 'fa-hand-holding-heart',
+    'regular': 'fa-calendar-alt'
+};
+const iconClass = categoryIcons[event.category] || 'fa-calendar-alt';
+
+// Format features array
+const features = event.features || [];
+%>
+
+<div class="event-card <%= categoryClass %>" data-event-id="<%= event._id %>">
+    <div class="event-image">
+        <% if (optimizedPosterUrl) { %>
+            <img src="<%= optimizedPosterUrl %>" alt="<%= event.title %>" loading="lazy">
+        <% } else { %>
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); display: flex; align-items: center; justify-content: center;">
+                <i class="fas <%= iconClass %>" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+            </div>
+        <% } %>
+        <div class="event-overlay">
+            <div class="event-icon">
+                <i class="fas <%= iconClass %>"></i>
+            </div>
+        </div>
+        <% if (showEditButton) { %>
+            <a href="/admin/events/<%= event._id %>/edit" class="event-edit-btn" title="Edit Event">
+                <i class="fas fa-edit"></i>
+            </a>
+        <% } %>
+    </div>
+    <div class="event-content">
+        <div class="event-category"><%= event.type || event.category %></div>
+        <h3><%= event.title %></h3>
+        <p><%= event.description %></p>
+        
+        <% if (features && features.length > 0) { %>
+            <div class="event-features">
+                <% features.slice(0, 3).forEach(feature => { %>
+                    <span class="feature-tag"><%= feature %></span>
+                <% }) %>
+            </div>
+        <% } %>
+        
+        <div class="event-details">
+            <div class="detail">
+                <i class="fas fa-calendar"></i>
+                <span><%= event.eventDate %></span>
+            </div>
+            <div class="detail">
+                <i class="fas fa-users"></i>
+                <span><%= event.participants %></span>
+            </div>
+        </div>
+    </div>
+</div>

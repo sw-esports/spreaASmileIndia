@@ -71,10 +71,8 @@ function initHeroCarousel() {
     
     const autoplayDelay = 4000; // Increased to 4 seconds for better UX
     const progressUpdateInterval = 50;
-    let currentSlide = 0;
+    // Use global variables: currentSlide, isAutoplayActive, autoplayInterval, progressInterval
     let isTransitioning = false;
-    let autoplayInterval = null;
-    let isAutoplayActive = true;
     let videoPlayingTimeout = null; // For video play delay
 
     function showSlide(index) {

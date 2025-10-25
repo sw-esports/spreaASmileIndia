@@ -6,7 +6,7 @@
     <title>Education Program - SASI NGO</title>
     <link rel="stylesheet" href="/css/education.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
 </head>
 <body>
     <%- include('../partials/header') %>
@@ -129,98 +129,100 @@
                 </div>
 
                 <div class="academic-grid">
-                    <!-- Primary Education -->
-                    <div class="academic-card primary-education" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-abc"></i>
-                            </div>
-                            <div class="grade-badge">3rd - 5th</div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Primary Education</h3>
-                            <p>Foundation building with focus on basic literacy, numeracy, and essential life skills. Creating a strong educational base for future learning.</p>
-                            <div class="subject-list">
-                                <span class="subject-tag">Hindi & English</span>
-                                <span class="subject-tag">Mathematics</span>
-                                <span class="subject-tag">Science</span>
-                                <span class="subject-tag">Social Studies</span>
-                                <span class="subject-tag">Art & Craft</span>
-                            </div>
-                            <div class="card-stats">
-                                <div class="stat">
-                                    <i class="fas fa-users"></i>
-                                    <span>80+ Students</span>
+                    <% if (typeof academicPrograms !== 'undefined' && academicPrograms && academicPrograms.length > 0) { %>
+                        <% academicPrograms.forEach((program, index) => { 
+                            const hasVideo = program.video && program.video.url;
+                            const videoUrl = hasVideo ? program.video.url : '';
+                        %>
+                            <div class="academic-card <%= program.level %>-education <%= hasVideo ? 'has-video' : '' %>" data-aos="fade-up" data-aos-offset="30" data-aos-delay="<%= index * 100 %>"
+                                 <% if (hasVideo) { %>data-video-url="<%= videoUrl %>" onclick="playProgramVideo(this)"<% } %>>
+                                <div class="program-image">
+                                    <% if (program.poster && program.poster.url) { %>
+                                        <img src="<%= program.poster.url %>" alt="<%= program.title %>" loading="lazy">
+                                    <% } else { %>
+                                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop" alt="<%= program.title %>" loading="lazy">
+                                    <% } %>
+                                    <div class="program-overlay">
+                                        <div class="program-icon">
+                                            <i class="fas <%= program.iconClass || 'fa-book' %>"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="stat">
-                                    <i class="fas fa-clock"></i>
-                                    <span>6 Hours Daily</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Middle School -->
-                    <div class="academic-card middle-education" data-aos="fade-up" data-aos-offset="30" data-aos-delay="100">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <div class="grade-badge">6th - 8th</div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Middle School</h3>
-                            <p>Advanced concepts in core subjects with introduction to computer literacy and practical skills for comprehensive development.</p>
-                            <div class="subject-list">
-                                <span class="subject-tag">Advanced Math</span>
-                                <span class="subject-tag">Science & Physics</span>
-                                <span class="subject-tag">Computer Basics</span>
-                                <span class="subject-tag">Geography</span>
-                                <span class="subject-tag">History</span>
-                            </div>
-                            <div class="card-stats">
-                                <div class="stat">
-                                    <i class="fas fa-users"></i>
-                                    <span>65+ Students</span>
-                                </div>
-                                <div class="stat">
-                                    <i class="fas fa-clock"></i>
-                                    <span>7 Hours Daily</span>
+                                <div class="program-content">
+                                    <div class="program-category">academic - <%= program.level %></div>
+                                    <h3><%= program.title %></h3>
+                                    <p><%= program.description %></p>
+                                    
+                                    <% if (program.gradeRange) { %>
+                                        <div class="program-features">
+                                            <span class="feature-tag grade-tag"><i class="fas fa-graduation-cap"></i> <%= program.gradeRange %></span>
+                                        </div>
+                                    <% } %>
+                                    
+                                    <% if (program.subjects && program.subjects.length > 0) { %>
+                                        <div class="program-features">
+                                            <% program.subjects.slice(0, 4).forEach(subject => { %>
+                                                <span class="feature-tag"><%= subject %></span>
+                                            <% }) %>
+                                        </div>
+                                    <% } %>
+                                    
+                                    <% if (program.stats) { %>
+                                        <div class="program-details">
+                                            <% if (program.stats.students) { %>
+                                                <div class="detail">
+                                                    <i class="fas fa-users"></i>
+                                                    <span><%= program.stats.students %></span>
+                                                </div>
+                                            <% } %>
+                                            <% if (program.stats.duration) { %>
+                                                <div class="detail">
+                                                    <i class="fas fa-clock"></i>
+                                                    <span><%= program.stats.duration %></span>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    <% } %>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- High School -->
-                    <div class="academic-card high-education" data-aos="fade-up" data-aos-offset="30" data-aos-delay="200">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-microscope"></i>
-                            </div>
-                            <div class="grade-badge">9th - 12th</div>
-                        </div>
-                        <div class="card-content">
-                            <h3>High School</h3>
-                            <p>Specialized subjects preparation for board exams, career guidance, and skill development for future opportunities and higher education.</p>
-                            <div class="subject-list">
-                                <span class="subject-tag">Physics & Chemistry</span>
-                                <span class="subject-tag">Biology</span>
-                                <span class="subject-tag">Advanced Computer</span>
-                                <span class="subject-tag">Commerce</span>
-                                <span class="subject-tag">English Literature</span>
-                            </div>
-                            <div class="card-stats">
-                                <div class="stat">
-                                    <i class="fas fa-users"></i>
-                                    <span>55+ Students</span>
-                                </div>
-                                <div class="stat">
-                                    <i class="fas fa-clock"></i>
-                                    <span>8 Hours Daily</span>
+                        <% }) %>
+                    <% } else { %>
+                        <!-- Fallback: No programs found -->
+                        <div class="academic-card primary-education" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0">
+                            <div class="program-image">
+                                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop" alt="Primary Education" loading="lazy">
+                                <div class="program-overlay">
+                                    <div class="program-icon">
+                                        <i class="fas fa-abc"></i>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="program-content">
+                                <div class="program-category">academic - primary</div>
+                                <h3>Primary Education</h3>
+                                <p>Foundation building with focus on basic literacy, numeracy, and essential life skills. Creating a strong educational base for future learning.</p>
+                                <div class="program-features">
+                                    <span class="feature-tag grade-tag"><i class="fas fa-graduation-cap"></i> 3rd - 5th</span>
+                                </div>
+                                <div class="program-features">
+                                    <span class="feature-tag">Hindi & English</span>
+                                    <span class="feature-tag">Mathematics</span>
+                                    <span class="feature-tag">Science</span>
+                                    <span class="feature-tag">Social Studies</span>
+                                </div>
+                                <div class="program-details">
+                                    <div class="detail">
+                                        <i class="fas fa-users"></i>
+                                        <span>80+ Students</span>
+                                    </div>
+                                    <div class="detail">
+                                        <i class="fas fa-clock"></i>
+                                        <span>6 Hours Daily</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
         </section>
@@ -240,119 +242,59 @@
                 </div>
 
                 <div class="skills-grid">
-                    <!-- Computer Course -->
-                    <div class="skill-card tech-skill" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0">
-                        <div class="skill-image">
-                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop&crop=center" alt="Computer Course" loading="lazy">
-                            <div class="skill-overlay">
-                                <i class="fas fa-laptop"></i>
+                    <% if (typeof skillPrograms !== 'undefined' && skillPrograms && skillPrograms.length > 0) { %>
+                        <% skillPrograms.forEach((program, index) => { 
+                            const skillClass = program.level + '-skill';
+                            const delay = (index % 3) * 100;
+                            const hasVideo = program.video && program.video.url;
+                            const videoUrl = hasVideo ? program.video.url : '';
+                        %>
+                            <div class="skill-card <%= skillClass %> <%= hasVideo ? 'has-video' : '' %>" 
+                                 data-aos="fade-up" data-aos-offset="30" data-aos-delay="<%= delay %>"
+                                 <% if (hasVideo) { %>data-video-url="<%= videoUrl %>" onclick="playProgramVideo(this)"<% } %>>
+                                <div class="skill-image">
+                                    <% if (program.poster && program.poster.url) { %>
+                                        <img src="<%= program.poster.url %>" alt="<%= program.title %>" loading="lazy">
+                                    <% } else { %>
+                                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop&crop=center" alt="<%= program.title %>" loading="lazy">
+                                    <% } %>
+                                    <div class="skill-overlay">
+                                        <i class="fas <%= program.iconClass || 'fa-tools' %>"></i>
+                                    </div>
+                                </div>
+                                <div class="skill-content">
+                                    <h3><%= program.title %></h3>
+                                    <p><%= program.description %></p>
+                                    <% if (program.modules && program.modules.length > 0) { %>
+                                        <div class="skill-modules">
+                                            <% program.modules.forEach(module => { %>
+                                                <span class="module-tag"><%= module %></span>
+                                            <% }) %>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <!-- Fallback skills -->
+                        <div class="skill-card tech-skill" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0">
+                            <div class="skill-image">
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop&crop=center" alt="Computer Course" loading="lazy">
+                                <div class="skill-overlay">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                            </div>
+                            <div class="skill-content">
+                                <h3>Computer Course</h3>
+                                <p>Complete computer literacy from basics to advanced applications, preparing students for the digital world.</p>
+                                <div class="skill-modules">
+                                    <span class="module-tag">Computer Basics</span>
+                                    <span class="module-tag">Internet & Email</span>
+                                    <span class="module-tag">Typing Skills</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-content">
-                            <h3>Computer Course</h3>
-                            <p>Complete computer literacy from basics to advanced applications, preparing students for the digital world.</p>
-                            <div class="skill-modules">
-                                <span class="module-tag">Computer Basics</span>
-                                <span class="module-tag">Internet & Email</span>
-                                <span class="module-tag">Typing Skills</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MS Office -->
-                    <div class="skill-card office-skill" data-aos="fade-up" data-aos-offset="30" data-aos-delay="100">
-                        <div class="skill-image">
-                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop&crop=center" alt="MS Office" loading="lazy">
-                            <div class="skill-overlay">
-                                <i class="fas fa-file-alt"></i>
-                            </div>
-                        </div>
-                        <div class="skill-content">
-                            <h3>MS Office Suite</h3>
-                            <p>Professional training in Microsoft Office applications essential for modern workplace skills.</p>
-                            <div class="skill-modules">
-                                <span class="module-tag">MS Word</span>
-                                <span class="module-tag">MS Excel</span>
-                                <span class="module-tag">PowerPoint</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Graphic Design -->
-                    <div class="skill-card design-skill" data-aos="fade-up" data-aos-offset="30" data-aos-delay="200">
-                        <div class="skill-image">
-                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop&crop=center" alt="Graphic Design" loading="lazy">
-                            <div class="skill-overlay">
-                                <i class="fas fa-paint-brush"></i>
-                            </div>
-                        </div>
-                        <div class="skill-content">
-                            <h3>Graphic Design</h3>
-                            <p>Creative design skills using modern software for artistic expression and potential career opportunities.</p>
-                            <div class="skill-modules">
-                                <span class="module-tag">Adobe Photoshop</span>
-                                <span class="module-tag">Design Basics</span>
-                                <span class="module-tag">Logo Creation</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dance & Arts -->
-                    <div class="skill-card creative-skill" data-aos="fade-up" data-aos-offset="30" data-aos-delay="0">
-                        <div class="skill-image">
-                            <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&h=250&fit=crop&crop=center" alt="Dance Classes" loading="lazy">
-                            <div class="skill-overlay">
-                                <i class="fas fa-music"></i>
-                            </div>
-                        </div>
-                        <div class="skill-content">
-                            <h3>Dance & Arts</h3>
-                            <p>Cultural and creative expression through various dance forms and artistic activities for holistic development.</p>
-                            <div class="skill-modules">
-                                <span class="module-tag">Classical Dance</span>
-                                <span class="module-tag">Folk Dance</span>
-                                <span class="module-tag">Art & Craft</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Language Skills -->
-                    <div class="skill-card language-skill" data-aos="fade-up" data-aos-offset="30" data-aos-delay="100">
-                        <div class="skill-image">
-                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=250&fit=crop&crop=center" alt="Language Learning" loading="lazy">
-                            <div class="skill-overlay">
-                                <i class="fas fa-language"></i>
-                            </div>
-                        </div>
-                        <div class="skill-content">
-                            <h3>Language Skills</h3>
-                            <p>Enhanced communication abilities in Hindi and English for better academic and professional prospects.</p>
-                            <div class="skill-modules">
-                                <span class="module-tag">English Speaking</span>
-                                <span class="module-tag">Writing Skills</span>
-                                <span class="module-tag">Grammar</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Life Skills -->
-                    <div class="skill-card life-skill" data-aos="fade-up" data-aos-offset="30" data-aos-delay="200">
-                        <div class="skill-image">
-                            <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=400&h=250&fit=crop&crop=center" alt="Life Skills" loading="lazy">
-                            <div class="skill-overlay">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                        </div>
-                        <div class="skill-content">
-                            <h3>Life Skills</h3>
-                            <p>Essential life skills training including personal hygiene, social skills, and basic financial literacy.</p>
-                            <div class="skill-modules">
-                                <span class="module-tag">Personal Development</span>
-                                <span class="module-tag">Social Skills</span>
-                                <span class="module-tag">Basic Finance</span>
-                            </div>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
         </section>
@@ -486,8 +428,340 @@
         </section>
     </main>
 
-    <%- include('../partials/footer') %>
+        </div>
+</section>
 
+<!-- Video Modal -->
+<div id="videoModal" class="video-modal" style="display: none;">
+    <div class="video-modal-overlay" onclick="closeVideoModal()"></div>
+    <div class="video-modal-content">
+        <button class="video-close-btn" onclick="closeVideoModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <video id="modalVideo" controls autoplay>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<style>
+    .video-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+    }
+
+    .video-modal-content {
+        position: relative;
+        z-index: 10001;
+        padding: 20px;
+        max-width: 1200px;
+        width: 90%;
+        max-height: 95vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-modal-content video {
+        width: 100%;
+        max-width: 100%;
+        max-height: 90vh;
+        height: auto;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        background: #000;
+    }
+
+    .video-close-btn {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #333;
+        z-index: 10002;
+        transition: all 0.3s;
+    }
+
+    .video-close-btn:hover {
+        background: #f0f0f0;
+        transform: rotate(90deg);
+    }
+
+    .skill-card.has-video,
+    .academic-card.has-video {
+        cursor: pointer;
+    }
+
+    .skill-card.has-video .skill-image::after,
+    .academic-card.has-video .card-icon::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    .skill-card.has-video:hover .skill-image::after,
+    .academic-card.has-video:hover .card-icon::after {
+        opacity: 1;
+    }
+
+    .skill-card.has-video .skill-image::before,
+    .academic-card.has-video .card-icon::before {
+        content: '\f04b';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: #F7941D;
+        z-index: 11;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    .skill-card.has-video:hover .skill-image::before,
+    .academic-card.has-video:hover .card-icon::before {
+        opacity: 1;
+    }
+
+    /* Academic Card Styles - Program Card Design */
+    .academic-card .program-image {
+        position: relative;
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .academic-card .program-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+    }
+
+    .academic-card:hover .program-image img {
+        transform: scale(1.05);
+    }
+
+    .academic-card .program-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    .academic-card:hover .program-overlay {
+        opacity: 1;
+    }
+
+    .academic-card .program-icon {
+        font-size: 48px;
+        color: white;
+    }
+
+    .academic-card .program-content {
+        padding: 20px;
+    }
+
+    .academic-card .program-category {
+        display: inline-block;
+        padding: 4px 12px;
+        background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        color: white;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+    }
+
+    .academic-card .program-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+    }
+
+    .academic-card .feature-tag {
+        padding: 6px 12px;
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        transition: all 0.3s;
+    }
+
+    .academic-card .feature-tag:hover {
+        background: rgba(139, 92, 246, 0.2);
+        color: #7c3aed;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+        border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .academic-card .feature-tag.grade-tag {
+        background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        color: white;
+        font-weight: 600;
+    }
+
+    .academic-card .feature-tag.grade-tag i {
+        margin-right: 4px;
+    }
+
+    .academic-card .program-details {
+        display: flex;
+        gap: 16px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #eee;
+    }
+
+    .academic-card .detail {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .academic-card .detail i {
+        color: #F7941D;
+        font-size: 16px;
+    }
+
+    /* Video play icon for academic cards with images */
+    .academic-card.has-video .program-image::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 70px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .academic-card.has-video:hover .program-image::after {
+        opacity: 1;
+    }
+
+    .academic-card.has-video .program-image::before {
+        content: '\f04b';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translateX(2px);
+        font-size: 28px;
+        color: #F7941D;
+        z-index: 6;
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+    }
+
+    .academic-card.has-video:hover .program-image::before {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateX(2px) scale(1.1);
+    }
+</style>
+
+<script>
+    // Video Modal Functions
+    function playProgramVideo(element) {
+        const videoUrl = element.getAttribute('data-video-url');
+        if (videoUrl) {
+            openVideoModal(videoUrl);
+        }
+    }
+
+    function openVideoModal(videoUrl) {
+        const modal = document.getElementById('videoModal');
+        const video = document.getElementById('modalVideo');
+        const source = video.querySelector('source');
+        
+        source.src = videoUrl;
+        video.load();
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('videoModal');
+        const video = document.getElementById('modalVideo');
+        
+        video.pause();
+        video.currentTime = 0;
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeVideoModal();
+        }
+    });
+</script>
+
+<script src="/js/script.js"></script>
+
+<%- include('../partials/footer') %>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({

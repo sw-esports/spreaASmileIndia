@@ -1,0 +1,736 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Education Program - SASI Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #F7941D;
+            --secondary: #ED1C24;
+            --accent: #EC4F78;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #FFF8F0;
+            --text-primary: #2D3748;
+            --text-secondary: #718096;
+            --border: #E2E8F0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1A202C;
+            --bg-secondary: #2D3748;
+            --text-primary: #F7FAFC;
+            --text-secondary: #CBD5E0;
+            --border: #4A5568;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .sidebar-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .sidebar-logo .text h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .sidebar-logo .text p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(247, 148, 29, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 32px;
+            flex: 1;
+            max-width: 1000px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .theme-toggle {
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Form Container */
+        .form-container {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 32px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h2 i {
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group label .required {
+            color: var(--secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(247, 148, 29, 0.1);
+        }
+
+        .form-group .hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-secondary);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(247, 148, 29, 0.05);
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload .icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .file-upload p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .file-upload .file-name {
+            margin-top: 12px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Category Grid */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .category-option {
+            position: relative;
+        }
+
+        .category-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .category-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-primary);
+        }
+
+        .category-option label i {
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        .category-option label span {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .category-option input[type="radio"]:checked + label {
+            border-color: var(--primary);
+            background: rgba(247, 148, 29, 0.1);
+        }
+
+        .category-option input[type="radio"]:checked + label i {
+            color: var(--primary);
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            padding-top: 24px;
+            border-top: 2px solid var(--border);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(247, 148, 29, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 148, 29, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="https://ik.imagekit.io/l15cczdgu/Assets/logo.png?updatedAt=1761389196069" alt="SASI Logo">
+                    <div class="text">
+                        <h2>SASI Admin</h2>
+                        <p>Content Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                <a href="/admin/events" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    Events
+                </a>
+                <a href="/admin/education" class="nav-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </a>
+                <a href="/admin/education/create" class="nav-link active">
+                    <i class="fas fa-plus-circle"></i>
+                    Create Program
+                </a>
+                <a href="/" target="_blank" class="nav-link">
+                    <i class="fas fa-globe"></i>
+                    View Website
+                </a>
+                <a href="/admin/logout" class="nav-link" style="color: var(--secondary);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1><i class="fas fa-plus-circle" style="color: var(--primary);"></i> Create New Education Program</h1>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+
+            <form action="/admin/education" method="POST" enctype="multipart/form-data" class="form-container">
+                
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h2><i class="fas fa-info-circle"></i> Basic Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="title">Program Title <span class="required">*</span></label>
+                        <input type="text" id="title" name="title" required 
+                               placeholder="e.g., Diwali Celebration 2025" maxlength="200">
+                        <span class="hint">Clear and concise title (max 200 characters)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description <span class="required">*</span></label>
+                        <textarea id="description" name="description" required 
+                                  placeholder="Describe what makes this event special..." maxlength="1000"></textarea>
+                        <span class="hint">What happens at this event? Target Students (max 1000 characters)</span>
+                    </div>
+                </div>
+
+                <!-- Category Selection -->
+                <div class="form-section">
+                    <h2><i class="fas fa-tag"></i> Program Category <span class="required" style="color: var(--secondary); font-size: 14px;">*</span></h2>
+                    
+                    <div class="category-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="category-option">
+                            <input type="radio" id="cat-academic" name="category" value="academic" required>
+                            <label for="cat-academic">
+                                <i class="fas fa-book"></i>
+                                <span>Academic Program</span>
+                            </label>
+                        </div>
+                        <div class="category-option">
+                            <input type="radio" id="cat-skill" name="category" value="skill">
+                            <label for="cat-skill">
+                                <i class="fas fa-tools"></i>
+                                <span>Skill Development</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 24px;">
+                        <label for="level">Program Level/Type <span class="required">*</span></label>
+                        <select id="level" name="level" required>
+                            <option value="">Select level...</option>
+                            <optgroup label="Academic Levels">
+                                <option value="primary">Primary (3rd-5th)</option>
+                                <option value="middle">Middle (6th-8th)</option>
+                                <option value="high">High (9th-12th)</option>
+                            </optgroup>
+                            <optgroup label="Skill Types">
+                                <option value="tech">Technology/Computer</option>
+                                <option value="creative">Creative/Arts</option>
+                                <option value="language">Language</option>
+                                <option value="life">Life Skills</option>
+                                <option value="other">Other</option>
+                            </optgroup>
+                        </select>
+                        <span class="hint">Select the appropriate level for academic programs or type for skill programs</span>
+                    </div>
+                </div>
+
+                <!-- Program Details -->
+                <div class="form-section">
+                    <h2><i class="fas fa-calendar"></i> Program Details</h2>
+                    
+                    <div class="form-group">
+                        <label for="duration">Program Duration <span class="required">*</span></label>
+                        <input type="text" id="duration" name="duration" required 
+                               placeholder="e.g., October 2025, Every Thursday, December 25th">
+                        <span class="hint">Date, month, or frequency (e.g., "Monthly", "Every Sunday")</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="students">Target Students</label>
+                        <input type="text" id="students" name="students" 
+                               placeholder="e.g., All Students, Age 8+, All Ages" value="All Students">
+                        <span class="hint">Age group or participant criteria</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gradeRange">Grade Range (for Academic Programs)</label>
+                        <input type="text" id="gradeRange" name="gradeRange" 
+                               placeholder="e.g., 3rd - 5th, 6th - 8th">
+                        <span class="hint">Specific grade range for academic programs</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modules">Modules (comma-separated)</label>
+                        <input type="text" id="modules" name="modules" 
+                               placeholder="e.g., MS Word, MS Excel, PowerPoint">
+                        <span class="hint">For skill programs: list key modules. Separate with commas</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subjects">Subjects (comma-separated, for Academic Programs)</label>
+                        <input type="text" id="subjects" name="subjects" 
+                               placeholder="e.g., Mathematics, Science, Hindi, English">
+                        <span class="hint">For academic programs: list subjects taught. Separate with commas</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="iconClass">Icon Class (Font Awesome)</label>
+                        <input type="text" id="iconClass" name="iconClass" 
+                               placeholder="e.g., fa-laptop, fa-paint-brush, fa-book" value="fa-graduation-cap">
+                        <span class="hint">Font Awesome icon name (e.g., fa-laptop for computer, fa-music for dance)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keywords">Keywords (comma-separated, for SEO)</label>
+                        <input type="text" id="keywords" name="keywords" 
+                               placeholder="e.g., computer, technology, education, skills">
+                        <span class="hint">Keywords for search optimization. Separate with commas</span>
+                    </div>
+                </div>
+
+                <!-- Media Upload -->
+                <div class="form-section">
+                    <h2><i class="fas fa-image"></i> Program Media</h2>
+                    
+                    <div class="form-group">
+                        <label for="poster">Poster/Cover Image</label>
+                        <div class="file-upload" onclick="document.getElementById('poster').click()">
+                            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <p><strong>Click to upload</strong> or drag and drop</p>
+                            <p style="margin-top: 8px;">JPG, PNG, WebP (Recommended: 1200x800px)</p>
+                            <p class="file-name" id="posterName"></p>
+                        </div>
+                        <input type="file" id="poster" name="poster" accept="image/*" 
+                               onchange="showFileName(this, 'posterName')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="video">Event Video (Optional)</label>
+                        <div class="file-upload" onclick="document.getElementById('video').click()">
+                            <div class="icon"><i class="fas fa-video"></i></div>
+                            <p><strong>Click to upload video</strong></p>
+                            <p style="margin-top: 8px;">MP4, MOV, AVI (Max 50MB)</p>
+                            <p class="file-name" id="videoName"></p>
+                        </div>
+                        <input type="file" id="video" name="video" accept="video/*" 
+                               onchange="showFileName(this, 'videoName')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gallery">Gallery Images (Multiple)</label>
+                        <div class="file-upload" onclick="document.getElementById('gallery').click()">
+                            <div class="icon"><i class="fas fa-images"></i></div>
+                            <p><strong>Click to upload multiple images</strong></p>
+                            <p style="margin-top: 8px;">Add event photos (max 10 files)</p>
+                            <p class="file-name" id="galleryName"></p>
+                        </div>
+                        <input type="file" id="gallery" name="gallery" accept="image/*" multiple 
+                               onchange="showFileCount(this, 'galleryName')">
+                    </div>
+                </div>
+
+                <!-- Status & Visibility -->
+                <div class="form-section">
+                    <h2><i class="fas fa-eye"></i> Visibility</h2>
+                    
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="draft">Draft (Save without publishing)</option>
+                            <option value="published" selected>Published (Visible to public)</option>
+                            <option value="archived">Archived (Hidden)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group" onclick="document.getElementById('isFeatured').click()">
+                            <input type="checkbox" id="isFeatured" name="isFeatured" value="true">
+                            <label for="isFeatured">
+                                <i class="fas fa-book" style="color: var(--primary);"></i>
+                                Mark as Featured Program
+                            </label>
+                        </div>
+                        <span class="hint" style="margin-left: 32px;">Featured events appear on homepage and dashboard</span>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <a href="/admin/education" class="btn btn-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i>
+                        Create Program
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        // Form Validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const title = document.getElementById('title').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const category = document.querySelector('input[name="category"]:checked');
+            const duration = document.getElementById('duration').value.trim();
+            
+            const errors = [];
+            
+            if (!title) errors.push('Program Title is required');
+            if (!description) errors.push('Description is required');
+            if (!category) errors.push('Please select a category');
+            if (!duration) errors.push('Event date is required');
+            
+            if (errors.length > 0) {
+                e.preventDefault();
+                alert('Please fix the following errors:\n\n' + errors.join('\n'));
+                return false;
+            }
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const toggleBtn = document.querySelector('.theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const text = toggleBtn.querySelector('span');
+            
+            if (newTheme === 'dark') {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light Mode';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark Mode';
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                const toggleBtn = document.querySelector('.theme-toggle');
+                toggleBtn.querySelector('i').className = 'fas fa-sun';
+                toggleBtn.querySelector('span').textContent = 'Light Mode';
+            }
+        });
+
+        // File Upload Helpers
+        function showFileName(input, elementId) {
+            const element = document.getElementById(elementId);
+            if (input.files.length > 0) {
+                element.textContent = `âœ“ ${input.files[0].name}`;
+                element.style.display = 'block';
+            }
+        }
+
+        function showFileCount(input, elementId) {
+            const element = document.getElementById(elementId);
+            if (input.files.length > 0) {
+                element.textContent = `âœ“ ${input.files.length} file(s) selected`;
+                element.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+

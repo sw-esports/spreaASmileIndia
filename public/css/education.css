@@ -323,8 +323,9 @@ body {
 
 .academic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 340px));
     gap: 2.5rem;
+    justify-content: center;
 }
 
 .academic-card {
@@ -395,13 +396,53 @@ body {
 }
 
 .subject-tag {
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--education-accent);
-    padding: 0.4rem 0.8rem;
-    border-radius: 12px;
-    font-size: 0.8rem;
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
     font-weight: 500;
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    transition: all 0.3s;
+}
+
+.subject-tag:hover {
+    background: rgba(139, 92, 246, 0.2);
+    color: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* Feature tags for new academic card design */
+.feature-tag {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    transition: all 0.3s;
+}
+
+.feature-tag:hover {
+    background: rgba(139, 92, 246, 0.2);
+    color: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.feature-tag.grade-tag {
+    background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+
+.feature-tag.grade-tag i {
+    margin-right: 4px;
 }
 
 .card-stats {

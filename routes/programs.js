@@ -18,12 +18,42 @@ router.get('/', (req, res) => {
 });
 
 // Education Support
-router.get('/education', (req, res) => {
-  res.render('programs/education', { 
-    title: 'Education Support - Spread A Smile India',
-    page: 'programs',
-    metaDescription: 'Our flagship education program helps street children transition from streets to classrooms through school enrollment and support.'
-  });
+router.get('/education', async (req, res) => {
+  try {
+    const EducationProgram = require('../models/EducationProgram');
+    
+    // Fetch all published education programs
+    const academicPrograms = await EducationProgram.find({ 
+      category: 'academic', 
+      status: 'published' 
+    })
+    .sort({ displayOrder: 1, level: 1 })
+    .lean();
+    
+    const skillPrograms = await EducationProgram.find({ 
+      category: 'skill', 
+      status: 'published' 
+    })
+    .sort({ displayOrder: 1, level: 1 })
+    .lean();
+    
+    res.render('programs/education', { 
+      title: 'Education Support - Spread A Smile India',
+      page: 'programs',
+      metaDescription: 'Our flagship education program helps street children transition from streets to classrooms through school enrollment and support.',
+      academicPrograms,
+      skillPrograms
+    });
+  } catch (error) {
+    console.error('Error fetching education programs:', error);
+    res.render('programs/education', { 
+      title: 'Education Support - Spread A Smile India',
+      page: 'programs',
+      metaDescription: 'Our flagship education program helps street children transition from streets to classrooms through school enrollment and support.',
+      academicPrograms: [],
+      skillPrograms: []
+    });
+  }
 });
 
 // Health & Wellness
@@ -54,12 +84,45 @@ router.get('/vocational', (req, res) => {
 });
 
 // Events & Campaigns
-router.get('/events', (req, res) => {
-  res.render('programs/events', { 
-    title: 'Events & Campaigns - Spread A Smile India',
-    page: 'programs',
-    metaDescription: 'Special events, cultural programs, and celebrations that bring joy and learning to our beneficiaries.'
-  });
+router.get('/events', async (req, res) => {
+  try {
+    const Event = require('../models/Event');
+    
+    // Fetch all published events, sorted by creation date (newest first)
+    const events = await Event.find({ status: 'published' })
+      .sort({ createdAt: -1 })
+      .lean();
+    
+    // Group events by category
+    const eventsByCategory = {
+      festival: events.filter(e => e.category === 'festival'),
+      national: events.filter(e => e.category === 'national'),
+      wellness: events.filter(e => e.category === 'wellness'),
+      recreation: events.filter(e => e.category === 'recreation'),
+      entertainment: events.filter(e => e.category === 'entertainment'),
+      sports: events.filter(e => e.category === 'sports'),
+      campaign: events.filter(e => e.category === 'campaign'),
+      fundraising: events.filter(e => e.category === 'fundraising'),
+      regular: events.filter(e => e.category === 'regular')
+    };
+    
+    res.render('programs/events', { 
+      title: 'Events & Campaigns - Spread A Smile India',
+      page: 'programs',
+      metaDescription: 'Special events, cultural programs, and celebrations that bring joy and learning to our beneficiaries.',
+      events,
+      eventsByCategory
+    });
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    res.render('programs/events', { 
+      title: 'Events & Campaigns - Spread A Smile India',
+      page: 'programs',
+      metaDescription: 'Special events, cultural programs, and celebrations that bring joy and learning to our beneficiaries.',
+      events: [],
+      eventsByCategory: {}
+    });
+  }
 });
 
 module.exports = router;

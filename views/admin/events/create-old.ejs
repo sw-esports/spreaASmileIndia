@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fdfcdc 0%, #fed9b7 25%, #f8a5c2 50%, #b8d4e3 75%, #c9e4f0 100%);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 30px 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, #f8a5c2 0%, #fed9b7 100%);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #2d3748;
+        }
+
+        .sidebar-logo .icon {
+            font-size: 32px;
+        }
+
+        .sidebar-logo .text h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .sidebar-logo .text p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(248, 165, 194, 0.1);
+            color: #f8a5c2;
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 12px;
+        }
+
+        .nav-link.submenu {
+            padding-left: 50px;
+            font-size: 13px;
+        }
+
+        .nav-folder {
+            margin: 0 12px;
+        }
+
+        .nav-folder-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 13px;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-folder-header:hover {
+            background: rgba(248, 165, 194, 0.1);
+            color: #f8a5c2;
+        }
+
+        .folder-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .folder-title i {
+            width: 20px;
+        }
+
+        .folder-arrow {
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        .nav-folder.open .folder-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-folder-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+            flex: 1;
+            max-width: 1200px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #718096;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(248, 165, 194, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group label .required {
+            color: #e53e3e;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #f8a5c2;
+            box-shadow: 0 0 0 4px rgba(248, 165, 194, 0.1);
+        }
+
+        .form-group .hint {
+            font-size: 12px;
+            color: #a0aec0;
+            margin-top: 6px;
+        }
+
+        .file-upload {
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: #f8a5c2;
+            background: rgba(248, 165, 194, 0.05);
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload .icon {
+            font-size: 40px;
+            color: #f8a5c2;
+            margin-bottom: 12px;
+        }
+
+        .file-upload p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .file-upload .file-name {
+            margin-top: 12px;
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            padding-top: 24px;
+            border-top: 2px solid rgba(248, 165, 194, 0.1);
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f8a5c2 0%, #fed9b7 100%);
+            color: #2d3748;
+            box-shadow: 0 4px 12px rgba(248, 165, 194, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 165, 194, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            border-color: #f8a5c2;
+            color: #f8a5c2;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="../src/images/logo.webp" alt="SASI Logo" style="width: 40px; height: 40px; object-fit: contain;">
+                    <div class="text">
+                        <h2>SASI Admin</h2>
+                        <p>Content Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                
+                <div class="nav-folder open">
+                    <div class="nav-folder-header" onclick="toggleFolder(this)">
+                        <div class="folder-title">
+                            <i class="fas fa-folder-open"></i>
+                            <span>Programs</span>
+                        </div>
+                        <i class="fas fa-chevron-down folder-arrow"></i>
+                    </div>
+                    <div class="nav-folder-content" style="max-height: 500px;">
+                        <a href="/admin/events" class="nav-link submenu">
+                            <i class="fas fa-calendar-alt"></i>
+                            Events
+                        </a>
+                        <a href="/admin/events/create" class="nav-link submenu active">
+                            <i class="fas fa-plus"></i>
+                            Create New
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/" target="_blank" class="nav-link">
+                    <i class="fas fa-globe"></i>
+                    View Website
+                </a>
+                <a href="/admin/logout" class="nav-link" style="color: #e53e3e;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1><i class="fas fa-plus-circle"></i> Create New Event</h1>
+                <p>Fill in the details below to create a new event post</p>
+            </div>
+
+            <form action="/admin/events" method="POST" enctype="multipart/form-data" class="form-container">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h2><i class="fas fa-info-circle"></i> Basic Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="title">Event Title <span class="required">*</span></label>
+                            <input type="text" id="title" name="title" required placeholder="e.g., Diwali Celebration 2025">
+                            <span class="hint">Max 200 characters</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="heading">Event Heading</label>
+                            <input type="text" id="heading" name="heading" placeholder="e.g., Festival of Lights">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="description">Description <span class="required">*</span></label>
+                            <textarea id="description" name="description" required placeholder="Describe your event in detail..." rows="5"></textarea>
+                            <span class="hint">Max 1000 characters</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category <span class="required">*</span></label>
+                            <select id="category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="festival">Festival</option>
+                                <option value="national">National</option>
+                                <option value="wellness">Wellness</option>
+                                <option value="recreation">Recreation</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="sports">Sports</option>
+                                <option value="campaign">Campaign</option>
+                                <option value="fundraising">Fundraising</option>
+                                <option value="regular">Regular</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type">Event Type <span class="required">*</span></label>
+                            <select id="type" name="type" required>
+                                <option value="Festival">Festival</option>
+                                <option value="National">National</option>
+                                <option value="Wellness">Wellness</option>
+                                <option value="Recreation">Recreation</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Campaign">Campaign</option>
+                                <option value="Fundraising">Fundraising</option>
+                                <option value="Regular">Regular</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Details -->
+                <div class="form-section">
+                    <h2><i class="fas fa-calendar"></i> Event Details</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventDate">Event Date <span class="required">*</span></label>
+                            <input type="text" id="eventDate" name="eventDate" required placeholder="e.g., October 2025 or Monthly">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" value="Munirka Centre" placeholder="Event location">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startTime">Start Time</label>
+                            <input type="text" id="startTime" name="startTime" placeholder="e.g., 2:00 PM">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endTime">End Time</label>
+                            <input type="text" id="endTime" name="endTime" placeholder="e.g., 5:00 PM">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="participants">Participants</label>
+                            <input type="text" id="participants" name="participants" value="All Students" placeholder="Who can participate">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="members">Members</label>
+                            <input type="text" id="members" name="members" placeholder="e.g., 50 students">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media Upload -->
+                <div class="form-section">
+                    <h2><i class="fas fa-image"></i> Media Upload</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="poster">Poster Image</label>
+                            <div class="file-upload" onclick="document.getElementById('poster').click()">
+                                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                <p>Click to upload poster image</p>
+                                <p class="file-name" id="posterName"></p>
+                            </div>
+                            <input type="file" id="poster" name="poster" accept="image/*" onchange="showFileName(this, 'posterName')">
+                            <span class="hint">JPG, PNG, WebP (Max 50MB)</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="video">Video</label>
+                            <div class="file-upload" onclick="document.getElementById('video').click()">
+                                <div class="icon"><i class="fas fa-video"></i></div>
+                                <p>Click to upload video</p>
+                                <p class="file-name" id="videoName"></p>
+                            </div>
+                            <input type="file" id="video" name="video" accept="video/*" onchange="showFileName(this, 'videoName')">
+                            <span class="hint">MP4, AVI, MOV (Max 50MB)</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="gallery">Gallery Images</label>
+                            <div class="file-upload" onclick="document.getElementById('gallery').click()">
+                                <div class="icon"><i class="fas fa-images"></i></div>
+                                <p>Click to upload multiple images</p>
+                                <p class="file-name" id="galleryName"></p>
+                            </div>
+                            <input type="file" id="gallery" name="gallery" accept="image/*" multiple onchange="showFileCount(this, 'galleryName')">
+                            <span class="hint">Multiple images (Max 10 files, 50MB each)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="form-section">
+                    <h2><i class="fas fa-list"></i> Additional Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="features">Features (comma-separated)</label>
+                            <input type="text" id="features" name="features" placeholder="e.g., Free Food, Live Music, Games">
+                            <span class="hint">Separate each feature with a comma</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="highlights">Highlights (comma-separated)</label>
+                            <input type="text" id="highlights" name="highlights" placeholder="e.g., Cultural Dance, Special Guests">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="activities">Activities (comma-separated)</label>
+                            <input type="text" id="activities" name="activities" placeholder="e.g., Painting, Storytelling, Sports">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="keywords">Keywords (comma-separated)</label>
+                            <input type="text" id="keywords" name="keywords" placeholder="e.g., diwali, festival, celebration">
+                            <span class="hint">For better search visibility</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status & Visibility -->
+                <div class="form-section">
+                    <h2><i class="fas fa-cog"></i> Status & Visibility</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" name="status">
+                                <option value="draft">Draft</option>
+                                <option value="published">Published</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="isFeatured" name="isFeatured" value="true">
+                                <label for="isFeatured">Mark as Featured Event</label>
+                            </div>
+                            <span class="hint">Featured events appear on homepage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="/admin/events" class="btn btn-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Create Event
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        function toggleFolder(element) {
+            const folder = element.parentElement;
+            folder.classList.toggle('open');
+        }
+
+        function showFileName(input, elementId) {
+            const element = document.getElementById(elementId);
+            if (input.files.length > 0) {
+                element.textContent = input.files[0].name;
+            }
+        }
+
+        function showFileCount(input, elementId) {
+            const element = document.getElementById(elementId);
+            if (input.files.length > 0) {
+                element.textContent = `${input.files.length} file(s) selected`;
+            }
+        }
+    </script>
+</body>
+</html>

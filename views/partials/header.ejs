@@ -7,28 +7,36 @@
     <title><%= title %></title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Spread A Smile India - Transforming lives of street children in Delhi since 2005. Education, healthcare, nutrition, and empowerment programs.' %>">
-    <meta name="keywords" content="NGO Delhi, street children, education support, charity India, Sangita Mehra, Munirka, volunteer, donate">
-    <meta name="author" content="Spread A Smile India">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://spreadasmileindia.org<%= typeof currentPath !== 'undefined' ? currentPath : '' %>">
+    <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Spread A Smile India - Best NGO in Delhi transforming lives of street children since 2005. Education, healthcare, nutrition programs. Sangita Mehra Foundation. Donate & Volunteer.' %>">
+    <meta name="keywords" content="spread a smile india, sasi foundation, best ngo in india, ngo in delhi, street children education, sangita mehra ngo, donate to ngo india, volunteer delhi, munirka ngo, charity india, children education">
+    <meta name="author" content="Spread A Smile India - SASI Foundation">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://www.spreadasmileindia.com<%= typeof currentPath !== 'undefined' ? currentPath : '' %>">
+    
+    <!-- Google Site Verification (add your code) -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE">
     
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="<%= title %>">
-    <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Transforming lives of street children through education and empowerment since 2005.' %>">
-    <meta property="og:image" content="https://spreadasmileindia.org/src/images/og-image.jpg">
-    <meta property="og:url" content="https://spreadasmileindia.org<%= typeof currentPath !== 'undefined' ? currentPath : '' %>">
+    <meta property="og:title" content="<%= title %> | Spread A Smile India - Best NGO in Delhi">
+    <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'SASI Foundation - Transforming lives of street children through education, healthcare & nutrition since 2005. Join India\'s leading NGO.' %>">
+    <meta property="og:image" content="https://www.spreadasmileindia.com/src/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://www.spreadasmileindia.com<%= typeof currentPath !== 'undefined' ? currentPath : '' %>">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Spread A Smile India">
+    <meta property="og:site_name" content="Spread A Smile India - SASI Foundation">
+    <meta property="og:locale" content="en_IN">
     
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<%= title %>">
-    <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Transforming lives of street children through education and empowerment since 2005.' %>">
-    <meta name="twitter:image" content="https://spreadasmileindia.org/src/images/twitter-card.jpg">
+    <meta name="twitter:site" content="@spreadasmile">
+    <meta name="twitter:creator" content="@sangitamehra">
+    <meta name="twitter:title" content="<%= title %> | Spread A Smile India">
+    <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Best NGO in Delhi - Empowering street children since 2005 through education, healthcare & nutrition programs.' %>">
+    <meta name="twitter:image" content="https://www.spreadasmileindia.com/src/images/twitter-card.jpg">
     
     <!-- Favicon and App Icons -->
     <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
@@ -37,18 +45,31 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/src/icons/favicon-16x16.png">
     <link rel="manifest" href="/src/icons/manifest.json">
     
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" crossorigin>
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" crossorigin>
+    
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "NGO",
         "name": "Spread A Smile India",
-        "description": "Delhi-based NGO transforming lives of street children through education and empowerment since 2005",
-        "url": "https://spreadasmileindia.org",
-        "logo": "https://spreadasmileindia.org/src/images/logo.png",
+        "alternateName": "SASI Foundation",
+        "description": "Delhi-based NGO transforming lives of street children through education, healthcare, nutrition and empowerment programs since 2005. Recognized as one of the best NGOs in India.",
+        "url": "https://www.spreadasmileindia.com",
+        "logo": "https://www.spreadasmileindia.com/src/images/logo.png",
+        "image": "https://www.spreadasmileindia.com/src/images/og-image.jpg",
+        "foundingDate": "2005",
         "founder": {
             "@type": "Person",
-            "name": "Sangita Mehra"
+            "name": "Sangita Mehra",
+            "jobTitle": "Founder & President",
+            "url": "https://www.spreadasmileindia.com/about/founder"
         },
         "address": {
             "@type": "PostalAddress",
@@ -58,11 +79,31 @@
             "postalCode": "110067",
             "addressCountry": "IN"
         },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "28.5535",
+            "longitude": "77.1700"
+        },
         "telephone": "+91-97178-66620",
+        "email": "contact@spreadasmileindia.org",
+        "areaServed": {
+            "@type": "City",
+            "name": "Delhi"
+        },
+        "knowsAbout": [
+            "Street Children Education",
+            "Child Healthcare",
+            "Nutrition Programs",
+            "Vocational Training",
+            "Women Empowerment"
+        ],
         "sameAs": [
             "https://instagram.com/sangitamehra1",
-            "https://facebook.com/SpreadASmileIndia"
-        ]
+            "https://facebook.com/SpreadASmileIndia",
+            "https://twitter.com/spreadasmile"
+        ],
+        "slogan": "Transforming Lives Through Education",
+        "nonprofitStatus": "Nonprofit501c3"
     }
     </script>
     
@@ -79,6 +120,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- GSAP Global Animations (replaces AOS) -->
+    <script src="/js/gsap-animations.js" defer></script>
+    
+    <!-- Lazy Loading for Images (LCP Optimization) -->
+    <script src="/js/lazy-load-images.js" defer></script>
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
@@ -97,10 +144,6 @@
     <script src="/js/ui-enhancer.js" defer></script>
     <script src="/js/search-enhancer.js" defer></script>
     
-    <!-- AOS (Animate On Scroll) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
     <!-- Theme Initialization Script (runs before page load to prevent flash) -->
     <script>
         (function() {
@@ -116,7 +159,7 @@
         <nav class="navbar">
             <div class="nav-container">
                 <!-- Logo Section -->
-                <div class="logo-section" data-aos="fade-right">
+                <div class="logo-section gsap-fade-right">
                     <div class="logo">
                         <div class="logo-image">
                             <img src="/src/images/logo.png" alt="Spread A Smile India Logo" class="main-logo">
@@ -130,7 +173,7 @@
                 
                 <!-- Navigation Links -->
                 <div class="nav-center">
-                    <ul class="nav-menu" data-aos="fade-down">
+                    <ul class="nav-menu gsap-fade-down">
                         <li class="nav-item">
                             <a href="/" class="nav-link <%= page === 'home' ? 'active' : '' %>">
                                 <div class="nav-link-content">
@@ -201,7 +244,7 @@
                 </div>
                 
                 <!-- Right Actions -->
-                <div class="nav-actions" data-aos="fade-left">
+                <div class="nav-actions gsap-fade-left">
                     <!-- Search Button -->
                     <button class="search-btn mobile-hide" onclick="openSearchModal()" aria-label="Search website" title="Search (Ctrl+K)">
                         <i class="fas fa-search"></i>
