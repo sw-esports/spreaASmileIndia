@@ -8,11 +8,7 @@
                 <div class="video-carousel">
                     <div class="video-slide active">
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <i class="fas fa-play-circle"></i>
-                                <p>Main Introduction Video</p>
-                                <small>Click to play</small>
-                            </div>
+                            <iframe class="video-iframe" src="https://imagekit.io/player/embed/l15cczdgu/Assets/video1t.mp4?controls=true&autoplay=false&loop=false&background=%23000000&updatedAt=1761408445617&thumbnail=https%3A%2F%2Fik.imagekit.io%2Fl15cczdgu%2FAssets%2Fvideo1t.mp4%2Fik-thumbnail.jpg%3FupdatedAt%3D1761408445617" title="Our Story - SASI" frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"></iframe>
                             <div class="video-info">
                                 <h3>Our Story</h3>
                                 <p>20 years of transforming lives</p>
@@ -21,11 +17,7 @@
                     </div>
                     <div class="video-slide">
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <i class="fas fa-play-circle"></i>
-                                <p>Impact Stories</p>
-                                <small>Click to play</small>
-                            </div>
+                            <iframe class="video-iframe" src="https://imagekit.io/player/embed/l15cczdgu/Assets/video2.mp4?controls=true&autoplay=false&loop=false&background=%23000000&updatedAt=1761410184901&thumbnail=https%3A%2F%2Fik.imagekit.io%2Fl15cczdgu%2FAssets%2Fvideo2.mp4%2Fik-thumbnail.jpg%3FupdatedAt%3D1761410184901" title="Success Stories - SASI" frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"></iframe>
                             <div class="video-info">
                                 <h3>Success Stories</h3>
                                 <p>Children who changed their lives</p>
@@ -34,11 +26,7 @@
                     </div>
                     <div class="video-slide">
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <i class="fas fa-play-circle"></i>
-                                <p>Daily Activities</p>
-                                <small>Click to play</small>
-                            </div>
+                            <iframe class="video-iframe" src="https://imagekit.io/player/embed/l15cczdgu/Assets/video1t.mp4?controls=true&autoplay=false&loop=false&background=%23000000&updatedAt=1761408445617&thumbnail=https%3A%2F%2Fik.imagekit.io%2Fl15cczdgu%2FAssets%2Fvideo1t.mp4%2Fik-thumbnail.jpg%3FupdatedAt%3D1761408445617" title="A Day at SASI" frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"></iframe>
                             <div class="video-info">
                                 <h3>A Day at SASI</h3>
                                 <p>See our programs in action</p>
@@ -586,6 +574,17 @@
         position: relative;
         padding-bottom: 56.25%;
         background: #000;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .video-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
     }
 
     .video-placeholder {
@@ -1253,9 +1252,19 @@
     function showVideoSlide(n) {
         const slides = document.querySelectorAll('.video-slide');
         const dots = document.querySelectorAll('.carousel-dots .dot');
+        const iframes = document.querySelectorAll('.video-iframe');
 
         if (n >= slides.length) currentSlide = 0;
         if (n < 0) currentSlide = slides.length - 1;
+
+        // Pause all videos by reloading iframes (stops playback and frees resources)
+        iframes.forEach((iframe, index) => {
+            if (index !== currentSlide) {
+                const src = iframe.src;
+                iframe.src = '';
+                setTimeout(() => { iframe.src = src; }, 100);
+            }
+        });
 
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
@@ -1264,10 +1273,10 @@
         dots[currentSlide].classList.add('active');
     }
 
-    // Auto-play carousel
-    setInterval(() => {
-        changeVideoSlide(1);
-    }, 5000);
+    // Auto-play carousel - disabled to prevent video loading issues
+    // setInterval(() => {
+    //     changeVideoSlide(1);
+    // }, 5000);
 
     // ONLY scroll animation: Timeline items fade in on scroll
     function checkTimelineVisibility() {
