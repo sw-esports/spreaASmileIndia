@@ -51,17 +51,18 @@ if (!process.env.SESSION_SECRET && process.env.NODE_ENV === 'production') {
 app.use(session({
   secret: process.env.SESSION_SECRET || 'sasi-production-secret-2024-spread-a-smile-india',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true, // Changed to true to create session before login
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI || 'mongodb+srv://SpreadASmileIndia:suraj@2007@spreadasmileindia.skj4t3a.mongodb.net/sasi-website?retryWrites=true&w=majority',
     touchAfter: 24 * 3600 // Lazy session update - update session once per 24 hours
   }),
   name: 'sasi.sid', // Custom session name
   cookie: { 
-    secure: true, // Always use HTTPS for security
+    secure: false, // Set to false for localhost HTTP
     httpOnly: true, // Prevent XSS
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    sameSite: 'lax' // CSRF protection
+    sameSite: 'lax', // CSRF protection
+    path: '/' // Ensure cookie is available for all paths
   }
 }));
 

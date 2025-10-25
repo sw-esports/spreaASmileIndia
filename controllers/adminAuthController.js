@@ -26,10 +26,12 @@ exports.showLoginPage = (req, res) => {
 // @access  Public
 exports.login = async (req, res) => {
   try {
+    console.log('🔐 Login attempt:', req.body);
     const { email, password } = req.body;
     
     // Validate input
     if (!email || !password) {
+      console.log('❌ Missing email or password');
       req.session.message = {
         type: 'error',
         text: 'Please provide email and password'
@@ -58,9 +60,12 @@ exports.login = async (req, res) => {
     }
     
     // Check password
+    console.log('🔍 Checking password...');
     const isPasswordMatch = await admin.comparePassword(password);
+    console.log('🔍 Password match:', isPasswordMatch);
     
     if (!isPasswordMatch) {
+      console.log('❌ Invalid password');
       req.session.message = {
         type: 'error',
         text: 'Invalid credentials'
@@ -78,8 +83,26 @@ exports.login = async (req, res) => {
     req.session.adminRole = admin.role;
     
     console.log(`✅ Admin logged in: ${admin.name} (${admin.email})`);
+    console.log('📝 Session data:', {
+      adminId: req.session.adminId,
+      adminName: req.session.adminName,
+      adminRole: req.session.adminRole,
+      sessionID: req.sessionID
+    });
     
-    res.redirect('/admin/dashboard');
+    // Save session before redirect to ensure it's persisted
+    req.session.save((err) => {
+      if (err) {
+        console.error('❌ Session save error:', err);
+        req.session.message = {
+          type: 'error',
+          text: 'Login failed. Please try again.'
+        };
+        return res.redirect('/admin/login');
+      }
+      console.log('✅ Session saved, redirecting to dashboard...');
+      res.redirect('/admin/dashboard');
+    });
     
   } catch (error) {
     console.error('Login error:', error);
@@ -161,10 +184,19 @@ exports.showDashboard = async (req, res) => {
 
 // Middleware to check if admin is authenticated
 exports.isAuthenticated = (req, res, next) => {
+  console.log('🔒 isAuthenticated check:', {
+    hasSession: !!req.session,
+    adminId: req.session?.adminId,
+    sessionID: req.sessionID,
+    cookies: req.headers.cookie
+  });
+  
   if (req.session.adminId) {
+    console.log('✅ Admin authenticated, proceeding...');
     return next();
   }
   
+  console.log('❌ Not authenticated, redirecting to login');
   req.session.message = {
     type: 'error',
     text: 'Please login to access admin panel'

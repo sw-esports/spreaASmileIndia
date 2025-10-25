@@ -1,466 +1,607 @@
-<%- include('../../partials/header') %>
-
-<style>
-    body {
-        background: var(--bg-primary, #f5f5f5);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    [data-theme="dark"] {
-        --bg-primary: #0f0f0f;
-        --bg-secondary: #1a1a1a;
-        --text-primary: #f5f5f5;
-        --text-secondary: #a0a0a0;
-        --border-color: #333;
-        --input-bg: #2d2d2d;
-    }
-
-    [data-theme="light"] {
-        --bg-primary: #f5f5f5;
-        --bg-secondary: #ffffff;
-        --text-primary: #1a1a1a;
-        --text-secondary: #666;
-        --border-color: #e0e0e0;
-        --input-bg: #ffffff;
-    }
-
-    .form-container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 0 20px;
-    }
-
-    .form-header {
-        margin-bottom: 30px;
-        padding: 30px;
-        background: var(--bg-secondary);
-        border-radius: 16px;
-        border: 1px solid var(--border-color);
-    }
-
-    .form-header h1 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin: 0 0 8px 0;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .form-header h1 i {
-        color: #F7941D;
-    }
-
-    .form-header p {
-        color: var(--text-secondary);
-        margin: 0;
-    }
-
-    .form-card {
-        background: var(--bg-secondary);
-        border-radius: 16px;
-        padding: 30px;
-        border: 1px solid var(--border-color);
-    }
-
-    .form-section {
-        margin-bottom: 30px;
-        padding-bottom: 30px;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .form-section:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    .section-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .section-title i {
-        color: #F7941D;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: var(--text-primary);
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-        width: 100%;
-        padding: 12px 16px;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        font-size: 1rem;
-        background: var(--input-bg);
-        color: var(--text-primary);
-        transition: all 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-        outline: none;
-        border-color: #F7941D;
-        box-shadow: 0 0 0 3px rgba(247, 148, 29, 0.1);
-    }
-
-    .form-group textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    .form-group small {
-        display: block;
-        margin-top: 6px;
-        color: var(--text-secondary);
-        font-size: 0.875rem;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .checkbox-group {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .checkbox-group input[type="checkbox"] {
-        width: auto;
-    }
-
-    .stats-container {
-        background: rgba(247, 148, 29, 0.05);
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px dashed rgba(247, 148, 29, 0.3);
-    }
-
-    .stat-item {
-        display: grid;
-        grid-template-columns: 150px 150px 1fr auto;
-        gap: 12px;
-        margin-bottom: 12px;
-        align-items: center;
-    }
-
-    .stat-item:last-child {
-        margin-bottom: 0;
-    }
-
-    .btn-remove-stat {
-        padding: 8px 12px;
-        background: rgba(239, 68, 68, 0.1);
-        color: #ef4444;
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .btn-remove-stat:hover {
-        background: #ef4444;
-        color: white;
-    }
-
-    .btn-add-stat {
-        width: 100%;
-        padding: 10px;
-        background: rgba(139, 92, 246, 0.1);
-        color: #8b5cf6;
-        border: 1px dashed rgba(139, 92, 246, 0.3);
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        margin-top: 12px;
-    }
-
-    .btn-add-stat:hover {
-        background: rgba(139, 92, 246, 0.2);
-    }
-
-    .form-actions {
-        display: flex;
-        gap: 12px;
-        margin-top: 30px;
-    }
-
-    .btn {
-        flex: 1;
-        padding: 14px 24px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
-        color: white;
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(247, 148, 29, 0.3);
-    }
-
-    .btn-secondary {
-        background: var(--bg-primary);
-        color: var(--text-primary);
-        border: 1px solid var(--border-color);
-    }
-
-    .btn-secondary:hover {
-        background: var(--input-bg);
-    }
-
-    @media (max-width: 768px) {
-        .form-row {
-            grid-template-columns: 1fr;
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Program - SASI Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #F7941D;
+            --secondary: #ED1C24;
+            --accent: #EC4F78;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #FFF8F0;
+            --text-primary: #2D3748;
+            --text-secondary: #718096;
+            --border: #E2E8F0;
+            --shadow: rgba(0, 0, 0, 0.1);
         }
 
-        .stat-item {
-            grid-template-columns: 1fr;
+        [data-theme="dark"] {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --border: #333;
+            --shadow: rgba(0, 0, 0, 0.3);
         }
-    }
-</style>
 
-<div class="form-container">
-    <div class="form-header">
-        <h1>
-            <i class="fas fa-plus-circle"></i>
-            Create New Program
-        </h1>
-        <p>Add a new program to showcase on your website</p>
-    </div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <form action="/admin/programs/create" method="POST" class="form-card">
-        <!-- Basic Information -->
-        <div class="form-section">
-            <h3 class="section-title">
-                <i class="fas fa-info-circle"></i>
-                Basic Information
-            </h3>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
 
-            <div class="form-group">
-                <label for="title">Program Title *</label>
-                <input type="text" id="title" name="title" required>
-                <small>The name of your program (e.g., "Education Support")</small>
-            </div>
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="slug">URL Slug *</label>
-                    <input type="text" id="slug" name="slug" required>
-                    <small>URL-friendly version (e.g., "education")</small>
-                </div>
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
 
-                <div class="form-group">
-                    <label for="category">Category *</label>
-                    <select id="category" name="category" required>
-                        <option value="">Select Category</option>
-                        <option value="education">Education</option>
-                        <option value="health">Health</option>
-                        <option value="nutrition">Nutrition</option>
-                        <option value="events">Events</option>
-                        <option value="wellness">Wellness</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-            </div>
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="icon">Icon Class *</label>
-                    <input type="text" id="icon" name="icon" value="fas fa-heart" required>
-                    <small>Font Awesome class (e.g., "fas fa-book")</small>
-                </div>
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
 
-                <div class="form-group">
-                    <label for="pageUrl">Page URL *</label>
-                    <input type="text" id="pageUrl" name="pageUrl" required>
-                    <small>Link to program page (e.g., "/programs/education")</small>
-                </div>
-            </div>
-        </div>
+        .sidebar-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
 
-        <!-- Descriptions -->
-        <div class="form-section">
-            <h3 class="section-title">
-                <i class="fas fa-align-left"></i>
-                Descriptions
-            </h3>
+        .sidebar-logo .text h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
 
-            <div class="form-group">
-                <label for="shortDescription">Short Description *</label>
-                <textarea id="shortDescription" name="shortDescription" maxlength="250" required></textarea>
-                <small>Brief description for program card (max 250 characters)</small>
-            </div>
+        .sidebar-logo .text p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
 
-            <div class="form-group">
-                <label for="fullDescription">Full Description *</label>
-                <textarea id="fullDescription" name="fullDescription" rows="6" required></textarea>
-                <small>Detailed description for program page</small>
-            </div>
-        </div>
+        .sidebar-nav {
+            padding: 20px 0;
+        }
 
-        <!-- Highlights -->
-        <div class="form-section">
-            <h3 class="section-title">
-                <i class="fas fa-check-circle"></i>
-                Highlights
-            </h3>
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-            <div class="form-group">
-                <label for="highlights">Program Highlights *</label>
-                <textarea id="highlights" name="highlights" rows="3" required></textarea>
-                <small>Comma-separated list (e.g., "School Admission, Academic Support, Skill Training")</small>
-            </div>
-        </div>
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(247, 148, 29, 0.1);
+            color: var(--primary);
+        }
 
-        <!-- Stats -->
-        <div class="form-section">
-            <h3 class="section-title">
-                <i class="fas fa-chart-bar"></i>
-                Statistics
-            </h3>
+        .nav-link i {
+            width: 20px;
+            margin-right: 12px;
+        }
 
-            <div class="stats-container">
-                <div id="statsContainer"></div>
-                <button type="button" class="btn-add-stat" onclick="addStat()">
-                    <i class="fas fa-plus"></i> Add Statistic
-                </button>
-            </div>
-            <input type="hidden" id="statsJson" name="statsJson" value="[]">
-        </div>
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 32px;
+            flex: 1;
+            max-width: 1000px;
+        }
 
-        <!-- Image -->
-        <div class="form-section">
-            <h3 class="section-title">
-                <i class="fas fa-image"></i>
-                Image
-            </h3>
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
 
-            <div class="form-group">
-                <label for="imageUrl">Image URL *</label>
-                <input type="url" id="imageUrl" name="imageUrl" required>
-                <small>Full URL to program image</small>
-            </div>
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
 
-            <div class="form-group">
-                <label for="imageAlt">Image Alt Text</label>
-                <input type="text" id="imageAlt" name="imageAlt">
-                <small>Description for accessibility</small>
-            </div>
-        </div>
+        .theme-toggle {
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
 
-        <!-- Settings -->
-        <div class="form-section">
-            <h3 class="section-title">
-                <i class="fas fa-cog"></i>
-                Settings
-            </h3>
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="order">Display Order</label>
-                    <input type="number" id="order" name="order" value="0" min="0">
-                    <small>Lower numbers appear first</small>
-                </div>
+        /* Form Container */
+        .form-container {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 32px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
 
-                <div class="form-group">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="isActive" name="isActive" value="true" checked>
-                        <label for="isActive">Active (visible on website)</label>
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h2 i {
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group label .required {
+            color: var(--secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(247, 148, 29, 0.1);
+        }
+
+        .form-group .hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* Buttons */
+        .form-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 148, 29, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Icon Picker */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .icon-option {
+            position: relative;
+        }
+
+        .icon-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .icon-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 12px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-primary);
+            min-height: 100px;
+        }
+
+        .icon-option label i {
+            font-size: 32px;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .icon-option label span {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .icon-option input[type="radio"]:checked + label {
+            border-color: var(--primary);
+            background: rgba(247, 148, 29, 0.1);
+        }
+
+        .icon-option input[type="radio"]:checked + label i {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .icon-option input[type="radio"]:checked + label span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .icon-option label:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="https://ik.imagekit.io/l15cczdgu/Assets/logo.png?updatedAt=1761389196069" alt="SASI Logo">
+                    <div class="text">
+                        <h2>SASI Admin</h2>
+                        <p>Content Management</p>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Form Actions -->
-        <div class="form-actions">
-            <a href="/admin/programs" class="btn btn-secondary">
-                <i class="fas fa-times"></i>
-                Cancel
-            </a>
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i>
-                Create Program
-            </button>
-        </div>
-    </form>
-</div>
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                <a href="/admin/events" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    Events
+                </a>
+                <a href="/admin/education" class="nav-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </a>
+                <a href="/admin/programs" class="nav-link active">
+                    <i class="fas fa-th-large"></i>
+                    Programs
+                </a>
+                <a href="/" target="_blank" class="nav-link">
+                    <i class="fas fa-globe"></i>
+                    View Website
+                </a>
+                <a href="/admin/logout" class="nav-link" style="color: var(--secondary);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+        </aside>
 
-<script>
-let stats = [];
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1><i class="fas fa-plus-circle" style="color: var(--primary);"></i> Create New Program</h1>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
 
-function addStat() {
-    const stat = { icon: '', value: '', label: '' };
-    stats.push(stat);
-    renderStats();
-}
+            <form action="/admin/programs/create" method="POST" class="form-container">
+                
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h2><i class="fas fa-info-circle"></i> Basic Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="title">Program Title <span class="required">*</span></label>
+                        <input type="text" id="title" name="title" required 
+                               placeholder="e.g., Education Program">
+                        <span class="hint">Main program page title</span>
+                    </div>
 
-function removeStat(index) {
-    stats.splice(index, 1);
-    renderStats();
-}
+                    <div class="form-group">
+                        <label for="description">Description <span class="required">*</span></label>
+                        <textarea id="description" name="description" required 
+                                  placeholder="Describe the program..."></textarea>
+                        <span class="hint">Program description for the page</span>
+                    </div>
 
-function updateStat(index, field, value) {
-    stats[index][field] = value;
-    document.getElementById('statsJson').value = JSON.stringify(stats);
-}
+                    <div class="form-group">
+                        <label for="shortDescription">Short Description <span class="required">*</span></label>
+                        <textarea id="shortDescription" name="shortDescription" required 
+                                  placeholder="Brief description for cards..."
+                                  maxlength="200"></textarea>
+                        <span class="hint">Brief description shown on cards (max 200 characters)</span>
+                    </div>
+                </div>
 
-function renderStats() {
-    const container = document.getElementById('statsContainer');
-    container.innerHTML = stats.map((stat, index) => `
-        <div class="stat-item">
-            <input type="text" placeholder="Icon (e.g., fas fa-users)" value="${stat.icon}" 
-                   onchange="updateStat(${index}, 'icon', this.value)">
-            <input type="text" placeholder="Value (e.g., 170+)" value="${stat.value}"
-                   onchange="updateStat(${index}, 'value', this.value)">
-            <input type="text" placeholder="Label (e.g., Students)" value="${stat.label}"
-                   onchange="updateStat(${index}, 'label', this.value)">
-            <button type="button" class="btn-remove-stat" onclick="removeStat(${index})">
-                <i class="fas fa-trash"></i>
-            </button>
-        </div>
-    `).join('');
-    document.getElementById('statsJson').value = JSON.stringify(stats);
-}
+                <!-- Program Details -->
+                <div class="form-section">
+                    <h2><i class="fas fa-cog"></i> Program Details</h2>
+                    
+                    <div class="form-group">
+                        <label for="category">Category <span class="required">*</span></label>
+                        <select id="category" name="category" required>
+                            <option value="">Select category...</option>
+                            <option value="education">Education</option>
+                            <option value="health">Health & Wellness</option>
+                            <option value="nutrition">Nutrition</option>
+                            <option value="events">Events & Activities</option>
+                        </select>
+                    </div>
 
-// Auto-generate slug from title
-document.getElementById('title').addEventListener('input', function(e) {
-    const slug = e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    document.getElementById('slug').value = slug;
-});
-</script>
+                    <div class="form-group">
+                        <label>Program Icon <span class="required">*</span></label>
+                        <span class="hint" style="margin-bottom: 12px; display: block;">Choose an icon that represents this program</span>
+                        <div class="icon-grid">
+                            <div class="icon-option">
+                                <input type="radio" id="icon-education" name="icon" value="fas fa-graduation-cap" required>
+                                <label for="icon-education">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Education</span>
+                                </label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-book" name="icon" value="fas fa-book">
+                                <label for="icon-book">
+                                    <i class="fas fa-book"></i>
+                                    <span>Book</span>
+                                </label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-heartbeat" name="icon" value="fas fa-heartbeat">
+                                <label for="icon-heartbeat">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <span>Health</span>
+                                </label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-apple" name="icon" value="fas fa-apple-alt">
+                                <label for="icon-apple">
+                                    <i class="fas fa-apple-alt"></i>
+                                    <span>Nutrition</span>
+                                </label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-calendar" name="icon" value="fas fa-calendar-alt">
+                                <label for="icon-calendar">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Events</span>
+                                </label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-hands" name="icon" value="fas fa-hands-helping">
+                                <label for="icon-hands">
+                                    <i class="fas fa-hands-helping"></i>
+                                    <span>Support</span>
+                                </label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-users" name="icon" value="fas fa-users">
+                                <label for="icon-users">
+                                    <i class="fas fa-users"></i>
+                                    <span>Community</span>
+                                </label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-star" name="icon" value="fas fa-star">
+                                <label for="icon-star">
+                                    <i class="fas fa-star"></i>
+                                    <span>Featured</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
 
-<%- include('../../partials/footer') %>
+                    <div class="form-group">
+                        <label for="order">Display Order <span class="required">*</span></label>
+                        <input type="number" id="order" name="order" required min="1"
+                               placeholder="1">
+                        <span class="hint">Order in which this program appears (lower numbers first)</span>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <a href="/admin/programs" class="btn btn-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Create Program
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        // Form Validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const title = document.getElementById('title').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const shortDescription = document.getElementById('shortDescription').value.trim();
+            const category = document.getElementById('category').value;
+            const icon = document.querySelector('input[name="icon"]:checked');
+            const order = document.getElementById('order').value;
+            
+            const errors = [];
+            
+            if (!title) errors.push('Program Title is required');
+            if (!description) errors.push('Description is required');
+            if (!shortDescription) errors.push('Short Description is required');
+            if (shortDescription.length > 200) errors.push('Short Description must be 200 characters or less');
+            if (!category) errors.push('Please select a category');
+            if (!icon) errors.push('Please select an icon');
+            if (!order || order < 1) errors.push('Display Order must be at least 1');
+            
+            if (errors.length > 0) {
+                e.preventDefault();
+                alert('Please fix the following errors:\n\n' + errors.join('\n'));
+                return false;
+            }
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const toggleBtn = document.querySelector('.theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const text = toggleBtn.querySelector('span');
+            
+            if (newTheme === 'dark') {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light Mode';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark Mode';
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                const toggleBtn = document.querySelector('.theme-toggle');
+                toggleBtn.querySelector('i').className = 'fas fa-sun';
+                toggleBtn.querySelector('span').textContent = 'Light Mode';
+            }
+        });
+    </script>
+</body>
+</html>

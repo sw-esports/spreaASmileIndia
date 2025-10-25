@@ -33,37 +33,33 @@ exports.showCreateForm = (req, res) => {
 // Create new program
 exports.createProgram = async (req, res) => {
     try {
-        const { title, slug, category, icon, shortDescription, fullDescription, highlights, pageUrl, imageUrl, imageAlt, isActive, order } = req.body;
+        const { title, description, shortDescription, category, icon, order } = req.body;
         
-        // Convert comma-separated highlights to array
-        const highlightsArray = highlights ? highlights.split(',').map(h => h.trim()).filter(h => h) : [];
+        // Generate slug from title
+        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
         
-        // Parse stats if provided
-        let statsArray = [];
-        if (req.body.statsJson) {
-            try {
-                statsArray = JSON.parse(req.body.statsJson);
-            } catch (e) {
-                console.log('Stats JSON parse error, using empty array');
-            }
-        }
+        // Generate pageUrl based on category
+        const pageUrl = `/programs/${category}`;
+        
+        // Default image
+        const defaultImage = {
+            url: 'https://ik.imagekit.io/l15cczdgu/Assets/logo.png?updatedAt=1761389196069',
+            alt: title
+        };
 
         const program = new Program({
             title,
-            slug: slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-            category,
-            icon: icon || 'fas fa-heart',
+            slug,
+            fullDescription: description,
             shortDescription,
-            fullDescription,
-            highlights: highlightsArray,
-            stats: statsArray,
-            image: {
-                url: imageUrl,
-                alt: imageAlt || title
-            },
-            isActive: isActive === 'true' || isActive === true,
-            order: order ? parseInt(order) : 0,
-            pageUrl
+            category,
+            icon,
+            order: order ? parseInt(order) : 1,
+            pageUrl,
+            image: defaultImage,
+            highlights: [],
+            stats: [],
+            isActive: true
         });
 
         await program.save();
@@ -91,11 +87,17 @@ exports.showEditForm = async (req, res) => {
             });
         }
 
+        // Map fullDescription to description for the form
+        const programData = {
+            ...program.toObject(),
+            description: program.fullDescription
+        };
+        
         res.render('admin/programs/edit', {
             title: `Edit ${program.title} - Admin`,
             page: 'admin',
             theme: req.session.theme || 'light',
-            program
+            program: programData
         });
     } catch (error) {
         console.error('Error fetching program:', error);
@@ -111,37 +113,49 @@ exports.showEditForm = async (req, res) => {
 // Update program
 exports.updateProgram = async (req, res) => {
     try {
-        const { title, slug, category, icon, shortDescription, fullDescription, highlights, pageUrl, imageUrl, imageAlt, isActive, order } = req.body;
+        const { title, description, shortDescription, category, icon, order } = req.body;
         
-        const highlightsArray = highlights ? highlights.split(',').map(h => h.trim()).filter(h => h) : [];
+        console.log('📝 Update request body:', req.body);
         
-        let statsArray = [];
-        if (req.body.statsJson) {
-            try {
-                statsArray = JSON.parse(req.body.statsJson);
-            } catch (e) {
-                console.log('Stats JSON parse error, keeping existing stats');
-            }
+        // Check if required fields are present
+        if (!title || !description || !shortDescription || !category || !icon) {
+            console.error('❌ Missing required fields:', { title, description, shortDescription, category, icon });
+            return res.status(400).send('Missing required fields. Please fill all fields and try again.');
         }
+        
+        // Get existing program to preserve required fields
+        const existingProgram = await Program.findById(req.params.id);
+        if (!existingProgram) {
+            return res.status(404).render('error', {
+                title: 'Error',
+                page: 'error',
+                theme: req.session.theme || 'light',
+                message: 'Program not found'
+            });
+        }
+        
+        // Generate new slug if title changed
+        const slug = title !== existingProgram.title 
+            ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+            : existingProgram.slug;
+        
+        // Update pageUrl if category changed
+        const pageUrl = category !== existingProgram.category
+            ? `/programs/${category}`
+            : existingProgram.pageUrl;
 
         const updateData = {
             title,
-            slug: slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+            slug,
+            fullDescription: description,
+            shortDescription,
             category,
             icon,
-            shortDescription,
-            fullDescription,
-            highlights: highlightsArray,
-            stats: statsArray,
-            image: {
-                url: imageUrl,
-                alt: imageAlt || title
-            },
-            isActive: isActive === 'true' || isActive === true,
-            order: order ? parseInt(order) : 0,
+            order: order ? parseInt(order) : 1,
             pageUrl
         };
 
+        console.log('✅ Updating program with:', updateData);
         await Program.findByIdAndUpdate(req.params.id, updateData, { new: true });
         res.redirect('/admin/programs');
     } catch (error) {
