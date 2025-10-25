@@ -38,153 +38,50 @@
             </div>
 
             <div class="programs-showcase">
-                <!-- Education Program -->
-                <div class="showcase-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=500&fit=crop" alt="Education Support" loading="lazy">
+                <% if (typeof programs !== 'undefined' && programs && programs.length > 0) { %>
+                    <% programs.forEach((program, index) => { %>
+                        <div class="showcase-card" data-aos="fade-up" data-aos-delay="<%= (index + 1) * 100 %>">
+                            <div class="card-image">
+                                <img src="<%= program.image.url %>" alt="<%= program.image.alt || program.title %>" loading="lazy">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-category">
+                                    <i class="<%= program.icon %>"></i>
+                                    <span><%= program.category.charAt(0).toUpperCase() + program.category.slice(1) %></span>
+                                </div>
+                                <h3><%= program.title %></h3>
+                                <p><%= program.shortDescription %></p>
+                                <div class="card-highlights">
+                                    <% program.highlights.forEach(highlight => { %>
+                                        <div class="highlight">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><%= highlight %></span>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                                <% if (program.stats && program.stats.length > 0) { %>
+                                    <div class="card-info-badges">
+                                        <% program.stats.forEach(stat => { %>
+                                            <span class="info-badge">
+                                                <i class="<%= stat.icon %>"></i> 
+                                                <%= stat.value %> <%= stat.label %>
+                                            </span>
+                                        <% }); %>
+                                    </div>
+                                <% } %>
+                                <a href="<%= program.pageUrl %>" class="btn-card">
+                                    <span>Explore Program</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <div class="empty-message">
+                        <i class="fas fa-info-circle"></i>
+                        <p>No programs available at the moment. Please check back later.</p>
                     </div>
-                    <div class="card-content">
-                        <div class="card-category">
-                            <i class="fas fa-book"></i>
-                            <span>Education & Skills</span>
-                        </div>
-                        <h3>Education Support</h3>
-                        <p>Helping street children transition from begging to learning through mainstream school enrollment, academic support, and skill development programs.</p>
-                        <div class="card-highlights">
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>School Admission Assistance</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Academic Programs (3rd-12th Grade)</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Computer & Skill Training</span>
-                            </div>
-                        </div>
-                        <div class="card-info-badges">
-                            <span class="info-badge"><i class="fas fa-users"></i> 170+ Students</span>
-                            <span class="info-badge"><i class="fas fa-chart-line"></i> 85% Retention</span>
-                        </div>
-                        <a href="/programs/education" class="btn-card">
-                            <span>Explore Program</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Health & Wellness -->
-                <div class="showcase-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop" alt="Health & Wellness" loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-category">
-                            <i class="fas fa-stethoscope"></i>
-                            <span>Healthcare</span>
-                        </div>
-                        <h3>Health & Wellness</h3>
-                        <p>Comprehensive healthcare services including regular check-ups, dental care, and wellness programs for holistic development.</p>
-                        <div class="card-highlights">
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Monthly Health Camps</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Dental Check-ups</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Preventive Care</span>
-                            </div>
-                        </div>
-                        <div class="card-info-badges">
-                            <span class="info-badge"><i class="fas fa-heartbeat"></i> 180+ Tests</span>
-                            <span class="info-badge"><i class="fas fa-procedures"></i> 54 ECGs</span>
-                        </div>
-                        <a href="/programs/health" class="btn-card">
-                            <span>Explore Program</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Nutrition -->
-                <div class="showcase-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop" alt="Food & Nutrition" loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-category">
-                            <i class="fas fa-utensils"></i>
-                            <span>Nutrition</span>
-                        </div>
-                        <h3>Food & Nutrition</h3>
-                        <p>Daily nutritious meals and emergency food support ensuring no child goes hungry while focusing on their education.</p>
-                        <div class="card-highlights">
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Daily Meal Programs</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Thursday Langar Day</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Emergency Food Relief</span>
-                            </div>
-                        </div>
-                        <div class="card-info-badges">
-                            <span class="info-badge"><i class="fas fa-users-cog"></i> 600+ Families</span>
-                            <span class="info-badge"><i class="fas fa-utensils"></i> Daily Meals</span>
-                        </div>
-                        <a href="/programs/nutrition" class="btn-card">
-                            <span>Explore Program</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Events -->
-                <div class="showcase-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop" alt="Special Events" loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-category">
-                            <i class="fas fa-party-horn"></i>
-                            <span>Events & Celebrations</span>
-                        </div>
-                        <h3>Special Events</h3>
-                        <p>Community celebrations, cultural programs, and awareness campaigns that bring joy and foster social development.</p>
-                        <div class="card-highlights">
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Festival Celebrations</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Children's Day Programs</span>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Cultural Activities</span>
-                            </div>
-                        </div>
-                        <div class="card-info-badges">
-                            <span class="info-badge"><i class="fas fa-calendar-check"></i> 12+ Events</span>
-                            <span class="info-badge"><i class="fas fa-child"></i> 300+ Kids</span>
-                        </div>
-                        <a href="/programs/events" class="btn-card">
-                            <span>Explore Program</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+                <% } %>
             </div>
         </div>
     </section>
@@ -288,7 +185,7 @@
     /* Theme Variables */
     :root {
         --bg-primary: #ffffff;
-        --bg-secondary: #f8f9ff;
+        --bg-secondary: #fff9f5;
         --text-primary: #1a1a1a;
         --text-secondary: #666;
         --border-color: #f0f0f0;
@@ -304,13 +201,36 @@
         --card-bg: #2d2d2d;
     }
 
+    [data-theme="dark"] .programs-hero {
+        background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 50%, #2d2d2d 100%);
+    }
+
+    [data-theme="dark"] .programs-hero::before {
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(247, 148, 29, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(237, 28, 36, 0.15) 0%, transparent 50%);
+    }
+
+    [data-theme="dark"] .main-programs {
+        background: #1a1a1a;
+    }
+
+    [data-theme="dark"] .weekly-schedule {
+        background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 50%, #2d2d2d 100%);
+    }
+
+    [data-theme="dark"] .cta-section {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    }
+
     /* Hero Section */
     .programs-hero {
-        background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        background: linear-gradient(135deg, #fff5ed 0%, #ffe9d9 50%, #fff0e6 100%);
         padding: 100px 0 80px;
-        color: white;
+        color: var(--text-primary);
         position: relative;
         overflow: hidden;
+        border-bottom: 3px solid #F7941D;
     }
 
     .programs-hero::before {
@@ -320,9 +240,10 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,122.7C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
-        background-size: cover;
-        opacity: 0.3;
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(247, 148, 29, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(237, 28, 36, 0.1) 0%, transparent 50%);
+        opacity: 0.6;
     }
 
     .hero-content {
@@ -335,11 +256,11 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        color: white;
         padding: 8px 20px;
         border-radius: 50px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(247, 148, 29, 0.3);
         font-size: 14px;
         font-weight: 600;
         margin-bottom: 20px;
@@ -350,14 +271,14 @@
         font-weight: 800;
         margin-bottom: 20px;
         line-height: 1.1;
-        color: white;
+        color: var(--text-primary);
     }
 
     .hero-description {
         font-size: 1.25rem;
         max-width: 700px;
         margin: 0 auto 40px;
-        opacity: 0.95;
+        color: var(--text-secondary);
         line-height: 1.6;
     }
 
@@ -377,17 +298,21 @@
         font-weight: 800;
         display: block;
         margin-bottom: 8px;
+        background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .stat-label {
         font-size: 1rem;
-        opacity: 0.9;
+        color: var(--text-secondary);
     }
 
     /* Main Programs */
     .main-programs {
         padding: 80px 0;
-        background: var(--bg-primary);
+        background: #ffffff;
     }
 
     .section-header {
@@ -560,7 +485,7 @@
     /* Weekly Schedule */
     .weekly-schedule {
         padding: 80px 0;
-        background: var(--bg-secondary);
+        background: linear-gradient(135deg, #fef3f2 0%, #fff8f5 50%, #fef5f1 100%);
     }
 
     .section-badge {

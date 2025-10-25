@@ -1,0 +1,471 @@
+<%- include('../../partials/header') %>
+
+<style>
+    body {
+        background: var(--bg-primary, #f5f5f5);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    [data-theme="dark"] {
+        --bg-primary: #0f0f0f;
+        --bg-secondary: #1a1a1a;
+        --text-primary: #f5f5f5;
+        --text-secondary: #a0a0a0;
+        --border-color: #333;
+        --input-bg: #2d2d2d;
+    }
+
+    [data-theme="light"] {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #666;
+        --border-color: #e0e0e0;
+        --input-bg: #ffffff;
+    }
+
+    .form-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .form-header {
+        margin-bottom: 30px;
+        padding: 30px;
+        background: var(--bg-secondary);
+        border-radius: 16px;
+        border: 1px solid var(--border-color);
+    }
+
+    .form-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .form-header h1 i {
+        color: #F7941D;
+    }
+
+    .form-header p {
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    .form-card {
+        background: var(--bg-secondary);
+        border-radius: 16px;
+        padding: 30px;
+        border: 1px solid var(--border-color);
+    }
+
+    .form-section {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-title i {
+        color: #F7941D;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+        background: var(--input-bg);
+        color: var(--text-primary);
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #F7941D;
+        box-shadow: 0 0 0 3px rgba(247, 148, 29, 0.1);
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .form-group small {
+        display: block;
+        margin-top: 6px;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        width: auto;
+    }
+
+    .stats-container {
+        background: rgba(247, 148, 29, 0.05);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px dashed rgba(247, 148, 29, 0.3);
+    }
+
+    .stat-item {
+        display: grid;
+        grid-template-columns: 150px 150px 1fr auto;
+        gap: 12px;
+        margin-bottom: 12px;
+        align-items: center;
+    }
+
+    .stat-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .btn-remove-stat {
+        padding: 8px 12px;
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-remove-stat:hover {
+        background: #ef4444;
+        color: white;
+    }
+
+    .btn-add-stat {
+        width: 100%;
+        padding: 10px;
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+        border: 1px dashed rgba(139, 92, 246, 0.3);
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-top: 12px;
+    }
+
+    .btn-add-stat:hover {
+        background: rgba(139, 92, 246, 0.2);
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 14px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #F7941D 0%, #ED1C24 100%);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(247, 148, 29, 0.3);
+    }
+
+    .btn-secondary {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+        background: var(--input-bg);
+    }
+
+    @media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .stat-item {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="form-container">
+    <div class="form-header">
+        <h1>
+            <i class="fas fa-edit"></i>
+            Edit Program
+        </h1>
+        <p>Update program information</p>
+    </div>
+
+    <form action="/admin/programs/<%= program._id %>/edit" method="POST" class="form-card">
+        <!-- Basic Information -->
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                Basic Information
+            </h3>
+
+            <div class="form-group">
+                <label for="title">Program Title *</label>
+                <input type="text" id="title" name="title" value="<%= program.title %>" required>
+                <small>The name of your program (e.g., "Education Support")</small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="slug">URL Slug *</label>
+                    <input type="text" id="slug" name="slug" value="<%= program.slug %>" required>
+                    <small>URL-friendly version (e.g., "education")</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select Category</option>
+                        <option value="education" <%= program.category === 'education' ? 'selected' : '' %>>Education</option>
+                        <option value="health" <%= program.category === 'health' ? 'selected' : '' %>>Health</option>
+                        <option value="nutrition" <%= program.category === 'nutrition' ? 'selected' : '' %>>Nutrition</option>
+                        <option value="events" <%= program.category === 'events' ? 'selected' : '' %>>Events</option>
+                        <option value="wellness" <%= program.category === 'wellness' ? 'selected' : '' %>>Wellness</option>
+                        <option value="other" <%= program.category === 'other' ? 'selected' : '' %>>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="icon">Icon Class *</label>
+                    <input type="text" id="icon" name="icon" value="<%= program.icon %>" required>
+                    <small>Font Awesome class (e.g., "fas fa-book")</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="pageUrl">Page URL *</label>
+                    <input type="text" id="pageUrl" name="pageUrl" value="<%= program.pageUrl %>" required>
+                    <small>Link to program page (e.g., "/programs/education")</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Descriptions -->
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-align-left"></i>
+                Descriptions
+            </h3>
+
+            <div class="form-group">
+                <label for="shortDescription">Short Description *</label>
+                <textarea id="shortDescription" name="shortDescription" maxlength="250" required><%= program.shortDescription %></textarea>
+                <small>Brief description for program card (max 250 characters)</small>
+            </div>
+
+            <div class="form-group">
+                <label for="fullDescription">Full Description *</label>
+                <textarea id="fullDescription" name="fullDescription" rows="6" required><%= program.fullDescription %></textarea>
+                <small>Detailed description for program page</small>
+            </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-check-circle"></i>
+                Highlights
+            </h3>
+
+            <div class="form-group">
+                <label for="highlights">Program Highlights *</label>
+                <textarea id="highlights" name="highlights" rows="3" required><%= program.highlights.join(', ') %></textarea>
+                <small>Comma-separated list (e.g., "School Admission, Academic Support, Skill Training")</small>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-chart-bar"></i>
+                Statistics
+            </h3>
+
+            <div class="stats-container">
+                <div id="statsContainer"></div>
+                <button type="button" class="btn-add-stat" onclick="addStat()">
+                    <i class="fas fa-plus"></i> Add Statistic
+                </button>
+            </div>
+            <input type="hidden" id="statsJson" name="statsJson" value="[]">
+        </div>
+
+        <!-- Image -->
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-image"></i>
+                Image
+            </h3>
+
+            <div class="form-group">
+                <label for="imageUrl">Image URL *</label>
+                <input type="url" id="imageUrl" name="imageUrl" value="<%= program.image.url %>" required>
+                <small>Full URL to program image</small>
+            </div>
+
+            <div class="form-group">
+                <label for="imageAlt">Image Alt Text</label>
+                <input type="text" id="imageAlt" name="imageAlt" value="<%= program.image.alt || '' %>">
+                <small>Description for accessibility</small>
+            </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-cog"></i>
+                Settings
+            </h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="order">Display Order</label>
+                    <input type="number" id="order" name="order" value="<%= program.order %>" min="0">
+                    <small>Lower numbers appear first</small>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="isActive" name="isActive" value="true" <%= program.isActive ? 'checked' : '' %>>
+                        <label for="isActive">Active (visible on website)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <a href="/admin/programs" class="btn btn-secondary">
+                <i class="fas fa-times"></i>
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                Update Program
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+let stats = <%- JSON.stringify(program.stats || []) %>;
+
+// Render existing stats on page load
+document.addEventListener('DOMContentLoaded', () => {
+    renderStats();
+});
+
+function addStat() {
+    const stat = { icon: '', value: '', label: '' };
+    stats.push(stat);
+    renderStats();
+}
+
+function removeStat(index) {
+    stats.splice(index, 1);
+    renderStats();
+}
+
+function updateStat(index, field, value) {
+    stats[index][field] = value;
+    document.getElementById('statsJson').value = JSON.stringify(stats);
+}
+
+function renderStats() {
+    const container = document.getElementById('statsContainer');
+    container.innerHTML = stats.map((stat, index) => `
+        <div class="stat-item">
+            <input type="text" placeholder="Icon (e.g., fas fa-users)" value="${stat.icon}" 
+                   onchange="updateStat(${index}, 'icon', this.value)">
+            <input type="text" placeholder="Value (e.g., 170+)" value="${stat.value}"
+                   onchange="updateStat(${index}, 'value', this.value)">
+            <input type="text" placeholder="Label (e.g., Students)" value="${stat.label}"
+                   onchange="updateStat(${index}, 'label', this.value)">
+            <button type="button" class="btn-remove-stat" onclick="removeStat(${index})">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    `).join('');
+    document.getElementById('statsJson').value = JSON.stringify(stats);
+}
+
+// Auto-generate slug from title
+document.getElementById('title').addEventListener('input', function(e) {
+    const slug = e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    document.getElementById('slug').value = slug;
+});
+</script>
+
+<%- include('../../partials/footer') %>

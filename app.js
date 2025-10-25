@@ -29,26 +29,16 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static files with caching and performance headers
+// Static files with NO CACHING in development
 app.use(express.static(path.join(__dirname, 'public'), {
-  maxAge: process.env.NODE_ENV === 'production' ? '1y' : 0,
-  etag: true,
-  lastModified: true,
+  maxAge: 0,
+  etag: false,
+  lastModified: false,
   setHeaders: (res, filepath) => {
-    // Cache CSS/JS/Images for 1 year in production
-    if (filepath.endsWith('.css') || filepath.endsWith('.js') || filepath.match(/\.(jpg|jpeg|png|gif|webp|svg|ico)$/)) {
-      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-    }
-    
-    // Performance headers for images
-    if (filepath.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
-      res.setHeader('X-Content-Type-Options', 'nosniff');
-    }
-    
-    // Preload critical CSS
-    if (filepath.endsWith('homepage.css') || filepath.endsWith('style.css')) {
-      res.setHeader('Link', '</css/style.css>; rel=preload; as=style');
-    }
+    // Force no cache in development
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
   }
 }));
 
@@ -59,7 +49,7 @@ if (!process.env.SESSION_SECRET && process.env.NODE_ENV === 'production') {
 }
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'dev-secret-change-in-production',
+  secret: process.env.SESSION_SECRET || 'sasi-production-secret-2024-spread-a-smile-india',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
@@ -68,16 +58,17 @@ app.use(session({
   }),
   name: 'sasi.sid', // Custom session name
   cookie: { 
-    secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+    secure: true, // Always use HTTPS for security
     httpOnly: true, // Prevent XSS
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     sameSite: 'lax' // CSRF protection
   }
 }));
 
-// Set EJS as templating engine
+// Set EJS as templating engine with NO CACHE
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.set('view cache', false); // Disable view caching in development
 
 // Authentication middleware (for future admin routes)
 const isAuthenticated = (req, res, next) => {
@@ -91,6 +82,14 @@ const isAuthenticated = (req, res, next) => {
 // Theme middleware (for theme switching)
 app.use((req, res, next) => {
   res.locals.theme = req.session.theme || 'light';
+  next();
+});
+
+// Disable all caching in development
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   next();
 });
 

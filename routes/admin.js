@@ -8,6 +8,7 @@ const router = express.Router();
 const authController = require('../controllers/adminAuthController');
 const eventController = require('../controllers/adminEventController');
 const educationController = require('../controllers/adminEducationController');
+const programsController = require('../controllers/adminProgramsController');
 const { uploadEventMedia } = require('../config/multer');
 
 // Authentication routes (public)
@@ -39,5 +40,13 @@ router.post('/education', uploadEventMedia, educationController.createProgram);
 router.get('/education/:id/edit', educationController.showEditForm);
 router.post('/education/:id', uploadEventMedia, educationController.updateProgram);
 router.post('/education/:id/delete', educationController.deleteProgram);
+
+// Programs Management (Education, Health, Nutrition, Events pages)
+router.get('/programs', programsController.getAllPrograms);
+router.get('/programs/create', programsController.showCreateForm);
+router.post('/programs/create', programsController.createProgram);
+router.get('/programs/:id/edit', programsController.showEditForm);
+router.post('/programs/:id/edit', programsController.updateProgram);
+router.post('/programs/:id/delete', programsController.deleteProgram);
 
 module.exports = router;

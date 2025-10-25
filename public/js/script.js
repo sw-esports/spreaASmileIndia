@@ -985,7 +985,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             delay: delay / 1000
         });
-        });
+    });
     }
     
     console.log('🌟 Spread A Smile India website loaded with enhanced animations!');

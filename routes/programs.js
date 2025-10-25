@@ -9,12 +9,34 @@ router.use((req, res, next) => {
 });
 
 // Programs main page
-router.get('/', (req, res) => {
-  res.render('programs/index', { 
-    title: 'Our Programs - Spread A Smile India',
-    page: 'programs',
-    metaDescription: 'Discover our comprehensive programs including education, health, nutrition, and vocational training for street children.'
-  });
+router.get('/', async (req, res) => {
+  try {
+    const Program = require('../models/Program');
+    
+    // Fetch all active programs sorted by order
+    const programs = await Program.find({ isActive: true })
+      .sort({ order: 1, createdAt: 1 })
+      .lean();
+    
+    console.log('Programs loaded:', programs.length);
+    
+    res.render('programs/index', { 
+      title: 'Our Programs - Spread A Smile India',
+      page: 'programs',
+      metaDescription: 'Discover our comprehensive programs including education, health, nutrition, and vocational training for street children.',
+      programs: programs || [],
+      currentPath: '/programs'
+    });
+  } catch (error) {
+    console.error('Error loading programs:', error);
+    res.render('programs/index', { 
+      title: 'Our Programs - Spread A Smile India',
+      page: 'programs',
+      metaDescription: 'Discover our comprehensive programs including education, health, nutrition, and vocational training for street children.',
+      programs: [],
+      currentPath: '/programs'
+    });
+  }
 });
 
 // Education Support
