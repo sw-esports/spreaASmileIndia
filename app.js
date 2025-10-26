@@ -7,6 +7,7 @@ require('dotenv').config();
 
 // MongoDB Connection
 const connectDB = require('./config/database');
+const { seoMiddleware } = require('./config/seo');
 connectDB();
 
 const app = express();
@@ -80,12 +81,14 @@ const isAuthenticated = (req, res, next) => {
     return res.status(401).redirect('/admin/login');
   }
 };
-
 // Theme middleware (for theme switching)
 app.use((req, res, next) => {
   res.locals.theme = req.session.theme || 'light';
   next();
 });
+
+// SEO Middleware - Inject page-specific metadata (CRITICAL FOR GOOGLE)
+app.use(seoMiddleware);
 
 // Disable all caching in development
 app.use((req, res, next) => {

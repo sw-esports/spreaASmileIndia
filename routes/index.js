@@ -11,11 +11,10 @@ router.use((req, res, next) => {
 // Home page
 router.get('/', (req, res) => {
   res.render('index', { 
-    title: 'Home - Spread A Smile India',
     page: 'home',
-    metaDescription: 'Spread A Smile India - Transforming lives of street children in Delhi since 2005. Education, healthcare, nutrition, and empowerment programs.',
     user: req.user || null,
     theme: req.session.theme || 'light'
+    // SEO middleware automatically injects title, metaDescription, keywords
   });
 });
 

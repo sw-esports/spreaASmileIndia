@@ -8,7 +8,7 @@
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Spread A Smile India - Best NGO in Delhi transforming lives of street children since 2005. Education, healthcare, nutrition programs. Sangita Mehra Foundation. Donate & Volunteer.' %>">
-    <meta name="keywords" content="spread a smile india, sasi foundation, best ngo in india, ngo in delhi, street children education, sangita mehra ngo, donate to ngo india, volunteer delhi, munirka ngo, charity india, children education">
+    <meta name="keywords" content="<%= typeof keywords !== 'undefined' ? keywords : 'spread a smile india, sasi foundation, best ngo in india, ngo in delhi, street children education, sangita mehra ngo, donate to ngo india, volunteer delhi, munirka ngo, charity india, children education' %>">
     <meta name="author" content="Spread A Smile India - SASI Foundation">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://www.spreadasmileindia.com<%= typeof currentPath !== 'undefined' ? currentPath : '' %>">
@@ -38,12 +38,24 @@
     <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Best NGO in Delhi - Empowering street children since 2005 through education, healthcare & nutrition programs.' %>">
     <meta name="twitter:image" content="https://www.spreadasmileindia.com/src/images/twitter-card.jpg">
     
-    <!-- Favicon and App Icons -->
-    <link rel="icon" type="image/x-icon" href="/src/icons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/src/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/icons/favicon-16x16.png">
-    <link rel="manifest" href="/src/icons/manifest.json">
+    <!-- Favicon - CRITICAL FOR GOOGLE SEARCH -->
+    <!-- Primary favicon at root (Google's #1 requirement) -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Android/Chrome -->
+    <link rel="icon" href="/android-chrome-192x192.png" type="image/png" sizes="192x192">
+    <link rel="icon" href="/android-chrome-512x512.png" type="image/png" sizes="512x512">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#FF6B6B">
     
     <!-- Resource Hints for Performance -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -106,6 +118,99 @@
         "nonprofitStatus": "Nonprofit501c3"
     }
     </script>
+    
+    <!-- LocalBusiness Schema for Local SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.spreadasmileindia.com/#organization",
+        "name": "Spread A Smile India",
+        "alternateName": ["SASI Foundation", "Spread A Smile Foundation"],
+        "description": "Best NGO in Delhi for street children education, healthcare, and women empowerment since 2005",
+        "url": "https://www.spreadasmileindia.com",
+        "telephone": "+91-97178-66620",
+        "email": "contact@spreadasmileindia.org",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "108/A 1st Floor, Mandir Wali Gali",
+            "addressLocality": "Munirka Village",
+            "addressRegion": "Delhi",
+            "postalCode": "110067",
+            "addressCountry": "IN"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 28.5535,
+            "longitude": 77.1700
+        },
+        "areaServed": [
+            {
+                "@type": "City",
+                "name": "Delhi"
+            },
+            {
+                "@type": "City",
+                "name": "New Delhi"
+            },
+            {
+                "@type": "State",
+                "name": "Delhi NCR"
+            }
+        ],
+        "slogan": "Transforming Lives Through Education",
+        "foundingDate": "2005",
+        "founder": {
+            "@type": "Person",
+            "name": "Sangita Mehra",
+            "jobTitle": "Founder & President"
+        },
+        "priceRange": "Free Services",
+        "openingHours": "Mo-Sa 09:00-18:00",
+        "sameAs": [
+            "https://instagram.com/sangitamehra1",
+            "https://facebook.com/SpreadASmileIndia",
+            "https://twitter.com/spreadasmile"
+        ],
+        "knowsAbout": [
+            "Street Children Education",
+            "NGO Services",
+            "Women Empowerment",
+            "Child Healthcare",
+            "Vocational Training"
+        ]
+    }
+    </script>
+    
+    <% if (typeof currentPath !== 'undefined' && currentPath !== '/') { %>
+    <!-- Breadcrumb Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.spreadasmileindia.com"
+            }<% 
+            const pathParts = currentPath.split('/').filter(p => p);
+            let buildPath = '';
+            pathParts.forEach((part, index) => {
+                buildPath += '/' + part;
+                const partName = part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, ' ');
+            %>,
+            {
+                "@type": "ListItem",
+                "position": <%= index + 2 %>,
+                "name": "<%= partName %>",
+                "item": "https://www.spreadasmileindia.com<%= buildPath %>"
+            }<% }); %>
+        ]
+    }
+    </script>
+    <% } %>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
