@@ -158,17 +158,64 @@ router.get('/', (req, res) => {
 
 ---
 
-## 📋 FILES MODIFIED (Total: 6)
+### Fix #9: Canonical URL Normalization ✅
+**Files**: `/config/seo.js`, `/views/partials/header.ejs`, `/app.js`
+
+**What Was Added**:
+
+1. **Canonical URL Generator** in `config/seo.js`:
+```javascript
+function getCanonicalUrl(req) {
+  const proto = (req.headers['x-forwarded-proto'] || req.protocol || 'https').toLowerCase();
+  let host = req.get('host') || 'www.spreadasmileindia.com';
+  host = host.replace(/:80$|:443$/, '');
+  let path = req.path || '/';
+  path = path.replace(/\/index\.html$/i, '/');
+  if (path !== '/' && path.endsWith('/')) path = path.slice(0, -1);
+  const preferredHost = 'www.spreadasmileindia.com';
+  return `https://${preferredHost}${path}`;
+}
+```
+
+2. **Dynamic Canonical Tag** in `header.ejs`:
+```html
+<link rel="canonical" href="<%= typeof canonical !== 'undefined' ? canonical : 'https://www.spreadasmileindia.com...' %>">
+```
+
+3. **301 URL Redirects** in `app.js`:
+```javascript
+// Force HTTPS + WWW
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV !== 'production') return next();
+  // Redirect http -> https and non-www -> www
+  ...
+});
+```
+
+**Impact**: 
+- Prevents duplicate content penalties
+- Forces all URLs to https://www.spreadasmileindia.com format
+- Strips query strings from canonical (unless needed)
+- Removes trailing slashes (SEO best practice)
+- Google sees ONE canonical version of each page
+- Better crawl budget and link equity consolidation
+
+---
+
+## 📋 FILES MODIFIED (Total: 7)
 
 1. **`/views/partials/header.ejs`**
    - Dynamic keywords (line 11)
    - LocalBusiness schema (added ~60 lines)
+   - Dynamic canonical tag using middleware value
 
 2. **`/config/seo.js`**
    - Homepage keywords updated
    - Donate page optimized
    - Education page optimized
    - Volunteer page optimized
+   - **Added `getCanonicalUrl()` function**
+   - **Canonical URL generation in middleware**
 
 3. **`/routes/index.js`**
    - Removed hardcoded title/metaDescription
@@ -185,8 +232,11 @@ router.get('/', (req, res) => {
 5. **`/views/partials/faq-schema.ejs`** (NEW FILE)
    - 10 FAQ items with Schema.org markup
 
-6. **`/app.js`** (ALREADY FIXED IN PREVIOUS SESSION)
-   - SEO middleware activated (line 91)
+6. **`/app.js`**
+   - SEO middleware activated (line 91) - **ALREADY FIXED**
+   - **Added URL normalization redirects (NEW)**
+   - Forces HTTPS + www for all requests
+   - 301 redirects for SEO compliance
 
 ---
 

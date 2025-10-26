@@ -210,10 +210,44 @@ function getSEOData(path) {
 }
 
 /**
+ * Generate canonical URL with proper normalization
+ * Forces HTTPS + www, removes query strings, removes trailing slashes (except root)
+ */
+function getCanonicalUrl(req) {
+  // Prefer forwarded proto if behind proxy (GoDaddy uses proxies)
+  const proto = (req.headers['x-forwarded-proto'] || req.protocol || 'https').toLowerCase();
+  
+  // Get host and remove default ports
+  let host = req.get('host') || 'www.spreadasmileindia.com';
+  host = host.replace(/:80$|:443$/, '');
+  
+  // Use req.path (no query string)
+  let path = req.path || '/';
+  
+  // Normalize path:
+  // 1. Remove index.html
+  path = path.replace(/\/index\.html$/i, '/');
+  
+  // 2. Remove trailing slash except for root
+  if (path !== '/' && path.endsWith('/')) {
+    path = path.slice(0, -1);
+  }
+  
+  // Force canonical host (www + domain)
+  const preferredHost = 'www.spreadasmileindia.com';
+  
+  // Always use HTTPS for canonical
+  return `https://${preferredHost}${path}`;
+}
+
+/**
  * Express middleware to inject SEO data into all routes
  */
 function seoMiddleware(req, res, next) {
   const seoData = getSEOData(req.path);
+  
+  // Generate canonical URL
+  const canonical = getCanonicalUrl(req);
   
   // Make SEO data available to all templates
   res.locals.seo = seoData;
@@ -223,6 +257,7 @@ function seoMiddleware(req, res, next) {
   res.locals.currentPath = seoData.currentPath;
   res.locals.ogImage = seoData.ogImage;
   res.locals.twitterImage = seoData.twitterImage;
+  res.locals.canonical = canonical; // Add canonical URL
   
   next();
 }
@@ -230,5 +265,6 @@ function seoMiddleware(req, res, next) {
 module.exports = {
   seoConfig,
   getSEOData,
-  seoMiddleware
+  seoMiddleware,
+  getCanonicalUrl
 };

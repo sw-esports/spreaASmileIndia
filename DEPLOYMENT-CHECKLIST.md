@@ -43,6 +43,18 @@ The following code changes have been made and are ready for deployment:
 - **Change**: Removed manual title/metaDescription passing
 - **Impact**: SEO middleware now works properly, no conflicts
 
+### 6. **Canonical URL Normalization** ✅
+- **Files**: `/config/seo.js`, `/views/partials/header.ejs`, `/app.js`
+- **Changes**: 
+  - Added `getCanonicalUrl()` function to SEO middleware
+  - Dynamic canonical tag generation (strips query strings, normalizes paths)
+  - Added 301 redirects for http→https and non-www→www
+- **Impact**: 
+  - Prevents duplicate content issues
+  - Google sees consistent canonical URLs
+  - All pages redirect to https://www.spreadasmileindia.com
+  - Better crawl budget and indexing
+
 ---
 
 ## 📦 HOW TO DEPLOY TO GODADDY
@@ -74,10 +86,10 @@ pm2 restart app  # or: node app.js
 2. **Open File Manager**
 3. **Navigate to your website directory** (usually `/public_html` or `/httpdocs`)
 4. **Upload these modified files**:
-   - `/app.js` (SEO middleware activated)
-   - `/views/partials/header.ejs` (dynamic keywords + LocalBusiness schema)
+   - `/app.js` (SEO middleware activated + URL normalization redirects)
+   - `/views/partials/header.ejs` (dynamic keywords + LocalBusiness schema + dynamic canonical)
    - `/views/partials/faq-schema.ejs` (NEW FILE - upload this)
-   - `/config/seo.js` (optimized keywords)
+   - `/config/seo.js` (optimized keywords + canonical URL generation)
    - `/routes/index.js` (removed hardcoded meta)
    - `/routes/about.js` (removed hardcoded meta)
 5. **Restart your Node.js application**:
@@ -113,9 +125,15 @@ pm2 restart app  # or use GoDaddy's restart method
    - ✅ Check `<title>` tag shows: "Spread A Smile India | Best NGO in Delhi for Street Children Education"
    - ✅ Check `<meta name="keywords">` has multiple keywords
    - ✅ Check for LocalBusiness schema (search for `"@type": "LocalBusiness"`)
+   - ✅ Check canonical tag shows: `<link rel="canonical" href="https://www.spreadasmileindia.com/"`
+   - ✅ Verify NO query strings or trailing slashes in canonical URL
 3. **Test Different Pages**:
    - Visit `/about` - check title changes
    - Visit `/get-involved/donate` - check keywords are different
+   - **Test URL redirects**: 
+     - Visit `http://spreadasmileindia.com` - should redirect to `https://www.spreadasmileindia.com`
+     - Visit `https://spreadasmileindia.com` - should redirect to `https://www.spreadasmileindia.com`
+     - Check canonical tag matches the final URL
 4. **Check No Errors**:
    - Check browser console (F12) for errors
    - Check server logs for errors
@@ -206,6 +224,37 @@ pm2 restart app  # or use GoDaddy's restart method
 5. **Verify**: View page source, search for `"@type": "FAQPage"`
 
 **Expected Impact**: FAQ rich snippets appear in Google within 1-2 weeks
+
+---
+
+### Task 3A: Verify Canonical Tags in Google Search Console
+
+**Why**: Ensures Google recognizes your canonical URLs and doesn't index duplicate versions
+
+**Steps** (After Search Console verified):
+1. Log in to Google Search Console
+2. Go to "URL Inspection" tool
+3. **Test your homepage**:
+   - Enter: `https://www.spreadasmileindia.com`
+   - Click "View tested page" → "More info"
+   - Check "User-declared canonical": Should show `https://www.spreadasmileindia.com`
+   - Check "Google-selected canonical": Should MATCH user-declared
+   - ✅ If they match = Perfect!
+   - ❌ If different = Google found duplicate content
+4. **Test non-www version**:
+   - Enter: `https://spreadasmileindia.com`
+   - Should show "Page is not indexed: Redirect"
+   - This confirms 301 redirect is working
+5. **Test key pages**:
+   - Test `/about/founder`, `/get-involved/donate`, `/programs/education`
+   - All should have matching user-declared and Google-selected canonicals
+
+**Expected Impact**: 
+- No duplicate content penalties
+- Better crawl budget
+- Higher rankings (consolidated link equity)
+
+**Timeline**: Google recognizes canonicals within 1-2 weeks after reindexing
 
 ---
 
@@ -503,6 +552,16 @@ pm2 restart app  # or use GoDaddy's restart method
 1. Verify header.ejs line 11 has dynamic keywords: `<%= typeof keywords !== 'undefined' ? keywords : '...' %>`
 2. Check config/seo.js has keywords for that path
 3. View page source, search for `<meta name="keywords"`
+
+### Issue: "Google showing wrong canonical / duplicate content"
+
+**Solutions**:
+1. Check URL Inspection in Search Console for canonical mismatch
+2. Verify 301 redirects working: test http://spreadasmileindia.com redirects to https://www.spreadasmileindia.com
+3. Check sitemap URLs all use https://www.spreadasmileindia.com format
+4. Verify canonical tag in page source matches the URL you want indexed
+5. Request reindexing for affected pages
+6. Check for conflicting canonical tags in other templates
 
 ---
 

@@ -13,6 +13,8 @@ The following technical SEO fixes have been completed in your codebase:
 ✅ FAQ schema created  
 ✅ Keywords optimized for target searches  
 ✅ Route conflicts removed  
+✅ Canonical URL normalization implemented  
+✅ 301 redirects for http→https and non-www→www  
 ✅ Comprehensive documentation created  
 
 ---
@@ -24,11 +26,11 @@ The following technical SEO fixes have been completed in your codebase:
 **Option 1: Using GoDaddy File Manager**
 1. Log in to GoDaddy cPanel
 2. Open File Manager
-3. Upload these 6 files (overwrite existing):
-   - `app.js`
-   - `views/partials/header.ejs`
+3. Upload these 7 files (overwrite existing):
+   - `app.js` (with URL redirects)
+   - `views/partials/header.ejs` (with dynamic canonical)
    - `views/partials/faq-schema.ejs` (NEW FILE)
-   - `config/seo.js`
+   - `config/seo.js` (with canonical generator)
    - `routes/index.js`
    - `routes/about.js`
 4. Restart your Node.js app in cPanel
@@ -37,19 +39,27 @@ The following technical SEO fixes have been completed in your codebase:
 **Option 2: Using Git**
 ```bash
 git add .
-git commit -m "SEO fixes: dynamic keywords, LocalBusiness schema"
+git commit -m "SEO fixes: dynamic keywords, LocalBusiness schema, canonical URLs, 301 redirects"
 git push origin main
 # Then SSH to GoDaddy and: git pull && pm2 restart app
 ```
 
 ---
 
-### TODAY - Verify Deployment (5 minutes)
+### TODAY - Verify Deployment (10 minutes)
 
 1. Visit: https://www.spreadasmileindia.com
 2. Right-click → "View Page Source"
-3. Search for (Ctrl+F): `"@type": "LocalBusiness"`
-4. Should find it? ✅ Success! If not, check deployment
+3. **Check canonical tag**: Search for `rel="canonical"`
+   - Should show: `<link rel="canonical" href="https://www.spreadasmileindia.com/">`
+4. **Check LocalBusiness schema**: Search for `"@type": "LocalBusiness"`
+   - Should find it ✅
+5. **Test URL redirects**:
+   - Type `http://spreadasmileindia.com` in browser
+   - Should redirect to `https://www.spreadasmileindia.com` ✅
+6. **Test non-www redirect**:
+   - Type `https://spreadasmileindia.com`
+   - Should redirect to `https://www.spreadasmileindia.com` ✅
 
 ---
 

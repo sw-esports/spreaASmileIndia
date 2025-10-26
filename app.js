@@ -19,6 +19,39 @@ const compression = require('compression');
 // Compression for all responses
 app.use(compression());
 
+// URL Normalization for SEO - Force HTTPS and WWW (301 redirects)
+// This ensures canonical URLs match actual URLs served
+app.use((req, res, next) => {
+  // Skip redirects in development
+  if (process.env.NODE_ENV !== 'production') {
+    return next();
+  }
+  
+  const host = (req.get('host') || '').replace(/:80$|:443$/, '');
+  const proto = (req.headers['x-forwarded-proto'] || req.protocol || 'https').toLowerCase();
+  const preferredHost = 'www.spreadasmileindia.com';
+  
+  let shouldRedirect = false;
+  let targetUrl = null;
+  
+  // Force HTTPS
+  if (proto !== 'https') {
+    targetUrl = `https://${preferredHost}${req.originalUrl}`;
+    shouldRedirect = true;
+  }
+  // Force www subdomain
+  else if (!host.startsWith('www.') && host === 'spreadasmileindia.com') {
+    targetUrl = `https://${preferredHost}${req.originalUrl}`;
+    shouldRedirect = true;
+  }
+  
+  if (shouldRedirect && targetUrl) {
+    return res.redirect(301, targetUrl);
+  }
+  
+  next();
+});
+
 // CORS - restricted to your domain
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
